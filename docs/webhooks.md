@@ -211,18 +211,18 @@ app = Flask(__name__)
 def handle_webhook():
     signature = request.headers.get('X-Webhook-Signature')
     payload = request.get_data()
-    
+
     if not verify_webhook_signature(payload, signature, 'your_webhook_secret_key'):
         return {'error': 'Invalid signature'}, 401
-    
+
     data = request.get_json()
     event = data['event']
-    
+
     if event == 'content.created':
         # Handle content creation
         content_id = data['data']['id']
         print(f"New content created: {content_id}")
-    
+
     return {'status': 'success'}, 200
 ```
 
@@ -251,19 +251,19 @@ const app = express();
 app.post('/webhooks/bakalr', express.raw({ type: 'application/json' }), (req, res) => {
   const signature = req.headers['x-webhook-signature'] as string;
   const payload = req.body.toString();
-  
+
   if (!verifyWebhookSignature(payload, signature, 'your_webhook_secret_key')) {
     return res.status(401).json({ error: 'Invalid signature' });
   }
-  
+
   const data = JSON.parse(payload);
   const event = data.event;
-  
+
   if (event === 'content.created') {
     const contentId = data.data.id;
     console.log(`New content created: ${contentId}`);
   }
-  
+
   res.json({ status: 'success' });
 });
 ```
@@ -435,17 +435,17 @@ redis_client = redis.Redis()
 def handle_webhook():
     data = request.get_json()
     webhook_id = f"{data['webhook_id']}:{data['timestamp']}"
-    
+
     # Check if we've already processed this webhook
     if redis_client.get(webhook_id):
         return {'status': 'already_processed'}, 200
-    
+
     # Mark as processed (expires after 24 hours)
     redis_client.setex(webhook_id, 86400, '1')
-    
+
     # Process the webhook
     process_webhook(data)
-    
+
     return {'status': 'success'}, 200
 ```
 

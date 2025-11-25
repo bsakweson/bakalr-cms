@@ -1,37 +1,38 @@
 """
 FastAPI application configuration and initialization
 """
+
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
-from fastapi.exceptions import RequestValidationError
-from starlette.exceptions import HTTPException as StarletteHTTPException
+from scalar_fastapi import get_scalar_api_reference
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from strawberry.fastapi import GraphQLRouter
-from scalar_fastapi import get_scalar_api_reference
 
-from backend.core.config import settings
 from backend.api import api_router
-from backend.db import engine
 from backend.core.cache import cache
-from backend.core.rate_limit import limiter
-from backend.core.versioning import VersioningMiddleware
-from backend.core.cache_warming import cache_warming_service
-from backend.middleware.security import setup_security_middleware
-from backend.middleware.performance import PerformanceMiddleware
-from backend.core.query_optimization import setup_query_logging
+from backend.core.config import settings
 from backend.core.exceptions import (
     AppException,
     app_exception_handler,
+    generic_exception_handler,
     http_exception_handler,
     validation_exception_handler,
-    generic_exception_handler,
 )
-from backend.graphql.schema import schema
+from backend.core.query_optimization import setup_query_logging
+from backend.core.rate_limit import limiter
+from backend.core.versioning import VersioningMiddleware
+from backend.db import engine
 from backend.graphql.context import get_graphql_context
+from backend.graphql.schema import schema
+from backend.middleware.performance import PerformanceMiddleware
+from backend.middleware.security import setup_security_middleware
 
 
 @asynccontextmanager
@@ -43,19 +44,19 @@ async def lifespan(app: FastAPI):
     print(f"🚀 Starting {settings.PROJECT_NAME} v{settings.VERSION}")
     print(f"📝 Environment: {settings.ENVIRONMENT}")
     print(f"🔧 Debug mode: {settings.DEBUG}")
-    
+
     # Setup query logging for performance monitoring
     if settings.DEBUG:
         print("📊 Setting up query performance logging...")
         setup_query_logging(engine)
-    
+
     # TODO: Enable cache warming in production
     # if not settings.DEBUG:
     #     print("🔥 Warming cache...")
     #     await cache_warming_service.warm_all()
-    
+
     yield
-    
+
     # Shutdown
     print("👋 Shutting down...")
 
@@ -69,7 +70,7 @@ def create_app() -> FastAPI:
         description="""
 ## Bakalr CMS - Headless CMS API
 
-A modern, production-ready headless CMS with comprehensive features for content management, 
+A modern, production-ready headless CMS with comprehensive features for content management,
 multi-tenancy, role-based access control, and more.
 
 ### Key Features
@@ -160,16 +161,16 @@ Get started by registering an account at `/api/v1/auth/register`.
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    
+
     # Performance monitoring middleware
     app.add_middleware(PerformanceMiddleware)
-    
+
     # Security middleware (headers, CSRF, validation)
     setup_security_middleware(app, settings.SECRET_KEY)
 
     # GZip compression
     app.add_middleware(GZipMiddleware, minimum_size=1000)
-    
+
     # API versioning middleware
     app.add_middleware(VersioningMiddleware)
 
@@ -185,11 +186,9 @@ Get started by registering an account at `/api/v1/auth/register`.
             content={
                 "error": "rate_limit_exceeded",
                 "message": "Too many requests. Please try again later.",
-                "detail": str(exc.detail) if hasattr(exc, 'detail') else None
+                "detail": str(exc.detail) if hasattr(exc, "detail") else None,
             },
-            headers={
-                "Retry-After": str(exc.detail) if hasattr(exc, 'detail') else "60"
-            }
+            headers={"Retry-After": str(exc.detail) if hasattr(exc, "detail") else "60"},
         )
 
     # Register exception handlers (RFC 7807 Problem Details)
@@ -200,7 +199,7 @@ Get started by registering an account at `/api/v1/auth/register`.
 
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_PREFIX)
-    
+
     # Include GraphQL router
     graphql_app = GraphQLRouter(
         schema,
@@ -208,7 +207,7 @@ Get started by registering an account at `/api/v1/auth/register`.
         graphiql=settings.DEBUG,  # Enable GraphiQL playground in debug mode
     )
     app.include_router(graphql_app, prefix="/api/v1/graphql")
-    
+
     # Scalar API documentation (modern interactive UI)
     @app.get("/api/scalar", include_in_schema=False)
     async def scalar_html():
@@ -226,9 +225,9 @@ Get started by registering an account at `/api/v1/auth/register`.
         return {
             "status": "healthy",
             "version": settings.VERSION,
-            "timestamp": "2025-11-25T10:30:00Z"
+            "timestamp": "2025-11-25T10:30:00Z",
         }
-    
+
     @app.get("/health/ready")
     async def readiness_check():
         """
@@ -236,11 +235,12 @@ Get started by registering an account at `/api/v1/auth/register`.
         Use for Kubernetes readiness probes
         """
         import datetime
+
         from sqlalchemy import text
-        
+
         services = {}
         overall_status = "ready"
-        
+
         # Check Redis
         try:
             await cache.client.ping()
@@ -248,10 +248,11 @@ Get started by registering an account at `/api/v1/auth/register`.
         except Exception as e:
             services["redis"] = {"status": "unhealthy", "error": str(e)}
             overall_status = "not_ready"
-        
+
         # Check Database
         try:
             from backend.db.session import SessionLocal
+
             db = SessionLocal()
             start_time = datetime.datetime.now()
             db.execute(text("SELECT 1"))
@@ -261,12 +262,14 @@ Get started by registering an account at `/api/v1/auth/register`.
         except Exception as e:
             services["database"] = {"status": "unhealthy", "error": str(e)}
             overall_status = "not_ready"
-        
+
         # Check Meilisearch (optional)
         try:
             from backend.core.config import settings as app_settings
-            if hasattr(app_settings, 'MEILI_HOST'):
+
+            if hasattr(app_settings, "MEILI_HOST"):
                 import httpx
+
                 async with httpx.AsyncClient() as client:
                     response = await client.get(f"{app_settings.MEILI_HOST}/health", timeout=2.0)
                     if response.status_code == 200:
@@ -275,9 +278,9 @@ Get started by registering an account at `/api/v1/auth/register`.
                         services["search"] = {"status": "degraded", "code": response.status_code}
         except Exception as e:
             services["search"] = {"status": "unavailable", "error": str(e)}
-        
+
         status_code = 200 if overall_status == "ready" else 503
-        
+
         return JSONResponse(
             status_code=status_code,
             content={
@@ -285,12 +288,11 @@ Get started by registering an account at `/api/v1/auth/register`.
                 "version": settings.VERSION,
                 "environment": settings.ENVIRONMENT,
                 "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
-                "services": services
-            }
+                "services": services,
+            },
         )
 
     return app
 
 
 app = create_app()
-

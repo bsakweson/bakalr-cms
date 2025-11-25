@@ -21,15 +21,15 @@ Bakalr CMS is a modern, production-ready headless Content Management System buil
 
 ### Key Features
 
-✨ **Content Management**: Dynamic content types with versioning and relationships  
-🔐 **Security**: JWT authentication, 2FA, API keys, RBAC with field-level permissions  
-🌍 **Multi-language**: Automatic translation to 100+ languages  
-🔍 **Search**: Meilisearch-powered full-text search with typo tolerance  
-📊 **Analytics**: Content usage, user activity, search analytics  
-🎨 **Theming**: Custom themes with Dark Chocolate Brown default  
-🔔 **Notifications**: In-app notifications with email delivery  
-🪝 **Webhooks**: Event-driven webhooks with HMAC signatures  
-⚡ **Performance**: Query optimization, caching, connection pooling  
+✨ **Content Management**: Dynamic content types with versioning and relationships
+🔐 **Security**: JWT authentication, 2FA, API keys, RBAC with field-level permissions
+🌍 **Multi-language**: Automatic translation to 100+ languages
+🔍 **Search**: Meilisearch-powered full-text search with typo tolerance
+📊 **Analytics**: Content usage, user activity, search analytics
+🎨 **Theming**: Custom themes with Dark Chocolate Brown default
+🔔 **Notifications**: In-app notifications with email delivery
+🪝 **Webhooks**: Event-driven webhooks with HMAC signatures
+⚡ **Performance**: Query optimization, caching, connection pooling
 🐳 **DevOps**: Docker-ready with CI/CD pipelines
 
 ## Quick Start
@@ -520,22 +520,22 @@ POST /api/v1/search/reindex
 
 ## FAQ
 
-**Q: Can I use this in production?**  
+**Q: Can I use this in production?**
 A: Yes! Bakalr CMS is production-ready with security hardening, performance optimization, and comprehensive testing.
 
-**Q: Do I need Meilisearch?**  
+**Q: Do I need Meilisearch?**
 A: No, it's optional. Basic search works without it, but Meilisearch provides advanced features like typo tolerance and faceted search.
 
-**Q: Can I customize the frontend?**  
+**Q: Can I customize the frontend?**
 A: Absolutely! The frontend is built with Next.js and TailwindCSS, making it easy to customize.
 
-**Q: How do I migrate from another CMS?**  
+**Q: How do I migrate from another CMS?**
 A: Check the [migration guide](./migration.md) for importing data from WordPress, Contentful, Strapi, etc.
 
-**Q: Is there a hosted version?**  
+**Q: Is there a hosted version?**
 A: Currently Bakalr CMS is self-hosted. A managed cloud version is planned for the future.
 
-**Q: What's the license?**  
+**Q: What's the license?**
 A: MIT License - free for personal and commercial use.
 
 ## What's Next?

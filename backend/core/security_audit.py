@@ -3,11 +3,12 @@ Security audit logging for Bakalr CMS
 
 Enhanced audit logging for security-related events with structured logging.
 """
+
 import logging
-import json
-from typing import Optional, Dict, Any
 from datetime import datetime
 from enum import Enum
+from typing import Any, Dict, Optional
+
 from fastapi import Request
 
 logger = logging.getLogger(__name__)
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class SecurityEventType(str, Enum):
     """Security event types for audit logging"""
-    
+
     # Authentication events
     LOGIN_SUCCESS = "auth.login.success"
     LOGIN_FAILURE = "auth.login.failure"
@@ -24,43 +25,43 @@ class SecurityEventType(str, Enum):
     PASSWORD_RESET_REQUEST = "auth.password_reset.request"
     PASSWORD_RESET_COMPLETE = "auth.password_reset.complete"
     PASSWORD_CHANGE = "auth.password.change"
-    
+
     # Authorization events
     ACCESS_DENIED = "authz.access_denied"
     PERMISSION_VIOLATION = "authz.permission_violation"
     ROLE_CHANGE = "authz.role.change"
-    
+
     # Two-Factor Authentication
     TWO_FACTOR_ENABLED = "auth.2fa.enabled"
     TWO_FACTOR_DISABLED = "auth.2fa.disabled"
     TWO_FACTOR_VERIFIED = "auth.2fa.verified"
     TWO_FACTOR_FAILURE = "auth.2fa.failure"
-    
+
     # Account security
     ACCOUNT_LOCKED = "account.locked"
     ACCOUNT_UNLOCKED = "account.unlocked"
     ACCOUNT_DELETED = "account.deleted"
     ACCOUNT_CREATED = "account.created"
-    
+
     # API security
     API_KEY_CREATED = "api.key.created"
     API_KEY_REVOKED = "api.key.revoked"
     API_KEY_USED = "api.key.used"
     RATE_LIMIT_EXCEEDED = "api.rate_limit.exceeded"
-    
+
     # Data security
     DATA_EXPORT = "data.export"
     DATA_IMPORT = "data.import"
     DATA_DELETION = "data.deletion"
     BULK_OPERATION = "data.bulk_operation"
-    
+
     # Security violations
     CSRF_VIOLATION = "security.csrf.violation"
     SQL_INJECTION_ATTEMPT = "security.sql_injection.attempt"
     XSS_ATTEMPT = "security.xss.attempt"
     SUSPICIOUS_REQUEST = "security.suspicious_request"
     INVALID_TOKEN = "security.invalid_token"
-    
+
     # System security
     CONFIG_CHANGE = "system.config.change"
     ADMIN_ACTION = "system.admin.action"
@@ -70,13 +71,13 @@ class SecurityEventType(str, Enum):
 class SecurityAuditLogger:
     """
     Security audit logger with structured logging
-    
+
     Logs security events with context information for compliance and monitoring.
     """
-    
+
     def __init__(self):
         self.logger = logging.getLogger("security.audit")
-    
+
     def log_event(
         self,
         event_type: SecurityEventType,
@@ -91,7 +92,7 @@ class SecurityAuditLogger:
     ):
         """
         Log a security event
-        
+
         Args:
             event_type: Type of security event
             user_id: User ID involved in the event
@@ -109,7 +110,7 @@ class SecurityAuditLogger:
                 ip_address = request.client.host if request.client else None
             if not user_agent:
                 user_agent = request.headers.get("user-agent")
-        
+
         # Build audit log entry
         audit_entry = {
             "timestamp": datetime.utcnow().isoformat(),
@@ -122,15 +123,15 @@ class SecurityAuditLogger:
             "user_agent": user_agent,
             "details": details or {},
         }
-        
+
         # Log based on severity
         log_message = f"Security Event: {event_type.value}"
-        
+
         if success:
             self.logger.info(log_message, extra={"audit": audit_entry})
         else:
             self.logger.warning(log_message, extra={"audit": audit_entry})
-    
+
     def log_login_success(
         self,
         user_id: int,
@@ -149,7 +150,7 @@ class SecurityAuditLogger:
             success=True,
             details={"auth_method": method},
         )
-    
+
     def log_login_failure(
         self,
         username: str,
@@ -164,7 +165,7 @@ class SecurityAuditLogger:
             success=False,
             details={"reason": reason},
         )
-    
+
     def log_access_denied(
         self,
         user_id: int,
@@ -185,7 +186,7 @@ class SecurityAuditLogger:
                 "action": action,
             },
         )
-    
+
     def log_permission_violation(
         self,
         user_id: int,
@@ -202,7 +203,7 @@ class SecurityAuditLogger:
             success=False,
             details={"required_permission": required_permission},
         )
-    
+
     def log_rate_limit_exceeded(
         self,
         user_id: Optional[int] = None,
@@ -223,7 +224,7 @@ class SecurityAuditLogger:
                 "limit": limit,
             },
         )
-    
+
     def log_csrf_violation(
         self,
         request: Optional[Request] = None,
@@ -237,7 +238,7 @@ class SecurityAuditLogger:
             success=False,
             details={"endpoint": request.url.path if request else None},
         )
-    
+
     def log_sql_injection_attempt(
         self,
         request: Optional[Request] = None,
@@ -255,7 +256,7 @@ class SecurityAuditLogger:
                 "endpoint": request.url.path if request else None,
             },
         )
-    
+
     def log_data_export(
         self,
         user_id: int,
@@ -278,7 +279,7 @@ class SecurityAuditLogger:
                 "record_count": record_count,
             },
         )
-    
+
     def log_bulk_operation(
         self,
         user_id: int,
@@ -301,7 +302,7 @@ class SecurityAuditLogger:
                 "record_count": record_count,
             },
         )
-    
+
     def log_admin_action(
         self,
         user_id: int,

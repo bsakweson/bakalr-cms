@@ -1,34 +1,35 @@
 """
 API Router aggregating all endpoints
 """
+
 from fastapi import APIRouter
 
 from backend.api import (
     analytics,
-    auth,
-    users,
-    roles,
-    organization,
-    audit_logs,
-    content,
-    translation,
-    seo,
-    media,
-    webhook,
-    preview,
-    delivery,
-    schedule,
-    password_reset,
     api_keys,
-    relationship,
-    field_permissions,
-    theme,
+    audit_logs,
+    auth,
+    content,
     content_template,
-    two_factor,
-    tenant,
-    notifications,
-    search,
+    delivery,
+    field_permissions,
+    media,
     metrics,
+    notifications,
+    organization,
+    password_reset,
+    preview,
+    relationship,
+    roles,
+    schedule,
+    search,
+    seo,
+    tenant,
+    theme,
+    translation,
+    two_factor,
+    users,
+    webhook,
 )
 
 api_router = APIRouter()
@@ -59,6 +60,7 @@ api_router.include_router(content_template.router)
 api_router.include_router(notifications.router)
 api_router.include_router(search.router)
 api_router.include_router(metrics.router)
+
 
 @api_router.get("/")
 async def root():

@@ -43,7 +43,7 @@
 - **Error Handling**: RFC 7807 Problem Details with 8 custom exception types, input sanitization with XSS protection
 - **API Versioning**: URL-based versioning (/api/v1, /api/v2) with deprecation headers (Deprecation, Sunset, Link, X-API-Warn)
 - **Content Relationships**: Bidirectional linking between content entries (one-to-many, many-to-one, many-to-many patterns)
-- **Caching**: Redis-based response caching with ETags, cache invalidation, and cache warming service  
+- **Caching**: Redis-based response caching with ETags, cache invalidation, and cache warming service
 - **Rate Limiting**: SlowAPI with per-user, per-tenant, and per-IP limits
 - **Webhooks**: Event-driven webhooks with HMAC-SHA256 signatures, retry logic, and 6 event types
 - **Authentication**: JWT-based with bcrypt, refresh tokens, multi-tenancy, password reset flow (3 endpoints), API key management (5 endpoints), Two-Factor Authentication (8 endpoints), Tenant Switching (5 endpoints)

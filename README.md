@@ -422,7 +422,7 @@ sequenceDiagram
     Client->>API: POST /media/upload
     API->>API: Validate file (type, size)
     API->>Storage: get_storage_backend()
-    
+
     alt Local Storage
         Storage->>LocalFS: save_file()
         LocalFS-->>Storage: file_path
@@ -430,7 +430,7 @@ sequenceDiagram
         Storage->>S3: put_object()
         S3-->>Storage: s3_url
     end
-    
+
     Storage-->>API: file_url
     API->>DB: Create media record
     DB-->>API: media_id
@@ -450,7 +450,7 @@ sequenceDiagram
     Client->>API: GET /media/files/{filename}
     API->>API: Find media record
     API->>Storage: get_storage_backend()
-    
+
     alt Local Storage
         Storage->>LocalFS: Read file
         LocalFS-->>API: File content
@@ -545,17 +545,17 @@ class StorageBackend(ABC):
     def save_file(self, file_content: bytes, file_path: str) -> str:
         """Save file and return URL"""
         pass
-    
+
     @abstractmethod
     def delete_file(self, file_path: str) -> bool:
         """Delete file from storage"""
         pass
-    
+
     @abstractmethod
     def get_file_url(self, file_path: str) -> str:
         """Get public URL for file"""
         pass
-    
+
     @abstractmethod
     def file_exists(self, file_path: str) -> bool:
         """Check if file exists"""
@@ -1635,7 +1635,7 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
    ```bash
    # Backend tests
    poetry run pytest
-   
+
    # Frontend tests
    cd frontend && npm test
    ```

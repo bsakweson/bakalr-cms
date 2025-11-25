@@ -353,10 +353,10 @@ async def send_email(to: str, subject: str, body: str) -> bool:
 def calculate_total(items: List[Item]) -> Decimal:
     """
     Calculate total price for list of items.
-    
+
     Args:
         items: List of Item objects
-        
+
     Returns:
         Total price as Decimal
     """
@@ -435,7 +435,7 @@ chore: update dependencies
 
 **users**: User accounts
 ```sql
-id, email, password_hash, full_name, organization_id, 
+id, email, password_hash, full_name, organization_id,
 is_active, is_superuser, created_at, updated_at
 ```
 
@@ -451,7 +451,7 @@ id, name, description, organization_id, created_at
 
 **permissions**: RBAC permissions
 ```sql
-id, name, description, resource, action, 
+id, name, description, resource, action,
 content_type_id, field_name
 ```
 
@@ -489,7 +489,7 @@ See `docs/database-schema.md` for complete schema documentation.
 ```python
 class Product(Base):
     __tablename__ = "products"
-    
+
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     price = Column(Numeric(10, 2), nullable=False)
@@ -501,12 +501,12 @@ class Product(Base):
 class ProductCreate(BaseModel):
     name: str
     price: Decimal
-    
+
 class ProductResponse(BaseModel):
     id: int
     name: str
     price: Decimal
-    
+
     class Config:
         from_attributes = True
 ```
@@ -619,9 +619,9 @@ describe('UserCard', () => {
       email: 'test@example.com',
       fullName: 'Test User'
     };
-    
+
     render(<UserCard user={user} />);
-    
+
     expect(screen.getByText('Test User')).toBeInTheDocument();
     expect(screen.getByText('test@example.com')).toBeInTheDocument();
   });
