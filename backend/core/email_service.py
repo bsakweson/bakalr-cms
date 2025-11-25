@@ -1,0 +1,237 @@
+"""
+Email service for sending transactional and notification emails.
+Uses FastAPI-Mail with Jinja2 templates and queue support.
+"""
+from typing import List, Dict, Any, Optional
+from pathlib import Path
+from datetime import datetime
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+from pydantic import EmailStr
+
+from backend.core.config import settings
+from backend.models.notification import EmailLog, EmailStatus
+from backend.db.session import SessionLocal
+
+
+class EmailService:
+    """
+    Email service with template rendering and delivery tracking.
+    Supports transactional emails, notifications, and bulk sending.
+    """
+    
+    def __init__(self):
+        # Configure FastAPI-Mail
+        self.conf = ConnectionConfig(
+            MAIL_USERNAME=settings.SMTP_USER,
+            MAIL_PASSWORD=settings.SMTP_PASSWORD,
+            MAIL_FROM=settings.SMTP_FROM,
+            MAIL_PORT=settings.SMTP_PORT,
+            MAIL_SERVER=settings.SMTP_HOST,
+            MAIL_STARTTLS=settings.SMTP_TLS,
+            MAIL_SSL_TLS=settings.SMTP_SSL,
+            USE_CREDENTIALS=True,
+            VALIDATE_CERTS=True,
+            TEMPLATE_FOLDER=Path(__file__).parent.parent / "templates" / "emails"
+        )
+        self.fastmail = FastMail(self.conf)
+        
+        # Configure Jinja2 for templates
+        template_dir = Path(__file__).parent.parent / "templates" / "emails"
+        template_dir.mkdir(parents=True, exist_ok=True)
+        
+        self.jinja_env = Environment(
+            loader=FileSystemLoader(str(template_dir)),
+            autoescape=select_autoescape(['html', 'xml'])
+        )
+    
+    async def send_email(
+        self,
+        to_email: str,
+        subject: str,
+        template_name: str,
+        template_vars: Dict[str, Any],
+        organization_id: int,
+        user_id: Optional[int] = None,
+        attachments: Optional[List[str]] = None
+    ) -> EmailLog:
+        """
+        Send email with template rendering and delivery tracking.
+        
+        Args:
+            to_email: Recipient email address
+            subject: Email subject line
+            template_name: Name of Jinja2 template (e.g., "welcome.html")
+            template_vars: Variables to pass to template
+            organization_id: Organization ID for multi-tenancy
+            user_id: Optional user ID
+            attachments: Optional list of file paths
+            
+        Returns:
+            EmailLog: Email log entry with delivery status
+        """
+        db = SessionLocal()
+        
+        try:
+            # Create email log entry
+            email_log = EmailLog(
+                user_id=user_id,
+                organization_id=organization_id,
+                to_email=to_email,
+                from_email=settings.SMTP_FROM,
+                subject=subject,
+                template_name=template_name,
+                status=EmailStatus.PENDING,
+                meta_data=template_vars
+            )
+            db.add(email_log)
+            db.commit()
+            db.refresh(email_log)
+            
+            # Render template
+            try:
+                template = self.jinja_env.get_template(template_name)
+                html_content = template.render(**template_vars)
+            except Exception as e:
+                email_log.status = EmailStatus.FAILED
+                email_log.error_message = f"Template rendering failed: {str(e)}"
+                db.commit()
+                raise
+            
+            # Create message
+            message = MessageSchema(
+                subject=subject,
+                recipients=[to_email],
+                body=html_content,
+                subtype=MessageType.html
+            )
+            
+            # Send email
+            try:
+                email_log.status = EmailStatus.SENDING
+                db.commit()
+                
+                await self.fastmail.send_message(message)
+                
+                email_log.status = EmailStatus.SENT
+                email_log.sent_at = datetime.utcnow()
+                db.commit()
+                
+            except Exception as e:
+                email_log.status = EmailStatus.FAILED
+                email_log.error_message = str(e)
+                email_log.retry_count += 1
+                db.commit()
+                raise
+            
+            return email_log
+            
+        except Exception as e:
+            db.rollback()
+            raise
+        finally:
+            db.close()
+    
+    async def send_welcome_email(
+        self,
+        to_email: str,
+        user_name: str,
+        organization_name: str,
+        organization_id: int,
+        user_id: int
+    ):
+        """Send welcome email to new user"""
+        return await self.send_email(
+            to_email=to_email,
+            subject=f"Welcome to {organization_name} - Bakalr CMS",
+            template_name="welcome.html",
+            template_vars={
+                "user_name": user_name,
+                "organization_name": organization_name,
+                "login_url": f"{settings.FRONTEND_URL}/login",
+                "dashboard_url": f"{settings.FRONTEND_URL}/dashboard",
+                "year": datetime.utcnow().year
+            },
+            organization_id=organization_id,
+            user_id=user_id
+        )
+    
+    async def send_password_reset_email(
+        self,
+        to_email: str,
+        user_name: str,
+        reset_token: str,
+        organization_id: int,
+        user_id: int
+    ):
+        """Send password reset email"""
+        reset_url = f"{settings.FRONTEND_URL}/reset-password?token={reset_token}"
+        
+        return await self.send_email(
+            to_email=to_email,
+            subject="Reset Your Password - Bakalr CMS",
+            template_name="password_reset.html",
+            template_vars={
+                "user_name": user_name,
+                "reset_url": reset_url,
+                "expiry_hours": 24,
+                "year": datetime.utcnow().year
+            },
+            organization_id=organization_id,
+            user_id=user_id
+        )
+    
+    async def send_content_digest_email(
+        self,
+        to_email: str,
+        user_name: str,
+        organization_name: str,
+        content_summary: Dict[str, Any],
+        organization_id: int,
+        user_id: int
+    ):
+        """Send content digest email (daily/weekly)"""
+        return await self.send_email(
+            to_email=to_email,
+            subject=f"Content Digest - {organization_name}",
+            template_name="content_digest.html",
+            template_vars={
+                "user_name": user_name,
+                "organization_name": organization_name,
+                "content_summary": content_summary,
+                "dashboard_url": f"{settings.FRONTEND_URL}/dashboard",
+                "year": datetime.utcnow().year
+            },
+            organization_id=organization_id,
+            user_id=user_id
+        )
+    
+    async def send_notification_email(
+        self,
+        to_email: str,
+        user_name: str,
+        notification_title: str,
+        notification_message: str,
+        action_url: Optional[str],
+        organization_id: int,
+        user_id: int
+    ):
+        """Send generic notification email"""
+        return await self.send_email(
+            to_email=to_email,
+            subject=f"Notification: {notification_title}",
+            template_name="notification.html",
+            template_vars={
+                "user_name": user_name,
+                "notification_title": notification_title,
+                "notification_message": notification_message,
+                "action_url": action_url,
+                "year": datetime.utcnow().year
+            },
+            organization_id=organization_id,
+            user_id=user_id
+        )
+
+
+# Global email service instance
+email_service = EmailService()

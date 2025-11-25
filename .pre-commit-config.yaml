@@ -1,0 +1,98 @@
+# Pre-commit hooks for Bakalr CMS
+# Install: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # Python code formatting
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        language_version: python3.13
+        args: ['--line-length=100']
+
+  # Python linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.0
+    hooks:
+      - id: ruff
+        args: ['--fix', '--line-length=100']
+
+  # Python type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    hooks:
+      - id: mypy
+        additional_dependencies: 
+          - types-requests
+          - sqlalchemy-stubs
+        args: ['--ignore-missing-imports', '--no-strict-optional']
+
+  # Python security checks
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.10
+    hooks:
+      - id: bandit
+        args: ['-r', 'backend/', '-ll']
+        exclude: 'tests/'
+
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  # Python import sorting
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ['--profile', 'black', '--line-length', '100']
+
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.44.0
+    hooks:
+      - id: markdownlint
+        args: ['--config', '.markdownlint.json']
+
+  # TypeScript/JavaScript linting (frontend)
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: bash -c 'cd frontend && npm run lint'
+        language: system
+        types: [javascript, jsx, ts, tsx]
+        files: '^frontend/'
+        pass_filenames: false
+
+  # Run backend tests
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: bash -c 'poetry run pytest tests/ -x --tb=short'
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [push]  # Only run on push, not every commit
+
+  # Run frontend tests
+  - repo: local
+    hooks:
+      - id: vitest
+        name: vitest
+        entry: bash -c 'cd frontend && npm test -- --run'
+        language: system
+        types: [javascript, jsx, ts, tsx]
+        files: '^frontend/'
+        pass_filenames: false
+        stages: [push]  # Only run on push, not every commit
