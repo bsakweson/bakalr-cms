@@ -28,6 +28,7 @@ from backend.api import (
     tenant,
     notifications,
     search,
+    metrics,
 )
 
 api_router = APIRouter()
@@ -57,6 +58,7 @@ api_router.include_router(theme.router)
 api_router.include_router(content_template.router)
 api_router.include_router(notifications.router)
 api_router.include_router(search.router)
+api_router.include_router(metrics.router)
 
 @api_router.get("/")
 async def root():

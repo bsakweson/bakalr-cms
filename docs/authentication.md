@@ -244,11 +244,13 @@ curl -X GET http://localhost:8000/api/v1/tenant/organizations \
 ## Security Best Practices
 
 ### Token Storage
+
 - ✅ Store tokens in secure, httpOnly cookies (web apps)
 - ✅ Use secure storage (Keychain, Keystore) for mobile apps
 - ❌ Never store tokens in localStorage (XSS vulnerable)
 
 ### API Key Management
+
 - ✅ Rotate API keys regularly
 - ✅ Use environment variables, never hardcode
 - ✅ Set expiration dates
@@ -256,6 +258,7 @@ curl -X GET http://localhost:8000/api/v1/tenant/organizations \
 - ❌ Never commit API keys to version control
 
 ### Password Requirements
+
 - Minimum 8 characters
 - At least one uppercase letter
 - At least one lowercase letter
@@ -263,12 +266,13 @@ curl -X GET http://localhost:8000/api/v1/tenant/organizations \
 - At least one special character
 
 ### Rate Limiting
+
 - Authenticated users: 100 requests/minute
 - Unauthenticated: 20 requests/minute
 - API keys: 200 requests/minute
 
 Rate limit headers in response:
-```
+```http
 X-RateLimit-Limit: 100
 X-RateLimit-Remaining: 95
 X-RateLimit-Reset: 1700000000
@@ -277,6 +281,7 @@ X-RateLimit-Reset: 1700000000
 ## Error Responses
 
 ### 401 Unauthorized
+
 ```json
 {
   "type": "https://api.yourdomain.com/errors/unauthorized",
@@ -287,6 +292,7 @@ X-RateLimit-Reset: 1700000000
 ```
 
 ### 403 Forbidden
+
 ```json
 {
   "type": "https://api.yourdomain.com/errors/forbidden",
@@ -297,6 +303,7 @@ X-RateLimit-Reset: 1700000000
 ```
 
 ### 429 Rate Limit Exceeded
+
 ```json
 {
   "error": "rate_limit_exceeded",

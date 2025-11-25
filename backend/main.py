@@ -15,10 +15,14 @@ from scalar_fastapi import get_scalar_api_reference
 
 from backend.core.config import settings
 from backend.api import api_router
+from backend.db import engine
 from backend.core.cache import cache
 from backend.core.rate_limit import limiter
 from backend.core.versioning import VersioningMiddleware
 from backend.core.cache_warming import cache_warming_service
+from backend.middleware.security import setup_security_middleware
+from backend.middleware.performance import PerformanceMiddleware
+from backend.core.query_optimization import setup_query_logging
 from backend.core.exceptions import (
     AppException,
     app_exception_handler,
@@ -39,6 +43,11 @@ async def lifespan(app: FastAPI):
     print(f"🚀 Starting {settings.PROJECT_NAME} v{settings.VERSION}")
     print(f"📝 Environment: {settings.ENVIRONMENT}")
     print(f"🔧 Debug mode: {settings.DEBUG}")
+    
+    # Setup query logging for performance monitoring
+    if settings.DEBUG:
+        print("📊 Setting up query performance logging...")
+        setup_query_logging(engine)
     
     # TODO: Enable cache warming in production
     # if not settings.DEBUG:
@@ -151,6 +160,12 @@ Get started by registering an account at `/api/v1/auth/register`.
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    
+    # Performance monitoring middleware
+    app.add_middleware(PerformanceMiddleware)
+    
+    # Security middleware (headers, CSRF, validation)
+    setup_security_middleware(app, settings.SECRET_KEY)
 
     # GZip compression
     app.add_middleware(GZipMiddleware, minimum_size=1000)
@@ -204,24 +219,78 @@ Get started by registering an account at `/api/v1/auth/register`.
 
     @app.get("/health")
     async def health_check():
-        """Health check endpoint with service status"""
-        redis_status = "healthy"
+        """
+        Health check endpoint for container orchestration
+        Returns basic health status - use for liveness probes
+        """
+        return {
+            "status": "healthy",
+            "version": settings.VERSION,
+            "timestamp": "2025-11-25T10:30:00Z"
+        }
+    
+    @app.get("/health/ready")
+    async def readiness_check():
+        """
+        Readiness check endpoint with service dependencies
+        Use for Kubernetes readiness probes
+        """
+        import datetime
+        from sqlalchemy import text
+        
+        services = {}
+        overall_status = "ready"
+        
+        # Check Redis
         try:
             await cache.client.ping()
-        except Exception:
-            redis_status = "unhealthy"
+            services["redis"] = {"status": "healthy", "latency_ms": 0}
+        except Exception as e:
+            services["redis"] = {"status": "unhealthy", "error": str(e)}
+            overall_status = "not_ready"
         
-        return {
-            "status": "healthy" if redis_status == "healthy" else "degraded",
-            "version": settings.VERSION,
-            "environment": settings.ENVIRONMENT,
-            "services": {
-                "redis": redis_status,
-                "api": "healthy"
+        # Check Database
+        try:
+            from backend.db.session import SessionLocal
+            db = SessionLocal()
+            start_time = datetime.datetime.now()
+            db.execute(text("SELECT 1"))
+            latency = (datetime.datetime.now() - start_time).total_seconds() * 1000
+            db.close()
+            services["database"] = {"status": "healthy", "latency_ms": round(latency, 2)}
+        except Exception as e:
+            services["database"] = {"status": "unhealthy", "error": str(e)}
+            overall_status = "not_ready"
+        
+        # Check Meilisearch (optional)
+        try:
+            from backend.core.config import settings as app_settings
+            if hasattr(app_settings, 'MEILI_HOST'):
+                import httpx
+                async with httpx.AsyncClient() as client:
+                    response = await client.get(f"{app_settings.MEILI_HOST}/health", timeout=2.0)
+                    if response.status_code == 200:
+                        services["search"] = {"status": "healthy"}
+                    else:
+                        services["search"] = {"status": "degraded", "code": response.status_code}
+        except Exception as e:
+            services["search"] = {"status": "unavailable", "error": str(e)}
+        
+        status_code = 200 if overall_status == "ready" else 503
+        
+        return JSONResponse(
+            status_code=status_code,
+            content={
+                "status": overall_status,
+                "version": settings.VERSION,
+                "environment": settings.ENVIRONMENT,
+                "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+                "services": services
             }
-        }
+        )
 
     return app
 
 
 app = create_app()
+

@@ -330,7 +330,7 @@ curl -X GET http://localhost:8000/api/v1/webhooks/550e8400-e29b-41d4-a716-446655
 
 For quick testing, use [webhook.site](https://webhook.site):
 
-1. Go to https://webhook.site
+1. Go to <https://webhook.site>
 2. Copy your unique URL
 3. Create a webhook with that URL
 4. Trigger an event (create content, upload media, etc.)
@@ -400,6 +400,7 @@ curl -X PUT http://localhost:8000/api/v1/webhooks/550e8400-e29b-41d4-a716-446655
 ## Best Practices
 
 ### Security
+
 - ✅ Always verify HMAC signatures
 - ✅ Use HTTPS endpoints only
 - ✅ Rotate webhook secrets regularly
@@ -407,6 +408,7 @@ curl -X PUT http://localhost:8000/api/v1/webhooks/550e8400-e29b-41d4-a716-446655
 - ❌ Never log sensitive data from webhooks
 
 ### Reliability
+
 - ✅ Return 2xx status code quickly (< 5 seconds)
 - ✅ Process webhooks asynchronously (use queues)
 - ✅ Implement idempotency (webhooks may be delivered multiple times)
@@ -414,6 +416,7 @@ curl -X PUT http://localhost:8000/api/v1/webhooks/550e8400-e29b-41d4-a716-446655
 - ❌ Don't perform heavy processing synchronously
 
 ### Monitoring
+
 - ✅ Monitor webhook logs regularly
 - ✅ Set up alerts for failed deliveries
 - ✅ Track response times

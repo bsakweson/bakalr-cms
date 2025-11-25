@@ -1,113 +1,297 @@
-# Bakalr CMS
+<div align="center">
 
-A modern headless CMS built with Python/FastAPI backend and Next.js frontend, featuring multi-tenancy, comprehensive RBAC, automatic translation, content templates, two-factor authentication, and advanced theming.
+# 🎂 Bakalr CMS
 
-## Features
+## Modern Headless CMS for the API-First Era
 
-- 🏢 **Multi-tenancy** - Complete organization/workspace isolation with seamless tenant switching for multi-org users
-- 🔐 **Comprehensive RBAC** - Custom roles, granular permissions, field-level access control, permission inheritance and role hierarchies
-- 🛡️ **Two-Factor Authentication** - TOTP-based 2FA with backup codes for enhanced security
-- 🌍 **Multi-language** - Automatic translation with locale detection (Google Translate/DeepL)
-- 🎨 **Custom Theming** - Dark chocolate brown default theme with custom color palettes, typography, spacing
-- 📋 **Content Templates** - Reusable blueprints with field defaults and configurations
-- 🔍 **Advanced Search** - Meilisearch-powered full-text search with fuzzy matching, typo tolerance, highlighting, autocomplete, faceted filtering
-- 📊 **SEO Optimized** - Meta tags, Open Graph, structured data, sitemaps
-- 📁 **Media Management** - Upload, thumbnails, S3/local storage support, CDN optimization
-- 🚀 **Real-time Updates** - WebSocket support for live collaboration
-- 🔗 **Webhooks** - Event-driven integrations with HMAC signatures
-- 📝 **Rich Content** - Modern content editor with dynamic field rendering, rich text (TipTap), media picker, multi-language translations, and versioning
-- 📅 **Content Scheduling** - Schedule publish/unpublish with timezone support
-- 🔑 **API Keys** - Programmatic access with permission scoping
-- 🚦 **Rate Limiting** - Per-user, per-tenant, per-IP rate limits
-- 📖 **Interactive API Docs** - OpenAPI with real-time testing (131+ endpoints)
-- 🔄 **GraphQL API** - Flexible query interface with 8 queries, 2 mutations, JWT auth
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org)
+[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
 
-## Tech Stack
+A production-ready headless CMS with FastAPI backend and Next.js frontend, featuring multi-tenancy, RBAC, auto-translation, full-text search, and comprehensive performance monitoring.
+
+[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [API Reference](#-api-reference) • [Contributing](#-contributing)
+
+</div>
+
+---
+
+## ✨ Features
+
+### 🏢 Multi-Tenancy & Organizations
+
+- Complete workspace isolation with organization-level data separation
+- Users can belong to multiple organizations with different roles
+- Seamless tenant switching without re-authentication
+- Per-organization settings and configurations
+
+### 🔐 Security & Authentication
+
+- **JWT Authentication**: Access and refresh tokens with configurable expiration
+- **Two-Factor Auth (2FA)**: TOTP-based with backup codes
+- **API Keys**: Programmatic access with permission scoping and expiration
+- **RBAC**: Role-based access control with field-level permissions
+- **Permission Hierarchies**: Inherited permissions with customizable rules
+- **Password Security**: Bcrypt hashing with strength validation
+- **CSRF Protection**: Double-submit cookie pattern
+- **Rate Limiting**: 100 req/min (authenticated), 20 req/min (anonymous)
+- **Security Headers**: CSP, HSTS, X-Frame-Options, X-Content-Type-Options
+
+### 📝 Content Management
+
+- **Dynamic Content Types**: JSON schema-based with full validation
+- **Content Versioning**: Track changes with version history
+- **Content Relationships**: Bidirectional linking (one-to-many, many-to-many)
+- **Content Templates**: Reusable blueprints with defaults
+- **Scheduled Publishing**: Publish/unpublish at specific times
+- **Status Management**: Draft, published, archived workflows
+- **Bulk Operations**: Efficient multi-item updates
+
+### 🌍 Multi-Language
+
+- **Auto-Translation**: 100+ languages via Google Translate
+- **Locale Management**: Enable/disable locales per organization
+- **Translation Caching**: Redis-based with 24-hour TTL
+- **Fallback Support**: Automatic fallback to default locale
+- **RTL Support**: Right-to-left language support
+
+### 🔍 Search & Discovery
+
+- **Full-Text Search**: Meilisearch with fuzzy matching and typo tolerance
+- **Advanced Filtering**: Faceted search with multiple filters
+- **Autocomplete**: Real-time search suggestions
+- **Highlighting**: Search term highlighting in results
+- **Search Analytics**: Track queries, zero-result searches, CTR
+
+### 📊 SEO & Analytics
+
+- **Meta Tags**: Title, description, keywords, Open Graph, Twitter Cards
+- **Sitemaps**: Automatic XML generation with priorities
+- **Structured Data**: Schema.org JSON-LD markup
+- **Content Analytics**: View counts, popularity, update frequency
+- **User Activity**: Track actions and login history
+- **System Metrics**: CPU, memory, disk, performance monitoring
+
+### 📁 Media Management
+
+- **Multi-File Upload**: Drag-and-drop support
+- **Storage Backends**: S3-compatible and local filesystem
+- **Image Processing**: Automatic thumbnail generation
+- **CDN Support**: CDN-ready URLs with cache headers
+- **Media Library**: Browse, search, and filter
+
+### 🔗 Integrations
+
+- **Webhooks**: 6 event types with HMAC-SHA256 signatures
+- **GraphQL API**: Flexible queries alongside REST
+- **REST API**: 159+ endpoints with OpenAPI docs
+- **API Versioning**: URL-based with deprecation headers
+
+### ⚡ Performance
+
+- **Redis Caching**: Response caching with ETag support
+- **Connection Pooling**: Environment-based pool sizing
+- **Query Optimization**: N+1 prevention, eager loading
+- **Performance Monitoring**: Request timing, p95/p99 metrics
+- **Metrics API**: 7 admin endpoints for performance data
+- **Image Optimization**: WebP/AVIF with Next.js Image
+- **Code Splitting**: Lazy loading and bundle optimization
+
+## 🛠️ Tech Stack
 
 ### Backend
 
-- **Python 3.11+** with **FastAPI**
-- **Poetry** for dependency management
-- **PostgreSQL** database
-- **SQLAlchemy** ORM
-- **Redis** for caching and pub/sub
-- **Celery** for background tasks
-- **Alembic** for database migrations
-- **AWS S3/boto3** for cloud storage (optional)
+- **Framework**: FastAPI 0.115+ (async Python web framework)
+- **Language**: Python 3.11+
+- **ORM**: SQLAlchemy 2.0 with async support
+- **Database**: PostgreSQL 14+ (production) or SQLite (development)
+- **Caching**: Redis 7+ for caching and sessions
+- **Search**: Meilisearch v1.5+ (optional)
+- **Migrations**: Alembic 1.13+
+- **Validation**: Pydantic 2.9+
+- **Authentication**: Python-JOSE for JWT
+- **Password**: Passlib with bcrypt
+- **Storage**: Boto3 for S3, local filesystem
+- **Monitoring**: psutil for system metrics
 
 ### Frontend
 
-- **Next.js 14+** with App Router
-- **TypeScript**
-- **TailwindCSS** for styling
-- **shadcn/ui** component library
-- **Tiptap/Lexical** rich text editor
+- **Framework**: Next.js 16.0.4 with App Router
+- **Language**: TypeScript 5.6+
+- **UI Library**: React 19
+- **Styling**: TailwindCSS 3 + shadcn/ui
+- **HTTP Client**: Axios with interceptors
+- **Forms**: React Hook Form + Zod validation
+- **Performance**: Web Vitals tracking
 
-## Quick Start
+### Infrastructure
 
-### Prerequisites
+- **Containerization**: Docker with multi-stage builds
+- **Orchestration**: Docker Compose for local/production
+- **CI/CD**: GitHub Actions (test, build, security scan)
+- **Proxy**: Nginx for production reverse proxy
+
+## 🚀 Quick Start
+
+### Option 1: Docker (Recommended)
+
+The fastest way to get started:
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/bakalr-cms.git
+cd bakalr-cms
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your settings
+
+# Start all services
+docker-compose up -d
+
+# Run migrations
+docker-compose exec backend alembic upgrade head
+
+# Access the application
+# Backend API: http://localhost:8000
+# Frontend: http://localhost:3000
+# API Docs: http://localhost:8000/api/docs
+```
+
+### Option 2: Local Development
+
+#### Prerequisites
 
 - Python 3.11+
 - Node.js 18+ (LTS)
-- PostgreSQL 14+ (or SQLite for development)
-- Redis 6+
-- Poetry
+- PostgreSQL 14+ (or SQLite for dev)
+- Redis 7+
+- Poetry 1.8+
 
-### Backend Setup
+#### Backend Setup
 
 ```bash
 # Install dependencies
 poetry install
 
-# Copy environment file
+# Configure environment
 cp .env.example .env
-
-# Edit .env with your configuration
-# DATABASE_URL, REDIS_URL, SECRET_KEY, etc.
+# Edit DATABASE_URL, REDIS_URL, SECRET_KEY
 
 # Run migrations
 poetry run alembic upgrade head
 
-# Run the development server
-poetry run uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+# Start backend
+poetry run uvicorn backend.main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`
+Backend available at `http://localhost:8000`
 
-### Frontend Setup
+#### Frontend Setup
 
 ```bash
-# Navigate to frontend directory
 cd frontend
 
 # Install dependencies
 npm install
 
-# Copy environment file
-cp .env.example .env.local
+# Configure environment
+cp .env.local.example .env.local
+# Set NEXT_PUBLIC_API_URL=http://localhost:8000
 
-# Edit .env.local with your backend API URL
-# NEXT_PUBLIC_API_URL=http://localhost:8000
-
-# Run the development server
+# Start frontend
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:3000`
+Frontend available at `http://localhost:3000`
 
 ### First Steps
 
-1. Open `http://localhost:3000` in your browser
-2. Click "Get Started" to create your account and organization
-3. Log in with your credentials
-4. Explore the admin dashboard at `http://localhost:3000/dashboard`
+1. Register an account at `http://localhost:3000/register`
+2. Create your organization during registration
+3. Log in and explore the admin dashboard
+4. Create your first content type and content entry
 
-### API Documentation
+See the [Getting Started Guide](docs/getting-started.md) for detailed instructions.
 
+## 📚 Documentation
+
+### User Guides
+
+- **[Getting Started](docs/getting-started.md)** - Installation, first steps, core concepts
+- **[Quickstart Guide](docs/quickstart.md)** - 5-minute setup guide
+- **[Authentication Guide](docs/authentication.md)** - JWT, 2FA, API keys, password reset
+
+### Developer Documentation
+
+- **[Developer Guide](docs/developer-guide.md)** - Architecture, project structure, development setup
+- **[API Reference](http://localhost:8000/api/docs)** - Interactive OpenAPI documentation
+- **[Database Schema](docs/database-schema.md)** - Complete schema documentation
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+
+### Admin Documentation
+
+- **[Deployment Guide](docs/deployment.md)** - Docker, production setup, environment config
+- **[Security Guide](docs/security.md)** - Best practices, hardening, compliance
+- **[Performance Guide](docs/performance.md)** - Optimization, monitoring, load testing
+
+### Additional Resources
+
+- **[CHANGELOG](CHANGELOG.md)** - Version history and release notes
+- **[LICENSE](LICENSE)** - MIT License
+- **[NOTICE](NOTICE)** - Third-party notices
+
+## 🎯 API Reference
+
+### REST API
+
+159+ endpoints across 24 modules:
+
+- **Authentication** (7 endpoints): Login, register, refresh, logout, verify
+- **Users** (6 endpoints): CRUD operations, profile management
+- **Organizations** (6 endpoints): Multi-tenancy management
+- **Roles** (8 endpoints): RBAC with custom roles
+- **Content** (11 endpoints): Content types and entries
+- **Translation** (11 endpoints): Auto-translation and locales
+- **SEO** (10 endpoints): Meta tags, sitemaps, structured data
+- **Media** (11 endpoints): Upload, manage files
+- **Search** (8 endpoints): Full-text search with Meilisearch
+- **Webhooks** (10 endpoints): Event subscriptions
+- **Analytics** (11 endpoints): Content and user analytics
+- **Notifications** (13 endpoints): In-app notifications
+- **Metrics** (7 endpoints): Performance monitoring
+- And more...
+
+**Interactive Documentation**:
 - Swagger UI: `http://localhost:8000/api/docs`
 - ReDoc: `http://localhost:8000/api/redoc`
-- OpenAPI JSON: `http://localhost:8000/api/openapi.json`
-- GraphQL Playground: `http://localhost:8000/api/v1/graphql` (debug mode only)
+- Scalar: `http://localhost:8000/api/scalar`
+
+### GraphQL API
+
+8 queries and 2 mutations available at `/api/v1/graphql`:
+
+```graphql
+query {
+  me {
+    id
+    email
+    fullName
+    organization {
+      name
+    }
+  }
+  contentEntries(limit: 10) {
+    id
+    title
+    status
+  }
+}
+```
+
+**GraphiQL Playground** (development): `http://localhost:8000/api/v1/graphql`
 
 ## Project Structure
 
@@ -1022,7 +1206,7 @@ docker run -d -p 6379:6379 redis:latest
 - **Pages**: Landing page, login, register, admin dashboard with sidebar navigation
 - **Features**: Responsive layout, dark/light mode, user profile dropdown, organization context
 
-## GraphQL API
+## GraphQL API (Alternative Query Interface)
 
 The CMS provides a GraphQL interface alongside the REST API for flexible querying.
 
@@ -1422,10 +1606,88 @@ Visual schema builder for creating content types without writing JSON:
 5. Reorder fields as needed
 6. Save → Content type ready for use
 
-## License
+## 🤝 Contributing
 
-MIT License - See LICENSE file for details
+We welcome contributions from the community! Whether you're fixing bugs, adding features, improving documentation, or reporting issues, your help is appreciated.
 
-## Contributing
+### Ways to Contribute
 
-Contributions are welcome! Please read our contributing guidelines.
+- **Report Bugs**: Open an issue with detailed reproduction steps
+- **Suggest Features**: Describe your idea and use case
+- **Submit Pull Requests**: Fork, create a branch, make changes, and open a PR
+- **Improve Documentation**: Fix typos, add examples, clarify explanations
+- **Write Tests**: Increase code coverage and test edge cases
+
+### Development Workflow
+
+1. **Fork the Repository**: Click the "Fork" button on GitHub
+2. **Clone Your Fork**:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/bakalr-cms.git
+   cd bakalr-cms
+   ```
+3. **Create a Branch**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **Make Changes**: Follow the code style guidelines in the [Developer Guide](docs/developer-guide.md)
+5. **Run Tests**:
+   ```bash
+   # Backend tests
+   poetry run pytest
+   
+   # Frontend tests
+   cd frontend && npm test
+   ```
+6. **Commit Changes**: Use [Conventional Commits](https://www.conventionalcommits.org/) format:
+   ```bash
+   git commit -m "feat: add new feature"
+   git commit -m "fix: resolve bug in content API"
+   git commit -m "docs: update installation guide"
+   ```
+7. **Push and Create PR**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+   Then open a Pull Request on GitHub with a clear description of your changes.
+
+### Code Style
+
+- **Backend**: Follow PEP 8 (Python), use type hints, add docstrings
+- **Frontend**: Follow Airbnb style guide (TypeScript), use ESLint/Prettier
+- **Git**: Use Conventional Commits format for commit messages
+
+For more details, see the [Developer Guide](docs/developer-guide.md).
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+### Third-Party Licenses
+
+Bakalr CMS uses several open-source libraries and frameworks. See the [NOTICE](NOTICE) file for full attribution and license information for all dependencies.
+
+## 🙏 Acknowledgments
+
+- **FastAPI** for the high-performance backend framework
+- **Next.js** for the modern React framework
+- **PostgreSQL** for robust data storage
+- **Meilisearch** for lightning-fast search
+- **Redis** for efficient caching
+- All the amazing open-source contributors whose libraries power this project
+
+## 📞 Support
+
+- **Documentation**: [Getting Started Guide](docs/getting-started.md)
+- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/bakalr-cms/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/bakalr-cms/discussions)
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#-bakalr-cms)**
+
+Made with ❤️ by the Bakalr CMS Contributors
+
+</div>

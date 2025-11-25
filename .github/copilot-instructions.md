@@ -1,92 +1,66 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
-- [x] Verify that the copilot-instructions.md file in the .github directory is created.
+# Bakalr CMS - Copilot Instructions
 
-- [x] Clarify Project Requirements
+This workspace contains **Bakalr CMS v0.1.0** - a production-ready headless CMS built with FastAPI (backend) and Next.js (frontend).
 
-- [x] Scaffold the Project
+## Project Overview
 
-- [x] Customize the Project
-	<!-- COMPLETED: Created comprehensive database schema with 10 models (Organization, User, Role, Permission, ContentType, ContentEntry, Locale, Translation, Media, APIKey, AuditLog). Fixed SQLAlchemy reserved 'metadata' field name. Configured SQLite for development. Generated and applied initial migration. Database file created at bakalr_cms.db (268KB). -->
+- **Backend**: Python 3.11+ with FastAPI, SQLAlchemy, PostgreSQL
+- **Frontend**: Next.js 16, React 19, TypeScript, TailwindCSS
+- **Features**: Multi-tenancy, RBAC, auto-translation (100+ languages), full-text search (Meilisearch), SEO, webhooks, 2FA
+- **API**: 159+ REST endpoints + GraphQL API
+- **Documentation**: 2000+ lines across getting-started, developer-guide, deployment, security, performance guides
 
-- [ ] Install Required Extensions
-	<!-- ONLY install extensions provided mentioned in the get_project_setup_info. Skip this step otherwise and mark as completed. -->
+## Development Setup
 
-- [ ] Compile the Project
-	<!--
-	Verify that all previous steps have been completed.
-	Install any missing dependencies.
-	Run diagnostics and resolve any issues.
-	Check for markdown files in project folder for relevant instructions on how to do this.
-	-->
+### Quick Start with Docker
+```bash
+docker-compose up -d
+```
 
-- [ ] Create and Run Task
-	<!--
-	Verify that all previous steps have been completed.
-	Check https://code.visualstudio.com/docs/debugtest/tasks to determine if the project needs a task. If so, use the create_and_run_task to create and launch a task based on package.json, README.md, and project structure.
-	Skip this step otherwise.
-	 -->
+### Local Development
+Backend:
+```bash
+poetry install
+poetry run alembic upgrade head
+poetry run uvicorn backend.main:app --reload
+```
 
-- [ ] Launch the Project
-	<!--
-	Verify that all previous steps have been completed.
-	Prompt user for debug mode, launch only if confirmed.
-	 -->
+Frontend:
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-- [ ] Ensure Documentation is Complete
-	<!--
-	Verify that all previous steps have been completed.
-	Verify that README.md and the copilot-instructions.md file in the .github directory exists and contains current project information.
-	Clean up the copilot-instructions.md file in the .github directory by removing all HTML comments.
-	 -->
+### VS Code Tasks
+- **Start Backend Server**: Runs FastAPI on port 8000
+- **Start Frontend Server**: Runs Next.js on port 3000
+- **Start Full Stack**: Runs both servers
 
-<!--
-## Execution Guidelines
-PROGRESS TRACKING:
-- If any tools are available to manage the above todo list, use it to track progress through this checklist.
-- After completing each step, mark it complete and add a summary.
-- Read current todo list status before starting each new step.
+## Code Style
 
-COMMUNICATION RULES:
-- Avoid verbose explanations or printing full command outputs.
-- If a step is skipped, state that briefly (e.g. "No extensions needed").
-- Do not explain project structure unless asked.
-- Keep explanations concise and focused.
+- **Backend**: PEP 8, type hints, docstrings
+- **Frontend**: Airbnb TypeScript, ESLint, Prettier
+- **Git**: Conventional Commits (feat:, fix:, docs:, etc.)
 
-DEVELOPMENT RULES:
-- Use '.' as the working directory unless user specifies otherwise.
-- Avoid adding media or external links unless explicitly requested.
-- Use placeholders only with a note that they should be replaced.
-- Use VS Code API tool only for VS Code extension projects.
-- Once the project is created, it is already opened in Visual Studio Code—do not suggest commands to open this project in Visual Studio again.
-- If the project setup information has additional rules, follow them strictly.
+## Key Directories
 
-FOLDER CREATION RULES:
-- Always use the current directory as the project root.
-- If you are running any terminal commands, use the '.' argument to ensure that the current working directory is used ALWAYS.
-- Do not create a new folder unless the user explicitly requests it besides a .vscode folder for a tasks.json file.
-- If any of the scaffolding commands mention that the folder name is not correct, let the user know to create a new folder with the correct name and then reopen it again in vscode.
+- `/backend` - FastAPI application (API, models, services)
+- `/frontend` - Next.js application (UI components, pages)
+- `/docs` - Documentation (getting-started, developer-guide, etc.)
+- `/alembic` - Database migrations
+- `/.vscode` - VS Code tasks and settings
 
-EXTENSION INSTALLATION RULES:
-- Only install extension specified by the get_project_setup_info tool. DO NOT INSTALL any other extensions.
+## Documentation
 
-PROJECT CONTENT RULES:
-- If the user has not specified project details, assume they want a "Hello World" project as a starting point.
-- Avoid adding links of any type (URLs, files, folders, etc.) or integrations that are not explicitly required.
-- Avoid generating images, videos, or any other media files unless explicitly requested.
-- If you need to use any media assets as placeholders, let the user know that these are placeholders and should be replaced with the actual assets later.
-- Ensure all generated components serve a clear purpose within the user's requested workflow.
-- If a feature is assumed but not confirmed, prompt the user for clarification before including it.
-- If you are working on a VS Code extension, use the VS Code API tool with a query to find relevant VS Code API references and samples related to that query.
+- [Getting Started Guide](../docs/getting-started.md) - Installation and first steps
+- [Developer Guide](../docs/developer-guide.md) - Architecture and contribution
+- [README](../README.md) - Project overview
+- [CHANGELOG](../CHANGELOG.md) - Version history
 
-TASK COMPLETION RULES:
-- Your task is complete when:
-  - Project is successfully scaffolded and compiled without errors
-  - copilot-instructions.md file in the .github directory exists in the project
-  - README.md file exists and is up to date
-  - User is provided with clear instructions to debug/launch the project
+## Implementation Status
 
-Before starting a new task in the above plan, update progress in the plan.
--->
-- Work through each checklist item systematically.
-- Keep communication concise and focused.
-- Follow development best practices.
+All 23 phases complete:
+✅ Authentication, RBAC, Multi-tenancy, Content Management, Translation, SEO, Media, Webhooks, Search, Analytics, 2FA, Performance, Security, Deployment, Documentation
+
+**Future enhancements** (v0.2.0): WebSocket/real-time features, SSO, advanced search facets, CLI tool, mobile SDK

@@ -1,0 +1,136 @@
+# Docker Compose for Bakalr CMS - Development Environment
+# Includes hot-reload, debugging tools, and local volumes
+
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: bakalr-postgres-dev
+    environment:
+      POSTGRES_DB: bakalr_cms_dev
+      POSTGRES_USER: bakalr
+      POSTGRES_PASSWORD: bakalr_dev_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bakalr"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bakalr-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: bakalr-redis-dev
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_dev:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bakalr-network
+
+  # Meilisearch
+  meilisearch:
+    image: getmeili/meilisearch:v1.5
+    container_name: bakalr-meilisearch-dev
+    environment:
+      MEILI_MASTER_KEY: bakalr_dev_master_key
+      MEILI_ENV: development
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data_dev:/meili_data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--spider", "http://localhost:7700/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bakalr-network
+
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: bakalr-backend-dev
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=True
+      - DATABASE_URL=postgresql://bakalr:bakalr_dev_password@postgres:5432/bakalr_cms_dev
+      - REDIS_URL=redis://redis:6379/0
+      - MEILI_HOST=http://meilisearch:7700
+      - MEILI_MASTER_KEY=bakalr_dev_master_key
+      - SECRET_KEY=dev_secret_key_change_in_production_min_32_chars
+      - JWT_SECRET_KEY=dev_jwt_secret_key_change_in_production_min_32_chars
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001,http://frontend:3000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend:cached
+      - ./alembic:/app/alembic:cached
+      - ./alembic.ini:/app/alembic.ini:cached
+      - backend_uploads_dev:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      meilisearch:
+        condition: service_healthy
+    networks:
+      - bakalr-network
+    command: >
+      sh -c "
+        poetry run alembic upgrade head &&
+        poetry run uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+      "
+
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: bakalr-frontend-dev
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - API_INTERNAL_URL=http://backend:8000
+      - NEXT_TELEMETRY_DISABLED=1
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app:cached
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    networks:
+      - bakalr-network
+
+volumes:
+  postgres_data_dev:
+    driver: local
+  redis_data_dev:
+    driver: local
+  meilisearch_data_dev:
+    driver: local
+  backend_uploads_dev:
+    driver: local
+
+networks:
+  bakalr-network:
+    driver: bridge
