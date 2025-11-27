@@ -1,24 +1,31 @@
 """
 Pydantic schemas for webhook API
 """
-from datetime import datetime
-from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field, HttpUrl, field_validator, ConfigDict
 
-from backend.models.webhook import WebhookStatus, WebhookEventType, WebhookDeliveryStatus
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
+
+from backend.models.webhook import WebhookDeliveryStatus, WebhookEventType, WebhookStatus
 
 
 # Webhook schemas
 class WebhookCreate(BaseModel):
     """Create webhook request"""
+
     name: str = Field(..., min_length=1, max_length=255, description="Webhook name")
     description: Optional[str] = Field(None, description="Webhook description")
     url: HttpUrl = Field(..., description="Webhook endpoint URL")
-    events: List[WebhookEventType] = Field(..., min_length=1, description="Event types to subscribe to")
-    headers: Optional[Dict[str, str]] = Field(None, description="Custom headers to include in requests")
+    events: List[WebhookEventType] = Field(
+        ..., min_length=1, description="Event types to subscribe to"
+    )
+    headers: Optional[Dict[str, str]] = Field(
+        None, description="Custom headers to include in requests"
+    )
     max_retries: int = Field(3, ge=0, le=10, description="Maximum retry attempts")
     retry_delay: int = Field(60, ge=1, description="Retry delay in seconds")
-    
+
     @field_validator("events")
     @classmethod
     def validate_events(cls, v):
@@ -31,6 +38,7 @@ class WebhookCreate(BaseModel):
 
 class WebhookUpdate(BaseModel):
     """Update webhook request"""
+
     name: Optional[str] = Field(None, min_length=1, max_length=255)
     description: Optional[str] = None
     url: Optional[HttpUrl] = None
@@ -39,7 +47,7 @@ class WebhookUpdate(BaseModel):
     status: Optional[WebhookStatus] = None
     max_retries: Optional[int] = Field(None, ge=0, le=10)
     retry_delay: Optional[int] = Field(None, ge=1)
-    
+
     @field_validator("events")
     @classmethod
     def validate_events(cls, v):
@@ -54,6 +62,7 @@ class WebhookUpdate(BaseModel):
 
 class WebhookResponse(BaseModel):
     """Webhook response"""
+
     id: int
     organization_id: int
     name: str
@@ -72,18 +81,20 @@ class WebhookResponse(BaseModel):
     last_failure_at: Optional[datetime]
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class WebhookListResponse(BaseModel):
     """List of webhooks"""
+
     total: int
     webhooks: List[WebhookResponse]
 
 
 class WebhookSecretResponse(BaseModel):
     """Webhook secret (only returned on creation)"""
+
     id: int
     secret: str
     message: str = "Store this secret securely. It will not be shown again."
@@ -92,6 +103,7 @@ class WebhookSecretResponse(BaseModel):
 # Webhook delivery schemas
 class WebhookDeliveryResponse(BaseModel):
     """Webhook delivery response"""
+
     id: int
     webhook_id: int
     event_type: str
@@ -107,18 +119,20 @@ class WebhookDeliveryResponse(BaseModel):
     last_attempted_at: Optional[datetime]
     completed_at: Optional[datetime]
     next_retry_at: Optional[datetime]
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class WebhookDeliveryListResponse(BaseModel):
     """List of webhook deliveries"""
+
     total: int
     deliveries: List[WebhookDeliveryResponse]
 
 
 class WebhookDeliveryDetailResponse(BaseModel):
     """Detailed webhook delivery response with full payload"""
+
     id: int
     webhook_id: int
     event_type: str
@@ -136,19 +150,23 @@ class WebhookDeliveryDetailResponse(BaseModel):
     last_attempted_at: Optional[datetime]
     completed_at: Optional[datetime]
     next_retry_at: Optional[datetime]
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 # Webhook test schemas
 class WebhookTestRequest(BaseModel):
     """Test webhook request"""
-    event_type: WebhookEventType = Field(WebhookEventType.CONTENT_CREATED, description="Event type to test")
+
+    event_type: WebhookEventType = Field(
+        WebhookEventType.CONTENT_CREATED, description="Event type to test"
+    )
     custom_payload: Optional[Dict[str, Any]] = Field(None, description="Custom payload for testing")
 
 
 class WebhookTestResponse(BaseModel):
     """Test webhook response"""
+
     success: bool
     delivery_id: int
     status_code: Optional[int]
@@ -160,12 +178,13 @@ class WebhookTestResponse(BaseModel):
 # Webhook event schemas
 class WebhookEventPayload(BaseModel):
     """Base webhook event payload"""
+
     event_id: str = Field(..., description="Unique event identifier")
     event_type: str = Field(..., description="Event type")
     timestamp: datetime = Field(..., description="Event timestamp")
     organization_id: int = Field(..., description="Organization ID")
     data: Dict[str, Any] = Field(..., description="Event data")
-    
+
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
@@ -177,8 +196,8 @@ class WebhookEventPayload(BaseModel):
                     "id": 42,
                     "type": "blog_post",
                     "title": "New Blog Post",
-                    "status": "draft"
-                }
+                    "status": "draft",
+                },
             }
         }
     )

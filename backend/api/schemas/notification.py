@@ -1,23 +1,30 @@
 """
 Notification API schemas for requests and responses.
 """
-from typing import Optional, List, Dict, Any
+
 from datetime import datetime
+from typing import Any, Dict, List, Optional
+
 from pydantic import BaseModel, Field
 
-from backend.models.notification import NotificationType, NotificationPriority, EmailStatus
-
+from backend.models.notification import EmailStatus, NotificationPriority, NotificationType
 
 # Notification Schemas
 
+
 class NotificationCreate(BaseModel):
     """Schema for creating a notification"""
-    user_id: Optional[int] = Field(None, description="Target user ID (defaults to current user if not provided)")
+
+    user_id: Optional[int] = Field(
+        None, description="Target user ID (defaults to current user if not provided)"
+    )
     title: str = Field(..., min_length=1, max_length=255, description="Notification title")
     message: str = Field(..., min_length=1, description="Notification message")
     notification_type: Optional[NotificationType] = Field(None, description="Notification type")
     type: Optional[str] = Field(None, description="Notification type (alias for notification_type)")
-    priority: NotificationPriority = Field(default=NotificationPriority.NORMAL, description="Priority level")
+    priority: NotificationPriority = Field(
+        default=NotificationPriority.NORMAL, description="Priority level"
+    )
     action_url: Optional[str] = Field(None, max_length=500, description="Action URL")
     action_label: Optional[str] = Field(None, max_length=100, description="Action button label")
     meta_data: Optional[Dict[str, Any]] = Field(None, description="Additional metadata")
@@ -27,6 +34,7 @@ class NotificationCreate(BaseModel):
 
 class NotificationResponse(BaseModel):
     """Schema for notification response"""
+
     id: int
     user_id: int
     organization_id: int
@@ -47,6 +55,7 @@ class NotificationResponse(BaseModel):
 
 class NotificationListResponse(BaseModel):
     """Schema for paginated notification list"""
+
     items: List[NotificationResponse]
     total: int
     page: int
@@ -56,11 +65,13 @@ class NotificationListResponse(BaseModel):
 
 class NotificationMarkRead(BaseModel):
     """Schema for marking notifications as read"""
+
     notification_ids: List[int] = Field(..., description="List of notification IDs to mark as read")
 
 
 class NotificationStats(BaseModel):
     """Schema for notification statistics"""
+
     total_count: int
     unread_count: int
     by_type: Dict[str, int]
@@ -69,17 +80,22 @@ class NotificationStats(BaseModel):
 
 # Notification Preference Schemas
 
+
 class NotificationPreferenceUpdate(BaseModel):
     """Schema for updating notification preferences"""
+
     event_type: str = Field(..., description="Event type (e.g., 'content.created')")
     in_app_enabled: bool = Field(True, description="Enable in-app notifications")
     email_enabled: bool = Field(True, description="Enable email notifications")
     digest_enabled: bool = Field(False, description="Enable digest emails")
-    digest_frequency: Optional[str] = Field(None, description="Digest frequency: daily, weekly, monthly")
+    digest_frequency: Optional[str] = Field(
+        None, description="Digest frequency: daily, weekly, monthly"
+    )
 
 
 class NotificationPreferenceResponse(BaseModel):
     """Schema for notification preference response"""
+
     id: int
     user_id: int
     organization_id: int
@@ -96,8 +112,10 @@ class NotificationPreferenceResponse(BaseModel):
 
 # Email Log Schemas
 
+
 class EmailLogResponse(BaseModel):
     """Schema for email log response"""
+
     id: int
     user_id: Optional[int]
     organization_id: int
@@ -119,6 +137,7 @@ class EmailLogResponse(BaseModel):
 
 class EmailLogListResponse(BaseModel):
     """Schema for paginated email log list"""
+
     items: List[EmailLogResponse]
     total: int
     page: int
@@ -127,6 +146,7 @@ class EmailLogListResponse(BaseModel):
 
 class EmailStats(BaseModel):
     """Schema for email statistics"""
+
     total_sent: int
     total_failed: int
     total_pending: int

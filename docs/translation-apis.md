@@ -159,7 +159,7 @@ def translate_text(text: str, source: str, target: str) -> str:
 5. **Python Integration:**
    ```python
    from google.cloud import translate_v2 as translate
-   
+
    def translate_text(text: str, target: str) -> str:
        translate_client = translate.Client(api_key="YOUR_API_KEY")
        result = translate_client.translate(text, target_language=target)
@@ -207,7 +207,7 @@ def translate_text(text: str, source: str, target: str) -> str:
 4. **Python Integration:**
    ```python
    import deepl
-   
+
    def translate_text(text: str, target: str) -> str:
        translator = deepl.Translator("YOUR_API_KEY")
        result = translator.translate_text(text, target_lang=target.upper())

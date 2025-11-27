@@ -325,7 +325,7 @@ Built with these amazing open-source projects:
 
 ### 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details
+Bakalr Proprietary License - see [LICENSE](LICENSE) file for details
 
 ---
 

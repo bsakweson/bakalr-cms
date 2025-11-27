@@ -1,28 +1,28 @@
 """Content template management API endpoints."""
-from fastapi import APIRouter, Depends, HTTPException, status, Query, Request
-from sqlalchemy.orm import Session
-from sqlalchemy import and_, func
+
 from typing import Optional
 
-from backend.db.session import get_db
-from backend.models.user import User
-from backend.models.content_template import ContentTemplate
-from backend.models.content import ContentType, ContentEntry
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from sqlalchemy import and_
+from sqlalchemy.orm import Session
+
 from backend.api.schemas.content_template import (
-    ContentTemplateCreate,
-    ContentTemplateUpdate,
-    ContentTemplateResponse,
-    ContentTemplateListResponse,
     ContentTemplateApply,
     ContentTemplateApplyResponse,
+    ContentTemplateCreate,
+    ContentTemplateListResponse,
+    ContentTemplateResponse,
+    ContentTemplateUpdate,
     TemplateStats,
 )
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
-from backend.core.rate_limit import limiter, get_rate_limit
-from backend.core.config import settings
+from backend.core.rate_limit import get_rate_limit, limiter
 from backend.core.seo_utils import generate_slug
-
+from backend.db.session import get_db
+from backend.models.content import ContentEntry, ContentType
+from backend.models.content_template import ContentTemplate
+from backend.models.user import User
 
 router = APIRouter(prefix="/templates", tags=["templates"])
 
@@ -37,7 +37,7 @@ def create_template(
 ):
     """
     Create a new content template.
-    
+
     Requires 'content.manage' permission.
     """
     # Check permission
@@ -47,36 +47,44 @@ def create_template(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage templates",
         )
-    
+
     # Verify content type exists and belongs to organization
-    content_type = db.query(ContentType).filter(
-        and_(
-            ContentType.id == template_data.content_type_id,
-            ContentType.organization_id == current_user.organization_id,
+    content_type = (
+        db.query(ContentType)
+        .filter(
+            and_(
+                ContentType.id == template_data.content_type_id,
+                ContentType.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not content_type:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Content type not found",
         )
-    
+
     # Check if template name already exists
-    existing = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.organization_id == current_user.organization_id,
-            ContentTemplate.content_type_id == template_data.content_type_id,
-            ContentTemplate.name == template_data.name,
+    existing = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.organization_id == current_user.organization_id,
+                ContentTemplate.content_type_id == template_data.content_type_id,
+                ContentTemplate.name == template_data.name,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if existing:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Template '{template_data.name}' already exists for this content type",
         )
-    
+
     # Create template
     template = ContentTemplate(
         organization_id=current_user.organization_id,
@@ -88,16 +96,18 @@ def create_template(
         is_system_template=False,
         is_published=template_data.is_published,
         field_defaults=template_data.field_defaults,
-        field_config=template_data.field_config.model_dump() if template_data.field_config else None,
+        field_config=(
+            template_data.field_config.model_dump() if template_data.field_config else None
+        ),
         content_structure=template_data.content_structure,
         category=template_data.category,
         tags=template_data.tags,
     )
-    
+
     db.add(template)
     db.commit()
     db.refresh(template)
-    
+
     return template
 
 
@@ -117,26 +127,28 @@ def list_templates(
     query = db.query(ContentTemplate).filter(
         ContentTemplate.organization_id == current_user.organization_id
     )
-    
+
     if content_type_id is not None:
         query = query.filter(ContentTemplate.content_type_id == content_type_id)
-    
+
     if category:
         query = query.filter(ContentTemplate.category == category)
-    
+
     if is_published is not None:
         query = query.filter(ContentTemplate.is_published == is_published)
-    
+
     # Count total
     total = query.count()
-    
+
     # Paginate and sort by usage
     offset = (page - 1) * page_size
-    templates = query.order_by(
-        ContentTemplate.usage_count.desc(),
-        ContentTemplate.created_at.desc()
-    ).offset(offset).limit(page_size).all()
-    
+    templates = (
+        query.order_by(ContentTemplate.usage_count.desc(), ContentTemplate.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+
     return ContentTemplateListResponse(
         templates=templates,
         total=total,
@@ -154,19 +166,23 @@ def get_template(
     db: Session = Depends(get_db),
 ):
     """Get a specific template by ID."""
-    template = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.id == template_id,
-            ContentTemplate.organization_id == current_user.organization_id,
+    template = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.id == template_id,
+                ContentTemplate.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not template:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Template not found",
         )
-    
+
     return template
 
 
@@ -181,7 +197,7 @@ def update_template(
 ):
     """
     Update a content template.
-    
+
     Requires 'content.manage' permission.
     System templates cannot be updated.
     """
@@ -192,28 +208,32 @@ def update_template(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage templates",
         )
-    
+
     # Get template
-    template = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.id == template_id,
-            ContentTemplate.organization_id == current_user.organization_id,
+    template = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.id == template_id,
+                ContentTemplate.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not template:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Template not found",
         )
-    
+
     # Prevent updating system templates
     if template.is_system_template:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot update system templates",
         )
-    
+
     # Update fields
     update_data = template_data.model_dump(exclude_unset=True)
     for field, value in update_data.items():
@@ -221,10 +241,10 @@ def update_template(
             setattr(template, field, {k: v.model_dump() for k, v in value.items()})
         else:
             setattr(template, field, value)
-    
+
     db.commit()
     db.refresh(template)
-    
+
     return template
 
 
@@ -238,7 +258,7 @@ def delete_template(
 ):
     """
     Delete a content template.
-    
+
     Requires 'content.manage' permission.
     System templates cannot be deleted.
     """
@@ -249,33 +269,39 @@ def delete_template(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage templates",
         )
-    
+
     # Get template
-    template = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.id == template_id,
-            ContentTemplate.organization_id == current_user.organization_id,
+    template = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.id == template_id,
+                ContentTemplate.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not template:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Template not found",
         )
-    
+
     # Prevent deleting system templates
     if template.is_system_template:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot delete system templates",
         )
-    
+
     db.delete(template)
     db.commit()
 
 
-@router.post("/apply", response_model=ContentTemplateApplyResponse, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/apply", response_model=ContentTemplateApplyResponse, status_code=status.HTTP_201_CREATED
+)
 @limiter.limit(get_rate_limit())
 def apply_template(
     request: Request,
@@ -285,7 +311,7 @@ def apply_template(
 ):
     """
     Apply a template to create a new content entry.
-    
+
     Creates a content entry with template defaults merged with provided overrides.
     Requires 'content.create' permission.
     """
@@ -296,44 +322,54 @@ def apply_template(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to create content",
         )
-    
+
     # Get template
-    template = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.id == apply_data.template_id,
-            ContentTemplate.organization_id == current_user.organization_id,
-            ContentTemplate.is_published == True,
+    template = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.id == apply_data.template_id,
+                ContentTemplate.organization_id == current_user.organization_id,
+                ContentTemplate.is_published == True,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not template:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Template not found or not published",
         )
-    
+
     # Apply template with overrides
     merged_data = template.apply_to_entry(apply_data.overrides or {})
-    
+
     # Generate title and slug if not provided
     title = apply_data.title or merged_data.get("title", f"New {template.name}")
     slug = apply_data.slug or generate_slug(title)
-    
+
     # Check slug uniqueness
-    existing_entry = db.query(ContentEntry).filter(
-        and_(
-            ContentEntry.content_type_id == template.content_type_id,
-            ContentEntry.slug == slug,
+    existing_entry = (
+        db.query(ContentEntry)
+        .filter(
+            and_(
+                ContentEntry.content_type_id == template.content_type_id,
+                ContentEntry.slug == slug,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if existing_entry:
         # Append timestamp to make unique
         import time
+
         slug = f"{slug}-{int(time.time())}"
-    
+
     # Create content entry
     import json
+
     content_entry = ContentEntry(
         content_type_id=template.content_type_id,
         title=title,
@@ -342,15 +378,15 @@ def apply_template(
         status="draft",
         author_id=current_user.id,
     )
-    
+
     db.add(content_entry)
-    
+
     # Increment template usage
     template.increment_usage()
-    
+
     db.commit()
     db.refresh(content_entry)
-    
+
     return ContentTemplateApplyResponse(
         content_entry_id=content_entry.id,
         template_id=template.id,
@@ -369,19 +405,23 @@ def get_template_stats(
     db: Session = Depends(get_db),
 ):
     """Get usage statistics for a template."""
-    template = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.id == template_id,
-            ContentTemplate.organization_id == current_user.organization_id,
+    template = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.id == template_id,
+                ContentTemplate.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not template:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Template not found",
         )
-    
+
     # Could track more detailed stats in future (e.g., actual content entries created)
     return TemplateStats(
         template_id=template.id,
@@ -392,7 +432,11 @@ def get_template_stats(
     )
 
 
-@router.post("/{template_id}/duplicate", response_model=ContentTemplateResponse, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/{template_id}/duplicate",
+    response_model=ContentTemplateResponse,
+    status_code=status.HTTP_201_CREATED,
+)
 @limiter.limit(get_rate_limit())
 def duplicate_template(
     request: Request,
@@ -403,7 +447,7 @@ def duplicate_template(
 ):
     """
     Duplicate an existing template.
-    
+
     Requires 'content.manage' permission.
     """
     # Check permission
@@ -413,36 +457,44 @@ def duplicate_template(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage templates",
         )
-    
+
     # Get source template
-    source = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.id == template_id,
-            ContentTemplate.organization_id == current_user.organization_id,
+    source = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.id == template_id,
+                ContentTemplate.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not source:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Template not found",
         )
-    
+
     # Check if new name already exists
-    existing = db.query(ContentTemplate).filter(
-        and_(
-            ContentTemplate.organization_id == current_user.organization_id,
-            ContentTemplate.content_type_id == source.content_type_id,
-            ContentTemplate.name == new_name,
+    existing = (
+        db.query(ContentTemplate)
+        .filter(
+            and_(
+                ContentTemplate.organization_id == current_user.organization_id,
+                ContentTemplate.content_type_id == source.content_type_id,
+                ContentTemplate.name == new_name,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if existing:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Template '{new_name}' already exists",
         )
-    
+
     # Duplicate template
     duplicate = ContentTemplate(
         organization_id=source.organization_id,
@@ -459,9 +511,9 @@ def duplicate_template(
         category=source.category,
         tags=source.tags,
     )
-    
+
     db.add(duplicate)
     db.commit()
     db.refresh(duplicate)
-    
+
     return duplicate

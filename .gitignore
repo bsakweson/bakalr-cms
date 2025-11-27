@@ -57,6 +57,12 @@ media/
 htmlcov/
 .tox/
 .hypothesis/
+test_uploads/
+data.ms/
+dumps/
+test_*.py
+test_*.sh
+check_*.py
 
 # Celery
 celerybeat-schedule

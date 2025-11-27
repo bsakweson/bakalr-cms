@@ -1,14 +1,17 @@
 """
 Media/Asset Management Schemas
 """
-from typing import Optional, List
-from pydantic import BaseModel, Field, field_validator, ConfigDict
+
 from datetime import datetime
 from enum import Enum
+from typing import List, Optional
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class MediaType(str, Enum):
     """Media type categories"""
+
     IMAGE = "image"
     VIDEO = "video"
     AUDIO = "audio"
@@ -18,6 +21,7 @@ class MediaType(str, Enum):
 
 class MediaUploadResponse(BaseModel):
     """Response after successful upload"""
+
     id: int
     filename: str
     original_filename: str
@@ -28,12 +32,13 @@ class MediaUploadResponse(BaseModel):
     width: Optional[int] = None
     height: Optional[int] = None
     created_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class MediaUpdateRequest(BaseModel):
     """Request to update media metadata"""
+
     alt_text: Optional[str] = Field(None, max_length=500)
     description: Optional[str] = Field(None, max_length=1000)
     tags: Optional[List[str]] = None
@@ -41,6 +46,7 @@ class MediaUpdateRequest(BaseModel):
 
 class MediaResponse(BaseModel):
     """Full media response"""
+
     id: int
     organization_id: int
     uploaded_by_id: Optional[int]
@@ -60,12 +66,13 @@ class MediaResponse(BaseModel):
     cdn_url: Optional[str]
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class MediaListResponse(BaseModel):
     """Paginated media list"""
+
     items: List[MediaResponse]
     total: int
     page: int
@@ -75,6 +82,7 @@ class MediaListResponse(BaseModel):
 
 class MediaFilterParams(BaseModel):
     """Media filtering parameters"""
+
     media_type: Optional[MediaType] = None
     mime_type: Optional[str] = None
     search: Optional[str] = None
@@ -88,6 +96,7 @@ class MediaFilterParams(BaseModel):
 
 class MediaStats(BaseModel):
     """Media storage statistics"""
+
     total_files: int
     total_size: int
     by_type: dict  # {media_type: count}
@@ -98,6 +107,7 @@ class MediaStats(BaseModel):
 
 class ThumbnailRequest(BaseModel):
     """Request to generate thumbnail"""
+
     media_id: int
     width: Optional[int] = Field(None, ge=50, le=2000)
     height: Optional[int] = Field(None, ge=50, le=2000)
@@ -106,6 +116,7 @@ class ThumbnailRequest(BaseModel):
 
 class ThumbnailResponse(BaseModel):
     """Thumbnail generation response"""
+
     media_id: int
     thumbnail_url: str
     width: int
@@ -114,11 +125,13 @@ class ThumbnailResponse(BaseModel):
 
 class BulkDeleteRequest(BaseModel):
     """Request to delete multiple media files"""
+
     media_ids: List[int] = Field(..., min_length=1)
 
 
 class BulkDeleteResponse(BaseModel):
     """Response from bulk delete"""
+
     deleted_count: int
     failed_ids: List[int] = Field(default_factory=list)
     errors: List[str] = Field(default_factory=list)

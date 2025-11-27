@@ -33,8 +33,8 @@ from backend.graphql.context import get_graphql_context
 from backend.graphql.schema import schema
 from backend.middleware.graphql_rate_limit import GraphQLRateLimitMiddleware
 from backend.middleware.performance import PerformanceMiddleware
-from backend.middleware.security import setup_security_middleware
 from backend.middleware.rate_limit_headers import setup_rate_limit_headers_middleware
+from backend.middleware.security import setup_security_middleware
 
 
 @asynccontextmanager
@@ -175,7 +175,7 @@ Get started by registering an account at `/api/v1/auth/register`.
 
     # Security middleware (headers, CSRF, validation)
     setup_security_middleware(app, settings.SECRET_KEY)
-    
+
     # Rate limit headers middleware (adds X-RateLimit-* headers)
     setup_rate_limit_headers_middleware(app, settings.REDIS_URL, default_limit=100)
 
@@ -184,7 +184,7 @@ Get started by registering an account at `/api/v1/auth/register`.
 
     # API versioning middleware
     app.add_middleware(VersioningMiddleware)
-    
+
     # GraphQL rate limiting middleware (must be before GraphQL router)
     app.add_middleware(GraphQLRateLimitMiddleware)
 
@@ -219,7 +219,9 @@ Get started by registering an account at `/api/v1/auth/register`.
     graphql_app = GraphQLRouter(
         schema,
         context_getter=get_graphql_context,
-        graphql_ide='graphiql' if settings.DEBUG else None,  # Enable GraphiQL playground in debug mode
+        graphql_ide=(
+            "graphiql" if settings.DEBUG else None
+        ),  # Enable GraphiQL playground in debug mode
     )
     app.include_router(graphql_app, prefix="/api/v1/graphql")
 

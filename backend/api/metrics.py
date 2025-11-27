@@ -9,8 +9,7 @@ from backend.api.auth import get_current_user
 from backend.core.performance import get_performance_report, performance_monitor
 from backend.core.permissions import PermissionChecker
 from backend.core.query_optimization import query_tracker
-from backend.core.rate_limit import limiter, get_rate_limit
-from backend.core.config import settings
+from backend.core.rate_limit import get_rate_limit, limiter
 from backend.db.session import SessionLocal, get_pool_stats
 from backend.models.user import User
 
@@ -21,7 +20,8 @@ router = APIRouter(prefix="/metrics", tags=["metrics"])
 @limiter.limit(get_rate_limit())
 async def get_performance_metrics(
     request: Request,
-    current_user: User = Depends(get_current_user), db: Session = Depends(SessionLocal)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(SessionLocal),
 ):
     """
     Get comprehensive performance metrics
@@ -35,7 +35,8 @@ async def get_performance_metrics(
 @limiter.limit(get_rate_limit())
 async def get_endpoint_metrics(
     request: Request,
-    current_user: User = Depends(get_current_user), db: Session = Depends(SessionLocal)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(SessionLocal),
 ):
     """
     Get performance metrics for all endpoints
@@ -65,7 +66,8 @@ async def get_slowest_endpoints(
 @limiter.limit(get_rate_limit())
 async def get_database_pool_stats(
     request: Request,
-    current_user: User = Depends(get_current_user), db: Session = Depends(SessionLocal)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(SessionLocal),
 ):
     """
     Get database connection pool statistics
@@ -102,7 +104,8 @@ async def get_slow_queries(
 @limiter.limit(get_rate_limit())
 async def get_system_metrics(
     request: Request,
-    current_user: User = Depends(get_current_user), db: Session = Depends(SessionLocal)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(SessionLocal),
 ):
     """
     Get system resource metrics (CPU, memory, disk)
@@ -116,7 +119,8 @@ async def get_system_metrics(
 @limiter.limit(get_rate_limit())
 async def reset_metrics(
     request: Request,
-    current_user: User = Depends(get_current_user), db: Session = Depends(SessionLocal)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(SessionLocal),
 ):
     """
     Reset all performance metrics

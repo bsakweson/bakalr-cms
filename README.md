@@ -4,7 +4,7 @@
 
 ## Modern Headless CMS for the API-First Era
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org)
@@ -245,7 +245,7 @@ See the [Getting Started Guide](docs/getting-started.md) for detailed instructio
 ### Additional Resources
 
 - **[CHANGELOG](CHANGELOG.md)** - Version history and release notes
-- **[LICENSE](LICENSE)** - MIT License
+- **[LICENSE](LICENSE)** - Bakalr Proprietary License
 - **[NOTICE](NOTICE)** - Third-party notices
 
 ## 🎯 API Reference
@@ -1666,11 +1666,13 @@ For more details, see the [Developer Guide](docs/developer-guide.md).
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is proprietary software owned by **Bakalr**. All rights reserved.
+
+Copyright (c) 2025 Bakalr. See the [LICENSE](LICENSE) file for complete terms.
 
 ### Third-Party Licenses
 
-Bakalr CMS uses several open-source libraries and frameworks. See the [NOTICE](NOTICE) file for full attribution and license information for all dependencies.
+Bakalr CMS uses several open-source libraries and frameworks. See the [NOTICE](NOTICE.md) file for full attribution and license information for all dependencies.
 
 ## 🙏 Acknowledgments
 

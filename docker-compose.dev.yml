@@ -1,8 +1,5 @@
 # Docker Compose for Bakalr CMS - Development Environment
 # Includes hot-reload, debugging tools, and local volumes
-
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:

@@ -1,7 +1,9 @@
 """
 Test configuration and fixtures for pytest
 """
+
 import os
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -18,26 +20,11 @@ os.environ["MAIL_SUPPRESS_SEND"] = "1"  # Disable email sending in tests
 os.environ["STORAGE_BACKEND"] = "local"  # Use local storage for tests to avoid AWS config issues
 os.environ["UPLOAD_DIR"] = "test_uploads"  # Use separate directory for test uploads
 
-from backend.main import app
-from backend.db.base import Base
 from backend.core.dependencies import get_db
+from backend.db.base import Base
+from backend.main import app
 
 # Import all models so they are registered with Base.metadata
-from backend.models.user import User
-from backend.models.organization import Organization
-from backend.models.user_organization import UserOrganization
-from backend.models.rbac import Role, Permission
-from backend.models.content import ContentType, ContentEntry
-from backend.models.relationship import ContentRelationship
-from backend.models.translation import Locale, Translation
-from backend.models.media import Media
-from backend.models.api_key import APIKey
-from backend.models.audit_log import AuditLog
-from backend.models.notification import Notification, EmailLog
-from backend.models.webhook import Webhook, WebhookDelivery
-from backend.models.theme import Theme
-from backend.models.content_template import ContentTemplate
-from backend.models.schedule import ContentSchedule
 
 
 # Create in-memory SQLite database for testing
@@ -66,6 +53,7 @@ def db_session():
 @pytest.fixture(scope="function")
 def client(db_session):
     """Create a test client with database session override"""
+
     def override_get_db():
         try:
             yield db_session
@@ -73,10 +61,10 @@ def client(db_session):
             db_session.close()
 
     app.dependency_overrides[get_db] = override_get_db
-    
+
     with TestClient(app) as test_client:
         yield test_client
-    
+
     app.dependency_overrides.clear()
 
 
@@ -87,7 +75,7 @@ def test_user_data():
         "email": "test@example.com",
         "password": "TestPass123!",
         "full_name": "Test User",
-        "organization_name": "Test Org"
+        "organization_name": "Test Org",
     }
 
 
@@ -99,25 +87,15 @@ def test_content_type_data():
         "api_id": "blog_post",
         "description": "Blog article content type",
         "fields": [
-            {
-                "name": "title",
-                "type": "text",
-                "required": True,
-                "help_text": "Blog post title"
-            },
+            {"name": "title", "type": "text", "required": True, "help_text": "Blog post title"},
             {
                 "name": "body",
                 "type": "textarea",
                 "required": True,
-                "help_text": "Blog post content"
+                "help_text": "Blog post content",
             },
-            {
-                "name": "author",
-                "type": "text",
-                "required": False,
-                "help_text": "Author name"
-            }
-        ]
+            {"name": "author", "type": "text", "required": False, "help_text": "Author name"},
+        ],
     }
 
 
@@ -125,12 +103,9 @@ def test_content_type_data():
 def test_content_data(test_content_type_data, authenticated_client):
     """Sample content data for testing"""
     # Create content type first to get its ID
-    ct_response = authenticated_client.post(
-        "/api/v1/content/types",
-        json=test_content_type_data
-    )
+    ct_response = authenticated_client.post("/api/v1/content/types", json=test_content_type_data)
     content_type_id = ct_response.json()["id"]
-    
+
     return {
         "content_type_id": content_type_id,
         "slug": "test-post",
@@ -138,8 +113,8 @@ def test_content_data(test_content_type_data, authenticated_client):
         "data": {
             "title": "Test Blog Post",
             "body": "<p>This is test content</p>",
-            "author": "Test Author"
-        }
+            "author": "Test Author",
+        },
     }
 
 
@@ -148,17 +123,14 @@ def authenticated_client(client, test_user_data):
     """Create an authenticated test client"""
     # Register user
     client.post("/api/v1/auth/register", json=test_user_data)
-    
+
     # Login
     login_response = client.post(
         "/api/v1/auth/login",
-        json={
-            "email": test_user_data["email"],
-            "password": test_user_data["password"]
-        }
+        json={"email": test_user_data["email"], "password": test_user_data["password"]},
     )
-    
+
     token = login_response.json()["access_token"]
     client.headers["Authorization"] = f"Bearer {token}"
-    
+
     return client

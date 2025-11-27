@@ -1,8 +1,5 @@
 # Docker Compose for Bakalr CMS - Production Environment
 # Optimized for production deployment with health checks
-
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:

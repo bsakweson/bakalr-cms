@@ -22,7 +22,6 @@ from backend.models.rbac import Permission, Role
 from backend.models.translation import Locale
 from backend.models.user import User
 from backend.models.user_organization import UserOrganization
-from backend.models.notification import Notification
 
 
 def create_default_permissions(db: Session) -> dict[str, Permission]:

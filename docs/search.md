@@ -17,14 +17,14 @@ Bakalr CMS provides powerful full-text search capabilities powered by [Meilisear
 
 ### Key Features
 
-✨ **Typo Tolerance**: Automatically handles typos and spelling mistakes  
-🔍 **Fuzzy Matching**: Finds relevant results even with approximate queries  
-⚡ **Instant Results**: Sub-50ms search response times  
-🎯 **Relevance Ranking**: Smart ranking based on content and context  
-🌈 **Highlighting**: Highlights search terms in results  
-📊 **Faceted Search**: Filter by content type, status, dates, and custom fields  
-🔤 **Autocomplete**: Real-time search suggestions  
-🌍 **Multi-language**: Search across all your content locales  
+✨ **Typo Tolerance**: Automatically handles typos and spelling mistakes
+🔍 **Fuzzy Matching**: Finds relevant results even with approximate queries
+⚡ **Instant Results**: Sub-50ms search response times
+🎯 **Relevance Ranking**: Smart ranking based on content and context
+🌈 **Highlighting**: Highlights search terms in results
+📊 **Faceted Search**: Filter by content type, status, dates, and custom fields
+🔤 **Autocomplete**: Real-time search suggestions
+🌍 **Multi-language**: Search across all your content locales
 
 ### When to Use Search vs Filtering
 
@@ -386,7 +386,7 @@ function SearchBox() {
 
   const fetchSuggestions = debounce(async (q) => {
     if (q.length < 2) return;
-    
+
     const response = await fetch(
       `http://localhost:8000/api/v1/search/autocomplete?q=${q}`,
       { headers: { Authorization: `Bearer ${token}` } }
@@ -469,7 +469,7 @@ function SearchFilters({ facets, onFilterChange }) {
           {type} ({count})
         </label>
       ))}
-      
+
       <h4>Status</h4>
       {Object.entries(facets.status).map(([status, count]) => (
         <label key={status}>

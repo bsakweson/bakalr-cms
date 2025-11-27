@@ -2,19 +2,19 @@
 Comprehensive test suite for analytics endpoints
 Testing business logic and data accuracy
 """
-import pytest
+
 from fastapi import status
-from datetime import datetime, timezone
 
 
 class TestAnalyticsComprehensive:
     """Test analytics with actual data"""
-    
+
     def test_content_stats_with_data(self, authenticated_client, test_content_data):
         """Test content statistics with actual content entries"""
         import uuid
+
         unique_id = str(uuid.uuid4())[:8]
-        
+
         # Create a content type and entry
         ct_response = authenticated_client.post(
             "/api/v1/content/types",
@@ -24,16 +24,16 @@ class TestAnalyticsComprehensive:
                 "description": "Blog articles",
                 "fields": [
                     {"name": "title", "type": "text", "required": True},
-                    {"name": "body", "type": "textarea", "required": True}
-                ]
-            }
+                    {"name": "body", "type": "textarea", "required": True},
+                ],
+            },
         )
         if ct_response.status_code != status.HTTP_201_CREATED:
             print(f"Content Type Creation Failed: {ct_response.status_code}")
             print(f"Response: {ct_response.json()}")
         assert ct_response.status_code == status.HTTP_201_CREATED
         content_type_id = ct_response.json()["id"]
-        
+
         # Create multiple content entries
         for i in range(5):
             entry_response = authenticated_client.post(
@@ -42,19 +42,16 @@ class TestAnalyticsComprehensive:
                     "content_type_id": content_type_id,
                     "slug": f"post-{i}",
                     "status": "published" if i % 2 == 0 else "draft",
-                    "data": {
-                        "title": f"Test Post {i}",
-                        "body": f"Content for post {i}"
-                    }
-                }
+                    "data": {"title": f"Test Post {i}", "body": f"Content for post {i}"},
+                },
             )
             assert entry_response.status_code == status.HTTP_201_CREATED
-        
+
         # Get content statistics
         response = authenticated_client.get("/api/v1/analytics/content")
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
-        
+
         # Verify statistics
         assert data["total_entries"] == 5
         assert data["published_entries"] == 3  # entries 0, 2, 4
@@ -62,13 +59,13 @@ class TestAnalyticsComprehensive:
         assert data["total_types"] >= 1
         assert "recent_entries" in data
         assert len(data["recent_entries"]) <= 10
-    
+
     def test_user_stats_accuracy(self, authenticated_client):
         """Test user statistics accuracy"""
         response = authenticated_client.get("/api/v1/analytics/users")
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
-        
+
         # Verify user stats structure
         assert "total_users" in data
         assert "active_users_7d" in data
@@ -77,13 +74,13 @@ class TestAnalyticsComprehensive:
         assert data["active_users_7d"] >= 0
         assert data["active_users_30d"] >= data["active_users_7d"]
         assert data["active_users_30d"] <= data["total_users"]
-    
+
     def test_activity_stats_structure(self, authenticated_client):
         """Test activity statistics structure"""
         response = authenticated_client.get("/api/v1/analytics/activity")
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
-        
+
         # Verify activity stats
         assert "actions_today" in data
         assert "actions_7d" in data
@@ -93,7 +90,7 @@ class TestAnalyticsComprehensive:
         assert isinstance(data["actions_7d"], int)
         assert isinstance(data["actions_30d"], int)
         assert isinstance(data["actions_by_type"], list)
-    
+
     def test_content_by_type_breakdown(self, authenticated_client):
         """Test content breakdown by type"""
         # Create two different content types
@@ -104,12 +101,12 @@ class TestAnalyticsComprehensive:
                     "name": f"Type {i}",
                     "api_id": f"type_{i}",
                     "description": f"Test type {i}",
-                    "fields": [{"name": "title", "type": "text", "required": True}]
-                }
+                    "fields": [{"name": "title", "type": "text", "required": True}],
+                },
             )
             assert ct_response.status_code == status.HTTP_201_CREATED
             content_type_id = ct_response.json()["id"]
-            
+
             # Create entries for this type
             for j in range(i + 1):  # Type 0: 1 entry, Type 1: 2 entries
                 authenticated_client.post(
@@ -118,15 +115,15 @@ class TestAnalyticsComprehensive:
                         "content_type_id": content_type_id,
                         "slug": f"entry-{i}-{j}",
                         "status": "published",
-                        "data": {"title": f"Entry {i}-{j}"}
-                    }
+                        "data": {"title": f"Entry {i}-{j}"},
+                    },
                 )
-        
+
         # Get statistics
         response = authenticated_client.get("/api/v1/analytics/content")
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
-        
+
         # Verify entries by type
         assert "entries_by_type" in data
         assert len(data["entries_by_type"]) >= 2

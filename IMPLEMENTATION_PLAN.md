@@ -2174,13 +2174,13 @@ docker-compose up -d --scale backend=3
   - [ ] Add media details/edit modal with alt text, metadata
   - [ ] Add delete confirmation dialog for media files
   - [ ] Implement bulk selection and operations UI
-  
+
 - [ ] **Content CRUD Forms**
   - [ ] Create content entry form page (`/dashboard/content/new`)
   - [ ] Create content edit page (`/dashboard/content/[id]/edit`)
   - [ ] Add content delete confirmation modal
   - [ ] Integrate content search with backend search API
-  
+
 - [ ] **Content Type Builder**
   - [ ] Visual schema builder for creating content types
   - [ ] Field configuration UI (validation, help text, editor preferences)
