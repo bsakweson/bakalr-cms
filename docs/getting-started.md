@@ -543,6 +543,8 @@ A: MIT License - free for personal and commercial use.
 Ready to dive deeper? Check out:
 
 - **[API Documentation](http://localhost:8000/api/docs)** - Full API reference
+- **[Search & Discovery Guide](./search.md)** - Full-text search with Meilisearch
+- **[Webhooks Guide](./webhooks.md)** - Event-driven integrations
 - **[Developer Guide](./developer-guide.md)** - Architecture and code structure
 - **[Deployment Guide](./deployment.md)** - Production deployment
 - **[Contributing Guide](../CONTRIBUTING.md)** - Help improve Bakalr CMS

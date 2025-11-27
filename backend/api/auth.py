@@ -2,7 +2,7 @@
 Authentication API endpoints
 """
 from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks, Request
 from sqlalchemy.orm import Session
 
 from backend.db.session import get_db
@@ -14,6 +14,8 @@ from backend.core.security import (
 )
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.organization import Organization
 from backend.api.schemas.auth import (
@@ -30,8 +32,12 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit("register"))
 async def register(
+   
+    request: Request,
     user_data: UserCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """
@@ -136,19 +142,17 @@ async def register(
     # Send welcome email (async, non-blocking)
     try:
         from backend.core.email_service import email_service
-        import asyncio
-        asyncio.create_task(
-            email_service.send_welcome_email(
-                to_email=user.email,
-                user_name=user.first_name or user.email,
-                organization_name=organization.name,
-                organization_id=organization.id,
-                user_id=user.id
-            )
+        background_tasks.add_task(
+            email_service.send_welcome_email,
+            to_email=user.email,
+            user_name=user.first_name or user.email,
+            organization_name=organization.name,
+            organization_id=organization.id,
+            user_id=user.id
         )
     except Exception as e:
         # Log error but don't fail registration
-        print(f"Failed to send welcome email: {e}")
+        print(f"Failed to queue welcome email: {e}")
     
     return TokenResponse(
         access_token=tokens.access_token,
@@ -159,7 +163,9 @@ async def register(
 
 
 @router.post("/login", response_model=TokenResponse)
+@limiter.limit(get_rate_limit())
 async def login(
+    request: Request,
     credentials: UserLogin,
     db: Session = Depends(get_db)
 ):
@@ -226,15 +232,17 @@ async def login(
 
 
 @router.post("/refresh", response_model=TokenResponse)
+@limiter.limit(get_rate_limit())
 async def refresh_token(
-    request: RefreshTokenRequest,
+    request: Request,
+    request_body: RefreshTokenRequest,
     db: Session = Depends(get_db)
 ):
     """
     Refresh access token using refresh token
     """
     # Verify refresh token
-    token_data = verify_token(request.refresh_token, token_type="refresh")
+    token_data = verify_token(request_body.refresh_token, token_type="refresh")
     
     if not token_data:
         raise HTTPException(
@@ -286,7 +294,9 @@ async def refresh_token(
 
 
 @router.get("/me", response_model=UserResponse)
+@limiter.limit(get_rate_limit())
 async def get_current_user_info(
+    request: Request,
     current_user: User = Depends(get_current_user)
 ):
     """
@@ -310,7 +320,9 @@ async def get_current_user_info(
 
 
 @router.put("/profile", response_model=UserResponse)
+@limiter.limit(get_rate_limit())
 async def update_profile(
+    request: Request,
     full_name: str = None,
     email: str = None,
     current_user: User = Depends(get_current_user),
@@ -357,8 +369,10 @@ async def update_profile(
 
 
 @router.post("/change-password")
+@limiter.limit(get_rate_limit())
 async def change_password(
-    request: PasswordChangeRequest,
+    request: Request,
+    request_body: PasswordChangeRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -366,21 +380,23 @@ async def change_password(
     Change password for current user
     """
     # Verify current password
-    if not verify_password(request.current_password, current_user.hashed_password):
+    if not verify_password(request_body.current_password, current_user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Current password is incorrect"
         )
     
     # Update password
-    current_user.hashed_password = get_password_hash(request.new_password)
+    current_user.hashed_password = get_password_hash(request_body.new_password)
     db.commit()
     
     return {"message": "Password changed successfully"}
 
 
 @router.post("/logout")
+@limiter.limit(get_rate_limit())
 async def logout(
+    request: Request,
     current_user: User = Depends(get_current_user)
 ):
     """

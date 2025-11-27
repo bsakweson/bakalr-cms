@@ -33,7 +33,7 @@ class RedisCache:
     async def disconnect(self):
         """Close Redis connection"""
         if self._redis_client:
-            await self._redis_client.close()
+            await self._redis_client.aclose()
             self._redis_client = None
     
     @property

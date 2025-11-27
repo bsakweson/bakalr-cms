@@ -12,10 +12,11 @@ from backend.models.notification import NotificationType, NotificationPriority, 
 
 class NotificationCreate(BaseModel):
     """Schema for creating a notification"""
-    user_id: int = Field(..., description="Target user ID")
+    user_id: Optional[int] = Field(None, description="Target user ID (defaults to current user if not provided)")
     title: str = Field(..., min_length=1, max_length=255, description="Notification title")
     message: str = Field(..., min_length=1, description="Notification message")
-    notification_type: NotificationType = Field(default=NotificationType.INFO, description="Notification type")
+    notification_type: Optional[NotificationType] = Field(None, description="Notification type")
+    type: Optional[str] = Field(None, description="Notification type (alias for notification_type)")
     priority: NotificationPriority = Field(default=NotificationPriority.NORMAL, description="Priority level")
     action_url: Optional[str] = Field(None, max_length=500, description="Action URL")
     action_label: Optional[str] = Field(None, max_length=100, description="Action button label")

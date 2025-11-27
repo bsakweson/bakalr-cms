@@ -1,10 +1,12 @@
 """Two-Factor Authentication API endpoints."""
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 
 from backend.core.dependencies import get_db, get_current_user
 from backend.core.security import verify_password
 from backend.core.two_factor_service import TwoFactorService
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.api.schemas.two_factor import (
     TwoFactorEnableResponse,
@@ -21,7 +23,9 @@ router = APIRouter(prefix="/auth/2fa", tags=["Two-Factor Authentication"])
 
 
 @router.get("/status", response_model=TwoFactorStatusResponse)
+@limiter.limit(get_rate_limit())
 def get_2fa_status(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -45,7 +49,9 @@ def get_2fa_status(
 
 
 @router.post("/enable", response_model=TwoFactorEnableResponse)
+@limiter.limit(get_rate_limit())
 def enable_2fa(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -91,8 +97,10 @@ def enable_2fa(
 
 
 @router.post("/verify-setup", response_model=TwoFactorVerifyResponse)
+@limiter.limit(get_rate_limit())
 def verify_2fa_setup(
-    request: TwoFactorVerifyRequest,
+    request: Request,
+    verify_data: TwoFactorVerifyRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -133,8 +141,10 @@ def verify_2fa_setup(
 
 
 @router.post("/verify", response_model=TwoFactorVerifyResponse)
+@limiter.limit(get_rate_limit())
 def verify_2fa_code(
-    request: TwoFactorVerifyRequest,
+    request: Request,
+    twofactorRequest: TwoFactorVerifyRequest,
     current_user: User = Depends(get_current_user)
 ):
     """
@@ -148,7 +158,7 @@ def verify_2fa_code(
             detail="2FA is not enabled"
         )
     
-    if not TwoFactorService.verify_code(current_user.two_factor_secret, request.code):
+    if not TwoFactorService.verify_code(current_user.two_factor_secret, twofactorRequest.code):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid verification code"
@@ -161,8 +171,10 @@ def verify_2fa_code(
 
 
 @router.post("/disable", response_model=TwoFactorVerifyResponse)
+@limiter.limit(get_rate_limit())
 def disable_2fa(
-    request: TwoFactorDisableRequest,
+    request: Request,
+    disable_data: TwoFactorDisableRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -185,22 +197,22 @@ def disable_2fa(
         )
     
     # Verify password
-    if not verify_password(request.password, current_user.hashed_password):
+    if not verify_password(disable_data.password, current_user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid password"
         )
     
     # Verify code if provided
-    if request.code:
+    if disable_data.code:
         # Try TOTP code first
-        is_valid = TwoFactorService.verify_code(current_user.two_factor_secret, request.code)
+        is_valid = TwoFactorService.verify_code(current_user.two_factor_secret, disable_data.code)
         
         # Try backup code if TOTP failed
         if not is_valid and current_user.two_factor_backup_codes:
             is_valid, _ = TwoFactorService.verify_backup_code(
                 current_user.two_factor_backup_codes,
-                request.code
+                disable_data.code
             )
         
         if not is_valid:
@@ -224,7 +236,9 @@ def disable_2fa(
 
 
 @router.get("/backup-codes", response_model=TwoFactorBackupCodesResponse)
+@limiter.limit(get_rate_limit())
 def get_backup_codes(
+    request: Request,
     current_user: User = Depends(get_current_user)
 ):
     """
@@ -250,8 +264,10 @@ def get_backup_codes(
 
 
 @router.post("/backup-codes/regenerate", response_model=TwoFactorBackupCodesResponse)
+@limiter.limit(get_rate_limit())
 def regenerate_backup_codes(
-    request: TwoFactorVerifyRequest,
+    request: Request,
+    verify_data: TwoFactorVerifyRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -267,7 +283,7 @@ def regenerate_backup_codes(
         )
     
     # Verify TOTP code
-    if not TwoFactorService.verify_code(current_user.two_factor_secret, request.code):
+    if not TwoFactorService.verify_code(current_user.two_factor_secret, verify_data.code):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid verification code"
@@ -288,8 +304,10 @@ def regenerate_backup_codes(
 
 
 @router.post("/verify-backup", response_model=TwoFactorVerifyResponse)
+@limiter.limit(get_rate_limit())
 def verify_backup_code(
-    request: TwoFactorBackupVerifyRequest,
+    request: Request,
+    backup_data: TwoFactorBackupVerifyRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -306,7 +324,7 @@ def verify_backup_code(
     
     is_valid, updated_codes = TwoFactorService.verify_backup_code(
         current_user.two_factor_backup_codes,
-        request.code
+        backup_data.code
     )
     
     if not is_valid:

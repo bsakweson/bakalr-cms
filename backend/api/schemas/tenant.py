@@ -2,7 +2,7 @@
 Tenant/Organization switching schemas
 """
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class OrganizationMembership(BaseModel):
@@ -15,8 +15,7 @@ class OrganizationMembership(BaseModel):
     roles: List[str]
     joined_at: str
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserOrganizationsResponse(BaseModel):

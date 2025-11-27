@@ -4,7 +4,7 @@ Cache warming service for preloading frequently accessed content.
 import asyncio
 import logging
 from typing import List, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
@@ -48,7 +48,7 @@ class CacheWarmingService:
             db = SessionLocal()
             try:
                 # Get recently published content
-                cutoff_date = datetime.utcnow() - timedelta(days=days_lookback)
+                cutoff_date = datetime.now(timezone.utc) - timedelta(days=days_lookback)
                 
                 entries = db.query(ContentEntry).filter(
                     ContentEntry.updated_at >= cutoff_date

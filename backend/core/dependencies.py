@@ -127,14 +127,14 @@ async def get_current_organization(
     Raises:
         HTTPException: 400 if user has no active organization
     """
-    if not current_user.current_organization_id:
+    if not current_user.organization_id:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="No active organization. Please switch to an organization first."
         )
     
     # Return the organization from the relationship
-    organization = current_user.current_organization
+    organization = current_user.organization
     
     if not organization:
         raise HTTPException(

@@ -5,7 +5,7 @@ Performance monitoring utilities and metrics collection
 import statistics
 import time
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 import psutil
@@ -186,7 +186,7 @@ def check_performance_budget(operation: str, duration_ms: float) -> bool:
 def get_performance_report() -> Dict[str, Any]:
     """Get a comprehensive performance report"""
     return {
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat() + "Z",
         "system_metrics": performance_monitor.get_system_metrics(),
         "endpoint_stats": performance_monitor.get_endpoint_stats(),
         "slowest_endpoints": performance_monitor.get_slowest_endpoints(),

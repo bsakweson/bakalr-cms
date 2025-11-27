@@ -327,9 +327,9 @@ class Mutation:
         if not entry:
             raise Exception("Content entry not found")
         
-        from datetime import datetime
+        from datetime import datetime, timezone
         entry.status = "published"
-        entry.published_at = datetime.utcnow()
+        entry.published_at = datetime.now(timezone.utc)
         context.db.commit()
         context.db.refresh(entry)
         
@@ -356,5 +356,17 @@ class Mutation:
         return to_content_entry_type(entry)
 
 
-# Create the schema
-schema = strawberry.Schema(query=Query, mutation=Mutation)
+# Import validators for schema extensions
+from backend.graphql.validators import QueryDepthLimiter, QueryComplexityLimiter, QueryTimeout
+from backend.core.config import settings
+
+# Create the schema with security extensions
+schema = strawberry.Schema(
+    query=Query,
+    mutation=Mutation,
+    extensions=[
+        QueryDepthLimiter(max_depth=settings.GRAPHQL_MAX_DEPTH),
+        QueryComplexityLimiter(max_complexity=settings.GRAPHQL_MAX_COMPLEXITY),
+        QueryTimeout(timeout_seconds=settings.GRAPHQL_TIMEOUT_SECONDS),
+    ]
+)

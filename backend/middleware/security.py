@@ -112,7 +112,7 @@ class CSRFProtectionMiddleware(BaseHTTPMiddleware):
 
     def _generate_token(self, session_id: str) -> str:
         """Generate CSRF token for session"""
-        timestamp = str(int(datetime.utcnow().timestamp()))
+        timestamp = str(int(datetime.now(timezone.utc).timestamp()))
         message = f"{session_id}:{timestamp}".encode()
         signature = hmac.new(self.secret_key, message, hashlib.sha256).hexdigest()
         return f"{timestamp}.{signature}"
@@ -124,7 +124,7 @@ class CSRFProtectionMiddleware(BaseHTTPMiddleware):
             timestamp = int(timestamp_str)
 
             # Check token age
-            age = datetime.utcnow().timestamp() - timestamp
+            age = datetime.now(timezone.utc).timestamp() - timestamp
             if age > max_age:
                 return False
 

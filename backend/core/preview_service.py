@@ -3,7 +3,7 @@ Content preview service for generating and validating preview tokens.
 Uses JWT tokens with expiration for secure preview access.
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import jwt, JWTError
 from backend.core.config import settings
@@ -29,13 +29,13 @@ class PreviewService:
         Returns:
             Tuple of (token, expiration_datetime)
         """
-        expires_at = datetime.utcnow() + timedelta(hours=expires_in_hours)
+        expires_at = datetime.now(timezone.utc) + timedelta(hours=expires_in_hours)
         
         payload = {
             "content_entry_id": content_entry_id,
             "organization_id": organization_id,
             "exp": expires_at,
-            "iat": datetime.utcnow(),
+            "iat": datetime.now(timezone.utc),
             "type": "preview"
         }
         

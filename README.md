@@ -224,6 +224,11 @@ See the [Getting Started Guide](docs/getting-started.md) for detailed instructio
 - **[Quickstart Guide](docs/quickstart.md)** - 5-minute setup guide
 - **[Authentication Guide](docs/authentication.md)** - JWT, 2FA, API keys, password reset
 
+### Feature Documentation
+
+- **[Search & Discovery](docs/search.md)** - Full-text search with Meilisearch, autocomplete, analytics
+- **[Webhooks](docs/webhooks.md)** - Event-driven webhooks with HMAC signatures
+
 ### Developer Documentation
 
 - **[Developer Guide](docs/developer-guide.md)** - Architecture, project structure, development setup

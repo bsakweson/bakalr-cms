@@ -36,6 +36,21 @@ def generate_api_key() -> str:
     return f"bk_{secrets.token_urlsafe(32)}"
 
 
+def hash_api_key(api_key: str) -> str:
+    """
+    Hash an API key for secure storage.
+    
+    Args:
+        api_key: The plain text API key
+        
+    Returns:
+        Hashed API key
+    """
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(api_key.encode('utf-8'), salt)
+    return hashed.decode('utf-8')
+
+
 class TokenData(BaseModel):
     """Token payload data"""
     user_id: int

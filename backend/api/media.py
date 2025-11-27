@@ -1,7 +1,7 @@
 """
 Media Management API Endpoints
 """
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Query, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Query, BackgroundTasks, Request
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import select, func, or_
@@ -16,6 +16,7 @@ from backend.core.dependencies import get_current_user
 from backend.models.user import User
 from backend.models.media import Media
 from backend.core.webhook_service import publish_media_uploaded_sync, publish_media_deleted_sync
+from backend.core.rate_limit import limiter, get_rate_limit
 from backend.api.schemas.media import (
     MediaUploadResponse,
     MediaResponse,
@@ -44,6 +45,7 @@ from backend.core.media_utils import (
 )
 from backend.core.storage import get_storage_backend
 from backend.core.cache_middleware import add_cache_headers
+from backend.core.config import settings
 
 
 router = APIRouter(prefix="/media", tags=["media"])
@@ -53,7 +55,9 @@ ensure_upload_directories()
 
 
 @router.post("/upload", response_model=MediaUploadResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def upload_media(
+    request: Request,
     file: UploadFile = File(...),
     alt_text: Optional[str] = None,
     description: Optional[str] = None,
@@ -176,7 +180,9 @@ async def upload_media(
 
 
 @router.get("", response_model=MediaListResponse)
+@limiter.limit(get_rate_limit())
 async def list_media(
+    request: Request,
     media_type: Optional[MediaType] = None,
     search: Optional[str] = None,
     page: int = Query(1, ge=1),
@@ -246,8 +252,73 @@ async def list_media(
     )
 
 
+@router.get("/search", response_model=MediaListResponse)
+@limiter.limit(get_rate_limit())
+async def search_media(
+    request: Request,
+    q: str = Query(..., min_length=1, description="Search query"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    media_type: Optional[MediaType] = None,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Search media files by filename, alt_text, or description.
+    Supports filtering by media type.
+    """
+    # Base query
+    query = select(Media).where(Media.organization_id == current_user.organization_id)
+    
+    # Search across filename, alt_text, and description
+    search_filter = or_(
+        Media.filename.ilike(f"%{q}%"),
+        Media.alt_text.ilike(f"%{q}%"),
+        Media.description.ilike(f"%{q}%")
+    )
+    query = query.where(search_filter)
+    
+    # Filter by media type if specified
+    if media_type:
+        query = query.where(Media.content_type.startswith(media_type.value))
+    
+    # Count total
+    count_query = select(func.count()).select_from(query.subquery())
+    total = db.execute(count_query).scalar() or 0
+    
+    # Paginate
+    offset = (page - 1) * page_size
+    query = query.offset(offset).limit(page_size).order_by(Media.created_at.desc())
+    
+    # Execute
+    media_items = db.execute(query).scalars().all()
+    
+    # Parse tags
+    items = []
+    for item in media_items:
+        item_dict = MediaResponse.model_validate(item).model_dump()
+        if item.tags:
+            try:
+                item_dict['tags'] = json.loads(item.tags)
+            except:
+                item_dict['tags'] = []
+        items.append(MediaResponse(**item_dict))
+    
+    total_pages = (total + page_size - 1) // page_size
+    
+    return MediaListResponse(
+        items=items,
+        total=total,
+        page=page,
+        page_size=page_size,
+        total_pages=total_pages
+    )
+
+
 @router.get("/{media_id}", response_model=MediaResponse)
+@limiter.limit(get_rate_limit())
 async def get_media(
+    request: Request,
     media_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -278,7 +349,9 @@ async def get_media(
 
 
 @router.put("/{media_id}", response_model=MediaResponse)
+@limiter.limit(get_rate_limit())
 async def update_media(
+    request: Request,
     media_id: int,
     update_data: MediaUpdateRequest,
     db: Session = Depends(get_db),
@@ -325,7 +398,9 @@ async def update_media(
 
 
 @router.delete("/{media_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_media(
+    request: Request,
     media_id: int,
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
@@ -353,10 +428,6 @@ async def delete_media(
     storage = get_storage_backend()
     storage.delete_file(media.file_path)
     
-    # Also delete thumbnail if exists
-    if media.thumbnail_path:
-        storage.delete_file(media.thumbnail_path)
-    
     # Delete from database
     db.delete(media)
     db.commit()
@@ -373,7 +444,9 @@ async def delete_media(
 
 
 @router.get("/files/{filename}")
+@limiter.limit(get_rate_limit())
 async def serve_media_file(
+    request: Request,
     filename: str,
     db: Session = Depends(get_db)
 ):
@@ -426,15 +499,17 @@ async def serve_media_file(
 
 
 @router.post("/thumbnail", response_model=ThumbnailResponse)
+@limiter.limit(get_rate_limit())
 async def generate_thumbnail(
-    request: ThumbnailRequest,
+    request: Request,
+    thumbnail_request: ThumbnailRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
     """Generate thumbnail for image"""
     media = db.execute(
         select(Media).where(
-            Media.id == request.media_id,
+            Media.id == thumbnail_request.media_id,
             Media.organization_id == current_user.organization_id
         )
     ).scalar_one_or_none()
@@ -475,7 +550,7 @@ async def generate_thumbnail(
             )
     
     # Generate thumbnail filename
-    thumb_filename = f"thumb_{request.width or 300}x{request.height or 300}_{media.filename}"
+    thumb_filename = f"thumb_{thumbnail_request.width or 300}x{thumbnail_request.height or 300}_{media.filename}"
     
     # Create thumbnail in temp location first
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -485,9 +560,9 @@ async def generate_thumbnail(
         width, height = create_thumbnail(
             source_path,
             temp_thumb_path,
-            max_width=request.width or 300,
-            max_height=request.height or 300,
-            quality=request.quality
+            max_width=thumbnail_request.width or 300,
+            max_height=thumbnail_request.height or 300,
+            quality=thumbnail_request.quality
         )
         
         # Read thumbnail content
@@ -516,7 +591,9 @@ async def generate_thumbnail(
 
 
 @router.get("/thumbnails/{filename}")
+@limiter.limit(get_rate_limit())
 async def serve_thumbnail(
+    request: Request,
     filename: str,
     db: Session = Depends(get_db)
 ):
@@ -560,7 +637,9 @@ async def serve_thumbnail(
 
 
 @router.get("/stats/overview", response_model=MediaStats)
+@limiter.limit(get_rate_limit())
 async def get_media_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -604,8 +683,10 @@ async def get_media_stats(
 
 
 @router.post("/bulk-delete", response_model=BulkDeleteResponse)
+@limiter.limit(get_rate_limit())
 async def bulk_delete_media(
-    request: BulkDeleteRequest,
+    request: Request,
+    delete_request: BulkDeleteRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -616,7 +697,7 @@ async def bulk_delete_media(
     
     storage = get_storage_backend()
     
-    for media_id in request.media_ids:
+    for media_id in delete_request.media_ids:
         try:
             media = db.execute(
                 select(Media).where(

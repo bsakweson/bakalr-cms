@@ -24,11 +24,12 @@ class PerformanceMiddleware(BaseHTTPMiddleware):
         endpoint = f"{request.method} {request.url.path}"
 
         # Process request
+        response = None
+        status_code = 500
         try:
             response = await call_next(request)
             status_code = response.status_code
         except Exception as e:
-            status_code = 500
             logger.error(f"Request failed: {endpoint} - {str(e)}")
             raise
         finally:
@@ -37,7 +38,7 @@ class PerformanceMiddleware(BaseHTTPMiddleware):
             performance_monitor.record_request(endpoint, duration, status_code)
 
             # Add performance headers
-            if hasattr(response, "headers"):
+            if response is not None and hasattr(response, "headers"):
                 response.headers["X-Response-Time"] = f"{duration * 1000:.2f}ms"
                 response.headers["X-Process-Time"] = f"{duration:.6f}"
 

@@ -130,6 +130,28 @@ response = requests.post(f"{BASE_URL}/content/types", json=content_type_data, he
 if response.status_code == 201:
     content_type_id = response.json()["id"]
     print(f"✅ Content type created with ID: {content_type_id}")
+else:
+    print(f"⚠️ Content type creation failed (might already exist)")
+    print_response(response)
+    # Try to get existing content type
+    response = requests.get(f"{BASE_URL}/content/types", headers=headers)
+    if response.status_code == 200:
+        types = response.json()
+        # Handle both list and paginated response formats
+        if isinstance(types, list):
+            article_type = next((t for t in types if t.get("api_id") == "article"), None)
+        else:
+            types_list = types.get("items", [])
+            article_type = next((t for t in types_list if t.get("api_id") == "article"), None)
+        if article_type:
+            content_type_id = article_type["id"]
+            print(f"✅ Using existing content type with ID: {content_type_id}")
+        else:
+            print("❌ Could not find or create content type")
+            exit(1)
+    else:
+        print("❌ Failed to retrieve content types")
+        exit(1)
 
 # Test 4: Create content entry (should auto-translate)
 print("\n🔵 Creating content entry with auto-translation...")

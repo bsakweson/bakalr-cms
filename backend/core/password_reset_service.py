@@ -27,7 +27,7 @@ class PasswordResetService:
         return secrets.token_urlsafe(32)
     
     @classmethod
-    async def create_reset_token(cls, email: str, db: AsyncSession) -> Optional[str]:
+    async def create_reset_token(cls, email: str, db) -> Optional[str]:
         """
         Create a password reset token for a user.
         
@@ -38,11 +38,8 @@ class PasswordResetService:
         Returns:
             Reset token if user exists, None otherwise
         """
-        # Check if user exists
-        result = await db.execute(
-            select(User).where(User.email == email, User.is_active == True)
-        )
-        user = result.scalar_one_or_none()
+        # Check if user exists (using sync db.query)
+        user = db.query(User).filter(User.email == email, User.is_active == True).first()
         
         if not user:
             # Don't reveal if user exists or not (security)
@@ -60,7 +57,7 @@ class PasswordResetService:
                 "email": user.email,
                 "created_at": datetime.now(timezone.utc).isoformat(),
             },
-            expire=cls.TOKEN_EXPIRATION_HOURS * 3600,
+            ttl=cls.TOKEN_EXPIRATION_HOURS * 3600,
         )
         
         return token
@@ -77,15 +74,24 @@ class PasswordResetService:
             Token data if valid, None otherwise
         """
         cache_key = f"{cls.CACHE_PREFIX}{token}"
-        token_data = await cache.get(cache_key)
-        return token_data
+        token_data_str = await cache.get(cache_key)
+        
+        if not token_data_str:
+            return None
+        
+        # Parse JSON string to dict
+        import json
+        try:
+            return json.loads(token_data_str)
+        except (json.JSONDecodeError, TypeError):
+            return None
     
     @classmethod
     async def reset_password(
         cls,
         token: str,
         new_password: str,
-        db: AsyncSession,
+        db,
     ) -> bool:
         """
         Reset user password with a valid token.
@@ -110,13 +116,13 @@ class PasswordResetService:
         # Hash new password
         hashed_password = get_password_hash(new_password)
         
-        # Update user password
-        await db.execute(
-            update(User)
-            .where(User.id == user_id, User.is_active == True)
-            .values(hashed_password=hashed_password)
-        )
-        await db.commit()
+        # Update user password (using sync db.query)
+        user = db.query(User).filter(User.id == user_id, User.is_active == True).first()
+        if user:
+            user.hashed_password = hashed_password
+            db.commit()
+        else:
+            return False
         
         # Invalidate token (delete from cache)
         cache_key = f"{cls.CACHE_PREFIX}{token}"

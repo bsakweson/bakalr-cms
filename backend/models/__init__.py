@@ -16,6 +16,7 @@ from backend.models.webhook import Webhook, WebhookDelivery, WebhookStatus, Webh
 from backend.models.schedule import ContentSchedule
 from backend.models.theme import Theme
 from backend.models.content_template import ContentTemplate
+from backend.models.notification import Notification
 
 __all__ = [
     "IDMixin",
@@ -42,5 +43,6 @@ __all__ = [
     "ContentSchedule",
     "Theme",
     "ContentTemplate",
+    "Notification",
 ]
 

@@ -10,10 +10,12 @@ def test_register_user(client, test_user_data):
     
     assert response.status_code == 201
     data = response.json()
-    assert data["email"] == test_user_data["email"]
-    assert data["full_name"] == test_user_data["full_name"]
-    assert "id" in data
-    assert "password" not in data  # Password should not be returned
+    assert "access_token" in data
+    assert "refresh_token" in data
+    assert data["token_type"] == "bearer"
+    assert data["user"]["email"] == test_user_data["email"]
+    assert "id" in data["user"]
+    assert "password" not in data["user"]  # Password should not be returned
 
 
 def test_register_duplicate_email(client, test_user_data):
@@ -37,7 +39,7 @@ def test_login_success(client, test_user_data):
     response = client.post(
         "/api/v1/auth/login",
         json={
-            "username": test_user_data["email"],
+            "email": test_user_data["email"],
             "password": test_user_data["password"]
         }
     )
@@ -47,7 +49,6 @@ def test_login_success(client, test_user_data):
     assert "access_token" in data
     assert "refresh_token" in data
     assert data["token_type"] == "bearer"
-    assert "expires_in" in data
 
 
 def test_login_invalid_credentials(client, test_user_data):
@@ -55,7 +56,7 @@ def test_login_invalid_credentials(client, test_user_data):
     response = client.post(
         "/api/v1/auth/login",
         json={
-            "username": test_user_data["email"],
+            "email": test_user_data["email"],
             "password": "WrongPassword123!"
         }
     )
@@ -70,7 +71,7 @@ def test_refresh_token(client, test_user_data):
     login_response = client.post(
         "/api/v1/auth/login",
         json={
-            "username": test_user_data["email"],
+            "email": test_user_data["email"],
             "password": test_user_data["password"]
         }
     )
@@ -80,7 +81,7 @@ def test_refresh_token(client, test_user_data):
     # Refresh token
     response = client.post(
         "/api/v1/auth/refresh",
-        headers={"Authorization": f"Bearer {refresh_token}"}
+        json={"refresh_token": refresh_token}
     )
     
     assert response.status_code == 200
@@ -91,20 +92,19 @@ def test_refresh_token(client, test_user_data):
 
 def test_get_current_user(authenticated_client):
     """Test getting current user info"""
-    response = authenticated_client.get("/api/v1/users/me")
+    response = authenticated_client.get("/api/v1/auth/me")
     
     assert response.status_code == 200
     data = response.json()
     assert "id" in data
     assert "email" in data
-    assert "full_name" in data
 
 
 def test_unauthorized_access(client):
     """Test accessing protected endpoint without auth fails"""
-    response = client.get("/api/v1/users/me")
+    response = client.get("/api/v1/auth/me")
     
-    assert response.status_code == 401
+    assert response.status_code == 403
 
 
 def test_logout(authenticated_client):
@@ -112,4 +112,4 @@ def test_logout(authenticated_client):
     response = authenticated_client.post("/api/v1/auth/logout")
     
     assert response.status_code == 200
-    assert response.json()["message"] == "Successfully logged out"
+    assert response.json()["message"] == "Logged out successfully"

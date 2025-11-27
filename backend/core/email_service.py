@@ -3,8 +3,9 @@ Email service for sending transactional and notification emails.
 Uses FastAPI-Mail with Jinja2 templates and queue support.
 """
 from typing import List, Dict, Any, Optional
+from datetime import timezone
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pydantic import EmailStr
@@ -22,6 +23,9 @@ class EmailService:
     
     def __init__(self):
         # Configure FastAPI-Mail
+        import os
+        suppress_send = os.getenv("MAIL_SUPPRESS_SEND", "0") == "1"
+        
         self.conf = ConnectionConfig(
             MAIL_USERNAME=settings.SMTP_USER,
             MAIL_PASSWORD=settings.SMTP_PASSWORD,
@@ -32,6 +36,7 @@ class EmailService:
             MAIL_SSL_TLS=settings.SMTP_SSL,
             USE_CREDENTIALS=True,
             VALIDATE_CERTS=True,
+            SUPPRESS_SEND=suppress_send,  # Disable email sending in tests
             TEMPLATE_FOLDER=Path(__file__).parent.parent / "templates" / "emails"
         )
         self.fastmail = FastMail(self.conf)
@@ -54,9 +59,9 @@ class EmailService:
         organization_id: int,
         user_id: Optional[int] = None,
         attachments: Optional[List[str]] = None
-    ) -> EmailLog:
+    ):
         """
-        Send email with template rendering and delivery tracking.
+        Send email with template rendering.
         
         Args:
             to_email: Recipient email address
@@ -66,37 +71,11 @@ class EmailService:
             organization_id: Organization ID for multi-tenancy
             user_id: Optional user ID
             attachments: Optional list of file paths
-            
-        Returns:
-            EmailLog: Email log entry with delivery status
         """
-        db = SessionLocal()
-        
         try:
-            # Create email log entry
-            email_log = EmailLog(
-                user_id=user_id,
-                organization_id=organization_id,
-                to_email=to_email,
-                from_email=settings.SMTP_FROM,
-                subject=subject,
-                template_name=template_name,
-                status=EmailStatus.PENDING,
-                meta_data=template_vars
-            )
-            db.add(email_log)
-            db.commit()
-            db.refresh(email_log)
-            
             # Render template
-            try:
-                template = self.jinja_env.get_template(template_name)
-                html_content = template.render(**template_vars)
-            except Exception as e:
-                email_log.status = EmailStatus.FAILED
-                email_log.error_message = f"Template rendering failed: {str(e)}"
-                db.commit()
-                raise
+            template = self.jinja_env.get_template(template_name)
+            html_content = template.render(**template_vars)
             
             # Create message
             message = MessageSchema(
@@ -107,30 +86,13 @@ class EmailService:
             )
             
             # Send email
-            try:
-                email_log.status = EmailStatus.SENDING
-                db.commit()
-                
-                await self.fastmail.send_message(message)
-                
-                email_log.status = EmailStatus.SENT
-                email_log.sent_at = datetime.utcnow()
-                db.commit()
-                
-            except Exception as e:
-                email_log.status = EmailStatus.FAILED
-                email_log.error_message = str(e)
-                email_log.retry_count += 1
-                db.commit()
-                raise
+            await self.fastmail.send_message(message)
             
-            return email_log
+            print(f"✓ Email sent successfully to {to_email}: {subject}")
             
         except Exception as e:
-            db.rollback()
+            print(f"✗ Failed to send email to {to_email}: {e}")
             raise
-        finally:
-            db.close()
     
     async def send_welcome_email(
         self,
@@ -150,7 +112,7 @@ class EmailService:
                 "organization_name": organization_name,
                 "login_url": f"{settings.FRONTEND_URL}/login",
                 "dashboard_url": f"{settings.FRONTEND_URL}/dashboard",
-                "year": datetime.utcnow().year
+                "year": datetime.now(timezone.utc).year
             },
             organization_id=organization_id,
             user_id=user_id
@@ -165,7 +127,7 @@ class EmailService:
         user_id: int
     ):
         """Send password reset email"""
-        reset_url = f"{settings.FRONTEND_URL}/reset-password?token={reset_token}"
+        reset_url = f"{settings.FRONTEND_URL}/reset-password/{reset_token}"
         
         return await self.send_email(
             to_email=to_email,
@@ -175,7 +137,7 @@ class EmailService:
                 "user_name": user_name,
                 "reset_url": reset_url,
                 "expiry_hours": 24,
-                "year": datetime.utcnow().year
+                "year": datetime.now(timezone.utc).year
             },
             organization_id=organization_id,
             user_id=user_id
@@ -200,7 +162,7 @@ class EmailService:
                 "organization_name": organization_name,
                 "content_summary": content_summary,
                 "dashboard_url": f"{settings.FRONTEND_URL}/dashboard",
-                "year": datetime.utcnow().year
+                "year": datetime.now(timezone.utc).year
             },
             organization_id=organization_id,
             user_id=user_id
@@ -226,7 +188,7 @@ class EmailService:
                 "notification_title": notification_title,
                 "notification_message": notification_message,
                 "action_url": action_url,
-                "year": datetime.utcnow().year
+                "year": datetime.now(timezone.utc).year
             },
             organization_id=organization_id,
             user_id=user_id

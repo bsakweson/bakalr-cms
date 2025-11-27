@@ -3,16 +3,18 @@ Role and Permission Management API endpoints
 Allows admins to manage roles and permissions within their organization
 """
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 
 from backend.db.session import get_db
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.rbac import Role, Permission
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 router = APIRouter(prefix="/roles", tags=["Role Management"])
@@ -25,8 +27,7 @@ class PermissionItem(BaseModel):
     description: str | None
     category: str | None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RoleItem(BaseModel):
@@ -38,8 +39,7 @@ class RoleItem(BaseModel):
     permissions: List[str] = []
     user_count: int = 0
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RoleListResponse(BaseModel):
@@ -72,12 +72,13 @@ class RoleResponse(BaseModel):
     level: int
     permissions: List[PermissionItem]
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 @router.get("/", response_model=RoleListResponse)
+@limiter.limit(get_rate_limit())
 async def list_roles(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -87,8 +88,7 @@ async def list_roles(
     Requires: view_roles permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("view_roles") and not checker.has_permission("manage_roles"):
+    if not PermissionChecker.has_permission(current_user, "view_roles", db) and not PermissionChecker.has_permission(current_user, "manage_roles", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to view roles"
@@ -118,7 +118,9 @@ async def list_roles(
 
 
 @router.get("/permissions", response_model=PermissionListResponse)
+@limiter.limit(get_rate_limit())
 async def list_permissions(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     category: str | None = None
@@ -129,8 +131,7 @@ async def list_permissions(
     Requires: manage_roles permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_roles"):
+    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to view permissions"
@@ -157,7 +158,9 @@ async def list_permissions(
 
 
 @router.get("/{role_id}", response_model=RoleResponse)
+@limiter.limit(get_rate_limit())
 async def get_role(
+    request: Request,
     role_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -168,8 +171,7 @@ async def get_role(
     Requires: view_roles permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("view_roles") and not checker.has_permission("manage_roles"):
+    if not PermissionChecker.has_permission(current_user, "view_roles", db) and not PermissionChecker.has_permission(current_user, "manage_roles", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to view roles"
@@ -210,8 +212,10 @@ async def get_role(
 
 
 @router.post("/", response_model=RoleResponse)
+@limiter.limit(get_rate_limit())
 async def create_role(
-    request: CreateRoleRequest,
+    request: Request,
+     role_data: CreateRoleRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -221,8 +225,7 @@ async def create_role(
     Requires: manage_roles permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_roles"):
+    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to create roles"
@@ -231,7 +234,7 @@ async def create_role(
     # Check if role name already exists in organization
     existing_role = db.query(Role).filter(
         and_(
-            Role.name == request.name,
+            Role.name == role_data.name,
             Role.organization_id == current_user.organization_id
         )
     ).first()
@@ -239,13 +242,13 @@ async def create_role(
     if existing_role:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Role '{request.name}' already exists in this organization"
+            detail=f"Role '{role_data.name}' already exists in this organization"
         )
     
     # Create new role
     new_role = Role(
-        name=request.name,
-        description=request.description,
+        name=role_data.name,
+        description=role_data.description,
         organization_id=current_user.organization_id,
         is_system_role=False,
         level=1  # Default level for custom roles
@@ -254,9 +257,9 @@ async def create_role(
     db.flush()
     
     # Assign permissions
-    if request.permission_ids:
+    if role_data.permission_ids:
         permissions = db.query(Permission).filter(
-            Permission.id.in_(request.permission_ids)
+            Permission.id.in_(role_data.permission_ids)
         ).all()
         new_role.permissions = permissions
     
@@ -284,9 +287,11 @@ async def create_role(
 
 
 @router.put("/{role_id}", response_model=RoleResponse)
+@limiter.limit(get_rate_limit())
 async def update_role(
+    request: Request,
     role_id: int,
-    request: UpdateRoleRequest,
+    role_data: UpdateRoleRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -296,8 +301,7 @@ async def update_role(
     Requires: manage_roles permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_roles"):
+    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to update roles"
@@ -325,11 +329,11 @@ async def update_role(
         )
     
     # Update fields
-    if request.name is not None:
+    if role_data.name is not None:
         # Check if new name already exists
         existing_role = db.query(Role).filter(
             and_(
-                Role.name == request.name,
+                Role.name == role_data.name,
                 Role.organization_id == current_user.organization_id,
                 Role.id != role_id
             )
@@ -338,17 +342,17 @@ async def update_role(
         if existing_role:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Role '{request.name}' already exists"
+                detail=f"Role '{role_data.name}' already exists"
             )
         
-        role.name = request.name
+        role.name = role_data.name
     
-    if request.description is not None:
-        role.description = request.description
+    if role_data.description is not None:
+        role.description = role_data.description
     
-    if request.permission_ids is not None:
+    if role_data.permission_ids is not None:
         permissions = db.query(Permission).filter(
-            Permission.id.in_(request.permission_ids)
+            Permission.id.in_(role_data.permission_ids)
         ).all()
         role.permissions = permissions
     
@@ -376,7 +380,9 @@ async def update_role(
 
 
 @router.delete("/{role_id}")
+@limiter.limit(get_rate_limit())
 async def delete_role(
+    request: Request,
     role_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -387,8 +393,7 @@ async def delete_role(
     Requires: manage_roles permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_roles"):
+    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to delete roles"

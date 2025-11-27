@@ -2,12 +2,14 @@
 Field-level and content type-specific permission management endpoints.
 """
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 
 from backend.core.dependencies import get_db, get_current_user
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.rbac import Role, Permission
 from backend.models.content import ContentType
@@ -20,13 +22,15 @@ from backend.api.schemas.field_permissions import (
     AccessibleFieldsResponse,
     PermissionCheckRequest,
     PermissionCheckResponse
-)
 
+)
 router = APIRouter(prefix="/permissions", tags=["Field Permissions"])
 
 
 @router.post("/field", response_model=PermissionResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_field_permission(
+    request: Request,
     data: FieldPermissionCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -97,7 +101,9 @@ async def create_field_permission(
 
 
 @router.post("/field/bulk", response_model=List[PermissionResponse], status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_field_permissions_bulk(
+    request: Request,
     data: FieldPermissionBulkCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -171,7 +177,9 @@ async def create_field_permissions_bulk(
 
 
 @router.post("/content-type", response_model=PermissionResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_content_type_permission(
+    request: Request,
     data: ContentTypePermissionCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -240,7 +248,9 @@ async def create_content_type_permission(
 
 
 @router.get("/role/{role_id}/fields", response_model=List[FieldPermissionResponse])
-async def list_role_field_permissions(
+@limiter.limit(get_rate_limit())
+async def get_role_field_permissions(
+    request: Request,
     role_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -278,7 +288,9 @@ async def list_role_field_permissions(
 
 
 @router.get("/accessible-fields/{content_type_id}", response_model=AccessibleFieldsResponse)
+@limiter.limit(get_rate_limit())
 async def get_accessible_fields(
+    request: Request,
     content_type_id: int,
     permission_name: str,
     current_user: User = Depends(get_current_user),
@@ -326,8 +338,10 @@ async def get_accessible_fields(
 
 
 @router.post("/check", response_model=PermissionCheckResponse)
-async def check_field_permissions(
-    data: PermissionCheckRequest,
+@limiter.limit(get_rate_limit())
+async def check_field_permission(
+    request: Request,
+    permission_request: PermissionCheckRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -339,11 +353,11 @@ async def check_field_permissions(
     accessible = []
     denied = []
     
-    for field_name in data.field_names:
+    for field_name in permission_request.field_names:
         has_perm = PermissionChecker.has_field_permission(
             current_user,
-            data.permission_name,
-            data.content_type_id,
+            permission_request.permission_name,
+            permission_request.content_type_id,
             field_name,
             db
         )
@@ -361,7 +375,9 @@ async def check_field_permissions(
 
 
 @router.delete("/field/{permission_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def revoke_field_permission(
+    request: Request,
     permission_id: int,
     role_id: int,
     current_user: User = Depends(get_current_user),

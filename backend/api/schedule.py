@@ -2,7 +2,7 @@
 Content Scheduling API endpoints.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -12,17 +12,21 @@ from backend.models.content import ContentEntry
 from backend.models.schedule import ContentSchedule
 from backend.core.dependencies import get_current_user
 from backend.core.scheduling_service import SchedulingService
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.api.schemas.schedule import (
     ScheduleContentRequest,
     ScheduleContentResponse,
     ScheduleListResponse
-)
 
+)
 router = APIRouter(prefix="/schedule", tags=["schedule"])
 
 
 @router.post("/content/{content_entry_id}", response_model=ScheduleContentResponse)
+@limiter.limit(get_rate_limit())
 async def schedule_content_action(
+    request_obj: Request,
     content_entry_id: int,
     request: ScheduleContentRequest,
     current_user: User = Depends(get_current_user),
@@ -71,7 +75,9 @@ async def schedule_content_action(
 
 
 @router.get("/content/{content_entry_id}", response_model=ScheduleListResponse)
-async def list_content_schedules(
+@limiter.limit(get_rate_limit())
+async def get_content_schedules(
+    request: Request,
     content_entry_id: int,
     page: int = 1,
     page_size: int = 20,
@@ -142,7 +148,9 @@ async def list_content_schedules(
 
 
 @router.delete("/{schedule_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def cancel_schedule(
+    request: Request,
     schedule_id: int,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
@@ -166,7 +174,9 @@ async def cancel_schedule(
 
 
 @router.post("/execute-pending", status_code=status.HTTP_200_OK)
+@limiter.limit(get_rate_limit())
 async def execute_pending_schedules(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):

@@ -87,12 +87,21 @@ class SearchService:
     
     def _content_entry_to_document(self, entry: ContentEntry, db: Session) -> Dict[str, Any]:
         """Convert ContentEntry to Meilisearch document"""
-        content_type = db.query(ContentType).filter(ContentType.id == entry.content_type_id).first()
+        from backend.models.user import User
         
-        # Extract text from content_data for better search
+        content_type = db.query(ContentType).filter(ContentType.id == entry.content_type_id).first()
+        author = db.query(User).filter(User.id == entry.author_id).first() if entry.author_id else None
+        
+        # Parse JSON data
+        try:
+            entry_data = json.loads(entry.data) if isinstance(entry.data, str) else entry.data
+        except:
+            entry_data = {}
+        
+        # Extract text from data for better search
         content_text = ""
-        if isinstance(entry.content_data, dict):
-            for key, value in entry.content_data.items():
+        if isinstance(entry_data, dict):
+            for key, value in entry_data.items():
                 if isinstance(value, str):
                     content_text += f" {value}"
                 elif isinstance(value, (list, dict)):
@@ -106,11 +115,11 @@ class SearchService:
             'status': entry.status,
             'content_type_id': entry.content_type_id,
             'content_type_name': content_type.name if content_type else "",
-            'content_type_slug': content_type.slug if content_type else "",
+            'content_type_slug': content_type.api_id if content_type else "",
             'author_id': entry.author_id,
-            'author_name': entry.author.email if entry.author else "",
-            'organization_id': entry.organization_id,
-            'tags': entry.tags.split(',') if entry.tags else [],
+            'author_name': author.email if author else "",
+            'organization_id': content_type.organization_id if content_type else None,
+            'tags': [],
             'created_at': entry.created_at.isoformat() if entry.created_at else None,
             'updated_at': entry.updated_at.isoformat() if entry.updated_at else None,
             'published_at': entry.published_at.isoformat() if entry.published_at else None,

@@ -2,7 +2,7 @@
 Search API endpoints for full-text search, autocomplete, and faceting.
 """
 from typing import Optional, List, Dict, Any
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, Query, status, Request
 from sqlalchemy.orm import Session
 
 from backend.api.schemas.search import (
@@ -16,13 +16,17 @@ from backend.core.permissions import PermissionChecker
 from backend.core.search_service import search_service
 from backend.models.user import User
 from backend.models.content import ContentEntry
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 
 router = APIRouter(prefix="/search", tags=["Search"])
 
 
 @router.post("", response_model=SearchResponse)
+@limiter.limit(get_rate_limit())
 async def search_content(
+    request: Request,
     search_request: SearchRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -57,7 +61,9 @@ async def search_content(
 
 
 @router.get("", response_model=SearchResponse)
+@limiter.limit(get_rate_limit())
 async def search_content_get(
+    request: Request,
     query: str = Query(..., description="Search query", min_length=1),
     status: Optional[str] = Query(None, description="Filter by status"),
     content_type_slug: Optional[str] = Query(None, description="Filter by content type"),
@@ -106,7 +112,9 @@ async def search_content_get(
 
 
 @router.post("/autocomplete", response_model=AutocompleteResponse)
+@limiter.limit(get_rate_limit())
 async def autocomplete_search(
+    request: Request,
     autocomplete_request: AutocompleteRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -139,7 +147,9 @@ async def autocomplete_search(
 
 
 @router.get("/autocomplete", response_model=AutocompleteResponse)
+@limiter.limit(get_rate_limit())
 async def autocomplete_search_get(
+    request: Request,
     query: str = Query(..., description="Partial search query", min_length=1),
     limit: int = Query(10, ge=1, le=50, description="Number of suggestions"),
     db: Session = Depends(get_db),
@@ -172,7 +182,9 @@ async def autocomplete_search_get(
 
 
 @router.post("/facets", response_model=FacetResponse)
+@limiter.limit(get_rate_limit())
 async def get_facets(
+    request: Request,
     facet_request: FacetRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -197,7 +209,9 @@ async def get_facets(
 
 
 @router.get("/facets", response_model=FacetResponse)
+@limiter.limit(get_rate_limit())
 async def get_facets_get(
+    request: Request,
     fields: Optional[str] = Query(None, description="Comma-separated facet fields"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -223,7 +237,9 @@ async def get_facets_get(
 
 
 @router.post("/reindex", response_model=ReindexResponse)
+@limiter.limit(get_rate_limit())
 async def reindex_content(
+    request: Request,
     reindex_request: ReindexRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -259,7 +275,9 @@ async def reindex_content(
 
 
 @router.delete("/index", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def clear_search_index(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):

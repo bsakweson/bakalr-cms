@@ -3,7 +3,7 @@ In-app notification service for real-time user notifications.
 Manages notification creation, delivery, and read status tracking.
 """
 from typing import List, Optional, Dict, Any
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_
 
@@ -59,7 +59,7 @@ class NotificationService:
         # Calculate expiration
         expires_at = None
         if expires_in_days:
-            expires_at = datetime.utcnow() + timedelta(days=expires_in_days)
+            expires_at = datetime.now(timezone.utc) + timedelta(days=expires_in_days)
         
         # Create notification
         notification = Notification(
@@ -121,7 +121,7 @@ class NotificationService:
                 Notification.organization_id == organization_id,
                 or_(
                     Notification.expires_at.is_(None),
-                    Notification.expires_at > datetime.utcnow()
+                    Notification.expires_at > datetime.now(timezone.utc)
                 )
             )
         )
@@ -150,7 +150,7 @@ class NotificationService:
         
         if notification and not notification.is_read:
             notification.is_read = True
-            notification.read_at = datetime.utcnow()
+            notification.read_at = datetime.now(timezone.utc)
             db.commit()
             db.refresh(notification)
         
@@ -171,7 +171,7 @@ class NotificationService:
             )
         ).update({
             "is_read": True,
-            "read_at": datetime.utcnow()
+            "read_at": datetime.now(timezone.utc)
         })
         db.commit()
         return count
@@ -210,7 +210,7 @@ class NotificationService:
                 Notification.is_read == False,
                 or_(
                     Notification.expires_at.is_(None),
-                    Notification.expires_at > datetime.utcnow()
+                    Notification.expires_at > datetime.now(timezone.utc)
                 )
             )
         ).count()
@@ -221,7 +221,7 @@ class NotificationService:
         count = db.query(Notification).filter(
             and_(
                 Notification.expires_at.isnot(None),
-                Notification.expires_at < datetime.utcnow()
+                Notification.expires_at < datetime.now(timezone.utc)
             )
         ).delete()
         db.commit()
@@ -264,7 +264,7 @@ class NotificationService:
             preference.email_enabled = email_enabled
             preference.digest_enabled = digest_enabled
             preference.digest_frequency = digest_frequency
-            preference.updated_at = datetime.utcnow()
+            preference.updated_at = datetime.now(timezone.utc)
         else:
             preference = NotificationPreference(
                 user_id=user_id,

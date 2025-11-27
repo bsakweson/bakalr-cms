@@ -2166,6 +2166,36 @@ docker-compose up -d --scale backend=3
 
 ## Additional Features (Future Enhancements)
 
+### Priority 1: Complete Core Features
+
+- [ ] **Media Management API Integration**
+  - [ ] Implement fetch media API calls in frontend (`/dashboard/media`)
+  - [ ] Implement file upload to backend API (replace placeholder)
+  - [ ] Add media details/edit modal with alt text, metadata
+  - [ ] Add delete confirmation dialog for media files
+  - [ ] Implement bulk selection and operations UI
+  
+- [ ] **Content CRUD Forms**
+  - [ ] Create content entry form page (`/dashboard/content/new`)
+  - [ ] Create content edit page (`/dashboard/content/[id]/edit`)
+  - [ ] Add content delete confirmation modal
+  - [ ] Integrate content search with backend search API
+  
+- [ ] **Content Type Builder**
+  - [ ] Visual schema builder for creating content types
+  - [ ] Field configuration UI (validation, help text, editor preferences)
+  - [ ] Field type selector with 12+ field types
+  - [ ] Field reordering and schema validation
+  - [ ] Edit existing content type schemas
+
+- [ ] **Template Management**
+  - [ ] Template creation form UI
+  - [ ] Template edit interface
+  - [ ] Template deletion with confirmation
+  - [ ] Template preview and usage tracking
+
+### Priority 2: Advanced Features
+
 - [ ] Content collaboration (comments, mentions, real-time editing)
 - [ ] Content workflows (approval chains with custom states)
 - [ ] Advanced analytics (usage, performance, translation costs)

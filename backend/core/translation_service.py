@@ -3,22 +3,29 @@ Translation service - wrapper for translation APIs with caching
 """
 import json
 import hashlib
+import requests
 from typing import Dict, Any, Optional, List
 from deep_translator import GoogleTranslator
 from deep_translator.exceptions import LanguageNotSupportedException, TranslationNotFound
 import logging
+
+from backend.core.config import settings
 
 logger = logging.getLogger(__name__)
 
 
 class TranslationService:
     """
-    Translation service with Google Translate support and caching
-    For production, add DeepL using deep_translator.DeepL
+    Translation service supporting multiple providers:
+    - LibreTranslate (free, self-hosted, recommended)
+    - Google Translate
+    - DeepL (coming soon)
     """
     
     def __init__(self):
         self._cache: Dict[str, Any] = {}
+        self.provider = settings.TRANSLATION_PROVIDER.lower()
+        logger.info(f"Translation service initialized with provider: {self.provider}")
     
     def _get_cache_key(self, text: str, source_lang: str, target_lang: str) -> str:
         """Generate cache key for translation"""
@@ -27,16 +34,41 @@ class TranslationService:
     
     def detect_language(self, text: str) -> tuple[str, float]:
         """
-        Detect language of text using Google Translate
+        Detect language of text
         Returns (language_code, confidence)
         """
-        try:
-            from deep_translator import single_detection
-            lang = single_detection(text, api_key=None)
-            return lang, 0.95  # deep-translator doesn't provide confidence
-        except Exception as e:
-            logger.error(f"Language detection failed: {e}")
-            return "en", 0.0
+        if self.provider == "libretranslate":
+            try:
+                url = f"{settings.LIBRETRANSLATE_URL}/detect"
+                headers = {}
+                if settings.LIBRETRANSLATE_API_KEY:
+                    headers["Authorization"] = f"Bearer {settings.LIBRETRANSLATE_API_KEY}"
+                
+                response = requests.post(
+                    url,
+                    json={"q": text},
+                    headers=headers,
+                    timeout=10
+                )
+                response.raise_for_status()
+                
+                result = response.json()
+                if result and len(result) > 0:
+                    return result[0]["language"], result[0]["confidence"]
+                return "en", 0.0
+                
+            except Exception as e:
+                logger.error(f"LibreTranslate language detection failed: {e}")
+                return "en", 0.0
+        
+        else:  # Google Translate or fallback
+            try:
+                from deep_translator import single_detection
+                lang = single_detection(text, api_key=None)
+                return lang, 0.95  # deep-translator doesn't provide confidence
+            except Exception as e:
+                logger.error(f"Language detection failed: {e}")
+                return "en", 0.0
     
     def translate_text(
         self,
@@ -76,24 +108,73 @@ class TranslationService:
             return self._cache[cache_key]
         
         try:
-            # Translate using Google Translate
-            translator = GoogleTranslator(source=source_lang, target=target_lang)
-            translated = translator.translate(text)
+            if self.provider == "libretranslate":
+                # Use LibreTranslate
+                url = f"{settings.LIBRETRANSLATE_URL}/translate"
+                headers = {"Content-Type": "application/json"}
+                if settings.LIBRETRANSLATE_API_KEY:
+                    headers["Authorization"] = f"Bearer {settings.LIBRETRANSLATE_API_KEY}"
+                
+                payload = {
+                    "q": text,
+                    "source": source_lang,
+                    "target": target_lang,
+                    "format": "text"
+                }
+                
+                response = requests.post(
+                    url,
+                    json=payload,
+                    headers=headers,
+                    timeout=30
+                )
+                response.raise_for_status()
+                
+                result = response.json()
+                translated = result.get("translatedText", text)
+                
+                response_data = {
+                    "translated_text": translated,
+                    "source_lang": source_lang,
+                    "target_lang": target_lang,
+                    "service": "libretranslate",
+                    "confidence": 0.95
+                }
+                
+                # Cache the result
+                self._cache[cache_key] = response_data
+                logger.info(f"Translated '{text[:30]}...' from {source_lang} to {target_lang}")
+                return response_data
             
-            response = {
-                "translated_text": translated,
-                "source_lang": source_lang,
+            else:  # Google Translate (fallback)
+                # Translate using Google Translate
+                translator = GoogleTranslator(source=source_lang, target=target_lang)
+                translated = translator.translate(text)
+                
+                response_data = {
+                    "translated_text": translated,
+                    "source_lang": source_lang,
+                    "target_lang": target_lang,
+                    "service": "google",
+                    "confidence": 0.95
+                }
+                
+                # Cache the result
+                self._cache[cache_key] = response_data
+                
+                logger.info(f"Translated '{text[:30]}...' from {source_lang} to {target_lang}")
+                return response_data
+            
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Translation API request failed: {e}")
+            return {
+                "translated_text": text,
+                "source_lang": source_lang or "unknown",
                 "target_lang": target_lang,
-                "service": "google",
-                "confidence": 0.95
+                "service": "none",
+                "confidence": 0.0,
+                "error": str(e)
             }
-            
-            # Cache the result
-            self._cache[cache_key] = response
-            
-            logger.info(f"Translated '{text[:30]}...' from {source_lang} to {target_lang}")
-            return response
-            
         except (LanguageNotSupportedException, TranslationNotFound) as e:
             logger.error(f"Translation not supported: {e}")
             return {

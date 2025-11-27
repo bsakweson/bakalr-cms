@@ -2,7 +2,7 @@
 Content relationship management endpoints.
 """
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 
@@ -17,6 +17,8 @@ from backend.api.schemas.relationship import (
     ContentRelationshipResponse,
     RelatedContentResponse
 )
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 router = APIRouter(prefix="/content/relationships", tags=["relationships"])
 
@@ -24,7 +26,9 @@ router = APIRouter(prefix="/content/relationships", tags=["relationships"])
 @router.post("/entries/{entry_id}/relationships", 
              response_model=ContentRelationshipResponse,
              status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_relationship(
+    request: Request,
     entry_id: int,
     data: ContentRelationshipCreate,
     current_user: User = Depends(get_current_user),
@@ -79,7 +83,9 @@ async def create_relationship(
 
 @router.get("/entries/{entry_id}/relationships",
             response_model=List[ContentRelationshipResponse])
+@limiter.limit(get_rate_limit())
 async def list_relationships(
+    request: Request,
     entry_id: int,
     relationship_type: Optional[str] = None,
     current_user: User = Depends(get_current_user),
@@ -107,7 +113,9 @@ async def list_relationships(
 
 @router.get("/entries/{entry_id}/related",
             response_model=List[RelatedContentResponse])
+@limiter.limit(get_rate_limit())
 async def get_related_content(
+    request: Request,
     entry_id: int,
     relationship_type: Optional[str] = None,
     current_user: User = Depends(get_current_user),
@@ -150,7 +158,9 @@ async def get_related_content(
 
 @router.delete("/relationships/{relationship_id}",
                status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_relationship(
+    request: Request,
     relationship_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -173,7 +183,9 @@ async def delete_relationship(
 
 @router.patch("/relationships/{relationship_id}",
               response_model=ContentRelationshipResponse)
+@limiter.limit(get_rate_limit())
 async def update_relationship(
+    request: Request,
     relationship_id: int,
     data: ContentRelationshipUpdate,
     current_user: User = Depends(get_current_user),

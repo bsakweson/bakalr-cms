@@ -3,18 +3,20 @@ User Management API endpoints
 Allows admins to manage users within their organization
 """
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_
 
 from backend.db.session import get_db
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.organization import Organization
 from backend.models.user_organization import UserOrganization
 from backend.models.rbac import Role
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 
 router = APIRouter(prefix="/users", tags=["User Management"])
@@ -30,8 +32,7 @@ class UserListItem(BaseModel):
     created_at: str
     last_login: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserListResponse(BaseModel):
@@ -63,7 +64,9 @@ class UpdateUserRoleResponse(BaseModel):
 
 
 @router.get("/", response_model=UserListResponse)
+@limiter.limit(get_rate_limit())
 async def list_users(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -75,8 +78,7 @@ async def list_users(
     Requires: view_users permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("view_users"):
+    if not PermissionChecker.has_permission(current_user, "view_users", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to view users"
@@ -121,8 +123,10 @@ async def list_users(
 
 
 @router.post("/invite", response_model=InviteUserResponse)
+@limiter.limit(get_rate_limit())
 async def invite_user(
-    request: InviteUserRequest,
+    request: Request,
+    invite_data: InviteUserRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -132,15 +136,14 @@ async def invite_user(
     Requires: manage_users permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_users"):
+    if not PermissionChecker.has_permission(current_user, "manage_users", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to invite users"
         )
     
     # Check if user already exists
-    existing_user = db.query(User).filter(User.email == request.email).first()
+    existing_user = db.query(User).filter(User.email == invite_data.email).first()
     
     if existing_user:
         # Check if user is already in this organization
@@ -169,7 +172,7 @@ async def invite_user(
         # Assign role
         role = db.query(Role).filter(
             and_(
-                Role.id == request.role_id,
+                Role.id == invite_data.role_id,
                 Role.organization_id == current_user.organization_id
             )
         ).first()
@@ -189,9 +192,9 @@ async def invite_user(
     from backend.core.security import get_password_hash
     
     new_user = User(
-        email=request.email,
-        full_name=request.full_name,
-        hashed_password=get_password_hash("temporary_password_" + request.email),  # Temporary
+        email=invite_data.email,
+        full_name=invite_data.full_name,
+        hashed_password=get_password_hash("temporary_password_" + invite_data.email),  # Temporary
         is_active=True,
         organization_id=current_user.organization_id
     )
@@ -210,7 +213,7 @@ async def invite_user(
     # Assign role
     role = db.query(Role).filter(
         and_(
-            Role.id == request.role_id,
+            Role.id == invite_data.role_id,
             Role.organization_id == current_user.organization_id
         )
     ).first()
@@ -231,9 +234,11 @@ async def invite_user(
 
 
 @router.put("/{user_id}/role", response_model=UpdateUserRoleResponse)
+@limiter.limit(get_rate_limit())
 async def update_user_role(
+    request: Request,
     user_id: int,
-    request: UpdateUserRoleRequest,
+    role_data: UpdateUserRoleRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -243,8 +248,7 @@ async def update_user_role(
     Requires: manage_users permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_users"):
+    if not PermissionChecker.has_permission(current_user, "manage_users", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage users"
@@ -274,7 +278,7 @@ async def update_user_role(
     # Get new role
     new_role = db.query(Role).filter(
         and_(
-            Role.id == request.role_id,
+            Role.id == role_data.role_id,
             Role.organization_id == current_user.organization_id
         )
     ).first()
@@ -303,13 +307,15 @@ async def update_user_role(
     
     return UpdateUserRoleResponse(
         user_id=user_id,
-        role_id=request.role_id,
+        role_id=role_data.role_id,
         message="User role updated successfully"
     )
 
 
 @router.delete("/{user_id}")
+@limiter.limit(get_rate_limit())
 async def remove_user(
+    request: Request,
     user_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -320,8 +326,7 @@ async def remove_user(
     Requires: manage_users permission
     """
     # Check permission
-    checker = PermissionChecker(db, current_user)
-    if not checker.has_permission("manage_users"):
+    if not PermissionChecker.has_permission(current_user, "manage_users", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage users"

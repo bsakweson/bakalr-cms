@@ -1,11 +1,22 @@
 """
 Test configuration and fixtures for pytest
 """
+import os
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
+
+# Set test environment variables before importing app
+os.environ["MEILISEARCH_URL"] = "http://localhost:7700"
+os.environ["MEILISEARCH_API_KEY"] = "change-this-secure-key-min-32-chars"
+os.environ["REDIS_URL"] = "redis://localhost:6379/0"
+os.environ["RATE_LIMIT_STORAGE_URL"] = "redis://localhost:6379/1"
+os.environ["RATE_LIMIT_ENABLED"] = "false"  # Disable rate limiting for tests
+os.environ["MAIL_SUPPRESS_SEND"] = "1"  # Disable email sending in tests
+os.environ["STORAGE_BACKEND"] = "local"  # Use local storage for tests to avoid AWS config issues
+os.environ["UPLOAD_DIR"] = "test_uploads"  # Use separate directory for test uploads
 
 from backend.main import app
 from backend.db.base import Base
@@ -85,35 +96,46 @@ def test_content_type_data():
     """Sample content type data for testing"""
     return {
         "name": "Blog Post",
-        "slug": "blog_post",
+        "api_id": "blog_post",
         "description": "Blog article content type",
-        "schema": {
-            "title": {
+        "fields": [
+            {
+                "name": "title",
                 "type": "text",
-                "label": "Title",
-                "required": True
+                "required": True,
+                "help_text": "Blog post title"
             },
-            "body": {
-                "type": "richtext",
-                "label": "Body",
-                "required": True
+            {
+                "name": "body",
+                "type": "textarea",
+                "required": True,
+                "help_text": "Blog post content"
             },
-            "author": {
+            {
+                "name": "author",
                 "type": "text",
-                "label": "Author"
+                "required": False,
+                "help_text": "Author name"
             }
-        }
+        ]
     }
 
 
 @pytest.fixture
-def test_content_data():
+def test_content_data(test_content_type_data, authenticated_client):
     """Sample content data for testing"""
+    # Create content type first to get its ID
+    ct_response = authenticated_client.post(
+        "/api/v1/content/types",
+        json=test_content_type_data
+    )
+    content_type_id = ct_response.json()["id"]
+    
     return {
-        "content_type": "blog_post",
+        "content_type_id": content_type_id,
         "slug": "test-post",
         "status": "published",
-        "fields": {
+        "data": {
             "title": "Test Blog Post",
             "body": "<p>This is test content</p>",
             "author": "Test Author"
@@ -131,7 +153,7 @@ def authenticated_client(client, test_user_data):
     login_response = client.post(
         "/api/v1/auth/login",
         json={
-            "username": test_user_data["email"],
+            "email": test_user_data["email"],
             "password": test_user_data["password"]
         }
     )

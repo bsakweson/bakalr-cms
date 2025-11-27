@@ -1,15 +1,17 @@
-"""
+"""  
 Content Management API endpoints
 """
 import json
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, status, Query, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, status, Query, BackgroundTasks, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from backend.db.session import get_db
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.content import ContentType, ContentEntry
 from backend.models.translation import Locale, Translation
@@ -132,10 +134,12 @@ def auto_translate_entry_background(
 # ContentType Endpoints
 
 @router.post("/types", response_model=ContentTypeResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_content_type(
+    request: Request,
     content_type_data: ContentTypeCreate,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Create a new content type
@@ -178,7 +182,7 @@ async def create_content_type(
         api_id=content_type.api_id,
         description=content_type.description,
         fields=fields,
-        display_field=content_type_data.display_field,
+        display_field=None,  # Not stored in DB yet
         is_active=content_type.is_published,
         entry_count=0,
         created_at=content_type.created_at,
@@ -187,7 +191,9 @@ async def create_content_type(
 
 
 @router.get("/types", response_model=List[ContentTypeResponse])
+@limiter.limit(get_rate_limit())
 async def list_content_types(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     skip: int = Query(0, ge=0),
@@ -225,10 +231,12 @@ async def list_content_types(
 
 
 @router.get("/types/{content_type_id}", response_model=ContentTypeResponse)
+@limiter.limit(get_rate_limit())
 async def get_content_type(
+    request: Request,
     content_type_id: int,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Get a specific content type by ID
@@ -265,11 +273,13 @@ async def get_content_type(
 
 
 @router.put("/types/{content_type_id}", response_model=ContentTypeResponse)
+@limiter.limit(get_rate_limit())
 async def update_content_type(
+    request: Request,
     content_type_id: int,
-    content_type_data: ContentTypeUpdate,
+    content_type_update: ContentTypeUpdate,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Update a content type
@@ -286,14 +296,14 @@ async def update_content_type(
         )
     
     # Update fields
-    if content_type_data.name is not None:
-        content_type.name = content_type_data.name
-    if content_type_data.description is not None:
-        content_type.description = content_type_data.description
-    if content_type_data.fields is not None:
-        content_type.fields_schema = str([field.model_dump() for field in content_type_data.fields])
-    if content_type_data.is_active is not None:
-        content_type.is_published = content_type_data.is_active
+    if content_type_update.name is not None:
+        content_type.name = content_type_update.name
+    if content_type_update.description is not None:
+        content_type.description = content_type_update.description
+    if content_type_update.fields is not None:
+        content_type.fields_schema = str([field.model_dump() for field in content_type_update.fields])
+    if content_type_update.is_active is not None:
+        content_type.is_published = content_type_update.is_active
     
     db.commit()
     db.refresh(content_type)
@@ -319,10 +329,12 @@ async def update_content_type(
 
 
 @router.delete("/types/{content_type_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_content_type(
+    request: Request,
     content_type_id: int,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Delete a content type
@@ -347,11 +359,13 @@ async def delete_content_type(
 # ContentEntry Endpoints
 
 @router.post("/entries", response_model=ContentEntryResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_content_entry(
+    request: Request,
     entry_data: ContentEntryCreate,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Create a new content entry with automatic translation
@@ -377,6 +391,18 @@ async def create_content_entry(
         # Generate from first text field or use default
         slug = f"entry-{content_type.api_id}"
         slug = re.sub(r'[^a-z0-9]+', '-', slug.lower()).strip('-')
+    
+    # Check if slug already exists within the same content type and organization
+    existing_entry = db.query(ContentEntry).join(ContentType).filter(
+        ContentEntry.slug == slug,
+        ContentType.organization_id == current_user.organization_id
+    ).first()
+    
+    if existing_entry:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"An entry with slug '{slug}' already exists in this organization"
+        )
     
     # Extract title from data for the title column
     title = entry_data.data.get("title", f"Entry {content_type.api_id}")
@@ -436,7 +462,9 @@ async def create_content_entry(
 
 
 @router.get("/entries", response_model=ContentEntryListResponse)
+@limiter.limit(get_rate_limit())
 async def list_content_entries(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     content_type_id: Optional[int] = Query(None),
@@ -477,7 +505,9 @@ async def list_content_entries(
 
 
 @router.get("/entries/{entry_id}", response_model=ContentEntryResponse)
+@limiter.limit(get_rate_limit())
 async def get_content_entry(
+    request: Request,
     entry_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -500,12 +530,15 @@ async def get_content_entry(
 
 
 @router.put("/entries/{entry_id}", response_model=ContentEntryResponse)
+@router.patch("/entries/{entry_id}", response_model=ContentEntryResponse)
+@limiter.limit(get_rate_limit())
 async def update_content_entry(
+    request: Request,
     entry_id: int,
     entry_data: ContentEntryUpdate,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Update a content entry
@@ -580,12 +613,14 @@ async def update_content_entry(
 
 
 @router.post("/entries/{entry_id}/publish", response_model=ContentEntryResponse)
+@limiter.limit(get_rate_limit())
 async def publish_content_entry(
+    request: Request,
     entry_id: int,
     publish_data: ContentEntryPublish,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Publish a content entry
@@ -632,11 +667,13 @@ async def publish_content_entry(
 
 
 @router.delete("/entries/{entry_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_content_entry(
+    request: Request,
     entry_id: int,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Delete a content entry
@@ -682,7 +719,9 @@ async def delete_content_entry(
 
 
 @router.post("/entries/{entry_id}/duplicate", response_model=ContentEntryResponse)
+@limiter.limit(get_rate_limit())
 async def duplicate_content_entry(
+    request: Request,
     entry_id: int,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),

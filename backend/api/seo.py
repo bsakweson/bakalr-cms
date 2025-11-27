@@ -1,7 +1,7 @@
 """
 SEO Management API endpoints
 """
-from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import select, func
 from typing import List, Optional
@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 
 from backend.db.session import get_db
 from backend.core.dependencies import get_current_user
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.content import ContentEntry, ContentType
 from backend.api.schemas.seo import (
@@ -40,7 +42,9 @@ router = APIRouter(prefix="/seo", tags=["seo"])
 
 
 @router.post("/validate-slug", response_model=SlugValidation)
+@limiter.limit(get_rate_limit())
 async def validate_content_slug(
+    request: Request,
     slug: str,
     content_type_id: Optional[int] = None,
     exclude_entry_id: Optional[int] = None,
@@ -103,7 +107,9 @@ async def validate_content_slug(
 
 
 @router.get("/analyze/{entry_id}", response_model=SEOAnalysis)
+@limiter.limit(get_rate_limit())
 async def analyze_content_seo(
+    request: Request,
     entry_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -147,7 +153,9 @@ async def analyze_content_seo(
 
 
 @router.put("/update/{entry_id}", response_model=dict)
+@limiter.limit(get_rate_limit())
 async def update_content_seo(
+    request: Request,
     entry_id: int,
     seo_data: CompleteSEOData,
     db: Session = Depends(get_db),
@@ -187,7 +195,9 @@ async def update_content_seo(
 
 
 @router.post("/structured-data/article/{entry_id}", response_model=StructuredData)
+@limiter.limit(get_rate_limit())
 async def generate_article_structured_data(
+    request: Request,
     entry_id: int,
     author: Optional[str] = None,
     db: Session = Depends(get_db),
@@ -248,7 +258,9 @@ async def generate_article_structured_data(
 
 
 @router.get("/sitemap.xml")
+@limiter.limit(get_rate_limit())
 async def get_sitemap(
+    request: Request,
     db: Session = Depends(get_db),
     base_url: str = "https://example.com"
 ):
@@ -289,7 +301,9 @@ async def get_sitemap(
 
 
 @router.get("/sitemap", response_model=SitemapResponse)
+@limiter.limit(get_rate_limit())
 async def get_sitemap_json(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
     base_url: str = "https://example.com"
@@ -329,7 +343,9 @@ async def get_sitemap_json(
 
 
 @router.post("/robots.txt", response_model=RobotsResponse)
+@limiter.limit(get_rate_limit())
 async def generate_robots(
+    request: Request,
     config: RobotsConfig,
     current_user: User = Depends(get_current_user)
 ):
@@ -354,7 +370,9 @@ async def generate_robots(
 
 
 @router.get("/robots.txt")
+@limiter.limit(get_rate_limit())
 async def get_robots(
+    request: Request,
     base_url: str = "https://example.com"
 ):
     """
@@ -382,7 +400,9 @@ async def get_robots(
 
 
 @router.post("/generate-slug", response_model=dict)
+@limiter.limit(get_rate_limit())
 async def generate_slug_from_text(
+    request: Request,
     text: str,
     current_user: User = Depends(get_current_user)
 ):
@@ -401,7 +421,9 @@ async def generate_slug_from_text(
 
 
 @router.get("/meta-preview/{entry_id}", response_model=dict)
+@limiter.limit(get_rate_limit())
 async def preview_meta_tags(
+    request: Request,
     entry_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)

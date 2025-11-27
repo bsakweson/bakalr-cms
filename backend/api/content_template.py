@@ -1,5 +1,5 @@
 """Content template management API endpoints."""
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, HTTPException, status, Query, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, func
 from typing import Optional
@@ -19,6 +19,8 @@ from backend.api.schemas.content_template import (
 )
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.core.seo_utils import generate_slug
 
 
@@ -26,7 +28,9 @@ router = APIRouter(prefix="/templates", tags=["templates"])
 
 
 @router.post("", response_model=ContentTemplateResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 def create_template(
+    request: Request,
     template_data: ContentTemplateCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -98,7 +102,9 @@ def create_template(
 
 
 @router.get("", response_model=ContentTemplateListResponse)
+@limiter.limit(get_rate_limit())
 def list_templates(
+    request: Request,
     content_type_id: Optional[int] = Query(None, description="Filter by content type"),
     category: Optional[str] = Query(None, description="Filter by category"),
     is_published: Optional[bool] = Query(None, description="Filter by published status"),
@@ -140,7 +146,9 @@ def list_templates(
 
 
 @router.get("/{template_id}", response_model=ContentTemplateResponse)
+@limiter.limit(get_rate_limit())
 def get_template(
+    request: Request,
     template_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -163,7 +171,9 @@ def get_template(
 
 
 @router.patch("/{template_id}", response_model=ContentTemplateResponse)
+@limiter.limit(get_rate_limit())
 def update_template(
+    request: Request,
     template_id: int,
     template_data: ContentTemplateUpdate,
     current_user: User = Depends(get_current_user),
@@ -219,7 +229,9 @@ def update_template(
 
 
 @router.delete("/{template_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 def delete_template(
+    request: Request,
     template_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -264,7 +276,9 @@ def delete_template(
 
 
 @router.post("/apply", response_model=ContentTemplateApplyResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 def apply_template(
+    request: Request,
     apply_data: ContentTemplateApply,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -347,7 +361,9 @@ def apply_template(
 
 
 @router.get("/{template_id}/stats", response_model=TemplateStats)
+@limiter.limit(get_rate_limit())
 def get_template_stats(
+    request: Request,
     template_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -377,7 +393,9 @@ def get_template_stats(
 
 
 @router.post("/{template_id}/duplicate", response_model=ContentTemplateResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 def duplicate_template(
+    request: Request,
     template_id: int,
     new_name: str = Query(..., description="Name for the duplicated template"),
     current_user: User = Depends(get_current_user),

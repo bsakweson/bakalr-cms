@@ -2,7 +2,7 @@
 Content Preview API endpoints.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -17,13 +17,17 @@ from backend.api.schemas.preview import (
     PreviewAccessRequest,
     PreviewContentResponse
 )
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 router = APIRouter(prefix="/preview", tags=["preview"])
 
 
 @router.post("/generate", response_model=PreviewTokenResponse)
+@limiter.limit(get_rate_limit())
 async def generate_preview_token(
-    request: PreviewTokenRequest,
+    request: Request,
+    preview_data: PreviewTokenRequest,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
@@ -34,7 +38,7 @@ async def generate_preview_token(
     # Verify content entry exists and belongs to user's organization
     result = await db.execute(
         select(ContentEntry).where(
-            ContentEntry.id == request.content_entry_id,
+            ContentEntry.id == preview_data.content_id,
             ContentEntry.content_type.has(organization_id=current_user.organization_id)
         )
     )
@@ -48,9 +52,9 @@ async def generate_preview_token(
     
     # Generate token
     token, expires_at = PreviewService.generate_preview_token(
-        content_entry_id=request.content_entry_id,
+        content_entry_id=preview_data.content_entry_id,
         organization_id=current_user.organization_id,
-        expires_in_hours=request.expires_in_hours
+        expires_in_hours=preview_data.expires_in_hours
     )
     
     # Generate preview URL (using a placeholder base URL)
@@ -58,7 +62,7 @@ async def generate_preview_token(
     base_url = "https://your-cms-domain.com"
     preview_url = PreviewService.generate_preview_url(
         base_url=base_url,
-        content_entry_id=request.content_entry_id,
+        content_entry_id=preview_data.content_entry_id,
         token=token
     )
     
@@ -66,12 +70,14 @@ async def generate_preview_token(
         preview_url=preview_url,
         token=token,
         expires_at=expires_at,
-        content_entry_id=request.content_entry_id
+        content_entry_id=preview_data.content_entry_id
     )
 
 
 @router.get("/{content_entry_id}", response_model=PreviewContentResponse)
+@limiter.limit(get_rate_limit())
 async def access_preview_content(
+    request: Request,
     content_entry_id: int,
     token: str,
     db: AsyncSession = Depends(get_db)

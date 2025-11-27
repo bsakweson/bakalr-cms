@@ -31,8 +31,10 @@ from backend.core.versioning import VersioningMiddleware
 from backend.db import engine
 from backend.graphql.context import get_graphql_context
 from backend.graphql.schema import schema
+from backend.middleware.graphql_rate_limit import GraphQLRateLimitMiddleware
 from backend.middleware.performance import PerformanceMiddleware
 from backend.middleware.security import setup_security_middleware
+from backend.middleware.rate_limit_headers import setup_rate_limit_headers_middleware
 
 
 @asynccontextmanager
@@ -44,6 +46,11 @@ async def lifespan(app: FastAPI):
     print(f"🚀 Starting {settings.PROJECT_NAME} v{settings.VERSION}")
     print(f"📝 Environment: {settings.ENVIRONMENT}")
     print(f"🔧 Debug mode: {settings.DEBUG}")
+
+    # Initialize Redis cache
+    print("🔌 Connecting to Redis cache...")
+    await cache.connect()
+    print("✅ Redis cache connected")
 
     # Setup query logging for performance monitoring
     if settings.DEBUG:
@@ -59,6 +66,7 @@ async def lifespan(app: FastAPI):
 
     # Shutdown
     print("👋 Shutting down...")
+    await cache.disconnect()
 
 
 def create_app() -> FastAPI:
@@ -167,12 +175,18 @@ Get started by registering an account at `/api/v1/auth/register`.
 
     # Security middleware (headers, CSRF, validation)
     setup_security_middleware(app, settings.SECRET_KEY)
+    
+    # Rate limit headers middleware (adds X-RateLimit-* headers)
+    setup_rate_limit_headers_middleware(app, settings.REDIS_URL, default_limit=100)
 
     # GZip compression
     app.add_middleware(GZipMiddleware, minimum_size=1000)
 
     # API versioning middleware
     app.add_middleware(VersioningMiddleware)
+    
+    # GraphQL rate limiting middleware (must be before GraphQL router)
+    app.add_middleware(GraphQLRateLimitMiddleware)
 
     # Rate limiting state
     app.state.limiter = limiter
@@ -201,10 +215,11 @@ Get started by registering an account at `/api/v1/auth/register`.
     app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 
     # Include GraphQL router
+    # Security extensions (depth limiting, complexity, timeout) are in the schema
     graphql_app = GraphQLRouter(
         schema,
         context_getter=get_graphql_context,
-        graphiql=settings.DEBUG,  # Enable GraphiQL playground in debug mode
+        graphql_ide='graphiql' if settings.DEBUG else None,  # Enable GraphiQL playground in debug mode
     )
     app.include_router(graphql_app, prefix="/api/v1/graphql")
 
@@ -217,7 +232,8 @@ Get started by registering an account at `/api/v1/auth/register`.
         )
 
     @app.get("/health")
-    async def health_check():
+    @limiter.limit("100/minute")
+    async def health_check(request: Request):
         """
         Health check endpoint for container orchestration
         Returns basic health status - use for liveness probes
@@ -234,7 +250,7 @@ Get started by registering an account at `/api/v1/auth/register`.
         Readiness check endpoint with service dependencies
         Use for Kubernetes readiness probes
         """
-        import datetime
+        from datetime import datetime, timezone
 
         from sqlalchemy import text
 
@@ -254,9 +270,9 @@ Get started by registering an account at `/api/v1/auth/register`.
             from backend.db.session import SessionLocal
 
             db = SessionLocal()
-            start_time = datetime.datetime.now()
+            start_time = datetime.now()
             db.execute(text("SELECT 1"))
-            latency = (datetime.datetime.now() - start_time).total_seconds() * 1000
+            latency = (datetime.now() - start_time).total_seconds() * 1000
             db.close()
             services["database"] = {"status": "healthy", "latency_ms": round(latency, 2)}
         except Exception as e:
@@ -287,7 +303,7 @@ Get started by registering an account at `/api/v1/auth/register`.
                 "status": overall_status,
                 "version": settings.VERSION,
                 "environment": settings.ENVIRONMENT,
-                "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+                "timestamp": datetime.now(timezone.utc).isoformat() + "Z",
                 "services": services,
             },
         )

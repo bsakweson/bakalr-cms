@@ -1,9 +1,9 @@
 """
 Analytics API endpoints for dashboard metrics and statistics.
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy import func, and_, or_, desc
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -14,6 +14,8 @@ from backend.models.content import ContentEntry, ContentType
 from backend.models.audit_log import AuditLog
 from backend.models.media import Media
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
@@ -72,29 +74,31 @@ class DashboardOverviewResponse(BaseModel):
 
 
 @router.get("/content", response_model=ContentStatsResponse)
+@limiter.limit(get_rate_limit())
 async def get_content_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
     """Get content statistics for the current organization."""
     org_id = current_user.organization_id
     
-    # Total entries
-    total_entries = db.query(ContentEntry).filter(
-        ContentEntry.organization_id == org_id
+    # Total entries (join with content_type to filter by organization)
+    total_entries = db.query(ContentEntry).join(ContentType).filter(
+        ContentType.organization_id == org_id
     ).count()
     
     # Published vs Draft
-    published_entries = db.query(ContentEntry).filter(
+    published_entries = db.query(ContentEntry).join(ContentType).filter(
         and_(
-            ContentEntry.organization_id == org_id,
+            ContentType.organization_id == org_id,
             ContentEntry.status == "published"
         )
     ).count()
     
-    draft_entries = db.query(ContentEntry).filter(
+    draft_entries = db.query(ContentEntry).join(ContentType).filter(
         and_(
-            ContentEntry.organization_id == org_id,
+            ContentType.organization_id == org_id,
             ContentEntry.status == "draft"
         )
     ).count()
@@ -119,19 +123,29 @@ async def get_content_stats(
     ]
     
     # Recent entries (last 10)
-    recent_entries = db.query(ContentEntry).filter(
-        ContentEntry.organization_id == org_id
+    recent_entries = db.query(ContentEntry).join(ContentType).filter(
+        ContentType.organization_id == org_id
     ).order_by(desc(ContentEntry.created_at)).limit(10).all()
     
-    recent_entries_list = [
-        {
+    recent_entries_list = []
+    for entry in recent_entries:
+        # Parse data if it's a JSON string
+        data = entry.data
+        if isinstance(data, str):
+            try:
+                import json
+                data = json.loads(data)
+            except:
+                data = {}
+        elif data is None:
+            data = {}
+        
+        recent_entries_list.append({
             "id": entry.id,
-            "title": entry.data.get("title", "Untitled") if entry.data else "Untitled",
+            "title": data.get("title", "Untitled"),
             "status": entry.status,
             "created_at": entry.created_at.isoformat() if entry.created_at else None
-        }
-        for entry in recent_entries
-    ]
+        })
     
     return ContentStatsResponse(
         total_entries=total_entries,
@@ -144,13 +158,15 @@ async def get_content_stats(
 
 
 @router.get("/users", response_model=UserStatsResponse)
+@limiter.limit(get_rate_limit())
 async def get_user_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
     """Get user statistics for the current organization."""
     org_id = current_user.organization_id
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     seven_days_ago = now - timedelta(days=7)
     thirty_days_ago = now - timedelta(days=30)
     
@@ -194,23 +210,24 @@ async def get_user_stats(
     # Top contributors (users with most content entries)
     top_contributors = db.query(
         User.id,
-        User.full_name,
+        User.first_name,
+        User.last_name,
         User.email,
         func.count(ContentEntry.id).label('entries_count')
     ).join(
-        ContentEntry, ContentEntry.created_by == User.id
+        ContentEntry, ContentEntry.author_id == User.id
     ).filter(
         User.organization_id == org_id
-    ).group_by(User.id, User.full_name, User.email).order_by(
+    ).group_by(User.id, User.first_name, User.last_name, User.email).order_by(
         desc('entries_count')
     ).limit(5).all()
     
     top_contributors_list = [
         {
             "id": row[0],
-            "name": row[1],
-            "email": row[2],
-            "entries_count": row[3]
+            "name": f"{row[1] or ''} {row[2] or ''}".strip() or row[3],
+            "email": row[3],
+            "entries_count": row[4]
         }
         for row in top_contributors
     ]
@@ -226,7 +243,9 @@ async def get_user_stats(
 
 
 @router.get("/media", response_model=MediaStatsResponse)
+@limiter.limit(get_rate_limit())
 async def get_media_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
@@ -281,14 +300,16 @@ async def get_media_stats(
 
 
 @router.get("/activity", response_model=ActivityStatsResponse)
+@limiter.limit(get_rate_limit())
 async def get_activity_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
     """Get activity statistics for the current organization."""
     org_id = current_user.organization_id
-    now = datetime.utcnow()
-    today_start = datetime(now.year, now.month, now.day)
+    now = datetime.now(timezone.utc)
+    today_start = datetime(now.year, now.month, now.day, tzinfo=timezone.utc)
     seven_days_ago = now - timedelta(days=7)
     thirty_days_ago = now - timedelta(days=30)
     
@@ -360,14 +381,16 @@ async def get_activity_stats(
 
 
 @router.get("/trends", response_model=TrendsResponse)
+@limiter.limit(get_rate_limit())
 async def get_trends(
+    request: Request,
     days: int = 30,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
     """Get trend data for charts (last N days)."""
     org_id = current_user.organization_id
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     start_date = now - timedelta(days=days)
     
     # Generate date range
@@ -381,9 +404,9 @@ async def get_trends(
     content_entries = db.query(
         func.date(ContentEntry.created_at).label('date'),
         func.count(ContentEntry.id).label('count')
-    ).filter(
+    ).join(ContentType).filter(
         and_(
-            ContentEntry.organization_id == org_id,
+            ContentType.organization_id == org_id,
             ContentEntry.created_at >= start_date
         )
     ).group_by(func.date(ContentEntry.created_at)).all()
@@ -444,15 +467,17 @@ async def get_trends(
 
 
 @router.get("/overview", response_model=DashboardOverviewResponse)
+@limiter.limit(get_rate_limit())
 async def get_dashboard_overview(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_active_user)
 ):
     """Get all analytics data for the dashboard overview."""
-    content_stats = await get_content_stats(db, current_user)
-    user_stats = await get_user_stats(db, current_user)
-    media_stats = await get_media_stats(db, current_user)
-    activity_stats = await get_activity_stats(db, current_user)
+    content_stats = await get_content_stats(request, db, current_user)
+    user_stats = await get_user_stats(request, db, current_user)
+    media_stats = await get_media_stats(request, db, current_user)
+    activity_stats = await get_activity_stats(request, db, current_user)
     
     return DashboardOverviewResponse(
         content_stats=content_stats,

@@ -4,7 +4,7 @@ Pydantic schemas for content delivery API.
 
 from datetime import datetime
 from typing import Optional, List, Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class DeliveryContentResponse(BaseModel):
@@ -17,8 +17,7 @@ class DeliveryContentResponse(BaseModel):
     published_at: Optional[datetime] = None
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class DeliveryContentListResponse(BaseModel):
@@ -44,5 +43,4 @@ class DeliveryContentDetailResponse(BaseModel):
     seo_keywords: Optional[List[str]] = None
     canonical_url: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

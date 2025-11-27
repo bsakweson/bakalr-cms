@@ -6,7 +6,7 @@ import hmac
 import hashlib
 import httpx
 import asyncio
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict, Any, List, Optional
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -67,7 +67,7 @@ class WebhookEventPublisher:
         payload = {
             "event_id": event_id,
             "event_type": event_type.value,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "organization_id": organization_id,
             "data": data
         }
@@ -88,7 +88,7 @@ class WebhookEventPublisher:
             delivery_ids.append(delivery.id)
             
             # Update webhook last_triggered_at
-            webhook.last_triggered_at = datetime.utcnow()
+            webhook.last_triggered_at = datetime.now(timezone.utc)
         
         await db.commit()
         
@@ -166,8 +166,8 @@ class WebhookDeliveryService:
         delivery.status = WebhookDeliveryStatus.DELIVERING
         delivery.attempt_count += 1
         if delivery.attempt_count == 1:
-            delivery.first_attempted_at = datetime.utcnow()
-        delivery.last_attempted_at = datetime.utcnow()
+            delivery.first_attempted_at = datetime.now(timezone.utc)
+        delivery.last_attempted_at = datetime.now(timezone.utc)
         await db.commit()
         
         # Prepare request
@@ -208,9 +208,9 @@ class WebhookDeliveryService:
                 # Check if successful (2xx status code)
                 if 200 <= response.status_code < 300:
                     delivery.status = WebhookDeliveryStatus.SUCCESS
-                    delivery.completed_at = datetime.utcnow()
+                    delivery.completed_at = datetime.now(timezone.utc)
                     webhook.success_count += 1
-                    webhook.last_success_at = datetime.utcnow()
+                    webhook.last_success_at = datetime.now(timezone.utc)
                     success = True
                 else:
                     delivery.error_message = f"HTTP {response.status_code}: {response.text[:200]}"
@@ -235,13 +235,13 @@ class WebhookDeliveryService:
                 delivery.status = WebhookDeliveryStatus.RETRYING
                 # Exponential backoff: 60s, 120s, 240s, etc.
                 delay = webhook.retry_delay * (2 ** (delivery.attempt_count - 1))
-                delivery.next_retry_at = datetime.utcnow() + timedelta(seconds=delay)
+                delivery.next_retry_at = datetime.now(timezone.utc) + timedelta(seconds=delay)
             else:
                 # Max retries reached
                 delivery.status = WebhookDeliveryStatus.FAILED
-                delivery.completed_at = datetime.utcnow()
+                delivery.completed_at = datetime.now(timezone.utc)
                 webhook.failure_count += 1
-                webhook.last_failure_at = datetime.utcnow()
+                webhook.last_failure_at = datetime.now(timezone.utc)
         
         await db.commit()
         return success
@@ -276,7 +276,7 @@ class WebhookDeliveryService:
         result = await db.execute(
             select(WebhookDelivery).where(
                 WebhookDelivery.status == WebhookDeliveryStatus.RETRYING,
-                WebhookDelivery.next_retry_at <= datetime.utcnow()
+                WebhookDelivery.next_retry_at <= datetime.now(timezone.utc)
             ).limit(100)  # Process in batches
         )
         deliveries = result.scalars().all()

@@ -3,7 +3,7 @@ Webhook API endpoints
 """
 import secrets
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status, Request
 from sqlalchemy import select, func, desc
 from sqlalchemy.orm import Session
 
@@ -17,12 +17,16 @@ from backend.api.schemas.webhook import (
     WebhookDeliveryDetailResponse, WebhookTestRequest, WebhookTestResponse
 )
 from backend.core.webhook_service import WebhookEventPublisher, WebhookDeliveryService
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 router = APIRouter(prefix="/webhooks", tags=["Webhooks"])
 
 
 @router.post("", response_model=WebhookSecretResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_webhook(
+    request: Request,
     webhook_data: WebhookCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -61,7 +65,9 @@ async def create_webhook(
 
 
 @router.get("", response_model=WebhookListResponse)
+@limiter.limit(get_rate_limit())
 async def list_webhooks(
+    request: Request,
     status_filter: Optional[WebhookStatus] = Query(None, alias="status"),
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
@@ -79,7 +85,7 @@ async def list_webhooks(
     
     # Get total count
     count_query = select(func.count()).select_from(query.subquery())
-    total = await db.scalar(count_query)
+    total = db.scalar(count_query)
     
     # Get webhooks
     query = query.order_by(desc(Webhook.created_at)).offset(skip).limit(limit)
@@ -93,7 +99,9 @@ async def list_webhooks(
 
 
 @router.get("/{webhook_id}", response_model=WebhookResponse)
+@limiter.limit(get_rate_limit())
 async def get_webhook(
+    request: Request,
     webhook_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -117,7 +125,9 @@ async def get_webhook(
 
 
 @router.patch("/{webhook_id}", response_model=WebhookResponse)
+@limiter.limit(get_rate_limit())
 async def update_webhook(
+    request: Request,
     webhook_id: int,
     webhook_data: WebhookUpdate,
     current_user: User = Depends(get_current_user),
@@ -159,7 +169,9 @@ async def update_webhook(
 
 
 @router.delete("/{webhook_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_webhook(
+    request: Request,
     webhook_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -179,12 +191,14 @@ async def delete_webhook(
             detail="Webhook not found"
         )
     
-    await db.delete(webhook)
+    db.delete(webhook)
     db.commit()
 
 
 @router.post("/{webhook_id}/test", response_model=WebhookTestResponse)
+@limiter.limit(get_rate_limit())
 async def test_webhook(
+    request: Request,
     webhook_id: int,
     test_data: WebhookTestRequest,
     current_user: User = Depends(get_current_user),
@@ -262,7 +276,9 @@ async def test_webhook(
 
 
 @router.post("/{webhook_id}/regenerate-secret", response_model=WebhookSecretResponse)
+@limiter.limit(get_rate_limit())
 async def regenerate_webhook_secret(
+    request: Request,
     webhook_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -301,7 +317,9 @@ async def regenerate_webhook_secret(
 
 # Webhook delivery endpoints
 @router.get("/{webhook_id}/deliveries", response_model=WebhookDeliveryListResponse)
+@limiter.limit(get_rate_limit())
 async def list_webhook_deliveries(
+    request: Request,
     webhook_id: int,
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
@@ -326,7 +344,7 @@ async def list_webhook_deliveries(
     
     # Get total count
     count_query = select(func.count()).where(WebhookDelivery.webhook_id == webhook_id)
-    total = await db.scalar(count_query)
+    total = db.scalar(count_query)
     
     # Get deliveries
     query = select(WebhookDelivery).where(
@@ -343,7 +361,9 @@ async def list_webhook_deliveries(
 
 
 @router.get("/{webhook_id}/deliveries/{delivery_id}", response_model=WebhookDeliveryDetailResponse)
+@limiter.limit(get_rate_limit())
 async def get_webhook_delivery(
+    request: Request,
     webhook_id: int,
     delivery_id: int,
     current_user: User = Depends(get_current_user),
@@ -384,7 +404,9 @@ async def get_webhook_delivery(
 
 
 @router.post("/{webhook_id}/deliveries/{delivery_id}/retry", response_model=WebhookTestResponse)
+@limiter.limit(get_rate_limit())
 async def retry_webhook_delivery(
+    request: Request,
     webhook_id: int,
     delivery_id: int,
     current_user: User = Depends(get_current_user),
@@ -448,7 +470,9 @@ async def retry_webhook_delivery(
 
 # Event types endpoint
 @router.get("/events/types", response_model=List[str])
+@limiter.limit(get_rate_limit())
 async def list_event_types(
+    request: Request,
     current_user: User = Depends(get_current_user)
 ):
     """List all available webhook event types"""

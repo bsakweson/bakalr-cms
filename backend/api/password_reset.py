@@ -1,8 +1,8 @@
 """
 Password reset endpoints.
 """
-from fastapi import APIRouter, Depends, BackgroundTasks
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Depends, BackgroundTasks, Request
+from sqlalchemy.orm import Session
 
 from backend.db.session import get_db
 from backend.api.schemas.password_reset import (
@@ -14,29 +14,51 @@ from backend.api.schemas.password_reset import (
 )
 from backend.core.password_reset_service import PasswordResetService
 from backend.core.exceptions import BadRequestException, NotFoundException
+from backend.core.email_service import email_service
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-async def send_reset_email(email: str, token: str):
+async def send_reset_email(email: str, token: str, organization_id: int, user_id: int):
     """
-    Send password reset email (background task).
-    
-    In production, integrate with your email service (SendGrid, AWS SES, etc.)
-    For now, this is a placeholder that logs the token.
+    Send password reset email using email service.
     """
-    reset_url = f"http://localhost:3000/reset-password?token={token}"
+    import os
     
-    # TODO: Replace with actual email sending
-    print(f"📧 Password reset email for {email}")
-    print(f"Reset URL: {reset_url}")
-    print(f"Token expires in {PasswordResetService.TOKEN_EXPIRATION_HOURS} hour(s)")
+    # Skip email sending in test mode
+    if os.getenv("MAIL_SUPPRESS_SEND") == "1":
+        print(f"✓ Password reset email suppressed (test mode) for {email}")
+        return
     
-    # Example email content:
-    # Subject: Reset your password
-    # Body: Click the link below to reset your password: {reset_url}
-    #       This link will expire in 1 hour.
+    from backend.models.user import User
+    from sqlalchemy import select
+    
+    # Get user name for email (sync query)
+    from backend.db.session import SessionLocal
+    db = SessionLocal()
+    try:
+        user = db.query(User).filter(User.id == user_id).first()
+        if user and user.first_name:
+            user_name = f"{user.first_name} {user.last_name}".strip() if user.last_name else user.first_name
+        else:
+            user_name = email.split('@')[0]
+    finally:
+        db.close()
+    
+    try:
+        await email_service.send_password_reset_email(
+            to_email=email,
+            user_name=user_name,
+            reset_token=token,
+            organization_id=organization_id,
+            user_id=user_id
+        )
+        print(f"✓ Password reset email sent to {email}")
+    except Exception as e:
+        print(f"✗ Failed to send password reset email to {email}: {e}")
 
 
 @router.post(
@@ -45,10 +67,12 @@ async def send_reset_email(email: str, token: str):
     summary="Request password reset",
     description="Send a password reset email with a secure token. Token expires in 1 hour.",
 )
+@limiter.limit(get_rate_limit())
 async def request_password_reset(
+    request: Request,
     data: PasswordResetRequestSchema,
     background_tasks: BackgroundTasks,
-    db: AsyncSession = Depends(get_db),
+    db: Session = Depends(get_db),
 ):
     """
     Request a password reset email.
@@ -57,12 +81,24 @@ async def request_password_reset(
     
     Returns success message even if email doesn't exist (security best practice).
     """
-    # Create reset token
+    # Create reset token (this internally checks if user exists)
     token = await PasswordResetService.create_reset_token(data.email, db)
     
     if token:
-        # Send email in background (non-blocking)
-        background_tasks.add_task(send_reset_email, data.email, token)
+        # Get user for organization_id (token creation already verified user exists)
+        from backend.models.user import User
+        
+        user = db.query(User).filter(User.email == data.email, User.is_active == True).first()
+        
+        if user:
+            # Send email in background (non-blocking)
+            background_tasks.add_task(
+                send_reset_email, 
+                data.email, 
+                token, 
+                user.organization_id, 
+                user.id
+            )
     
     # Always return success (don't reveal if user exists)
     return PasswordResetResponseSchema(
@@ -77,7 +113,10 @@ async def request_password_reset(
     summary="Validate reset token",
     description="Check if a password reset token is valid and not expired.",
 )
-async def validate_reset_token(data: PasswordResetTokenValidationSchema):
+@limiter.limit(get_rate_limit())
+async def validate_reset_token(
+    request: Request,
+    data: PasswordResetTokenValidationSchema):
     """
     Validate a password reset token without consuming it.
     
@@ -103,9 +142,11 @@ async def validate_reset_token(data: PasswordResetTokenValidationSchema):
     summary="Confirm password reset",
     description="Reset password using a valid token. Token will be invalidated after use.",
 )
+@limiter.limit(get_rate_limit())
 async def confirm_password_reset(
+    request: Request,
     data: PasswordResetConfirmSchema,
-    db: AsyncSession = Depends(get_db),
+    db: Session = Depends(get_db),
 ):
     """
     Reset password with a valid token.

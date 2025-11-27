@@ -2,8 +2,8 @@
 Audit Log API endpoints for viewing activity history
 """
 from typing import Optional, List
-from datetime import datetime, timedelta
-from fastapi import APIRouter, Depends, Query
+from datetime import datetime, timedelta, timezone
+from fastapi import APIRouter, Depends, Query, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_, desc
 from pydantic import BaseModel
@@ -11,6 +11,8 @@ from pydantic import BaseModel
 from backend.db.session import get_db
 from backend.core.dependencies import get_current_user, get_current_organization
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.organization import Organization
 from backend.models.audit_log import AuditLog
@@ -46,7 +48,9 @@ class AuditLogStatsResponse(BaseModel):
 
 
 @router.get("/", response_model=AuditLogListResponse)
+@limiter.limit(get_rate_limit())
 async def list_audit_logs(
+    request: Request,
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=100),
     action: Optional[str] = None,
@@ -68,7 +72,7 @@ async def list_audit_logs(
     
     # Date filter
     if days:
-        cutoff_date = datetime.utcnow() - timedelta(days=days)
+        cutoff_date = datetime.now(timezone.utc) - timedelta(days=days)
         query = query.filter(AuditLog.created_at >= cutoff_date)
     
     # Apply filters
@@ -122,7 +126,9 @@ async def list_audit_logs(
 
 
 @router.get("/stats", response_model=AuditLogStatsResponse)
+@limiter.limit(get_rate_limit())
 async def get_audit_stats(
+    request: Request,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -135,14 +141,14 @@ async def get_audit_stats(
     total_logs = db.query(AuditLog).filter(AuditLog.organization_id == org.id).count()
     
     # Actions today
-    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     actions_today = db.query(AuditLog).filter(
         AuditLog.organization_id == org.id,
         AuditLog.created_at >= today_start
     ).count()
     
     # Failed actions (last 7 days)
-    week_ago = datetime.utcnow() - timedelta(days=7)
+    week_ago = datetime.now(timezone.utc) - timedelta(days=7)
     failed_actions = db.query(AuditLog).filter(
         AuditLog.organization_id == org.id,
         AuditLog.status == "failure",
@@ -150,7 +156,7 @@ async def get_audit_stats(
     ).count()
     
     # Unique users (last 30 days)
-    month_ago = datetime.utcnow() - timedelta(days=30)
+    month_ago = datetime.now(timezone.utc) - timedelta(days=30)
     unique_users = db.query(AuditLog.user_id).filter(
         AuditLog.organization_id == org.id,
         AuditLog.user_id.isnot(None),

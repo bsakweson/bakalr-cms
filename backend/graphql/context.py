@@ -4,13 +4,14 @@ GraphQL context for authentication and organization scope.
 from typing import Optional
 from fastapi import Request, Depends
 from sqlalchemy.orm import Session
+from strawberry.fastapi import BaseContext
 
 from backend.models.user import User
 from backend.db.session import get_db
 from backend.core.security import verify_token
 
 
-class GraphQLContext:
+class GraphQLContext(BaseContext):
     """
     GraphQL context with request, database, and authenticated user.
     """

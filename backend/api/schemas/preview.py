@@ -4,7 +4,7 @@ Pydantic schemas for content preview system.
 
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class PreviewTokenRequest(BaseModel):
@@ -27,8 +27,7 @@ class PreviewTokenResponse(BaseModel):
     expires_at: datetime = Field(..., description="Token expiration timestamp")
     content_entry_id: int = Field(..., description="ID of the content entry")
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class PreviewAccessRequest(BaseModel):
@@ -48,10 +47,9 @@ class PreviewContentResponse(BaseModel):
     status: str  # Can be 'draft' or 'published'
     fields: dict
     version: int
+    published_at: Optional[datetime] = None
     created_at: datetime
     updated_at: datetime
-    published_at: Optional[datetime] = None
     is_preview: bool = Field(default=True, description="Indicates this is preview mode")
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

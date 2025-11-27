@@ -1,24 +1,23 @@
 """Theme management API endpoints."""
-from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlalchemy.orm import Session
-from sqlalchemy import and_
-from typing import List
 
-from backend.db.session import get_db
-from backend.models.user import User
-from backend.models.theme import Theme
+from fastapi import APIRouter, Depends, HTTPException, Query, status
+from sqlalchemy import and_
+from sqlalchemy.orm import Session
+
 from backend.api.schemas.theme import (
     ThemeCreate,
-    ThemeUpdate,
-    ThemeResponse,
-    ThemeListResponse,
-    ThemeSetActive,
     ThemeCSSVariables,
+    ThemeListResponse,
+    ThemeResponse,
+    ThemeSetActive,
+    ThemeUpdate,
 )
+from backend.core.default_themes import DEFAULT_THEMES, get_default_active_theme
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
-from backend.core.default_themes import DEFAULT_THEMES, get_default_active_theme
-
+from backend.db.session import get_db
+from backend.models.theme import Theme
+from backend.models.user import User
 
 router = APIRouter(prefix="/themes", tags=["themes"])
 
@@ -31,31 +30,34 @@ def create_theme(
 ):
     """
     Create a new custom theme for the organization.
-    
+
     Requires 'themes.manage' permission.
     """
     # Check permission
-    checker = PermissionChecker(db)
-    if not checker.has_permission(current_user, "themes.manage"):
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
         )
-    
+
     # Check if theme name already exists in this organization
-    existing = db.query(Theme).filter(
-        and_(
-            Theme.organization_id == current_user.organization_id,
-            Theme.name == theme_data.name,
+    existing = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.organization_id == current_user.organization_id,
+                Theme.name == theme_data.name,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if existing:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Theme with name '{theme_data.name}' already exists",
         )
-    
+
     # Create theme
     theme = Theme(
         organization_id=current_user.organization_id,
@@ -71,11 +73,11 @@ def create_theme(
         shadows=theme_data.shadows,
         custom_properties=theme_data.custom_properties,
     )
-    
+
     db.add(theme)
     db.commit()
     db.refresh(theme)
-    
+
     return theme
 
 
@@ -89,23 +91,26 @@ def list_themes(
 ):
     """
     List all themes for the organization.
-    
+
     Includes both custom themes and system themes (if include_system=True).
     """
-    query = db.query(Theme).filter(
-        Theme.organization_id == current_user.organization_id
-    )
-    
+    query = db.query(Theme).filter(Theme.organization_id == current_user.organization_id)
+
     if not include_system:
         query = query.filter(Theme.is_system_theme == False)
-    
+
     # Count total
     total = query.count()
-    
+
     # Paginate
     offset = (page - 1) * page_size
-    themes = query.order_by(Theme.is_active.desc(), Theme.created_at.desc()).offset(offset).limit(page_size).all()
-    
+    themes = (
+        query.order_by(Theme.is_active.desc(), Theme.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+
     return ThemeListResponse(
         themes=themes,
         total=total,
@@ -121,19 +126,23 @@ def get_theme(
     db: Session = Depends(get_db),
 ):
     """Get a specific theme by ID."""
-    theme = db.query(Theme).filter(
-        and_(
-            Theme.id == theme_id,
-            Theme.organization_id == current_user.organization_id,
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not theme:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Theme not found",
         )
-    
+
     return theme
 
 
@@ -144,16 +153,20 @@ def get_active_theme(
 ):
     """
     Get the currently active theme for the organization.
-    
+
     If no theme is set as active, returns the default Dark Chocolate theme.
     """
-    active_theme = db.query(Theme).filter(
-        and_(
-            Theme.organization_id == current_user.organization_id,
-            Theme.is_active == True,
+    active_theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.organization_id == current_user.organization_id,
+                Theme.is_active == True,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not active_theme:
         # Return default theme (but don't create it in DB yet)
         default = get_default_active_theme()
@@ -161,7 +174,7 @@ def get_active_theme(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="No active theme set. Use POST /themes/initialize-defaults to create default themes.",
         )
-    
+
     return active_theme
 
 
@@ -174,39 +187,43 @@ def update_theme(
 ):
     """
     Update a theme.
-    
+
     Requires 'themes.manage' permission.
     System themes cannot be updated.
     """
     # Check permission
-    checker = PermissionChecker(db)
-    if not checker.has_permission(current_user, "themes.manage"):
+    # Fixed: Use static method
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
         )
-    
+
     # Get theme
-    theme = db.query(Theme).filter(
-        and_(
-            Theme.id == theme_id,
-            Theme.organization_id == current_user.organization_id,
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not theme:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Theme not found",
         )
-    
+
     # Prevent updating system themes
     if theme.is_system_theme:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot update system themes. Clone it to create a custom version.",
         )
-    
+
     # Update fields
     update_data = theme_data.model_dump(exclude_unset=True)
     for field, value in update_data.items():
@@ -216,10 +233,10 @@ def update_theme(
             setattr(theme, field, value.model_dump())
         else:
             setattr(theme, field, value)
-    
+
     db.commit()
     db.refresh(theme)
-    
+
     return theme
 
 
@@ -231,46 +248,50 @@ def delete_theme(
 ):
     """
     Delete a theme.
-    
+
     Requires 'themes.manage' permission.
     System themes and active themes cannot be deleted.
     """
     # Check permission
-    checker = PermissionChecker(db)
-    if not checker.has_permission(current_user, "themes.manage"):
+    # Fixed: Use static method
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
         )
-    
+
     # Get theme
-    theme = db.query(Theme).filter(
-        and_(
-            Theme.id == theme_id,
-            Theme.organization_id == current_user.organization_id,
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not theme:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Theme not found",
         )
-    
+
     # Prevent deleting system themes
     if theme.is_system_theme:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot delete system themes",
         )
-    
+
     # Prevent deleting active theme
     if theme.is_active:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot delete the active theme. Set another theme as active first.",
         )
-    
+
     db.delete(theme)
     db.commit()
 
@@ -283,42 +304,46 @@ def set_active_theme(
 ):
     """
     Set a theme as the active theme for the organization.
-    
+
     Requires 'themes.manage' permission.
     Only one theme can be active at a time.
     """
     # Check permission
-    checker = PermissionChecker(db)
-    if not checker.has_permission(current_user, "themes.manage"):
+    # Fixed: Use static method
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
         )
-    
+
     # Get the theme to activate
-    theme = db.query(Theme).filter(
-        and_(
-            Theme.id == data.theme_id,
-            Theme.organization_id == current_user.organization_id,
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == data.theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not theme:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Theme not found",
         )
-    
+
     # Deactivate all other themes
-    db.query(Theme).filter(
-        Theme.organization_id == current_user.organization_id
-    ).update({"is_active": False})
-    
+    db.query(Theme).filter(Theme.organization_id == current_user.organization_id).update(
+        {"is_active": False}
+    )
+
     # Activate this theme
     theme.is_active = True
     db.commit()
     db.refresh(theme)
-    
+
     return theme
 
 
@@ -330,32 +355,36 @@ def get_theme_css_variables(
 ):
     """
     Get CSS custom properties (variables) for a theme.
-    
+
     Returns both a dictionary and a CSS string ready to use in :root.
     """
-    theme = db.query(Theme).filter(
-        and_(
-            Theme.id == theme_id,
-            Theme.organization_id == current_user.organization_id,
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not theme:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Theme not found",
         )
-    
+
     # Get CSS variables
     css_vars = theme.to_css_variables()
-    
+
     # Generate CSS string
     css_lines = [":root {"]
     for var_name, var_value in css_vars.items():
         css_lines.append(f"  {var_name}: {var_value};")
     css_lines.append("}")
     css_string = "\n".join(css_lines)
-    
+
     return ThemeCSSVariables(
         theme_id=theme.id,
         theme_name=theme.name,
@@ -371,31 +400,35 @@ def initialize_default_themes(
 ):
     """
     Initialize default system themes for the organization.
-    
+
     Creates Dark Chocolate, Light, and Dark themes if they don't exist.
     Sets Dark Chocolate as the active theme.
-    
+
     Requires 'themes.manage' permission.
     """
     # Check permission
-    checker = PermissionChecker(db)
-    if not checker.has_permission(current_user, "themes.manage"):
+    # Fixed: Use static method
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
         )
-    
+
     created_themes = []
-    
+
     for default_theme in DEFAULT_THEMES:
         # Check if theme already exists
-        existing = db.query(Theme).filter(
-            and_(
-                Theme.organization_id == current_user.organization_id,
-                Theme.name == default_theme["name"],
+        existing = (
+            db.query(Theme)
+            .filter(
+                and_(
+                    Theme.organization_id == current_user.organization_id,
+                    Theme.name == default_theme["name"],
+                )
             )
-        ).first()
-        
+            .first()
+        )
+
         if not existing:
             # Create theme
             theme = Theme(
@@ -404,7 +437,9 @@ def initialize_default_themes(
                 display_name=default_theme["display_name"],
                 description=default_theme["description"],
                 is_system_theme=True,
-                is_active=(default_theme["name"] == "dark-chocolate"),  # Set Dark Chocolate as active
+                is_active=(
+                    default_theme["name"] == "dark-chocolate"
+                ),  # Set Dark Chocolate as active
                 colors=default_theme["colors"],
                 typography=default_theme.get("typography"),
                 spacing=default_theme.get("spacing"),
@@ -413,11 +448,13 @@ def initialize_default_themes(
             )
             db.add(theme)
             created_themes.append(default_theme["name"])
-    
+
     db.commit()
-    
+
     return {
-        "message": "Default themes initialized" if created_themes else "Default themes already exist",
+        "message": (
+            "Default themes initialized" if created_themes else "Default themes already exist"
+        ),
         "created": created_themes,
         "total_themes": len(DEFAULT_THEMES),
     }
@@ -433,46 +470,54 @@ def clone_theme(
 ):
     """
     Clone an existing theme (system or custom) to create a new custom theme.
-    
+
     Useful for customizing system themes.
     Requires 'themes.manage' permission.
     """
     # Check permission
-    checker = PermissionChecker(db)
-    if not checker.has_permission(current_user, "themes.manage"):
+    # Fixed: Use static method
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
         )
-    
+
     # Get source theme
-    source_theme = db.query(Theme).filter(
-        and_(
-            Theme.id == theme_id,
-            Theme.organization_id == current_user.organization_id,
+    source_theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if not source_theme:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Source theme not found",
         )
-    
+
     # Check if new name already exists
-    existing = db.query(Theme).filter(
-        and_(
-            Theme.organization_id == current_user.organization_id,
-            Theme.name == new_name,
+    existing = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.organization_id == current_user.organization_id,
+                Theme.name == new_name,
+            )
         )
-    ).first()
-    
+        .first()
+    )
+
     if existing:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Theme with name '{new_name}' already exists",
         )
-    
+
     # Clone theme
     cloned_theme = Theme(
         organization_id=current_user.organization_id,
@@ -488,9 +533,9 @@ def clone_theme(
         shadows=source_theme.shadows,
         custom_properties=source_theme.custom_properties,
     )
-    
+
     db.add(cloned_theme)
     db.commit()
     db.refresh(cloned_theme)
-    
+
     return cloned_theme

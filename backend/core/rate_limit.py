@@ -9,6 +9,24 @@ from slowapi.errors import RateLimitExceeded
 from backend.core.config import settings
 
 
+def get_rate_limit(endpoint_name: str = None) -> str:
+    """
+    Get rate limit value for an endpoint.
+    Uses RATE_LIMIT_DEFAULT for all endpoints.
+    
+    Args:
+        endpoint_name: Name of the endpoint (ignored, for future customization)
+    
+    Returns:
+        Rate limit string like "1000/hour;100/minute"
+    """
+    # If rate limiting is disabled, return effectively unlimited
+    if not settings.RATE_LIMIT_ENABLED:
+        return "1000000/minute"
+    
+    return settings.RATE_LIMIT_DEFAULT
+
+
 def get_identifier(request: Request) -> str:
     """
     Get identifier for rate limiting

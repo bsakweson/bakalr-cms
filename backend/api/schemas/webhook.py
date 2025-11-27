@@ -3,7 +3,7 @@ Pydantic schemas for webhook API
 """
 from datetime import datetime
 from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field, HttpUrl, field_validator
+from pydantic import BaseModel, Field, HttpUrl, field_validator, ConfigDict
 
 from backend.models.webhook import WebhookStatus, WebhookEventType, WebhookDeliveryStatus
 
@@ -14,7 +14,7 @@ class WebhookCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=255, description="Webhook name")
     description: Optional[str] = Field(None, description="Webhook description")
     url: HttpUrl = Field(..., description="Webhook endpoint URL")
-    events: List[WebhookEventType] = Field(..., min_items=1, description="Event types to subscribe to")
+    events: List[WebhookEventType] = Field(..., min_length=1, description="Event types to subscribe to")
     headers: Optional[Dict[str, str]] = Field(None, description="Custom headers to include in requests")
     max_retries: int = Field(3, ge=0, le=10, description="Maximum retry attempts")
     retry_delay: int = Field(60, ge=1, description="Retry delay in seconds")
@@ -73,8 +73,7 @@ class WebhookResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class WebhookListResponse(BaseModel):
@@ -109,8 +108,7 @@ class WebhookDeliveryResponse(BaseModel):
     completed_at: Optional[datetime]
     next_retry_at: Optional[datetime]
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class WebhookDeliveryListResponse(BaseModel):
@@ -139,8 +137,7 @@ class WebhookDeliveryDetailResponse(BaseModel):
     completed_at: Optional[datetime]
     next_retry_at: Optional[datetime]
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Webhook test schemas
@@ -169,8 +166,8 @@ class WebhookEventPayload(BaseModel):
     organization_id: int = Field(..., description="Organization ID")
     data: Dict[str, Any] = Field(..., description="Event data")
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "event_id": "evt_1234567890",
                 "event_type": "content.created",
@@ -184,3 +181,4 @@ class WebhookEventPayload(BaseModel):
                 }
             }
         }
+    )

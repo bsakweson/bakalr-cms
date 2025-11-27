@@ -4,7 +4,7 @@ Pydantic schemas for content scheduling system.
 
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class ScheduleContentRequest(BaseModel):
@@ -36,8 +36,7 @@ class ScheduleContentResponse(BaseModel):
     executed_at: Optional[datetime] = None
     error_message: Optional[str] = None
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ScheduleListResponse(BaseModel):

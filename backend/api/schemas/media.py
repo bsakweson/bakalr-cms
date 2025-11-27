@@ -2,7 +2,7 @@
 Media/Asset Management Schemas
 """
 from typing import Optional, List
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 from datetime import datetime
 from enum import Enum
 
@@ -29,8 +29,7 @@ class MediaUploadResponse(BaseModel):
     height: Optional[int] = None
     created_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class MediaUpdateRequest(BaseModel):
@@ -62,8 +61,7 @@ class MediaResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class MediaListResponse(BaseModel):

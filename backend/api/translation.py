@@ -3,7 +3,7 @@ Translation and Locale Management API endpoints
 """
 import json
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, status, Query, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, status, Query, BackgroundTasks, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
@@ -13,6 +13,8 @@ from backend.models.user import User
 from backend.models.translation import Locale, Translation, TranslationGlossary
 from backend.models.content import ContentEntry, ContentType
 from backend.core.translation_service import get_translation_service
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.api.schemas.translation import (
     LocaleCreate,
     LocaleUpdate,
@@ -27,16 +29,18 @@ from backend.api.schemas.translation import (
     GlossaryUpdate,
     GlossaryResponse,
     LocaleDetectionResponse,
+
+
 )
-
-
 router = APIRouter(prefix="/translation", tags=["Translation & Localization"])
 
 
 # Locale Endpoints
 
 @router.post("/locales", response_model=LocaleResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_locale(
+    request: Request,
     locale_data: LocaleCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -81,7 +85,9 @@ async def create_locale(
 
 
 @router.get("/locales", response_model=List[LocaleResponse])
+@limiter.limit(get_rate_limit())
 async def list_locales(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     enabled_only: bool = Query(False, description="Show only enabled locales")
@@ -101,7 +107,9 @@ async def list_locales(
 
 
 @router.get("/locales/{locale_id}", response_model=LocaleResponse)
+@limiter.limit(get_rate_limit())
 async def get_locale(
+    request: Request,
     locale_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -124,7 +132,9 @@ async def get_locale(
 
 
 @router.put("/locales/{locale_id}", response_model=LocaleResponse)
+@limiter.limit(get_rate_limit())
 async def update_locale(
+    request: Request,
     locale_id: int,
     locale_data: LocaleUpdate,
     current_user: User = Depends(get_current_user),
@@ -170,7 +180,9 @@ async def update_locale(
 
 
 @router.delete("/locales/{locale_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_locale(
+    request: Request,
     locale_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -269,7 +281,9 @@ def translate_content_entry_background(
 
 
 @router.post("/translate", response_model=TranslateResponse)
+@limiter.limit(get_rate_limit())
 async def translate_content(
+    request: Request,
     translate_req: TranslateRequest,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
@@ -321,7 +335,9 @@ async def translate_content(
 
 
 @router.get("/translations", response_model=TranslationListResponse)
+@limiter.limit(get_rate_limit())
 async def list_translations(
+    request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
     content_entry_id: Optional[int] = Query(None),
@@ -378,7 +394,9 @@ async def list_translations(
 
 
 @router.get("/translations/{translation_id}", response_model=TranslationResponse)
+@limiter.limit(get_rate_limit())
 async def get_translation(
+    request: Request,
     translation_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -416,7 +434,9 @@ async def get_translation(
 
 
 @router.put("/translations/{translation_id}", response_model=TranslationResponse)
+@limiter.limit(get_rate_limit())
 async def update_translation(
+    request: Request,
     translation_id: int,
     translation_data: TranslationUpdate,
     current_user: User = Depends(get_current_user),
@@ -469,7 +489,9 @@ async def update_translation(
 
 
 @router.delete("/translations/{translation_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_translation(
+    request: Request,
     translation_id: int,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -495,7 +517,9 @@ async def delete_translation(
 # Locale Detection
 
 @router.post("/detect-locale", response_model=LocaleDetectionResponse)
+@limiter.limit(get_rate_limit())
 async def detect_locale(
+    request: Request,
     text: str = Query(..., description="Text to detect language from"),
     current_user: User = Depends(get_current_user)
 ):

@@ -2,13 +2,15 @@
 Organization settings management API endpoints
 """
 from typing import Optional, List, Annotated
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr
 
 from backend.db.session import get_db
 from backend.core.dependencies import get_current_user, get_current_organization
 from backend.core.permissions import PermissionChecker
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
 from backend.models.organization import Organization
 from backend.models.translation import Locale
@@ -60,7 +62,9 @@ class UpdateLocaleRequest(BaseModel):
 
 
 @router.get("/profile", response_model=OrganizationProfileResponse)
+@limiter.limit(get_rate_limit())
 async def get_organization_profile(
+    request: Request,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -85,7 +89,9 @@ async def get_organization_profile(
 
 
 @router.put("/profile", response_model=OrganizationProfileResponse)
+@limiter.limit(get_rate_limit())
 async def update_organization_profile(
+    request: Request,
     data: OrganizationProfileUpdate,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
@@ -126,7 +132,9 @@ async def update_organization_profile(
 
 
 @router.get("/locales", response_model=LocaleListResponse)
+@limiter.limit(get_rate_limit())
 async def list_locales(
+    request: Request,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -153,7 +161,9 @@ async def list_locales(
 
 
 @router.post("/locales", response_model=LocaleItem)
+@limiter.limit(get_rate_limit())
 async def create_locale(
+    request: Request,
     data: CreateLocaleRequest,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
@@ -204,7 +214,9 @@ async def create_locale(
 
 
 @router.put("/locales/{locale_id}", response_model=LocaleItem)
+@limiter.limit(get_rate_limit())
 async def update_locale(
+    request: Request,
     locale_id: int,
     data: UpdateLocaleRequest,
     org: Organization = Depends(get_current_organization),
@@ -255,7 +267,9 @@ async def update_locale(
 
 
 @router.delete("/locales/{locale_id}")
+@limiter.limit(get_rate_limit())
 async def delete_locale(
+    request: Request,
     locale_id: int,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),

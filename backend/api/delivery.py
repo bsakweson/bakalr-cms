@@ -3,7 +3,7 @@ Content Delivery API - optimized endpoints for frontend consumption.
 CDN-friendly with minimal payloads and edge caching support.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 import json
@@ -15,12 +15,16 @@ from backend.api.schemas.delivery import (
     DeliveryContentListResponse,
     DeliveryContentDetailResponse
 )
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 
 router = APIRouter(prefix="/delivery", tags=["delivery"])
 
 
 @router.get("/content/slug/{slug}", response_model=DeliveryContentDetailResponse)
+@limiter.limit(get_rate_limit())
 async def get_content_by_slug(
+    request: Request,
     slug: str,
     content_type: str,
     response: Response,
@@ -83,7 +87,9 @@ async def get_content_by_slug(
 
 
 @router.get("/content/{content_id}", response_model=DeliveryContentDetailResponse)
+@limiter.limit(get_rate_limit())
 async def get_content_by_id(
+    request: Request,
     content_id: int,
     response: Response,
     db: AsyncSession = Depends(get_db)
@@ -128,7 +134,9 @@ async def get_content_by_id(
 
 
 @router.get("/content", response_model=DeliveryContentListResponse)
+@limiter.limit(get_rate_limit())
 async def list_content(
+    request: Request,
     content_type: str,
     page: int = 1,
     page_size: int = 20,

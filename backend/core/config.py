@@ -125,6 +125,18 @@ class Settings(BaseSettings):
     )
 
     # Translation
+    TRANSLATION_PROVIDER: str = Field(
+        default="libretranslate",
+        description="Translation provider: libretranslate, google, deepl"
+    )
+    LIBRETRANSLATE_URL: str = Field(
+        default="http://localhost:5001",
+        description="LibreTranslate API URL"
+    )
+    LIBRETRANSLATE_API_KEY: str = Field(
+        default="",
+        description="LibreTranslate API key (optional, leave empty for local instance)"
+    )
     GOOGLE_TRANSLATE_API_KEY: str = Field(
         default="",
         description="Google Translate API key (use Kubernetes Secret)"
@@ -132,6 +144,10 @@ class Settings(BaseSettings):
     DEEPL_API_KEY: str = Field(
         default="",
         description="DeepL API key (use Kubernetes Secret)"
+    )
+    DEEPL_API_URL: str = Field(
+        default="https://api-free.deepl.com/v2/translate",
+        description="DeepL API URL (use api-free.deepl.com for free tier)"
     )
     DEFAULT_LANGUAGE: str = Field(
         default="en",
@@ -252,6 +268,20 @@ class Settings(BaseSettings):
         description="Require 2FA for admin users"
     )
     
+    # GraphQL Settings
+    GRAPHQL_MAX_DEPTH: int = Field(
+        default=10,
+        description="Maximum query depth for GraphQL to prevent abuse"
+    )
+    GRAPHQL_MAX_COMPLEXITY: int = Field(
+        default=1000,
+        description="Maximum query complexity for GraphQL to prevent abuse"
+    )
+    GRAPHQL_TIMEOUT_SECONDS: int = Field(
+        default=30,
+        description="Maximum execution time for GraphQL queries in seconds"
+    )
+    
     # Content Templates
     CONTENT_TEMPLATES_ENABLED: bool = Field(
         default=True,
@@ -260,6 +290,17 @@ class Settings(BaseSettings):
     MAX_TEMPLATES_PER_TYPE: int = Field(
         default=50,
         description="Maximum number of templates per content type"
+    )
+
+    # Rate Limiting - Simple default for all endpoints
+    RATE_LIMIT_ENABLED: bool = Field(default=True, description="Enable rate limiting")
+    RATE_LIMIT_DEFAULT: str = Field(
+        default="1000/hour;100/minute",
+        description="Default rate limit for all endpoints"
+    )
+    RATE_LIMIT_GRAPHQL: str = Field(
+        default="1000/hour;100/minute",
+        description="Rate limit for GraphQL endpoints"
     )
 
     def get_cors_origins_list(self) -> List[str]:

@@ -2,7 +2,7 @@
 Notification API endpoints for in-app notifications and preferences.
 """
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
@@ -15,8 +15,10 @@ from backend.api.schemas.notification import (
 from backend.core.dependencies import get_db, get_current_user
 from backend.core.permissions import PermissionChecker
 from backend.core.notification_service import NotificationService
+from backend.core.rate_limit import limiter, get_rate_limit
+from backend.core.config import settings
 from backend.models.user import User
-from backend.models.notification import Notification, NotificationPreference, EmailLog, EmailStatus
+from backend.models.notification import Notification, NotificationPreference, EmailLog, EmailStatus, NotificationType
 
 
 router = APIRouter(prefix="/notifications", tags=["Notifications"])
@@ -24,8 +26,10 @@ router = APIRouter(prefix="/notifications", tags=["Notifications"])
 
 # Notification Endpoints
 
-@router.get("", response_model=NotificationListResponse)
+@router.get("")
+@limiter.limit(get_rate_limit())
 async def list_notifications(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
     unread_only: bool = Query(False, description="Show only unread notifications"),
@@ -60,17 +64,29 @@ async def list_notifications(
         organization_id=current_user.organization_id
     )
     
-    return NotificationListResponse(
+    response_data = NotificationListResponse(
         items=[NotificationResponse.model_validate(n) for n in notifications],
         total=total,
         page=page,
         per_page=per_page,
         unread_count=unread_count
     )
+    
+    # Return with 'notifications' key for backward compatibility
+    return {
+        "notifications": response_data.items,
+        "items": response_data.items,
+        "total": total,
+        "page": page,
+        "per_page": per_page,
+        "unread_count": unread_count
+    }
 
 
 @router.get("/stats", response_model=NotificationStats)
+@limiter.limit(get_rate_limit())
 async def get_notification_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -118,7 +134,9 @@ async def get_notification_stats(
 
 
 @router.get("/{notification_id}", response_model=NotificationResponse)
+@limiter.limit(get_rate_limit())
 async def get_notification(
+    request: Request,
     notification_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -139,7 +157,9 @@ async def get_notification(
 
 
 @router.post("", response_model=NotificationResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit(get_rate_limit())
 async def create_notification(
+    request: Request,
     notification_data: NotificationCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -149,13 +169,27 @@ async def create_notification(
     Requires 'notifications.create' permission (admin only).
     """
     PermissionChecker.require_permission(current_user, "notifications.create", db)
+    
+    # Use current user if user_id not provided
+    target_user_id = notification_data.user_id or current_user.id
+    
+    # Handle type alias
+    ntype = notification_data.notification_type
+    if not ntype and notification_data.type:
+        try:
+            ntype = NotificationType(notification_data.type)
+        except ValueError:
+            ntype = NotificationType.INFO
+    elif not ntype:
+        ntype = NotificationType.INFO
+    
     notification = await NotificationService.create_notification(
         db=db,
-        user_id=notification_data.user_id,
+        user_id=target_user_id,
         organization_id=current_user.organization_id,
         title=notification_data.title,
         message=notification_data.message,
-        notification_type=notification_data.notification_type,
+        notification_type=ntype,
         priority=notification_data.priority,
         action_url=notification_data.action_url,
         action_label=notification_data.action_label,
@@ -168,7 +202,9 @@ async def create_notification(
 
 
 @router.patch("/{notification_id}/read", response_model=NotificationResponse)
+@limiter.limit(get_rate_limit())
 async def mark_notification_read(
+    request: Request,
     notification_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -190,7 +226,10 @@ async def mark_notification_read(
 
 
 @router.post("/read-all")
+@router.post("/mark-all-read")
+@limiter.limit(get_rate_limit())
 async def mark_all_read(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -205,7 +244,9 @@ async def mark_all_read(
 
 
 @router.post("/mark-read")
+@limiter.limit(get_rate_limit())
 async def mark_notifications_read(
+    request: Request,
     data: NotificationMarkRead,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -225,7 +266,9 @@ async def mark_notifications_read(
 
 
 @router.delete("/{notification_id}", status_code=status.HTTP_204_NO_CONTENT)
+@limiter.limit(get_rate_limit())
 async def delete_notification(
+    request: Request,
     notification_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -247,7 +290,9 @@ async def delete_notification(
 # Notification Preferences
 
 @router.get("/preferences", response_model=List[NotificationPreferenceResponse])
+@limiter.limit(get_rate_limit())
 async def get_notification_preferences(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -261,7 +306,9 @@ async def get_notification_preferences(
 
 
 @router.put("/preferences", response_model=NotificationPreferenceResponse)
+@limiter.limit(get_rate_limit())
 async def update_notification_preference(
+    request: Request,
     preference_data: NotificationPreferenceUpdate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -284,7 +331,9 @@ async def update_notification_preference(
 # Email Logs (Admin only)
 
 @router.get("/email-logs", response_model=EmailLogListResponse)
+@limiter.limit(get_rate_limit())
 async def list_email_logs(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
     status: Optional[str] = Query(None, description="Filter by status"),
@@ -317,7 +366,9 @@ async def list_email_logs(
 
 
 @router.get("/email-stats", response_model=EmailStats)
+@limiter.limit(get_rate_limit())
 async def get_email_stats(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
