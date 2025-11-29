@@ -536,7 +536,7 @@ A: Check the [migration guide](./migration.md) for importing data from WordPress
 A: Currently Bakalr CMS is self-hosted. A managed cloud version is planned for the future.
 
 **Q: What's the license?**
-A: Bakalr Proprietary License - all rights reserved. For licensing inquiries, contact legal@bakalr.com.
+A: Bakalr Proprietary License - all rights reserved. For licensing inquiries, contact <info@bakalr.com>.
 
 ## What's Next?
 
