@@ -66,16 +66,18 @@ async def register(
         # Create new organization for first user
         # organization_name is now required (validated by schema)
         org_name = user_data.organization_name
-        
+
         # Check if organization name already exists
         existing_org = db.query(Organization).filter(Organization.name == org_name).first()
         if existing_org:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Organization '{org_name}' already exists. Please choose a different name or contact the organization owner to be invited."
+                detail=f"Organization '{org_name}' already exists. Please choose a different name or contact the organization owner to be invited.",
             )
-        
-        org_slug = user_data.organization_name.lower().replace(" ", "-").replace("'", "").replace(".", "-")
+
+        org_slug = (
+            user_data.organization_name.lower().replace(" ", "-").replace("'", "").replace(".", "-")
+        )
 
         # Ensure unique slug
         base_slug = org_slug
@@ -98,11 +100,11 @@ async def register(
 
     # Create user
     hashed_password = get_password_hash(user_data.password)
-    
+
     # Handle full_name splitting
     first_name = user_data.first_name
     last_name = user_data.last_name
-    
+
     if user_data.full_name:
         # Split full_name into first_name and last_name
         parts = user_data.full_name.strip().split(None, 1)  # Split on first whitespace
@@ -126,46 +128,46 @@ async def register(
 
     # Assign default role to new user
     from backend.models.rbac import Role
-    
+
     # If this is the first user in the organization (org creator), assign admin role
     user_count = db.query(User).filter(User.organization_id == organization_id).count()
-    
+
     if user_count == 1:
         # First user = Organization Owner (Admin role)
-        admin_role = db.query(Role).filter(
-            Role.organization_id == organization_id,
-            Role.name == "admin"
-        ).first()
-        
+        admin_role = (
+            db.query(Role)
+            .filter(Role.organization_id == organization_id, Role.name == "admin")
+            .first()
+        )
+
         if not admin_role:
             # Create admin role if it doesn't exist
             from backend.models.rbac import Permission
-            
+
             admin_role = Role(
                 organization_id=organization_id,
                 name="admin",
                 description="Organization administrator (auto-created)",
                 is_system_role=True,
-                level=80
+                level=80,
             )
             db.add(admin_role)
             db.flush()
-            
+
             # Assign all non-system permissions to admin
-            permissions = db.query(Permission).filter(
-                Permission.category != "system"
-            ).all()
+            permissions = db.query(Permission).filter(Permission.category != "system").all()
             admin_role.permissions.extend(permissions)
-        
+
         user.roles.append(admin_role)
         print(f"✅ Assigned admin role to organization creator: {user.email}")
     else:
         # Subsequent users = Viewer role (least permissions)
-        viewer_role = db.query(Role).filter(
-            Role.organization_id == organization_id,
-            Role.name == "viewer"
-        ).first()
-        
+        viewer_role = (
+            db.query(Role)
+            .filter(Role.organization_id == organization_id, Role.name == "viewer")
+            .first()
+        )
+
         if not viewer_role:
             # Create viewer role if it doesn't exist
             viewer_role = Role(
@@ -173,21 +175,20 @@ async def register(
                 name="viewer",
                 description="Read-only access (auto-created)",
                 is_system_role=True,
-                level=20
+                level=20,
             )
             db.add(viewer_role)
             db.flush()
-            
+
             # Assign only read permissions
             from backend.models.rbac import Permission
-            read_permissions = db.query(Permission).filter(
-                Permission.name.like("%.read")
-            ).all()
+
+            read_permissions = db.query(Permission).filter(Permission.name.like("%.read")).all()
             viewer_role.permissions.extend(read_permissions)
-        
+
         user.roles.append(viewer_role)
         print(f"ℹ️  Assigned viewer role to new user: {user.email}")
-    
+
     db.commit()
     db.refresh(user)
 
@@ -257,7 +258,7 @@ async def login(request: Request, credentials: UserLogin, db: Session = Depends(
     else:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Either email or username must be provided"
+            detail="Either email or username must be provided",
         )
 
     if not user:
@@ -285,6 +286,7 @@ async def login(request: Request, credentials: UserLogin, db: Session = Depends(
 
     # Get organization details
     from backend.models.organization import Organization
+
     organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
 
     # Prepare user response
@@ -405,7 +407,7 @@ async def update_profile(
 ):
     """
     Update current user profile.
-    
+
     Supports updating:
     - email (triggers email verification reset)
     - username
@@ -415,53 +417,56 @@ async def update_profile(
     - preferences (JSON string for user settings like theme, language, notifications)
     """
     # Handle full_name if provided (for backwards compatibility)
-    if hasattr(profile_data, 'full_name') and profile_data.full_name:
+    if hasattr(profile_data, "full_name") and profile_data.full_name:
         parts = profile_data.full_name.strip().split(None, 1)
         profile_data.first_name = parts[0] if len(parts) > 0 else None
         profile_data.last_name = parts[1] if len(parts) > 1 else None
-    
+
     # Update email if provided
     if profile_data.email is not None and profile_data.email != current_user.email:
         # Check if email already exists
-        existing = db.query(User).filter(User.email == profile_data.email, User.id != current_user.id).first()
+        existing = (
+            db.query(User)
+            .filter(User.email == profile_data.email, User.id != current_user.id)
+            .first()
+        )
         if existing:
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST, 
-                detail="Email already in use"
+                status_code=status.HTTP_400_BAD_REQUEST, detail="Email already in use"
             )
         current_user.email = profile_data.email
         current_user.is_email_verified = False  # Require re-verification
-    
+
     # Update username if provided
     if profile_data.username is not None:
         # Check if username already exists
         if profile_data.username:  # Only check if not empty
-            existing = db.query(User).filter(
-                User.username == profile_data.username, 
-                User.id != current_user.id
-            ).first()
+            existing = (
+                db.query(User)
+                .filter(User.username == profile_data.username, User.id != current_user.id)
+                .first()
+            )
             if existing:
                 raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Username already in use"
+                    status_code=status.HTTP_400_BAD_REQUEST, detail="Username already in use"
                 )
         current_user.username = profile_data.username or None
-    
+
     # Update names if provided
     if profile_data.first_name is not None:
         current_user.first_name = profile_data.first_name
-    
+
     if profile_data.last_name is not None:
         current_user.last_name = profile_data.last_name
-    
+
     # Update avatar URL if provided
     if profile_data.avatar_url is not None:
         current_user.avatar_url = profile_data.avatar_url
-    
+
     # Update bio if provided
     if profile_data.bio is not None:
         current_user.bio = profile_data.bio
-    
+
     # Update preferences if provided
     if profile_data.preferences is not None:
         current_user.preferences = profile_data.preferences
@@ -470,9 +475,11 @@ async def update_profile(
     db.refresh(current_user)
 
     role_names = [role.name for role in current_user.roles]
-    
+
     # Get organization for response
-    organization = db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
 
     return UserResponse(
         id=current_user.id,
