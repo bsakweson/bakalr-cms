@@ -3,11 +3,14 @@ Content Management API endpoints
 """
 
 import json
+import logging
 from typing import List, Optional
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request, status
 from sqlalchemy import func
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
+
+logger = logging.getLogger(__name__)
 
 from backend.api.schemas.content import (
     ContentEntryCreate,
@@ -43,9 +46,26 @@ def build_entry_response(entry: ContentEntry) -> ContentEntryResponse:
     data = json.loads(entry.data) if entry.data else {}
     seo_data = json.loads(entry.seo_data) if entry.seo_data else {}
 
+    # Build content_type object if relationship is loaded
+    content_type_data = None
+    # Debug: what is in entry.content_type?
+    ct = entry.content_type
+    if ct:
+        content_type_data = {
+            "id": ct.id,
+            "name": ct.name,
+            "api_id": ct.api_id,
+        }
+    else:
+        # Log why it's None
+        logger.warning(
+            f"content_type is None for entry {entry.id}, content_type_id={entry.content_type_id}"
+        )
+
     return ContentEntryResponse(
         id=entry.id,
         content_type_id=entry.content_type_id,
+        content_type=content_type_data,
         author_id=entry.author_id,
         data=data,
         slug=entry.slug,
@@ -503,11 +523,23 @@ async def list_content_entries(
     """
     List content entries with pagination and filters
     """
+    logger.info(f"========== LIST ENTRIES CALLED - Page {page} ==========")
+
+    # Build subquery to filter by organization
+    from sqlalchemy import select
+
+    content_type_subquery = (
+        select(ContentType.id)
+        .where(ContentType.organization_id == current_user.organization_id)
+        .scalar_subquery()
+    )
+
     query = (
         db.query(ContentEntry)
-        .join(ContentType)
-        .filter(ContentType.organization_id == current_user.organization_id)
+        .filter(ContentEntry.content_type_id.in_(content_type_subquery))
+        .options(selectinload(ContentEntry.content_type))
     )
+    logger.info("Query configured with selectinload and scalar_subquery")
 
     if content_type_id:
         query = query.filter(ContentEntry.content_type_id == content_type_id)
@@ -516,12 +548,42 @@ async def list_content_entries(
         query = query.filter(ContentEntry.status == status)
 
     total = query.count()
+    logger.info(f"Total entries: {total}")
     entries = query.offset((page - 1) * page_size).limit(page_size).all()
 
     items = []
     for entry in entries:
         data = json.loads(entry.data) if entry.data else {}
-        items.append(build_entry_response(entry))
+        seo_data = json.loads(entry.seo_data) if entry.seo_data else {}
+
+        # FORCE fetch content type from database
+        ct_from_db = db.query(ContentType).filter(ContentType.id == entry.content_type_id).first()
+        content_type_data = None
+        if ct_from_db:
+            content_type_data = {
+                "id": ct_from_db.id,
+                "name": ct_from_db.name,
+                "api_id": ct_from_db.api_id,
+            }
+
+        item = ContentEntryResponse(
+            id=entry.id,
+            content_type_id=entry.content_type_id,
+            content_type=content_type_data,  # Add inline
+            author_id=entry.author_id,
+            data=data,
+            slug=entry.slug,
+            status=entry.status,
+            version=entry.version,
+            published_at=entry.published_at,
+            seo_title=seo_data.get("seo_title"),
+            seo_description=seo_data.get("seo_description"),
+            seo_keywords=seo_data.get("seo_keywords"),
+            og_image=seo_data.get("og_image"),
+            created_at=entry.created_at,
+            updated_at=entry.updated_at,
+        )
+        items.append(item)
 
     pages = (total + page_size - 1) // page_size
 
@@ -544,6 +606,7 @@ async def get_content_entry(
     entry = (
         db.query(ContentEntry)
         .join(ContentType)
+        .options(selectinload(ContentEntry.content_type))
         .filter(
             ContentEntry.id == entry_id, ContentType.organization_id == current_user.organization_id
         )

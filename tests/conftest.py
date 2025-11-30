@@ -44,11 +44,12 @@ def db_session():
     """Create a fresh database session for each test"""
     Base.metadata.create_all(bind=engine)
     session = TestingSessionLocal()
-    
+
     # Seed default permissions for tests
     from backend.core.seed_permissions import seed_default_permissions
+
     seed_default_permissions(session)
-    
+
     try:
         yield session
     finally:
@@ -127,8 +128,26 @@ def test_content_data(test_content_type_data, authenticated_client):
 @pytest.fixture
 def authenticated_client(client, test_user_data):
     """Create an authenticated test client"""
+    from backend.db.session import get_db
+    from backend.models.user import User
+
     # Register user
     client.post("/api/v1/auth/register", json=test_user_data)
+
+    # Verify email in database (bypass email verification for tests)
+    # Get the db session from the app's dependency override
+    db_generator = app.dependency_overrides[get_db]()
+    db = next(db_generator)
+    try:
+        user = db.query(User).filter(User.email == test_user_data["email"]).first()
+        if user:
+            user.is_email_verified = True
+            db.commit()
+    finally:
+        try:
+            next(db_generator)
+        except StopIteration:
+            pass
 
     # Login
     login_response = client.post(

@@ -90,6 +90,33 @@ class EmailService:
             print(f"✗ Failed to send email to {to_email}: {e}")
             raise
 
+    async def send_verification_email(
+        self,
+        to_email: str,
+        user_name: str,
+        verification_token: str,
+        organization_name: str,
+        organization_id: int,
+        user_id: int,
+    ):
+        """Send email verification email to new user"""
+        verification_url = f"{settings.FRONTEND_URL}/verify-email/{verification_token}"
+
+        return await self.send_email(
+            to_email=to_email,
+            subject=f"Verify Your Email - {organization_name}",
+            template_name="verify_email.html",
+            template_vars={
+                "user_name": user_name,
+                "organization_name": organization_name,
+                "verification_url": verification_url,
+                "expiry_hours": 24,
+                "year": datetime.now(timezone.utc).year,
+            },
+            organization_id=organization_id,
+            user_id=user_id,
+        )
+
     async def send_welcome_email(
         self,
         to_email: str,

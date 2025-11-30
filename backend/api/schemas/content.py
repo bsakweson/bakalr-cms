@@ -1,15 +1,18 @@
 """
 Pydantic schemas for content management
 """
-from typing import Optional, Dict, Any, List
-from datetime import datetime
-from pydantic import BaseModel, Field, ConfigDict
 
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, ConfigDict, Field
 
 # ContentType Schemas
 
+
 class ContentTypeFieldSchema(BaseModel):
     """Schema for a single field in a content type"""
+
     name: str
     type: str  # text, textarea, number, boolean, date, datetime, json, reference, media
     required: bool = False
@@ -22,6 +25,7 @@ class ContentTypeFieldSchema(BaseModel):
 
 class ContentTypeCreate(BaseModel):
     """Schema for creating a content type"""
+
     name: str = Field(..., min_length=1, max_length=100)
     api_id: str = Field(..., min_length=1, max_length=100, pattern="^[a-z][a-z0-9_]*$")
     description: Optional[str] = None
@@ -31,6 +35,7 @@ class ContentTypeCreate(BaseModel):
 
 class ContentTypeUpdate(BaseModel):
     """Schema for updating a content type"""
+
     name: Optional[str] = Field(None, min_length=1, max_length=100)
     description: Optional[str] = None
     fields: Optional[List[ContentTypeFieldSchema]] = None
@@ -40,6 +45,7 @@ class ContentTypeUpdate(BaseModel):
 
 class ContentTypeResponse(BaseModel):
     """Schema for content type response"""
+
     id: int
     organization_id: int
     name: str
@@ -51,14 +57,16 @@ class ContentTypeResponse(BaseModel):
     entry_count: int = 0
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 # ContentEntry Schemas
 
+
 class ContentEntryCreate(BaseModel):
     """Schema for creating a content entry"""
+
     content_type_id: int
     data: Dict[str, Any]
     slug: Optional[str] = None
@@ -71,6 +79,7 @@ class ContentEntryCreate(BaseModel):
 
 class ContentEntryUpdate(BaseModel):
     """Schema for updating a content entry"""
+
     data: Optional[Dict[str, Any]] = None
     slug: Optional[str] = None
     status: Optional[str] = None
@@ -82,13 +91,16 @@ class ContentEntryUpdate(BaseModel):
 
 class ContentEntryPublish(BaseModel):
     """Schema for publishing a content entry"""
+
     publish_at: Optional[datetime] = None
 
 
 class ContentEntryResponse(BaseModel):
     """Schema for content entry response"""
+
     id: int
     content_type_id: int
+    content_type: Optional[Dict[str, Any]] = None
     author_id: int
     data: Dict[str, Any]
     slug: Optional[str]
@@ -101,12 +113,13 @@ class ContentEntryResponse(BaseModel):
     og_image: Optional[str]
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 class ContentEntryListResponse(BaseModel):
     """Schema for paginated content entry list"""
+
     items: List[ContentEntryResponse]
     total: int
     page: int

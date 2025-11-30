@@ -14,7 +14,7 @@ from backend.api.schemas.auth import (
     UserResponse,
     UserUpdate,
 )
-from backend.core.dependencies import get_current_user
+from backend.core.dependencies import get_current_user, get_current_user_unverified
 from backend.core.permissions import PermissionChecker
 from backend.core.rate_limit import get_rate_limit, limiter
 from backend.core.security import (
@@ -111,6 +111,13 @@ async def register(
         first_name = parts[0] if len(parts) > 0 else None
         last_name = parts[1] if len(parts) > 1 else None
 
+    # Generate email verification token
+    import secrets
+    from datetime import datetime, timedelta, timezone
+
+    verification_token = secrets.token_urlsafe(32)
+    verification_expires = datetime.now(timezone.utc) + timedelta(hours=24)
+
     user = User(
         email=user_data.email,
         username=user_data.username,
@@ -120,6 +127,8 @@ async def register(
         organization_id=organization_id,
         is_active=True,
         is_email_verified=False,
+        email_verification_token=verification_token,
+        email_verification_expires=verification_expires.isoformat(),
     )
 
     db.add(user)
@@ -218,21 +227,22 @@ async def register(
         organization=organization,  # Include organization in response
     )
 
-    # Send welcome email (async, non-blocking)
+    # Send verification email (async, non-blocking)
     try:
         from backend.core.email_service import email_service
 
         background_tasks.add_task(
-            email_service.send_welcome_email,
+            email_service.send_verification_email,
             to_email=user.email,
             user_name=user.first_name or user.email,
+            verification_token=verification_token,
             organization_name=organization.name,
             organization_id=organization.id,
             user_id=user.id,
         )
     except Exception as e:
         # Log error but don't fail registration
-        print(f"Failed to queue welcome email: {e}")
+        print(f"Failed to queue verification email: {e}")
 
     return TokenResponse(
         access_token=tokens.access_token,
@@ -534,3 +544,93 @@ async def logout(request: Request, current_user: User = Depends(get_current_user
     extended to add token to a blacklist if needed.
     """
     return {"message": "Logged out successfully"}
+
+
+@router.get("/verify-email/{token}")
+@limiter.limit(get_rate_limit())
+async def verify_email(request: Request, token: str, db: Session = Depends(get_db)):
+    """
+    Verify user's email address using the verification token sent via email
+    """
+    from datetime import datetime, timezone
+
+    # Find user with this verification token
+    user = db.query(User).filter(User.email_verification_token == token).first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired verification token"
+        )
+
+    # Check if token has expired (24 hours)
+    if user.email_verification_expires:
+        expires_at = datetime.fromisoformat(user.email_verification_expires)
+        if datetime.now(timezone.utc) > expires_at:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Verification token has expired. Please request a new one.",
+            )
+
+    # Mark email as verified
+    user.is_email_verified = True
+    user.email_verification_token = None
+    user.email_verification_expires = None
+    db.commit()
+
+    return {
+        "message": "Email verified successfully! You can now access all features.",
+        "email": user.email,
+    }
+
+
+@router.post("/resend-verification")
+@limiter.limit(get_rate_limit())
+async def resend_verification(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    current_user: User = Depends(get_current_user_unverified),
+    db: Session = Depends(get_db),
+):
+    """
+    Resend verification email to current user
+    """
+    import secrets
+    from datetime import datetime, timedelta, timezone
+
+    from backend.core.email_service import email_service
+
+    # Check if already verified
+    if current_user.is_email_verified:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Email is already verified"
+        )
+
+    # Generate new verification token
+    verification_token = secrets.token_urlsafe(32)
+    expires_at = datetime.now(timezone.utc) + timedelta(hours=24)
+
+    # Update user with new token
+    current_user.email_verification_token = verification_token
+    current_user.email_verification_expires = expires_at.isoformat()
+    db.commit()
+
+    # Get organization
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
+
+    # Send verification email
+    try:
+        background_tasks.add_task(
+            email_service.send_verification_email,
+            to_email=current_user.email,
+            user_name=current_user.first_name or current_user.email,
+            verification_token=verification_token,
+            organization_name=organization.name if organization else "Bakalr CMS",
+            organization_id=current_user.organization_id,
+            user_id=current_user.id,
+        )
+    except Exception as e:
+        print(f"Failed to queue verification email: {e}")
+
+    return {"message": "Verification email sent successfully", "email": current_user.email}

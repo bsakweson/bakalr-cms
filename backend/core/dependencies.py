@@ -55,6 +55,61 @@ async def get_current_user(
     if not user.is_active:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Inactive user")
 
+    # Check if email is verified
+    if not user.is_email_verified:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Email not verified. Please check your email for verification link.",
+        )
+
+    return user
+
+
+async def get_current_user_unverified(
+    credentials: HTTPAuthorizationCredentials = Depends(security), db: Session = Depends(get_db)
+) -> User:
+    """
+    Get current authenticated user WITHOUT checking email verification.
+    Used for endpoints that need authentication but should work for unverified users,
+    such as resending verification emails.
+
+    Args:
+        credentials: Bearer token from request header
+        db: Database session
+
+    Returns:
+        User object
+
+    Raises:
+        HTTPException: 401 if token is invalid or user not found
+    """
+    token = credentials.credentials
+
+    # Verify token
+    token_data = verify_token(token, token_type="access")
+    if not token_data:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Get user from database
+    user = db.query(User).filter(User.id == int(token_data.sub)).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Check if user is active
+    if not user.is_active:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Inactive user")
+
+    # NOTE: We do NOT check is_email_verified here - that's the whole point
+    # This allows unverified users to access specific endpoints like resend-verification
+
     return user
 
 

@@ -1,7 +1,7 @@
 """create notifications and email_logs tables
 
 Revision ID: add_notifications_email
-Revises: 6f4fc8ddbb02
+Revises: 6f8704939c05
 Create Date: 2025-11-25 23:45:00.000000
 
 """
@@ -13,7 +13,7 @@ from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = "add_notifications_email"
-down_revision = "6f4fc8ddbb02"
+down_revision = "6f8704939c05"
 branch_labels = None
 depends_on = None
 
