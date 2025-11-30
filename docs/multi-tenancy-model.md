@@ -18,7 +18,7 @@ Bakalr CMS uses a **SaaS-style multi-tenancy model** where each organization ope
 ### Roles & Hierarchy
 
 | Role | Level | Description | Auto-Assigned |
-|------|-------|-------------|---------------|
+| ------ | ----- | ------------- | --------------- |
 | **Admin** | 80 | Organization owner/administrator | ✅ First user only |
 | **Editor** | 60 | Create, edit, publish content | ❌ Manual |
 | **Author** | 40 | Create and edit own content | ❌ Manual |
@@ -57,7 +57,7 @@ Bakalr CMS uses a **SaaS-style multi-tenancy model** where each organization ope
 ### Role-Permission Matrix
 
 | Permission | Admin | Editor | Author | Viewer |
-|------------|-------|--------|--------|--------|
+| ------------ | ----- | ------ | ------ | ------ |
 | content.read | ✅ | ✅ | ✅ | ✅ |
 | content.create | ✅ | ✅ | ✅ | ❌ |
 | content.update | ✅ | ✅ | ✅* | ❌ |
@@ -179,11 +179,13 @@ If migrating from single-tenant system:
 ## Best Practices
 
 ### For Solo Developers
+
 - Use one organization per project
 - You're automatically admin with full access
 - Create content types freely
 
 ### For Teams
+
 - **Owner** creates organization during registration
 - **Employees** need invitation system (coming in v0.2.0)
 - Assign minimum necessary roles
@@ -192,6 +194,7 @@ If migrating from single-tenant system:
 - Keep "admin" limited to 1-2 people
 
 ### For Agencies
+
 - Create separate organization per client
 - Use multi-organization support (Phase 19)
 - Switch between client organizations
