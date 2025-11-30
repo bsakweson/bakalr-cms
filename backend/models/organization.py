@@ -16,7 +16,7 @@ class Organization(Base, IDMixin, TimestampMixin):
     __tablename__ = "organizations"
 
     # Basic Info
-    name = Column(String(255), nullable=False, index=True)
+    name = Column(String(255), nullable=False, unique=True, index=True)
     slug = Column(String(100), unique=True, nullable=False, index=True)
     description = Column(Text, nullable=True)
     

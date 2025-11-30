@@ -2,6 +2,7 @@
 FastAPI application configuration and initialization
 """
 
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -46,6 +47,13 @@ async def lifespan(app: FastAPI):
     print(f"🚀 Starting {settings.PROJECT_NAME} v{settings.VERSION}")
     print(f"📝 Environment: {settings.ENVIRONMENT}")
     print(f"🔧 Debug mode: {settings.DEBUG}")
+
+    # Skip database seeding in test mode (tests handle their own DB setup)
+    if not os.getenv("TESTING", "false").lower() == "true":
+        # Seed default permissions
+        print("🌱 Seeding default permissions...")
+        from backend.core.seed_permissions import init_permissions
+        init_permissions()
 
     # Initialize Redis cache
     print("🔌 Connecting to Redis cache...")

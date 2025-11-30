@@ -224,6 +224,8 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
     ports:
       - "3000:3000"
+    healthcheck:
+      disable: true
     depends_on:
       - backend
     restart: unless-stopped

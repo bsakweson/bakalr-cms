@@ -11,6 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
 # Set test environment variables before importing app
+os.environ["TESTING"] = "true"  # Indicate we're in test mode
 os.environ["MEILISEARCH_URL"] = "http://localhost:7700"
 os.environ["MEILISEARCH_API_KEY"] = "change-this-secure-key-min-32-chars"
 os.environ["REDIS_URL"] = "redis://localhost:6379/0"
@@ -43,6 +44,11 @@ def db_session():
     """Create a fresh database session for each test"""
     Base.metadata.create_all(bind=engine)
     session = TestingSessionLocal()
+    
+    # Seed default permissions for tests
+    from backend.core.seed_permissions import seed_default_permissions
+    seed_default_permissions(session)
+    
     try:
         yield session
     finally:
