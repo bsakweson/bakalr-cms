@@ -12,6 +12,7 @@ from backend.api.schemas.auth import (
     UserCreate,
     UserLogin,
     UserResponse,
+    UserUpdate,
 )
 from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
@@ -63,8 +64,18 @@ async def register(
 
     if not organization_id:
         # Create new organization for first user
-        org_name = user_data.email.split("@")[0] + "'s Organization"
-        org_slug = user_data.email.split("@")[0].lower().replace(".", "-")
+        # organization_name is now required (validated by schema)
+        org_name = user_data.organization_name
+        
+        # Check if organization name already exists
+        existing_org = db.query(Organization).filter(Organization.name == org_name).first()
+        if existing_org:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Organization '{org_name}' already exists. Please choose a different name or contact the organization owner to be invited."
+            )
+        
+        org_slug = user_data.organization_name.lower().replace(" ", "-").replace("'", "").replace(".", "-")
 
         # Ensure unique slug
         base_slug = org_slug
@@ -87,12 +98,22 @@ async def register(
 
     # Create user
     hashed_password = get_password_hash(user_data.password)
+    
+    # Handle full_name splitting
+    first_name = user_data.first_name
+    last_name = user_data.last_name
+    
+    if user_data.full_name:
+        # Split full_name into first_name and last_name
+        parts = user_data.full_name.strip().split(None, 1)  # Split on first whitespace
+        first_name = parts[0] if len(parts) > 0 else None
+        last_name = parts[1] if len(parts) > 1 else None
 
     user = User(
         email=user_data.email,
         username=user_data.username,
-        first_name=user_data.first_name,
-        last_name=user_data.last_name,
+        first_name=first_name,
+        last_name=last_name,
         hashed_password=hashed_password,
         organization_id=organization_id,
         is_active=True,
@@ -100,6 +121,73 @@ async def register(
     )
 
     db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    # Assign default role to new user
+    from backend.models.rbac import Role
+    
+    # If this is the first user in the organization (org creator), assign admin role
+    user_count = db.query(User).filter(User.organization_id == organization_id).count()
+    
+    if user_count == 1:
+        # First user = Organization Owner (Admin role)
+        admin_role = db.query(Role).filter(
+            Role.organization_id == organization_id,
+            Role.name == "admin"
+        ).first()
+        
+        if not admin_role:
+            # Create admin role if it doesn't exist
+            from backend.models.rbac import Permission
+            
+            admin_role = Role(
+                organization_id=organization_id,
+                name="admin",
+                description="Organization administrator (auto-created)",
+                is_system_role=True,
+                level=80
+            )
+            db.add(admin_role)
+            db.flush()
+            
+            # Assign all non-system permissions to admin
+            permissions = db.query(Permission).filter(
+                Permission.category != "system"
+            ).all()
+            admin_role.permissions.extend(permissions)
+        
+        user.roles.append(admin_role)
+        print(f"✅ Assigned admin role to organization creator: {user.email}")
+    else:
+        # Subsequent users = Viewer role (least permissions)
+        viewer_role = db.query(Role).filter(
+            Role.organization_id == organization_id,
+            Role.name == "viewer"
+        ).first()
+        
+        if not viewer_role:
+            # Create viewer role if it doesn't exist
+            viewer_role = Role(
+                organization_id=organization_id,
+                name="viewer",
+                description="Read-only access (auto-created)",
+                is_system_role=True,
+                level=20
+            )
+            db.add(viewer_role)
+            db.flush()
+            
+            # Assign only read permissions
+            from backend.models.rbac import Permission
+            read_permissions = db.query(Permission).filter(
+                Permission.name.like("%.read")
+            ).all()
+            viewer_role.permissions.extend(read_permissions)
+        
+        user.roles.append(viewer_role)
+        print(f"ℹ️  Assigned viewer role to new user: {user.email}")
+    
     db.commit()
     db.refresh(user)
 
@@ -111,7 +199,7 @@ async def register(
         user_id=user.id, organization_id=user.organization_id, email=user.email, roles=role_names
     )
 
-    # Prepare user response
+    # Prepare user response (include organization details)
     user_response = UserResponse(
         id=user.id,
         email=user.email,
@@ -122,8 +210,11 @@ async def register(
         is_active=user.is_active,
         is_email_verified=user.is_email_verified,
         avatar_url=user.avatar_url,
+        bio=user.bio,
+        preferences=user.preferences,
         roles=role_names,
         permissions=PermissionChecker.get_user_permissions(user),
+        organization=organization,  # Include organization in response
     )
 
     # Send welcome email (async, non-blocking)
@@ -154,16 +245,24 @@ async def register(
 @limiter.limit(get_rate_limit())
 async def login(request: Request, credentials: UserLogin, db: Session = Depends(get_db)):
     """
-    Login with email and password
+    Login with email/username and password
 
     Returns access token, refresh token, and user information
     """
-    # Find user by email
-    user = db.query(User).filter(User.email == credentials.email).first()
+    # Find user by email or username
+    if credentials.email:
+        user = db.query(User).filter(User.email == credentials.email).first()
+    elif credentials.username:
+        user = db.query(User).filter(User.username == credentials.username).first()
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Either email or username must be provided"
+        )
 
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect email or password"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect credentials"
         )
 
     # Verify password
@@ -184,6 +283,10 @@ async def login(request: Request, credentials: UserLogin, db: Session = Depends(
         user_id=user.id, organization_id=user.organization_id, email=user.email, roles=role_names
     )
 
+    # Get organization details
+    from backend.models.organization import Organization
+    organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
+
     # Prepare user response
     user_response = UserResponse(
         id=user.id,
@@ -195,8 +298,11 @@ async def login(request: Request, credentials: UserLogin, db: Session = Depends(
         is_active=user.is_active,
         is_email_verified=user.is_email_verified,
         avatar_url=user.avatar_url,
+        bio=user.bio,
+        preferences=user.preferences,
         roles=role_names,
         permissions=PermissionChecker.get_user_permissions(user),
+        organization=organization,
     )
 
     return TokenResponse(
@@ -250,6 +356,8 @@ async def refresh_token(
         is_active=user.is_active,
         is_email_verified=user.is_email_verified,
         avatar_url=user.avatar_url,
+        bio=user.bio,
+        preferences=user.preferences,
         roles=role_names,
         permissions=PermissionChecker.get_user_permissions(user),
     )
@@ -280,6 +388,8 @@ async def get_current_user_info(request: Request, current_user: User = Depends(g
         is_active=current_user.is_active,
         is_email_verified=current_user.is_email_verified,
         avatar_url=current_user.avatar_url,
+        bio=current_user.bio,
+        preferences=current_user.preferences,
         roles=role_names,
         permissions=PermissionChecker.get_user_permissions(current_user),
     )
@@ -289,34 +399,80 @@ async def get_current_user_info(request: Request, current_user: User = Depends(g
 @limiter.limit(get_rate_limit())
 async def update_profile(
     request: Request,
-    full_name: str = None,
-    email: str = None,
+    profile_data: UserUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
-    Update current user profile
+    Update current user profile.
+    
+    Supports updating:
+    - email (triggers email verification reset)
+    - username
+    - first_name and last_name (or provide full_name to auto-split)
+    - avatar_url
+    - bio (user description, max 500 characters)
+    - preferences (JSON string for user settings like theme, language, notifications)
     """
-    if full_name is not None:
-        # Split full_name into first_name and last_name
-        parts = full_name.strip().split(None, 1)
-        current_user.first_name = parts[0] if len(parts) > 0 else ""
-        current_user.last_name = parts[1] if len(parts) > 1 else ""
-
-    if email is not None and email != current_user.email:
+    # Handle full_name if provided (for backwards compatibility)
+    if hasattr(profile_data, 'full_name') and profile_data.full_name:
+        parts = profile_data.full_name.strip().split(None, 1)
+        profile_data.first_name = parts[0] if len(parts) > 0 else None
+        profile_data.last_name = parts[1] if len(parts) > 1 else None
+    
+    # Update email if provided
+    if profile_data.email is not None and profile_data.email != current_user.email:
         # Check if email already exists
-        existing = db.query(User).filter(User.email == email, User.id != current_user.id).first()
+        existing = db.query(User).filter(User.email == profile_data.email, User.id != current_user.id).first()
         if existing:
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST, detail="Email already in use"
+                status_code=status.HTTP_400_BAD_REQUEST, 
+                detail="Email already in use"
             )
-        current_user.email = email
+        current_user.email = profile_data.email
         current_user.is_email_verified = False  # Require re-verification
+    
+    # Update username if provided
+    if profile_data.username is not None:
+        # Check if username already exists
+        if profile_data.username:  # Only check if not empty
+            existing = db.query(User).filter(
+                User.username == profile_data.username, 
+                User.id != current_user.id
+            ).first()
+            if existing:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Username already in use"
+                )
+        current_user.username = profile_data.username or None
+    
+    # Update names if provided
+    if profile_data.first_name is not None:
+        current_user.first_name = profile_data.first_name
+    
+    if profile_data.last_name is not None:
+        current_user.last_name = profile_data.last_name
+    
+    # Update avatar URL if provided
+    if profile_data.avatar_url is not None:
+        current_user.avatar_url = profile_data.avatar_url
+    
+    # Update bio if provided
+    if profile_data.bio is not None:
+        current_user.bio = profile_data.bio
+    
+    # Update preferences if provided
+    if profile_data.preferences is not None:
+        current_user.preferences = profile_data.preferences
 
     db.commit()
     db.refresh(current_user)
 
     role_names = [role.name for role in current_user.roles]
+    
+    # Get organization for response
+    organization = db.query(Organization).filter(Organization.id == current_user.organization_id).first()
 
     return UserResponse(
         id=current_user.id,
@@ -328,8 +484,11 @@ async def update_profile(
         is_active=current_user.is_active,
         is_email_verified=current_user.is_email_verified,
         avatar_url=current_user.avatar_url,
+        bio=current_user.bio,
+        preferences=current_user.preferences,
         roles=role_names,
         permissions=PermissionChecker.get_user_permissions(current_user),
+        organization=organization,
     )
 
 
