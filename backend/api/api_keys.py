@@ -74,13 +74,14 @@ def create_api_key(
 
     # Return with full key (only time it's shown)
     scopes_list = api_key.permissions.split(",") if api_key.permissions else []
-    
+
     # Convert expires_at to datetime if it's a string
     expires_at_value = api_key.expires_at
     if isinstance(expires_at_value, str):
         from dateutil import parser
+
         expires_at_value = parser.parse(expires_at_value)
-    
+
     return APIKeyWithSecretSchema(
         id=api_key.id,
         name=api_key.name,
@@ -139,18 +140,20 @@ def list_api_keys(
     items = []
     for key in api_keys:
         scopes_list = key.permissions.split(",") if key.permissions else []
-        
+
         # Convert datetime strings if needed
         expires_at_value = key.expires_at
         if isinstance(expires_at_value, str):
             from dateutil import parser
+
             expires_at_value = parser.parse(expires_at_value)
-        
+
         last_used_at_value = key.last_used_at
         if isinstance(last_used_at_value, str):
             from dateutil import parser
+
             last_used_at_value = parser.parse(last_used_at_value)
-        
+
         items.append(
             APIKeyResponseSchema(
                 id=key.id,
@@ -204,18 +207,20 @@ def get_api_key(
         raise NotFoundException(detail=f"API key with ID {key_id} not found")
 
     scopes_list = api_key.permissions.split(",") if api_key.permissions else []
-    
+
     # Convert datetime strings if needed
     expires_at_value = api_key.expires_at
     if isinstance(expires_at_value, str):
         from dateutil import parser
+
         expires_at_value = parser.parse(expires_at_value)
-    
+
     last_used_at_value = api_key.last_used_at
     if isinstance(last_used_at_value, str):
         from dateutil import parser
+
         last_used_at_value = parser.parse(last_used_at_value)
-    
+
     return APIKeyResponseSchema(
         id=api_key.id,
         name=api_key.name,
@@ -328,12 +333,12 @@ def add_permissions_to_api_key(
 
     # Get current permissions
     current_scopes = api_key.permissions.split(",") if api_key.permissions else []
-    
+
     # Add new permissions (avoiding duplicates)
     for perm in permissions:
         if perm not in current_scopes:
             current_scopes.append(perm)
-    
+
     # Update API key
     api_key.permissions = ",".join(current_scopes)
     db.commit()

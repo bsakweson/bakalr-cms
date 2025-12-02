@@ -556,7 +556,7 @@ async def list_content_entries(
             return ContentEntryListResponse(
                 items=[], total=0, page=page, page_size=page_size, pages=0
             )
-    
+
     query = (
         db.query(ContentEntry)
         .filter(ContentEntry.content_type_id.in_(content_type_subquery))
