@@ -3,18 +3,24 @@ Pydantic schemas for authentication
 """
 
 from typing import List, Optional
+from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 
 class OrganizationResponse(BaseModel):
     """Simple organization response for user objects"""
 
-    id: int
+    id: str
     name: str
     slug: str
 
     model_config = ConfigDict(from_attributes=True)
+
+    @field_validator("id", mode="before")
+    @classmethod
+    def convert_uuid_to_str(cls, value):
+        return str(value) if isinstance(value, UUID) else value
 
 
 class UserBase(BaseModel):
@@ -71,8 +77,8 @@ class UserUpdate(BaseModel):
 class UserResponse(UserBase):
     """Schema for user response"""
 
-    id: int
-    organization_id: int
+    id: str
+    organization_id: str
     is_active: bool
     is_email_verified: bool
     avatar_url: Optional[str] = None
@@ -83,6 +89,11 @@ class UserResponse(UserBase):
     organization: Optional[OrganizationResponse] = None
 
     model_config = ConfigDict(from_attributes=True)
+
+    @field_validator("id", "organization_id", mode="before")
+    @classmethod
+    def convert_uuid_to_str(cls, value):
+        return str(value) if isinstance(value, UUID) else value
 
 
 class TokenResponse(BaseModel):

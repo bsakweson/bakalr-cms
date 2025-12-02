@@ -115,12 +115,16 @@ class SearchService:
             "slug": entry.slug,
             "content_data": content_text,
             "status": entry.status,
-            "content_type_id": entry.content_type_id,
+            "content_type_id": str(entry.content_type_id),
             "content_type_name": content_type.name if content_type else "",
             "content_type_slug": content_type.api_id if content_type else "",
-            "author_id": entry.author_id,
+            "author_id": str(entry.author_id) if entry.author_id else None,
             "author_name": author.email if author else "",
-            "organization_id": content_type.organization_id if content_type else None,
+            "organization_id": (
+                str(content_type.organization_id)
+                if content_type and content_type.organization_id
+                else None
+            ),
             "tags": [],
             "created_at": entry.created_at.isoformat() if entry.created_at else None,
             "updated_at": entry.updated_at.isoformat() if entry.updated_at else None,

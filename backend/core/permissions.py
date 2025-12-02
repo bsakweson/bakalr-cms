@@ -36,6 +36,12 @@ class PermissionChecker:
         Returns:
             True if user has permission, False otherwise
         """
+        # Check if user is the organization owner - owners have all permissions
+        from backend.models.organization import Organization
+        org = db.query(Organization).filter(Organization.id == user.organization_id).first()
+        if org and org.owner_id == user.id:
+            return True
+        
         # Use hierarchy if enabled
         if use_hierarchy:
             return PermissionHierarchyService.has_permission_with_inheritance(

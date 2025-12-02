@@ -3,6 +3,7 @@ Field-level and content type-specific permission management endpoints.
 """
 
 from typing import List
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import and_
@@ -287,7 +288,7 @@ async def create_content_type_permission(
 @limiter.limit(get_rate_limit())
 async def get_role_field_permissions(
     request: Request,
-    role_id: int,
+    role_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -331,7 +332,7 @@ async def get_role_field_permissions(
 @limiter.limit(get_rate_limit())
 async def get_accessible_fields(
     request: Request,
-    content_type_id: int,
+    content_type_id: UUID,
     permission_name: str,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -421,8 +422,8 @@ async def check_field_permission(
 @limiter.limit(get_rate_limit())
 async def revoke_field_permission(
     request: Request,
-    permission_id: int,
-    role_id: int,
+    permission_id: UUID,
+    role_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):

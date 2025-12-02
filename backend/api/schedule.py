@@ -2,6 +2,8 @@
 Content Scheduling API endpoints.
 """
 
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -26,7 +28,7 @@ router = APIRouter(prefix="/schedule", tags=["schedule"])
 @limiter.limit(get_rate_limit())
 async def schedule_content_action(
     request_obj: Request,
-    content_entry_id: int,
+    content_entry_id: UUID,
     request: ScheduleContentRequest,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
@@ -74,7 +76,7 @@ async def schedule_content_action(
 @limiter.limit(get_rate_limit())
 async def get_content_schedules(
     request: Request,
-    content_entry_id: int,
+    content_entry_id: UUID,
     page: int = 1,
     page_size: int = 20,
     current_user: User = Depends(get_current_user),
@@ -137,7 +139,7 @@ async def get_content_schedules(
 @limiter.limit(get_rate_limit())
 async def cancel_schedule(
     request: Request,
-    schedule_id: int,
+    schedule_id: UUID,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):

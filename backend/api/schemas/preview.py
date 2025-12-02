@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 class PreviewTokenRequest(BaseModel):
     """Request schema for generating preview token."""
 
-    content_entry_id: int = Field(..., description="ID of the content entry to preview")
+    content_entry_id: str = Field(..., description="ID of the content entry to preview")
     expires_in_hours: int = Field(
         default=24,
         ge=1,
@@ -26,7 +26,7 @@ class PreviewTokenResponse(BaseModel):
     preview_url: str = Field(..., description="Full preview URL with signed token")
     token: str = Field(..., description="Signed preview token")
     expires_at: datetime = Field(..., description="Token expiration timestamp")
-    content_entry_id: int = Field(..., description="ID of the content entry")
+    content_entry_id: str = Field(..., description="ID of the content entry")
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -40,9 +40,9 @@ class PreviewAccessRequest(BaseModel):
 class PreviewContentResponse(BaseModel):
     """Content response for preview mode (includes draft content)."""
 
-    id: int
-    content_type_id: int
-    organization_id: int
+    id: str
+    content_type_id: str
+    organization_id: str
     title: str
     slug: str
     status: str  # Can be 'draft' or 'published'

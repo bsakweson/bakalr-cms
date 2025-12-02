@@ -168,6 +168,13 @@ async def register(
             admin_role.permissions.extend(permissions)
 
         user.roles.append(admin_role)
+
+        # Set this user as organization owner
+        org = db.query(Organization).filter(Organization.id == organization_id).first()
+        if org and not org.owner_id:
+            org.owner_id = user.id
+            print(f"✅ Set {user.email} as owner of organization: {org.name}")
+
         print(f"✅ Assigned admin role to organization creator: {user.email}")
     else:
         # Subsequent users = Viewer role (least permissions)
@@ -342,7 +349,7 @@ async def refresh_token(
         )
 
     # Get user
-    user = db.query(User).filter(User.id == int(token_data.sub)).first()
+    user = db.query(User).filter(User.id == token_data.sub).first()
 
     if not user or not user.is_active:
         raise HTTPException(

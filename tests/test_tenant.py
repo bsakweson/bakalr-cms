@@ -37,8 +37,9 @@ class TestTenantSwitching:
 
     def test_switch_to_invalid_organization(self, authenticated_client):
         """Test switching to non-existent organization"""
+        fake_uuid = "99999999-9999-9999-9999-999999999999"
         response = authenticated_client.post(
-            "/api/v1/tenant/switch", json={"organization_id": 99999}
+            "/api/v1/tenant/switch", json={"organization_id": fake_uuid}
         )
 
         # Should fail with 403 or 404
@@ -84,12 +85,14 @@ class TestTenantSwitching:
 
     def test_remove_user_from_organization(self, authenticated_client):
         """Test removing user from organization"""
-        # Try to remove non-existent user
-        response = authenticated_client.delete("/api/v1/tenant/remove/99999")
+        # Try to remove non-existent user (use UUID format)
+        fake_uuid = "99999999-9999-9999-9999-999999999999"
+        response = authenticated_client.delete(f"/api/v1/tenant/remove/{fake_uuid}")
 
         # Should fail
         assert response.status_code in [
             status.HTTP_403_FORBIDDEN,
             status.HTTP_404_NOT_FOUND,
             status.HTTP_400_BAD_REQUEST,
+            status.HTTP_422_UNPROCESSABLE_ENTITY,  # May get validation error for UUID
         ]

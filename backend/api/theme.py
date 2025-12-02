@@ -1,5 +1,7 @@
 """Theme management API endpoints."""
 
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
@@ -13,7 +15,7 @@ from backend.api.schemas.theme import (
     ThemeUpdate,
 )
 from backend.core.default_themes import DEFAULT_THEMES, get_default_active_theme
-from backend.core.dependencies import get_current_user
+from backend.core.dependencies import get_current_user, get_current_user_flexible
 from backend.core.permissions import PermissionChecker
 from backend.db.session import get_db
 from backend.models.theme import Theme
@@ -121,7 +123,7 @@ def list_themes(
 
 @router.get("/{theme_id}", response_model=ThemeResponse)
 def get_theme(
-    theme_id: int,
+    theme_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -148,13 +150,14 @@ def get_theme(
 
 @router.get("/active/current", response_model=ThemeResponse)
 def get_active_theme(
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
     Get the currently active theme for the organization.
 
     If no theme is set as active, returns the default Dark Chocolate theme.
+    Supports both JWT and API key authentication.
     """
     active_theme = (
         db.query(Theme)
@@ -180,7 +183,7 @@ def get_active_theme(
 
 @router.patch("/{theme_id}", response_model=ThemeResponse)
 def update_theme(
-    theme_id: int,
+    theme_id: UUID,
     theme_data: ThemeUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -242,7 +245,7 @@ def update_theme(
 
 @router.delete("/{theme_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_theme(
-    theme_id: int,
+    theme_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -347,9 +350,147 @@ def set_active_theme(
     return theme
 
 
+@router.post("/{theme_id}/activate", response_model=ThemeResponse)
+def activate_theme(
+    theme_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Activate a theme for the organization (alternative endpoint for UI).
+
+    Requires 'themes.manage' permission.
+    Only one theme can be active at a time.
+    """
+    # Check permission
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You don't have permission to manage themes",
+        )
+
+    # Get the theme to activate
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
+        )
+        .first()
+    )
+
+    if not theme:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Theme not found",
+        )
+
+    # Deactivate all other themes
+    db.query(Theme).filter(Theme.organization_id == current_user.organization_id).update(
+        {"is_active": False}
+    )
+
+    # Activate this theme
+    theme.is_active = True
+    db.commit()
+    db.refresh(theme)
+
+    return theme
+
+
+@router.post("/{theme_id}/deactivate", response_model=ThemeResponse)
+def deactivate_theme(
+    theme_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Deactivate a theme for the organization.
+
+    Requires 'themes.manage' permission.
+    """
+    # Check permission
+    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You don't have permission to manage themes",
+        )
+
+    # Get the theme to deactivate
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
+        )
+        .first()
+    )
+
+    if not theme:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Theme not found",
+        )
+
+    # Deactivate this theme
+    theme.is_active = False
+    db.commit()
+    db.refresh(theme)
+
+    return theme
+
+
+@router.get("/{theme_id}/export")
+def export_theme(
+    theme_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Export theme configuration as JSON.
+
+    Returns the complete theme definition that can be imported elsewhere.
+    """
+    theme = (
+        db.query(Theme)
+        .filter(
+            and_(
+                Theme.id == theme_id,
+                Theme.organization_id == current_user.organization_id,
+            )
+        )
+        .first()
+    )
+
+    if not theme:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Theme not found",
+        )
+
+    # Export as dictionary
+    export_data = {
+        "name": theme.name,
+        "display_name": theme.display_name,
+        "description": theme.description,
+        "colors": theme.colors,
+        "typography": theme.typography,
+        "spacing": theme.spacing,
+        "borderRadius": theme.borderRadius,
+        "shadows": theme.shadows,
+        "custom_properties": theme.custom_properties,
+    }
+
+    return export_data
+
+
 @router.get("/{theme_id}/css-variables", response_model=ThemeCSSVariables)
 def get_theme_css_variables(
-    theme_id: int,
+    theme_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -462,7 +603,7 @@ def initialize_default_themes(
 
 @router.post("/{theme_id}/clone", response_model=ThemeResponse, status_code=status.HTTP_201_CREATED)
 def clone_theme(
-    theme_id: int,
+    theme_id: UUID,
     new_name: str = Query(..., description="Name for the cloned theme"),
     new_display_name: str = Query(..., description="Display name for the cloned theme"),
     current_user: User = Depends(get_current_user),

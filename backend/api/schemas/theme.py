@@ -5,6 +5,8 @@ from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from backend.api.schemas.base import UUIDMixin
+
 
 class ColorPalette(BaseModel):
     """Color palette configuration."""
@@ -122,11 +124,11 @@ class ThemeUpdate(BaseModel):
     custom_properties: Optional[Dict[str, Any]] = None
 
 
-class ThemeResponse(BaseModel):
+class ThemeResponse(UUIDMixin):
     """Schema for theme response."""
 
-    id: int
-    organization_id: int
+    id: str
+    organization_id: str
     name: str
     display_name: str
     description: Optional[str]
@@ -144,7 +146,7 @@ class ThemeResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-class ThemeListResponse(BaseModel):
+class ThemeListResponse(UUIDMixin):
     """Schema for list of themes."""
 
     themes: list[ThemeResponse]
@@ -156,13 +158,13 @@ class ThemeListResponse(BaseModel):
 class ThemeSetActive(BaseModel):
     """Schema for setting a theme as active."""
 
-    theme_id: int = Field(..., description="ID of the theme to set as active")
+    theme_id: str = Field(..., description="ID of the theme to set as active")
 
 
 class ThemeCSSVariables(BaseModel):
     """Schema for CSS variables export."""
 
-    theme_id: int
+    theme_id: str
     theme_name: str
     css_variables: Dict[str, str] = Field(..., description="CSS custom properties")
     css_string: str = Field(..., description="CSS :root block with variables")

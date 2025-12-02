@@ -3,6 +3,8 @@ Tenant/Organization switching API endpoints
 Allows users to manage multi-organization memberships and switch context
 """
 
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
@@ -355,7 +357,7 @@ async def invite_user_to_organization(
 @limiter.limit(get_rate_limit())
 async def remove_user_from_organization(
     request: Request,
-    user_id: int,
+    user_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -383,6 +385,18 @@ async def remove_user_from_organization(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="You cannot remove yourself from the organization",
+        )
+
+    # Get organization to check ownership
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
+
+    # Cannot remove organization owner
+    if organization and organization.owner_id == user_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot remove organization owner. Please transfer ownership first.",
         )
 
     # Find membership

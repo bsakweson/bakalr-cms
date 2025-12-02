@@ -5,6 +5,7 @@ SEO Management API endpoints
 import json
 from datetime import datetime, timezone
 from typing import Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from sqlalchemy import select
@@ -42,8 +43,8 @@ router = APIRouter(prefix="/seo", tags=["seo"])
 async def validate_content_slug(
     request: Request,
     slug: str,
-    content_type_id: Optional[int] = None,
-    exclude_entry_id: Optional[int] = None,
+    content_type_id: Optional[UUID] = None,
+    exclude_entry_id: Optional[UUID] = None,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -113,7 +114,7 @@ async def validate_content_slug(
 @limiter.limit(get_rate_limit())
 async def analyze_content_seo(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -157,7 +158,7 @@ async def analyze_content_seo(
 @limiter.limit(get_rate_limit())
 async def update_content_seo(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     seo_data: CompleteSEOData,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -197,7 +198,7 @@ async def update_content_seo(
 @limiter.limit(get_rate_limit())
 async def generate_article_structured_data(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     author: Optional[str] = None,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -428,7 +429,7 @@ async def generate_slug_from_text(
 @limiter.limit(get_rate_limit())
 async def preview_meta_tags(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):

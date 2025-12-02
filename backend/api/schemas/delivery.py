@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 class DeliveryContentResponse(BaseModel):
     """Optimized content response for frontend delivery."""
 
-    id: int
+    id: str
     slug: str
     title: str
     fields: Dict[str, Any] = Field(..., description="Content fields")
@@ -33,7 +33,7 @@ class DeliveryContentListResponse(BaseModel):
 class DeliveryContentDetailResponse(BaseModel):
     """Detailed content response with SEO metadata."""
 
-    id: int
+    id: str
     slug: str
     title: str
     fields: Dict[str, Any]

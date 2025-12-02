@@ -38,8 +38,9 @@ class TestNotifications:
 
     def test_mark_notification_as_read(self, authenticated_client):
         """Test marking a notification as read"""
-        # Try to mark a notification as read
-        response = authenticated_client.patch("/api/v1/notifications/1/read")
+        # Try to mark a notification as read (use valid UUID format)
+        test_uuid = "00000000-0000-0000-0000-000000000001"
+        response = authenticated_client.patch(f"/api/v1/notifications/{test_uuid}/read")
 
         # May not exist or require different endpoint
         assert response.status_code in [
@@ -68,7 +69,8 @@ class TestNotifications:
 
     def test_delete_notification(self, authenticated_client):
         """Test deleting a notification"""
-        response = authenticated_client.delete("/api/v1/notifications/1")
+        test_uuid = "00000000-0000-0000-0000-000000000001"
+        response = authenticated_client.delete(f"/api/v1/notifications/{test_uuid}")
 
         # Notification may not exist
         assert response.status_code in [

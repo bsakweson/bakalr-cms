@@ -8,6 +8,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.api.schemas.base import UUIDMixin
+
 
 class MediaType(str, Enum):
     """Media type categories"""
@@ -19,10 +21,10 @@ class MediaType(str, Enum):
     OTHER = "other"
 
 
-class MediaUploadResponse(BaseModel):
+class MediaUploadResponse(UUIDMixin):
     """Response after successful upload"""
 
-    id: int
+    id: str
     filename: str
     original_filename: str
     url: str
@@ -44,12 +46,12 @@ class MediaUpdateRequest(BaseModel):
     tags: Optional[List[str]] = None
 
 
-class MediaResponse(BaseModel):
+class MediaResponse(UUIDMixin):
     """Full media response"""
 
-    id: int
-    organization_id: int
-    uploaded_by_id: Optional[int]
+    id: str
+    organization_id: str
+    uploaded_by_id: Optional[str]
     filename: str
     original_filename: str
     file_path: str
@@ -87,7 +89,7 @@ class MediaFilterParams(BaseModel):
     mime_type: Optional[str] = None
     search: Optional[str] = None
     tags: Optional[List[str]] = None
-    uploaded_by_id: Optional[int] = None
+    uploaded_by_id: Optional[str] = None
     min_size: Optional[int] = None
     max_size: Optional[int] = None
     page: int = Field(1, ge=1)
@@ -108,7 +110,7 @@ class MediaStats(BaseModel):
 class ThumbnailRequest(BaseModel):
     """Request to generate thumbnail"""
 
-    media_id: int
+    media_id: str
     width: Optional[int] = Field(None, ge=50, le=2000)
     height: Optional[int] = Field(None, ge=50, le=2000)
     quality: int = Field(85, ge=1, le=100)
@@ -117,7 +119,7 @@ class ThumbnailRequest(BaseModel):
 class ThumbnailResponse(BaseModel):
     """Thumbnail generation response"""
 
-    media_id: int
+    media_id: str
     thumbnail_url: str
     width: int
     height: int

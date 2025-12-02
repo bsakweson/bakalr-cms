@@ -3,6 +3,7 @@ API key management endpoints.
 """
 
 from typing import Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Request
 from sqlalchemy.orm import Session
@@ -73,6 +74,13 @@ def create_api_key(
 
     # Return with full key (only time it's shown)
     scopes_list = api_key.permissions.split(",") if api_key.permissions else []
+    
+    # Convert expires_at to datetime if it's a string
+    expires_at_value = api_key.expires_at
+    if isinstance(expires_at_value, str):
+        from dateutil import parser
+        expires_at_value = parser.parse(expires_at_value)
+    
     return APIKeyWithSecretSchema(
         id=api_key.id,
         name=api_key.name,
@@ -81,7 +89,7 @@ def create_api_key(
         scopes=scopes_list,
         is_active=api_key.is_active,
         created_at=api_key.created_at,
-        expires_at=api_key.expires_at,
+        expires_at=expires_at_value,
         organization_id=api_key.organization_id,
     )
 
@@ -131,6 +139,18 @@ def list_api_keys(
     items = []
     for key in api_keys:
         scopes_list = key.permissions.split(",") if key.permissions else []
+        
+        # Convert datetime strings if needed
+        expires_at_value = key.expires_at
+        if isinstance(expires_at_value, str):
+            from dateutil import parser
+            expires_at_value = parser.parse(expires_at_value)
+        
+        last_used_at_value = key.last_used_at
+        if isinstance(last_used_at_value, str):
+            from dateutil import parser
+            last_used_at_value = parser.parse(last_used_at_value)
+        
         items.append(
             APIKeyResponseSchema(
                 id=key.id,
@@ -139,8 +159,8 @@ def list_api_keys(
                 scopes=scopes_list,
                 is_active=key.is_active,
                 created_at=key.created_at,
-                expires_at=key.expires_at,
-                last_used_at=key.last_used_at,
+                expires_at=expires_at_value,
+                last_used_at=last_used_at_value,
                 organization_id=key.organization_id,
             )
         )
@@ -162,7 +182,7 @@ def list_api_keys(
 @limiter.limit(get_rate_limit())
 def get_api_key(
     request: Request,
-    key_id: int,
+    key_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -184,6 +204,18 @@ def get_api_key(
         raise NotFoundException(detail=f"API key with ID {key_id} not found")
 
     scopes_list = api_key.permissions.split(",") if api_key.permissions else []
+    
+    # Convert datetime strings if needed
+    expires_at_value = api_key.expires_at
+    if isinstance(expires_at_value, str):
+        from dateutil import parser
+        expires_at_value = parser.parse(expires_at_value)
+    
+    last_used_at_value = api_key.last_used_at
+    if isinstance(last_used_at_value, str):
+        from dateutil import parser
+        last_used_at_value = parser.parse(last_used_at_value)
+    
     return APIKeyResponseSchema(
         id=api_key.id,
         name=api_key.name,
@@ -191,8 +223,8 @@ def get_api_key(
         scopes=scopes_list,
         is_active=api_key.is_active,
         created_at=api_key.created_at,
-        expires_at=api_key.expires_at,
-        last_used_at=api_key.last_used_at,
+        expires_at=expires_at_value,
+        last_used_at=last_used_at_value,
         organization_id=api_key.organization_id,
     )
 
@@ -206,7 +238,7 @@ def get_api_key(
 @limiter.limit(get_rate_limit())
 def update_api_key(
     request: Request,
-    key_id: int,
+    key_id: UUID,
     data: APIKeyUpdateSchema,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -260,6 +292,66 @@ def update_api_key(
     return APIKeyResponseSchema.model_validate(api_key)
 
 
+@router.post(
+    "/{key_id}/permissions",
+    response_model=APIKeyResponseSchema,
+    summary="Add permissions to API key",
+    description="Add one or more permissions to an existing API key.",
+)
+@limiter.limit(get_rate_limit())
+def add_permissions_to_api_key(
+    request: Request,
+    key_id: UUID,
+    permissions: list[str],
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Add permissions to an existing API key.
+
+    - **permissions**: List of permissions to add (e.g., ['themes.read', 'themes.manage'])
+
+    Existing permissions are preserved, duplicates are ignored.
+    """
+    # Get API key
+    api_key = (
+        db.query(APIKey)
+        .filter(
+            APIKey.id == key_id,
+            APIKey.organization_id == current_user.organization_id,
+        )
+        .first()
+    )
+
+    if not api_key:
+        raise NotFoundException(detail=f"API key with ID {key_id} not found")
+
+    # Get current permissions
+    current_scopes = api_key.permissions.split(",") if api_key.permissions else []
+    
+    # Add new permissions (avoiding duplicates)
+    for perm in permissions:
+        if perm not in current_scopes:
+            current_scopes.append(perm)
+    
+    # Update API key
+    api_key.permissions = ",".join(current_scopes)
+    db.commit()
+    db.refresh(api_key)
+
+    return APIKeyResponseSchema(
+        id=api_key.id,
+        name=api_key.name,
+        key_prefix=api_key.key_prefix,
+        scopes=current_scopes,
+        is_active=api_key.is_active,
+        created_at=api_key.created_at,
+        expires_at=api_key.expires_at,
+        last_used_at=api_key.last_used_at,
+        organization_id=api_key.organization_id,
+    )
+
+
 @router.delete(
     "/{key_id}",
     status_code=204,
@@ -269,7 +361,7 @@ def update_api_key(
 @limiter.limit(get_rate_limit())
 def delete_api_key(
     request: Request,
-    key_id: int,
+    key_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):

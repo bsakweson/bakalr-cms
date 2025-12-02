@@ -7,6 +7,8 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.api.schemas.base import UUIDMixin
+
 
 class ScheduleContentRequest(BaseModel):
     """Request schema for scheduling content publish/unpublish."""
@@ -19,11 +21,11 @@ class ScheduleContentRequest(BaseModel):
     scheduled_at: datetime = Field(..., description="When to execute the action (timezone-aware)")
 
 
-class ScheduleContentResponse(BaseModel):
+class ScheduleContentResponse(UUIDMixin):
     """Response schema for scheduled content action."""
 
     id: int = Field(..., description="Schedule ID")
-    content_entry_id: int
+    content_entry_id: str
     action: str
     scheduled_at: datetime
     status: str = Field(
@@ -36,7 +38,7 @@ class ScheduleContentResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-class ScheduleListResponse(BaseModel):
+class ScheduleListResponse(UUIDMixin):
     """List of scheduled content actions."""
 
     items: list[ScheduleContentResponse]

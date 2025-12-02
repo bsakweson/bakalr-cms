@@ -7,6 +7,8 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.api.schemas.base import UUIDMixin
+
 # ContentType Schemas
 
 
@@ -43,11 +45,11 @@ class ContentTypeUpdate(BaseModel):
     is_active: Optional[bool] = None
 
 
-class ContentTypeResponse(BaseModel):
+class ContentTypeResponse(UUIDMixin):
     """Schema for content type response"""
 
-    id: int
-    organization_id: int
+    id: str
+    organization_id: str
     name: str
     api_id: str
     description: Optional[str]
@@ -67,7 +69,7 @@ class ContentTypeResponse(BaseModel):
 class ContentEntryCreate(BaseModel):
     """Schema for creating a content entry"""
 
-    content_type_id: int
+    content_type_id: str
     data: Dict[str, Any]
     slug: Optional[str] = None
     status: str = "draft"  # draft, published, archived
@@ -95,13 +97,13 @@ class ContentEntryPublish(BaseModel):
     publish_at: Optional[datetime] = None
 
 
-class ContentEntryResponse(BaseModel):
+class ContentEntryResponse(UUIDMixin):
     """Schema for content entry response"""
 
-    id: int
-    content_type_id: int
+    id: str
+    content_type_id: str
     content_type: Optional[Dict[str, Any]] = None
-    author_id: int
+    author_id: str
     data: Dict[str, Any]
     slug: Optional[str]
     status: str

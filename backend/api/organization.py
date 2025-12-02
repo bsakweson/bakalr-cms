@@ -3,6 +3,7 @@ Organization settings management API endpoints
 """
 
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel, EmailStr
@@ -29,7 +30,7 @@ class OrganizationProfileUpdate(BaseModel):
 
 
 class OrganizationProfileResponse(BaseModel):
-    id: int
+    id: UUID
     name: str
     slug: str
     description: Optional[str]
@@ -43,7 +44,7 @@ class OrganizationProfileResponse(BaseModel):
 
 
 class LocaleItem(BaseModel):
-    id: int
+    id: UUID
     code: str
     name: str
     is_default: bool
@@ -222,7 +223,7 @@ async def create_locale(
 @limiter.limit(get_rate_limit())
 async def update_locale(
     request: Request,
-    locale_id: int,
+    locale_id: UUID,
     data: UpdateLocaleRequest,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
@@ -269,7 +270,7 @@ async def update_locale(
 @limiter.limit(get_rate_limit())
 async def delete_locale(
     request: Request,
-    locale_id: int,
+    locale_id: UUID,
     org: Organization = Depends(get_current_organization),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),

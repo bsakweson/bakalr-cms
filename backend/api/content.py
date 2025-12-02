@@ -5,6 +5,7 @@ Content Management API endpoints
 import json
 import logging
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request, status
 from sqlalchemy import func
@@ -23,7 +24,7 @@ from backend.api.schemas.content import (
     ContentTypeUpdate,
 )
 from backend.core.cache import invalidate_cache_pattern
-from backend.core.dependencies import get_current_user
+from backend.core.dependencies import get_current_user, get_current_user_flexible
 from backend.core.rate_limit import get_rate_limit, limiter
 from backend.core.translation_service import get_translation_service
 from backend.core.webhook_service import (
@@ -81,7 +82,7 @@ def build_entry_response(entry: ContentEntry) -> ContentEntryResponse:
     )
 
 
-def auto_translate_entry_background(entry_id: int, organization_id: int, db: Session):
+def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: Session):
     """
     Background task to automatically translate content entry to all enabled locales with auto_translate=True
     """
@@ -221,13 +222,14 @@ async def create_content_type(
 @limiter.limit(get_rate_limit())
 async def list_content_types(
     request: Request,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=100),
 ):
     """
-    List all content types for the current organization
+    List all content types for the current organization.
+    Supports both JWT and API key authentication.
     """
     content_types = (
         db.query(ContentType)
@@ -269,7 +271,7 @@ async def list_content_types(
 @limiter.limit(get_rate_limit())
 async def get_content_type(
     request: Request,
-    content_type_id: int,
+    content_type_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -314,7 +316,7 @@ async def get_content_type(
 @limiter.limit(get_rate_limit())
 async def update_content_type(
     request: Request,
-    content_type_id: int,
+    content_type_id: UUID,
     content_type_update: ContentTypeUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -375,7 +377,7 @@ async def update_content_type(
 @limiter.limit(get_rate_limit())
 async def delete_content_type(
     request: Request,
-    content_type_id: int,
+    content_type_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -513,15 +515,17 @@ async def create_content_entry(
 @limiter.limit(get_rate_limit())
 async def list_content_entries(
     request: Request,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
-    content_type_id: Optional[int] = Query(None),
+    content_type_id: Optional[UUID] = Query(None),
+    content_type_slug: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
     page: int = Query(1, ge=1),
     page_size: int = Query(10, ge=1, le=100),
 ):
     """
-    List content entries with pagination and filters
+    List content entries with pagination and filters.
+    Supports both JWT and API key authentication.
     """
     logger.info(f"========== LIST ENTRIES CALLED - Page {page} ==========")
 
@@ -534,6 +538,25 @@ async def list_content_entries(
         .scalar_subquery()
     )
 
+    # If filtering by slug, we need to get the content type first
+    filter_content_type_id = content_type_id
+    if content_type_slug:
+        content_type = (
+            db.query(ContentType)
+            .filter(
+                ContentType.api_id == content_type_slug,
+                ContentType.organization_id == current_user.organization_id,
+            )
+            .first()
+        )
+        if content_type:
+            filter_content_type_id = content_type.id
+        else:
+            # No matching content type found, return empty result
+            return ContentEntryListResponse(
+                items=[], total=0, page=page, page_size=page_size, pages=0
+            )
+    
     query = (
         db.query(ContentEntry)
         .filter(ContentEntry.content_type_id.in_(content_type_subquery))
@@ -541,8 +564,8 @@ async def list_content_entries(
     )
     logger.info("Query configured with selectinload and scalar_subquery")
 
-    if content_type_id:
-        query = query.filter(ContentEntry.content_type_id == content_type_id)
+    if filter_content_type_id:
+        query = query.filter(ContentEntry.content_type_id == filter_content_type_id)
 
     if status:
         query = query.filter(ContentEntry.status == status)
@@ -596,12 +619,13 @@ async def list_content_entries(
 @limiter.limit(get_rate_limit())
 async def get_content_entry(
     request: Request,
-    entry_id: int,
-    current_user: User = Depends(get_current_user),
+    entry_id: UUID,
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
-    Get a specific content entry by ID
+    Get a specific content entry by ID.
+    Supports both JWT and API key authentication.
     """
     entry = (
         db.query(ContentEntry)
@@ -624,7 +648,7 @@ async def get_content_entry(
 @limiter.limit(get_rate_limit())
 async def update_content_entry(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     entry_data: ContentEntryUpdate,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
@@ -715,7 +739,7 @@ async def update_content_entry(
 @limiter.limit(get_rate_limit())
 async def publish_content_entry(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     publish_data: ContentEntryPublish,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
@@ -772,7 +796,7 @@ async def publish_content_entry(
 @limiter.limit(get_rate_limit())
 async def delete_content_entry(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -826,7 +850,7 @@ async def delete_content_entry(
 @limiter.limit(get_rate_limit())
 async def duplicate_content_entry(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),

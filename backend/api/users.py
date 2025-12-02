@@ -4,6 +4,7 @@ Allows admins to manage users within their organization
 """
 
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel, ConfigDict, EmailStr
@@ -14,6 +15,7 @@ from backend.core.dependencies import get_current_user
 from backend.core.permissions import PermissionChecker
 from backend.core.rate_limit import get_rate_limit, limiter
 from backend.db.session import get_db
+from backend.models.organization import Organization
 from backend.models.rbac import Role
 from backend.models.user import User
 from backend.models.user_organization import UserOrganization
@@ -23,9 +25,10 @@ router = APIRouter(prefix="/users", tags=["User Management"])
 
 # Schemas
 class UserListItem(BaseModel):
-    id: int
+    id: UUID
     email: str
-    full_name: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
     is_active: bool
     roles: List[str]
     created_at: str
@@ -41,24 +44,25 @@ class UserListResponse(BaseModel):
 
 class InviteUserRequest(BaseModel):
     email: EmailStr
-    full_name: str
-    role_id: int
+    first_name: str
+    last_name: str
+    role_id: UUID
     send_invite_email: bool = True
 
 
 class InviteUserResponse(BaseModel):
-    user_id: int
+    user_id: UUID
     email: str
     message: str
 
 
 class UpdateUserRoleRequest(BaseModel):
-    role_id: int
+    role_id: UUID
 
 
 class UpdateUserRoleResponse(BaseModel):
-    user_id: int
-    role_id: int
+    user_id: UUID
+    role_id: UUID
     message: str
 
 
@@ -74,10 +78,10 @@ async def list_users(
     """
     List all users in the current organization
 
-    Requires: view_users permission
+    Requires: user.read permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "view_users", db):
+    if not PermissionChecker.has_permission(current_user, "user.read", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="You don't have permission to view users"
         )
@@ -114,7 +118,8 @@ async def list_users(
             UserListItem(
                 id=user.id,
                 email=user.email,
-                full_name=user.full_name,
+                first_name=user.first_name,
+                last_name=user.last_name,
                 is_active=user.is_active,
                 roles=role_names,
                 created_at=user.created_at.isoformat() if user.created_at else "",
@@ -146,10 +151,10 @@ async def invite_user(
     """
     Invite a new user to the organization
 
-    Requires: manage_users permission
+    Requires: user.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_users", db):
+    if not PermissionChecker.has_permission(current_user, "user.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to invite users",
@@ -265,7 +270,7 @@ async def invite_user(
 @limiter.limit(get_rate_limit())
 async def update_user_role(
     request: Request,
-    user_id: int,
+    user_id: UUID,
     role_data: UpdateUserRoleRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -273,10 +278,10 @@ async def update_user_role(
     """
     Update a user's role in the organization
 
-    Requires: manage_users permission
+    Requires: user.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_users", db):
+    if not PermissionChecker.has_permission(current_user, "user.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage users",
@@ -302,6 +307,18 @@ async def update_user_role(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+    # Get organization to check ownership
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
+
+    # Cannot change organization owner's role
+    if organization and organization.owner_id == user_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot modify organization owner's role. The owner maintains full administrative privileges.",
+        )
 
     # Get new role
     new_role = (
@@ -341,17 +358,17 @@ async def update_user_role(
 @limiter.limit(get_rate_limit())
 async def remove_user(
     request: Request,
-    user_id: int,
+    user_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
     Remove a user from the organization
 
-    Requires: manage_users permission
+    Requires: user.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_users", db):
+    if not PermissionChecker.has_permission(current_user, "user.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage users",
@@ -362,6 +379,18 @@ async def remove_user(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="You cannot remove yourself from the organization",
+        )
+
+    # Get organization to check ownership
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
+
+    # Can't remove organization owner without transfer
+    if organization and organization.owner_id == user_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot remove organization owner. Please transfer ownership first.",
         )
 
     # Verify user is in organization
@@ -400,3 +429,109 @@ async def remove_user(
     db.commit()
 
     return {"message": "User removed from organization successfully"}
+
+
+# Ownership Transfer Schema
+class TransferOwnershipRequest(BaseModel):
+    """Schema for transferring organization ownership"""
+
+    new_owner_id: UUID
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class TransferOwnershipResponse(BaseModel):
+    """Response schema for ownership transfer"""
+
+    organization_id: UUID
+    organization_name: str
+    previous_owner_id: UUID
+    new_owner_id: UUID
+    new_owner_email: str
+    message: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+@router.post(
+    "/transfer-ownership",
+    response_model=TransferOwnershipResponse,
+    status_code=status.HTTP_200_OK,
+)
+@limiter.limit(get_rate_limit("expensive_operations"))
+async def transfer_ownership(
+    request: Request,
+    transfer_request: TransferOwnershipRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Transfer organization ownership to another user.
+
+    Only the current owner can transfer ownership.
+    The new owner must:
+    - Be a member of the organization
+    - Have an Admin role
+
+    Requires: Current user must be the organization owner
+    """
+    # Get organization
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
+
+    if not organization:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Organization not found",
+        )
+
+    # Verify current user is the owner
+    if organization.owner_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only the organization owner can transfer ownership",
+        )
+
+    # Get new owner user
+    new_owner = db.query(User).filter(User.id == transfer_request.new_owner_id).first()
+
+    if not new_owner:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="New owner user not found",
+        )
+
+    # Verify new owner is in the organization
+    if new_owner.organization_id != organization.id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="New owner must be a member of your organization",
+        )
+
+    # Verify new owner has Admin role
+    admin_role = (
+        db.query(Role)
+        .filter(and_(Role.organization_id == organization.id, Role.name == "Admin"))
+        .first()
+    )
+
+    if not admin_role or new_owner not in admin_role.users:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="New owner must have Admin role in the organization",
+        )
+
+    # Transfer ownership
+    previous_owner_id = organization.owner_id
+    organization.owner_id = new_owner.id
+    db.commit()
+
+    return TransferOwnershipResponse(
+        organization_id=organization.id,
+        organization_name=organization.name,
+        previous_owner_id=previous_owner_id,
+        new_owner_id=new_owner.id,
+        new_owner_email=new_owner.email,
+        message=f"Ownership successfully transferred to {new_owner.email}",
+    )

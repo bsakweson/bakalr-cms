@@ -4,6 +4,8 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.api.schemas.base import UUIDMixin
+
 
 class FieldConfig(BaseModel):
     """Configuration for a single field in a template."""
@@ -20,7 +22,7 @@ class FieldConfig(BaseModel):
 class ContentTemplateCreate(BaseModel):
     """Schema for creating a content template."""
 
-    content_type_id: int = Field(..., description="ID of the content type this template is for")
+    content_type_id: str = Field(..., description="ID of the content type this template is for")
     name: str = Field(..., min_length=1, max_length=200, description="Template name")
     description: Optional[str] = Field(None, description="Template description")
     icon: Optional[str] = Field(None, max_length=100, description="Icon name or emoji")
@@ -50,12 +52,12 @@ class ContentTemplateUpdate(BaseModel):
     is_published: Optional[bool] = None
 
 
-class ContentTemplateResponse(BaseModel):
+class ContentTemplateResponse(UUIDMixin):
     """Schema for content template response."""
 
-    id: int
-    organization_id: int
-    content_type_id: int
+    id: str
+    organization_id: str
+    content_type_id: str
     name: str
     description: Optional[str]
     is_system_template: bool
@@ -74,7 +76,7 @@ class ContentTemplateResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-class ContentTemplateListResponse(BaseModel):
+class ContentTemplateListResponse(UUIDMixin):
     """Schema for list of templates."""
 
     templates: List[ContentTemplateResponse]
@@ -86,7 +88,7 @@ class ContentTemplateListResponse(BaseModel):
 class ContentTemplateApply(BaseModel):
     """Schema for applying a template to create content."""
 
-    template_id: int = Field(..., description="ID of template to apply")
+    template_id: str = Field(..., description="ID of template to apply")
     overrides: Optional[Dict[str, Any]] = Field(
         None, description="Field values to override template defaults"
     )
@@ -94,11 +96,11 @@ class ContentTemplateApply(BaseModel):
     slug: Optional[str] = Field(None, description="Content entry slug")
 
 
-class ContentTemplateApplyResponse(BaseModel):
+class ContentTemplateApplyResponse(UUIDMixin):
     """Response after applying a template."""
 
-    content_entry_id: int
-    template_id: int
+    content_entry_id: str
+    template_id: str
     template_name: str
     applied_data: Dict[str, Any]
     message: str
@@ -107,7 +109,7 @@ class ContentTemplateApplyResponse(BaseModel):
 class TemplateStats(BaseModel):
     """Template usage statistics."""
 
-    template_id: int
+    template_id: str
     template_name: str
     usage_count: int
     last_used: Optional[str]

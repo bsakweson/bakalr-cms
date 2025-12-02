@@ -1,6 +1,7 @@
 """Content template management API endpoints."""
 
 from typing import Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy import and_
@@ -115,7 +116,7 @@ def create_template(
 @limiter.limit(get_rate_limit())
 def list_templates(
     request: Request,
-    content_type_id: Optional[int] = Query(None, description="Filter by content type"),
+    content_type_id: Optional[UUID] = Query(None, description="Filter by content type"),
     category: Optional[str] = Query(None, description="Filter by category"),
     is_published: Optional[bool] = Query(None, description="Filter by published status"),
     page: int = Query(1, ge=1),
@@ -161,7 +162,7 @@ def list_templates(
 @limiter.limit(get_rate_limit())
 def get_template(
     request: Request,
-    template_id: int,
+    template_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -190,7 +191,7 @@ def get_template(
 @limiter.limit(get_rate_limit())
 def update_template(
     request: Request,
-    template_id: int,
+    template_id: UUID,
     template_data: ContentTemplateUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -252,7 +253,7 @@ def update_template(
 @limiter.limit(get_rate_limit())
 def delete_template(
     request: Request,
-    template_id: int,
+    template_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -400,7 +401,7 @@ def apply_template(
 @limiter.limit(get_rate_limit())
 def get_template_stats(
     request: Request,
-    template_id: int,
+    template_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -440,7 +441,7 @@ def get_template_stats(
 @limiter.limit(get_rate_limit())
 def duplicate_template(
     request: Request,
-    template_id: int,
+    template_id: UUID,
     new_name: str = Query(..., description="Name for the duplicated template"),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),

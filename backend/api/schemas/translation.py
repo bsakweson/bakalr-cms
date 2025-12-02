@@ -1,15 +1,20 @@
 """
 Translation and Locale API schemas
 """
-from typing import Dict, Any, Optional, List
-from pydantic import BaseModel, Field, ConfigDict
-from datetime import datetime
 
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, ConfigDict, Field
+
+from backend.api.schemas.base import UUIDMixin
 
 # Locale Schemas
 
+
 class LocaleCreate(BaseModel):
     """Schema for creating a locale"""
+
     code: str = Field(..., description="Locale code (e.g., 'en', 'es', 'fr-FR')")
     name: str = Field(..., description="Locale name (e.g., 'English', 'Spanish')")
     native_name: Optional[str] = Field(None, description="Native name (e.g., 'Español')")
@@ -20,6 +25,7 @@ class LocaleCreate(BaseModel):
 
 class LocaleUpdate(BaseModel):
     """Schema for updating a locale"""
+
     name: Optional[str] = None
     native_name: Optional[str] = None
     is_default: Optional[bool] = None
@@ -27,10 +33,11 @@ class LocaleUpdate(BaseModel):
     auto_translate: Optional[bool] = None
 
 
-class LocaleResponse(BaseModel):
+class LocaleResponse(UUIDMixin):
     """Schema for locale response"""
-    id: int
-    organization_id: int
+
+    id: str
+    organization_id: str
     code: str
     name: str
     native_name: Optional[str]
@@ -39,16 +46,18 @@ class LocaleResponse(BaseModel):
     auto_translate: bool
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
 # Translation Schemas
 
+
 class TranslationCreate(BaseModel):
     """Schema for creating a translation"""
-    content_entry_id: int
-    locale_id: int
+
+    content_entry_id: str
+    locale_id: str
     translated_data: Dict[str, Any]
     source_locale: Optional[str] = None
     is_manual: bool = False
@@ -56,17 +65,19 @@ class TranslationCreate(BaseModel):
 
 class TranslationUpdate(BaseModel):
     """Schema for updating a translation"""
+
     translated_data: Optional[Dict[str, Any]] = None
     status: Optional[str] = None
     quality_score: Optional[float] = None
     is_manual: Optional[bool] = None
 
 
-class TranslationResponse(BaseModel):
+class TranslationResponse(UUIDMixin):
     """Schema for translation response"""
-    id: int
-    content_entry_id: int
-    locale_id: int
+
+    id: str
+    content_entry_id: str
+    locale_id: str
     translated_data: Dict[str, Any]
     status: str
     source_locale: Optional[str]
@@ -76,12 +87,13 @@ class TranslationResponse(BaseModel):
     version: int
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
-class TranslationListResponse(BaseModel):
+class TranslationListResponse(UUIDMixin):
     """Schema for paginated translation list"""
+
     items: List[TranslationResponse]
     total: int
     page: int
@@ -91,22 +103,28 @@ class TranslationListResponse(BaseModel):
 
 class TranslateRequest(BaseModel):
     """Schema for translation request"""
-    content_entry_id: int
-    target_locale_ids: List[int] = Field(..., description="List of locale IDs to translate to")
+
+    content_entry_id: str
+    target_locale_ids: List[str] = Field(
+        ..., description="List of locale IDs (UUIDs) to translate to"
+    )
     force_retranslate: bool = Field(False, description="Force re-translation even if exists")
 
 
-class TranslateResponse(BaseModel):
+class TranslateResponse(UUIDMixin):
     """Schema for translation job response"""
-    content_entry_id: int
+
+    content_entry_id: str
     translations: List[TranslationResponse]
     message: str
 
 
 # Translation Glossary Schemas
 
+
 class GlossaryCreate(BaseModel):
     """Schema for creating a glossary entry"""
+
     source_term: str
     source_locale: str
     target_term: str
@@ -116,15 +134,17 @@ class GlossaryCreate(BaseModel):
 
 class GlossaryUpdate(BaseModel):
     """Schema for updating a glossary entry"""
+
     source_term: Optional[str] = None
     target_term: Optional[str] = None
     context: Optional[str] = None
 
 
-class GlossaryResponse(BaseModel):
+class GlossaryResponse(UUIDMixin):
     """Schema for glossary entry response"""
-    id: int
-    organization_id: int
+
+    id: str
+    organization_id: str
     source_term: str
     source_locale: str
     target_term: str
@@ -132,12 +152,13 @@ class GlossaryResponse(BaseModel):
     context: Optional[str]
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)
 
 
-class LocaleDetectionResponse(BaseModel):
+class LocaleDetectionResponse(UUIDMixin):
     """Schema for locale detection response"""
+
     detected_locale: str
     confidence: float
     fallback_chain: List[str]

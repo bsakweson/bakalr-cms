@@ -4,6 +4,7 @@ Translation and Locale Management API endpoints
 
 import json
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request, status
 from sqlalchemy.orm import Session
@@ -106,7 +107,7 @@ async def list_locales(
 @limiter.limit(get_rate_limit())
 async def get_locale(
     request: Request,
-    locale_id: int,
+    locale_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -129,7 +130,7 @@ async def get_locale(
 @limiter.limit(get_rate_limit())
 async def update_locale(
     request: Request,
-    locale_id: int,
+    locale_id: UUID,
     locale_data: LocaleUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -174,7 +175,7 @@ async def update_locale(
 @limiter.limit(get_rate_limit())
 async def delete_locale(
     request: Request,
-    locale_id: int,
+    locale_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -203,7 +204,11 @@ async def delete_locale(
 
 
 def translate_content_entry_background(
-    entry_id: int, locale_ids: List[int], force_retranslate: bool, organization_id: int, db: Session
+    entry_id: UUID,
+    locale_ids: List[int],
+    force_retranslate: bool,
+    organization_id: UUID,
+    db: Session,
 ):
     """Background task to translate content entry"""
     translation_service = get_translation_service()
@@ -337,8 +342,8 @@ async def list_translations(
     request: Request,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
-    content_entry_id: Optional[int] = Query(None),
-    locale_id: Optional[int] = Query(None),
+    content_entry_id: Optional[UUID] = Query(None),
+    locale_id: Optional[UUID] = Query(None),
     status: Optional[str] = Query(None),
     page: int = Query(1, ge=1),
     page_size: int = Query(10, ge=1, le=100),
@@ -401,7 +406,7 @@ async def list_translations(
 @limiter.limit(get_rate_limit())
 async def get_translation(
     request: Request,
-    translation_id: int,
+    translation_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -444,7 +449,7 @@ async def get_translation(
 @limiter.limit(get_rate_limit())
 async def update_translation(
     request: Request,
-    translation_id: int,
+    translation_id: UUID,
     translation_data: TranslationUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -502,7 +507,7 @@ async def update_translation(
 @limiter.limit(get_rate_limit())
 async def delete_translation(
     request: Request,
-    translation_id: int,
+    translation_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):

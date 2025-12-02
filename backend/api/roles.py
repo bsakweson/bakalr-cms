@@ -4,6 +4,7 @@ Allows admins to manage roles and permissions within their organization
 """
 
 from typing import List
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel, ConfigDict
@@ -22,7 +23,7 @@ router = APIRouter(prefix="/roles", tags=["Role Management"])
 
 # Schemas
 class PermissionItem(BaseModel):
-    id: int
+    id: UUID
     name: str
     description: str | None
     category: str | None
@@ -31,7 +32,7 @@ class PermissionItem(BaseModel):
 
 
 class RoleItem(BaseModel):
-    id: int
+    id: UUID
     name: str
     description: str | None
     is_system_role: bool
@@ -65,7 +66,7 @@ class UpdateRoleRequest(BaseModel):
 
 
 class RoleResponse(BaseModel):
-    id: int
+    id: UUID
     name: str
     description: str | None
     is_system_role: bool
@@ -155,7 +156,7 @@ async def list_permissions(
 @limiter.limit(get_rate_limit())
 async def get_role(
     request: Request,
-    role_id: int,
+    role_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -270,7 +271,7 @@ async def create_role(
 @limiter.limit(get_rate_limit())
 async def update_role(
     request: Request,
-    role_id: int,
+    role_id: UUID,
     role_data: UpdateRoleRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -355,7 +356,7 @@ async def update_role(
 @limiter.limit(get_rate_limit())
 async def delete_role(
     request: Request,
-    role_id: int,
+    role_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):

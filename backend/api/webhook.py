@@ -4,6 +4,7 @@ Webhook API endpoints
 
 import secrets
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy import desc, func, select
@@ -104,7 +105,7 @@ async def list_webhooks(
 @limiter.limit(get_rate_limit())
 async def get_webhook(
     request: Request,
-    webhook_id: int,
+    webhook_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -126,7 +127,7 @@ async def get_webhook(
 @limiter.limit(get_rate_limit())
 async def update_webhook(
     request: Request,
-    webhook_id: int,
+    webhook_id: UUID,
     webhook_data: WebhookUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -166,7 +167,7 @@ async def update_webhook(
 @limiter.limit(get_rate_limit())
 async def delete_webhook(
     request: Request,
-    webhook_id: int,
+    webhook_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -189,7 +190,7 @@ async def delete_webhook(
 @limiter.limit(get_rate_limit())
 async def test_webhook(
     request: Request,
-    webhook_id: int,
+    webhook_id: UUID,
     test_data: WebhookTestRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -260,7 +261,7 @@ async def test_webhook(
 @limiter.limit(get_rate_limit())
 async def regenerate_webhook_secret(
     request: Request,
-    webhook_id: int,
+    webhook_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -297,7 +298,7 @@ async def regenerate_webhook_secret(
 @limiter.limit(get_rate_limit())
 async def list_webhook_deliveries(
     request: Request,
-    webhook_id: int,
+    webhook_id: UUID,
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=100),
     current_user: User = Depends(get_current_user),
@@ -340,8 +341,8 @@ async def list_webhook_deliveries(
 @limiter.limit(get_rate_limit())
 async def get_webhook_delivery(
     request: Request,
-    webhook_id: int,
-    delivery_id: int,
+    webhook_id: UUID,
+    delivery_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -375,8 +376,8 @@ async def get_webhook_delivery(
 @limiter.limit(get_rate_limit())
 async def retry_webhook_delivery(
     request: Request,
-    webhook_id: int,
-    delivery_id: int,
+    webhook_id: UUID,
+    delivery_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):

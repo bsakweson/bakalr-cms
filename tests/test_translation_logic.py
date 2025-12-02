@@ -92,6 +92,10 @@ class TestTranslationLogic:
                     )
 
                     # Translation should be queued successfully
+                    # If failed, print error for debugging
+                    if trans_response.status_code == 422:
+                        print(f"Translation error: {trans_response.json()}")
+
                     assert trans_response.status_code in [
                         status.HTTP_201_CREATED,
                         status.HTTP_200_OK,

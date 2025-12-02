@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
+from backend.api.schemas.base import UUIDMixin
 from backend.models.notification import EmailStatus, NotificationPriority, NotificationType
 
 # Notification Schemas
@@ -32,12 +33,12 @@ class NotificationCreate(BaseModel):
     send_email: bool = Field(False, description="Also send email notification")
 
 
-class NotificationResponse(BaseModel):
+class NotificationResponse(UUIDMixin):
     """Schema for notification response"""
 
-    id: int
-    user_id: int
-    organization_id: int
+    id: str
+    user_id: str
+    organization_id: str
     title: str
     message: str
     notification_type: NotificationType
@@ -53,7 +54,7 @@ class NotificationResponse(BaseModel):
     model_config = {"from_attributes": True}
 
 
-class NotificationListResponse(BaseModel):
+class NotificationListResponse(UUIDMixin):
     """Schema for paginated notification list"""
 
     items: List[NotificationResponse]
@@ -93,12 +94,12 @@ class NotificationPreferenceUpdate(BaseModel):
     )
 
 
-class NotificationPreferenceResponse(BaseModel):
+class NotificationPreferenceResponse(UUIDMixin):
     """Schema for notification preference response"""
 
-    id: int
-    user_id: int
-    organization_id: int
+    id: str
+    user_id: str
+    organization_id: str
     event_type: str
     in_app_enabled: bool
     email_enabled: bool
@@ -113,12 +114,12 @@ class NotificationPreferenceResponse(BaseModel):
 # Email Log Schemas
 
 
-class EmailLogResponse(BaseModel):
+class EmailLogResponse(UUIDMixin):
     """Schema for email log response"""
 
-    id: int
+    id: str
     user_id: Optional[int]
-    organization_id: int
+    organization_id: str
     to_email: str
     from_email: str
     subject: str
@@ -135,7 +136,7 @@ class EmailLogResponse(BaseModel):
     model_config = {"from_attributes": True}
 
 
-class EmailLogListResponse(BaseModel):
+class EmailLogListResponse(UUIDMixin):
     """Schema for paginated email log list"""
 
     items: List[EmailLogResponse]

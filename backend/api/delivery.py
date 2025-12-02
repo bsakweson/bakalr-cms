@@ -4,6 +4,7 @@ CDN-friendly with minimal payloads and edge caching support.
 """
 
 import json
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from sqlalchemy import select
@@ -83,7 +84,7 @@ async def get_content_by_slug(
 @router.get("/content/{content_id}", response_model=DeliveryContentDetailResponse)
 @limiter.limit(get_rate_limit())
 async def get_content_by_id(
-    request: Request, content_id: int, response: Response, db: AsyncSession = Depends(get_db)
+    request: Request, content_id: UUID, response: Response, db: AsyncSession = Depends(get_db)
 ):
     """
     Get published content by ID (CDN-friendly).

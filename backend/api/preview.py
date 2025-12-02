@@ -2,6 +2,8 @@
 Content Preview API endpoints.
 """
 
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -70,7 +72,7 @@ async def generate_preview_token(
 @router.get("/{content_entry_id}", response_model=PreviewContentResponse)
 @limiter.limit(get_rate_limit())
 async def access_preview_content(
-    request: Request, content_entry_id: int, token: str, db: AsyncSession = Depends(get_db)
+    request: Request, content_entry_id: UUID, token: str, db: AsyncSession = Depends(get_db)
 ):
     """
     Access content via preview token.

@@ -2,6 +2,8 @@
 Password reset endpoints.
 """
 
+from uuid import UUID
+
 from fastapi import APIRouter, BackgroundTasks, Depends, Request
 from sqlalchemy.orm import Session
 
@@ -21,7 +23,7 @@ from backend.db.session import get_db
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-async def send_reset_email(email: str, token: str, organization_id: int, user_id: int):
+async def send_reset_email(email: str, token: str, organization_id: UUID, user_id: UUID):
     """
     Send password reset email using email service.
     """

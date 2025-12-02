@@ -4,6 +4,7 @@ Audit Log API endpoints for viewing activity history
 
 from datetime import datetime, timedelta, timezone
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Request
 from pydantic import BaseModel
@@ -23,14 +24,14 @@ router = APIRouter(prefix="/audit-logs", tags=["Audit Logs"])
 
 # Response schemas
 class AuditLogItem(BaseModel):
-    id: int
+    id: UUID
     action: str
     resource_type: str
-    resource_id: Optional[int]
+    resource_id: Optional[UUID]
     description: Optional[str]
     severity: str
     status: str
-    user_id: Optional[int]
+    user_id: Optional[UUID]
     user_email: Optional[str]
     user_name: Optional[str]
     ip_address: Optional[str]
@@ -59,7 +60,7 @@ async def list_audit_logs(
     page_size: int = Query(50, ge=1, le=100),
     action: Optional[str] = None,
     resource_type: Optional[str] = None,
-    user_id: Optional[int] = None,
+    user_id: Optional[UUID] = None,
     severity: Optional[str] = None,
     status: Optional[str] = None,
     days: Optional[int] = Query(7, ge=1, le=90),

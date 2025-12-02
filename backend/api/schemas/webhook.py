@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator
 
+from backend.api.schemas.base import UUIDMixin
 from backend.models.webhook import WebhookDeliveryStatus, WebhookEventType, WebhookStatus
 
 
@@ -60,11 +61,11 @@ class WebhookUpdate(BaseModel):
         return v
 
 
-class WebhookResponse(BaseModel):
+class WebhookResponse(UUIDMixin):
     """Webhook response"""
 
-    id: int
-    organization_id: int
+    id: str
+    organization_id: str
     name: str
     description: Optional[str]
     url: str
@@ -92,20 +93,20 @@ class WebhookListResponse(BaseModel):
     webhooks: List[WebhookResponse]
 
 
-class WebhookSecretResponse(BaseModel):
+class WebhookSecretResponse(UUIDMixin):
     """Webhook secret (only returned on creation)"""
 
-    id: int
+    id: str
     secret: str
     message: str = "Store this secret securely. It will not be shown again."
 
 
 # Webhook delivery schemas
-class WebhookDeliveryResponse(BaseModel):
+class WebhookDeliveryResponse(UUIDMixin):
     """Webhook delivery response"""
 
-    id: int
-    webhook_id: int
+    id: str
+    webhook_id: str
     event_type: str
     event_id: str
     status: WebhookDeliveryStatus
@@ -130,11 +131,11 @@ class WebhookDeliveryListResponse(BaseModel):
     deliveries: List[WebhookDeliveryResponse]
 
 
-class WebhookDeliveryDetailResponse(BaseModel):
+class WebhookDeliveryDetailResponse(UUIDMixin):
     """Detailed webhook delivery response with full payload"""
 
-    id: int
-    webhook_id: int
+    id: str
+    webhook_id: str
     event_type: str
     event_id: str
     payload: Dict[str, Any]
@@ -168,7 +169,7 @@ class WebhookTestResponse(BaseModel):
     """Test webhook response"""
 
     success: bool
-    delivery_id: int
+    delivery_id: str
     status_code: Optional[int]
     response_body: Optional[str]
     error: Optional[str]
@@ -182,7 +183,7 @@ class WebhookEventPayload(BaseModel):
     event_id: str = Field(..., description="Unique event identifier")
     event_type: str = Field(..., description="Event type")
     timestamp: datetime = Field(..., description="Event timestamp")
-    organization_id: int = Field(..., description="Organization ID")
+    organization_id: str = Field(..., description="Organization ID")
     data: Dict[str, Any] = Field(..., description="Event data")
 
     model_config = ConfigDict(

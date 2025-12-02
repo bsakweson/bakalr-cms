@@ -3,6 +3,7 @@ Notification API endpoints for in-app notifications and preferences.
 """
 
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy import func
@@ -158,7 +159,7 @@ async def get_notification_stats(
 @limiter.limit(get_rate_limit())
 async def get_notification(
     request: Request,
-    notification_id: int,
+    notification_id: UUID,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -224,7 +225,7 @@ async def create_notification(
 @limiter.limit(get_rate_limit())
 async def mark_notification_read(
     request: Request,
-    notification_id: int,
+    notification_id: UUID,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -277,7 +278,7 @@ async def mark_notifications_read(
 @limiter.limit(get_rate_limit())
 async def delete_notification(
     request: Request,
-    notification_id: int,
+    notification_id: UUID,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):

@@ -5,6 +5,7 @@ Security utilities for password hashing and JWT tokens
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional
+from uuid import UUID
 
 import bcrypt
 from jose import JWTError, jwt
@@ -71,8 +72,8 @@ class Token(BaseModel):
 class TokenPayload(BaseModel):
     """JWT token payload"""
 
-    sub: str  # user_id
-    org_id: int  # organization_id
+    sub: str  # user_id (UUID as string)
+    org_id: str  # organization_id (UUID as string)
     email: str
     roles: list[str] = []
     exp: Optional[int] = None
@@ -158,20 +159,25 @@ def verify_token(token: str, token_type: str = "access") -> Optional[TokenPayloa
         return None
 
 
-def create_token_pair(user_id: int, organization_id: int, email: str, roles: list[str]) -> Token:
+def create_token_pair(user_id: UUID, organization_id: UUID, email: str, roles: list[str]) -> Token:
     """
     Create access and refresh token pair
 
     Args:
-        user_id: User ID
-        organization_id: Organization ID
+        user_id: User ID (UUID)
+        organization_id: Organization ID (UUID)
         email: User email
         roles: List of role names
 
     Returns:
         Token object with access_token and refresh_token
     """
-    token_data = {"sub": str(user_id), "org_id": organization_id, "email": email, "roles": roles}
+    token_data = {
+        "sub": str(user_id),
+        "org_id": str(organization_id),
+        "email": email,
+        "roles": roles,
+    }
 
     access_token = create_access_token(token_data)
     refresh_token = create_refresh_token(token_data)

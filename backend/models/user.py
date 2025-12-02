@@ -2,18 +2,18 @@
 User model with organization/tenant association
 """
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table
+from sqlalchemy import Boolean, Column, ForeignKey, String, Table
 from sqlalchemy.orm import relationship
 
 from backend.db.base import Base
-from backend.models.base import IDMixin, TimestampMixin
+from backend.models.base import GUID, IDMixin, TimestampMixin
 
 # Association table for User-Role many-to-many relationship
 user_roles = Table(
     "user_roles",
     Base.metadata,
-    Column("user_id", Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
-    Column("role_id", Integer, ForeignKey("roles.id", ondelete="CASCADE"), primary_key=True),
+    Column("user_id", GUID(), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("role_id", GUID(), ForeignKey("roles.id", ondelete="CASCADE"), primary_key=True),
 )
 
 
@@ -27,7 +27,7 @@ class User(Base, IDMixin, TimestampMixin):
 
     # Organization (Tenant) - each user belongs to one organization
     organization_id = Column(
-        Integer, ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, index=True
+        GUID(), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False, index=True
     )
 
     # Basic Info
@@ -64,7 +64,7 @@ class User(Base, IDMixin, TimestampMixin):
 
     # Relationships
     organization = relationship(
-        "Organization", back_populates="users"
+        "Organization", foreign_keys=[organization_id], back_populates="users"
     )  # Primary/legacy organization
     user_organizations = relationship(
         "UserOrganization",

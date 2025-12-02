@@ -3,6 +3,7 @@ Content relationship management endpoints.
 """
 
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import and_
@@ -31,7 +32,7 @@ router = APIRouter(prefix="/content/relationships", tags=["relationships"])
 @limiter.limit(get_rate_limit())
 async def create_relationship(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     data: ContentRelationshipCreate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -93,7 +94,7 @@ async def create_relationship(
 @limiter.limit(get_rate_limit())
 async def list_relationships(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     relationship_type: Optional[str] = None,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -120,7 +121,7 @@ async def list_relationships(
 @limiter.limit(get_rate_limit())
 async def get_related_content(
     request: Request,
-    entry_id: int,
+    entry_id: UUID,
     relationship_type: Optional[str] = None,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
@@ -165,7 +166,7 @@ async def get_related_content(
 @limiter.limit(get_rate_limit())
 async def delete_relationship(
     request: Request,
-    relationship_id: int,
+    relationship_id: UUID,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -189,7 +190,7 @@ async def delete_relationship(
 @limiter.limit(get_rate_limit())
 async def update_relationship(
     request: Request,
-    relationship_id: int,
+    relationship_id: UUID,
     data: ContentRelationshipUpdate,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),

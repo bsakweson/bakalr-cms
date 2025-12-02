@@ -246,16 +246,21 @@ async def reindex_content(
     """
     PermissionChecker.require_permission(current_user, "content.manage", db)
 
-    # Count entries to be indexed
-    query = db.query(ContentEntry).filter(
-        ContentEntry.organization_id == current_user.organization_id
+    # Import ContentType here to avoid circular imports
+    from backend.models.content import ContentType
+
+    # Count entries to be indexed - join with ContentType to filter by organization
+    query = (
+        db.query(ContentEntry)
+        .join(ContentType, ContentEntry.content_type_id == ContentType.id)
+        .filter(ContentType.organization_id == current_user.organization_id)
     )
 
     if reindex_request.organization_id:
         # Verify user has access to specified organization
         if reindex_request.organization_id != current_user.organization_id:
             PermissionChecker.require_permission(current_user, "system.admin", db)
-        query = query.filter(ContentEntry.organization_id == reindex_request.organization_id)
+        query = query.filter(ContentType.organization_id == reindex_request.organization_id)
 
     entries = query.all()
     indexed_count = len(entries)

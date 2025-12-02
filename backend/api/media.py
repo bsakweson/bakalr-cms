@@ -6,6 +6,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
+from uuid import UUID
 
 from fastapi import (
     APIRouter,
@@ -312,7 +313,7 @@ async def search_media(
 @limiter.limit(get_rate_limit())
 async def get_media(
     request: Request,
-    media_id: int,
+    media_id: UUID,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -341,7 +342,7 @@ async def get_media(
 @limiter.limit(get_rate_limit())
 async def update_media(
     request: Request,
-    media_id: int,
+    media_id: UUID,
     update_data: MediaUpdateRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -386,7 +387,7 @@ async def update_media(
 @limiter.limit(get_rate_limit())
 async def delete_media(
     request: Request,
-    media_id: int,
+    media_id: UUID,
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
