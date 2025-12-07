@@ -14,6 +14,20 @@ from backend.core.config import settings
 
 logger = logging.getLogger(__name__)
 
+# Language code mapping for LibreTranslate
+# Maps our locale codes to LibreTranslate's expected codes
+LIBRETRANSLATE_LANG_MAP = {
+    "zh": "zh-Hans",  # Chinese -> Chinese Simplified
+    "zh-CN": "zh-Hans",  # Chinese (China) -> Chinese Simplified
+    "zh-TW": "zh-Hant",  # Chinese (Taiwan) -> Chinese Traditional (if supported)
+}
+
+# Reverse mapping for detection results
+LIBRETRANSLATE_LANG_REVERSE_MAP = {
+    "zh-Hans": "zh",
+    "zh-Hant": "zh",
+}
+
 
 class TranslationService:
     """
@@ -109,10 +123,14 @@ class TranslationService:
                 if settings.LIBRETRANSLATE_API_KEY:
                     headers["Authorization"] = f"Bearer {settings.LIBRETRANSLATE_API_KEY}"
 
+                # Map language codes for LibreTranslate compatibility
+                lt_source = LIBRETRANSLATE_LANG_MAP.get(source_lang, source_lang)
+                lt_target = LIBRETRANSLATE_LANG_MAP.get(target_lang, target_lang)
+
                 payload = {
                     "q": text,
-                    "source": source_lang,
-                    "target": target_lang,
+                    "source": lt_source,
+                    "target": lt_target,
                     "format": "text",
                 }
 
@@ -213,27 +231,44 @@ class TranslationService:
                 translated[key] = value
                 continue
 
-            # Translate string values
+            # Skip fields that shouldn't be translated (URLs, IDs, technical fields)
+            skip_keys = {"href", "url", "link", "src", "id", "key", "slug", "code", "path", "route"}
+            if key.lower() in skip_keys:
+                translated[key] = value
+                continue
+
+            # Translate string values (but skip URLs)
             if isinstance(value, str) and value.strip():
-                result = self.translate_text(value, target_lang, source_lang)
-                translated[key] = result["translated_text"]
+                # Skip URLs and paths
+                if value.startswith(("http://", "https://", "/", "#", "mailto:", "tel:")):
+                    translated[key] = value
+                else:
+                    result = self.translate_text(value, target_lang, source_lang)
+                    translated[key] = result["translated_text"]
 
             # Recursively translate nested dicts
+            # Pass None for translatable_fields to translate ALL nested strings
+            # since we're already inside a translatable field
             elif isinstance(value, dict):
-                translated[key] = self.translate_dict(
-                    value, target_lang, source_lang, translatable_fields
-                )
+                translated[key] = self.translate_dict(value, target_lang, source_lang, None)
 
-            # Translate lists of strings
+            # Translate lists (strings or dicts)
             elif isinstance(value, list):
-                translated[key] = [
-                    (
-                        self.translate_text(item, target_lang, source_lang)["translated_text"]
-                        if isinstance(item, str) and item.strip()
-                        else item
-                    )
-                    for item in value
-                ]
+                translated_list = []
+                for item in value:
+                    if isinstance(item, str) and item.strip():
+                        # Translate string items
+                        result = self.translate_text(item, target_lang, source_lang)
+                        translated_list.append(result["translated_text"])
+                    elif isinstance(item, dict):
+                        # Recursively translate dict items in list
+                        translated_list.append(
+                            self.translate_dict(item, target_lang, source_lang, None)
+                        )
+                    else:
+                        # Keep other types as-is
+                        translated_list.append(item)
+                translated[key] = translated_list
 
             # Keep other types as-is
             else:

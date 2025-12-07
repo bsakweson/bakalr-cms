@@ -1,0 +1,80 @@
+{
+  "entries": [
+    {
+      "content_type_api_id": "site_settings",
+      "slug": "main-settings",
+      "status": "published",
+      "data": {
+        "site_name": "Bakalr Boutique",
+        "tagline": "Your Beauty, Our Passion",
+        "default_locale": "en",
+        "enabled_locales": ["en", "es", "fr"],
+        "default_currency": "USD",
+        "symbol": "$",
+        "enabled_currencies": [
+          {
+            "code": "USD",
+            "symbol": "$",
+            "name": "US Dollar",
+            "flag": "🇺🇸",
+            "exchange_rate": 1,
+            "decimal_places": 2,
+            "position": "before"
+          },
+          {
+            "code": "EUR",
+            "symbol": "€",
+            "name": "Euro",
+            "flag": "🇪🇺",
+            "exchange_rate": 0.92,
+            "decimal_places": 2,
+            "position": "before"
+          },
+          {
+            "code": "MXN",
+            "symbol": "$",
+            "name": "Mexican Peso",
+            "flag": "🇲🇽",
+            "exchange_rate": 17.5,
+            "decimal_places": 2,
+            "position": "before"
+          },
+          {
+            "code": "GBP",
+            "symbol": "£",
+            "name": "British Pound",
+            "flag": "🇬🇧",
+            "exchange_rate": 0.79,
+            "decimal_places": 2,
+            "position": "before"
+          },
+          {
+            "code": "CAD",
+            "symbol": "CA$",
+            "name": "Canadian Dollar",
+            "flag": "🇨🇦",
+            "exchange_rate": 1.36,
+            "decimal_places": 2,
+            "position": "before"
+          }
+        ],
+        "contact_email": "hello@bakalr-boutique.com",
+        "contact_phone": "+1 (555) 123-4567",
+        "contact_address": "123 Beauty Ave, Suite 100\nLos Angeles, CA 90001",
+        "social_links": {
+          "facebook": "https://facebook.com/bakalrboutique",
+          "instagram": "https://instagram.com/bakalrboutique",
+          "twitter": "https://twitter.com/bakalrboutique",
+          "youtube": "https://youtube.com/@bakalrboutique",
+          "tiktok": "https://tiktok.com/@bakalrboutique"
+        },
+        "analytics_ids": {
+          "ga4": "G-XXXXXXXXXX",
+          "gtm": "GTM-XXXXXXX"
+        },
+        "maintenance_mode": false,
+        "maintenance_message": "We're updating our store. Please check back soon!"
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "name": "Banner",
+  "api_id": "banner",
+  "description": "Promotional banners for hero sections, sidebars, popups",
+  "display_field": "banner_key",
+  "fields": [
+    {
+      "name": "banner_key",
+      "type": "text",
+      "required": true,
+      "localized": false,
+      "help_text": "Unique identifier - NOT translated"
+    },
+    {
+      "name": "headline",
+      "type": "text",
+      "required": false,
+      "localized": true,
+      "help_text": "Main headline - IS translated"
+    },
+    {
+      "name": "subheadline",
+      "type": "textarea",
+      "required": false,
+      "localized": true,
+      "help_text": "Supporting text - IS translated"
+    },
+    {
+      "name": "cta_text",
+      "type": "text",
+      "required": false,
+      "localized": true,
+      "help_text": "Button text - IS translated"
+    },
+    {
+      "name": "cta_link",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "help_text": "URL for button - NOT translated"
+    },
+    {
+      "name": "background_image_id",
+      "type": "media",
+      "required": false,
+      "help_text": "Background image"
+    },
+    {
+      "name": "background_video_id",
+      "type": "media",
+      "required": false,
+      "help_text": "Background video (optional)"
+    },
+    {
+      "name": "overlay_color",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "default": "rgba(0,0,0,0.5)",
+      "help_text": "Overlay color - NOT translated"
+    },
+    {
+      "name": "text_color",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "default": "#ffffff",
+      "help_text": "Text color - NOT translated"
+    },
+    {
+      "name": "position",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "default": "hero",
+      "help_text": "Position: hero, sidebar, footer, popup - NOT translated"
+    }
+  ]
+}

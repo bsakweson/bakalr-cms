@@ -235,21 +235,27 @@ async def register(
     )
 
     # Send verification email (async, non-blocking)
-    try:
-        from backend.core.email_service import email_service
+    async def send_verification_email_task():
+        """Wrapper to catch and log errors in background task"""
+        try:
+            from backend.core.email_service import email_service
 
-        background_tasks.add_task(
-            email_service.send_verification_email,
-            to_email=user.email,
-            user_name=user.first_name or user.email,
-            verification_token=verification_token,
-            organization_name=organization.name,
-            organization_id=organization.id,
-            user_id=user.id,
-        )
-    except Exception as e:
-        # Log error but don't fail registration
-        print(f"Failed to queue verification email: {e}")
+            await email_service.send_verification_email(
+                to_email=user.email,
+                user_name=user.first_name or user.email,
+                verification_token=verification_token,
+                organization_name=organization.name,
+                organization_id=organization.id,
+                user_id=user.id,
+            )
+            print(f"✓ Verification email sent to {user.email}")
+        except Exception as e:
+            import traceback
+
+            print(f"✗ Failed to send verification email to {user.email}: {e}")
+            traceback.print_exc()
+
+    background_tasks.add_task(send_verification_email_task)
 
     return TokenResponse(
         access_token=tokens.access_token,

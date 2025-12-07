@@ -1,0 +1,114 @@
+{
+  "entries": [
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-shipping-time",
+      "status": "published",
+      "data": {
+        "question": "How long does shipping take?",
+        "answer": "Standard shipping takes 5-7 business days. Express shipping (2-3 business days) and overnight shipping are available at checkout. Orders placed before 2 PM EST ship same day.",
+        "category": "shipping",
+        "display_order": 1
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-free-shipping",
+      "status": "published",
+      "data": {
+        "question": "Do you offer free shipping?",
+        "answer": "Yes! We offer free standard shipping on all orders over $50. Sign up for our newsletter to get exclusive free shipping offers.",
+        "category": "shipping",
+        "display_order": 2
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-international-shipping",
+      "status": "published",
+      "data": {
+        "question": "Do you ship internationally?",
+        "answer": "Currently we ship to the United States and Canada. We're working on expanding to more countries. Sign up for updates!",
+        "category": "shipping",
+        "display_order": 3
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-return-policy",
+      "status": "published",
+      "data": {
+        "question": "What is your return policy?",
+        "answer": "We accept returns within 30 days of purchase for unopened items in original packaging. Opened products can be exchanged if defective. Contact us at support@bakalr.com to initiate a return.",
+        "category": "returns",
+        "display_order": 1
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-damaged-products",
+      "status": "published",
+      "data": {
+        "question": "What if my order arrives damaged?",
+        "answer": "Please contact us within 48 hours of delivery with photos of the damage. We'll send a replacement or issue a full refund. Your satisfaction is our priority!",
+        "category": "returns",
+        "display_order": 2
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-payment-methods",
+      "status": "published",
+      "data": {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit cards (Visa, MasterCard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Shop Pay. Affirm is available for orders over $50.",
+        "category": "payments",
+        "display_order": 1
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-order-tracking",
+      "status": "published",
+      "data": {
+        "question": "How can I track my order?",
+        "answer": "Once your order ships, you'll receive an email with tracking information. You can also track your order by logging into your account and viewing your order history.",
+        "category": "orders",
+        "display_order": 1
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-product-authenticity",
+      "status": "published",
+      "data": {
+        "question": "Are all your products authentic?",
+        "answer": "Absolutely! We only source products directly from authorized distributors and manufacturers. Every product we sell is 100% authentic with a satisfaction guarantee.",
+        "category": "products",
+        "display_order": 1
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-hair-type-recommendations",
+      "status": "published",
+      "data": {
+        "question": "How do I know which products are right for my hair type?",
+        "answer": "Each product page includes recommendations for specific hair types. You can also use our Hair Quiz (coming soon!) or contact our customer service team for personalized recommendations.",
+        "category": "products",
+        "display_order": 2
+      }
+    },
+    {
+      "content_type_api_id": "faq",
+      "slug": "faq-wholesale",
+      "status": "published",
+      "data": {
+        "question": "Do you offer wholesale pricing for salons?",
+        "answer": "Yes! We have a professional program for licensed cosmetologists and salon owners. Contact wholesale@bakalr.com with your license number for more information.",
+        "category": "business",
+        "display_order": 1
+      }
+    }
+  ]
+}

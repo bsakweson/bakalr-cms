@@ -2,6 +2,7 @@
 Content Management API endpoints
 """
 
+import ast
 import json
 import logging
 from typing import List, Optional
@@ -12,6 +13,34 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session, selectinload
 
 logger = logging.getLogger(__name__)
+
+
+def parse_fields_schema(fields_schema) -> list:
+    """
+    Safely parse fields_schema which may be JSON, Python-style string, or already a list/dict.
+    Returns a list of field definitions.
+    """
+    if not fields_schema:
+        return []
+
+    if isinstance(fields_schema, list):
+        return fields_schema
+
+    if isinstance(fields_schema, dict):
+        return list(fields_schema.values()) if fields_schema else []
+
+    if isinstance(fields_schema, str):
+        try:
+            return json.loads(fields_schema)
+        except json.JSONDecodeError:
+            # Try parsing as Python literal (handles True/False/None and single quotes)
+            try:
+                return ast.literal_eval(fields_schema)
+            except (ValueError, SyntaxError):
+                return []
+
+    return []
+
 
 from backend.api.schemas.content import (
     ContentEntryCreate,
@@ -84,11 +113,12 @@ def build_entry_response(entry: ContentEntry) -> ContentEntryResponse:
 
 def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: Session):
     """
-    Background task to automatically translate content entry to all enabled locales with auto_translate=True
+    Background task to automatically translate content entry to all enabled locales with auto_translate=True.
+    Only translates fields marked with localized: true in the content type schema.
     """
     translation_service = get_translation_service()
 
-    # Get entry
+    # Get entry with content type
     entry = (
         db.query(ContentEntry)
         .join(ContentType)
@@ -98,6 +128,9 @@ def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: S
 
     if not entry:
         return
+
+    # Get content type to check schema for localized fields
+    content_type = entry.content_type
 
     # Get all enabled locales with auto_translate enabled
     locales = (
@@ -116,6 +149,35 @@ def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: S
     # Parse entry data
     entry_data = json.loads(entry.data) if entry.data else {}
 
+    # Extract translatable fields from content type schema
+    # Only fields with localized: true (or not explicitly set to false) should be translated
+    translatable_fields = None
+    if content_type and content_type.fields_schema:
+        schema_fields = parse_fields_schema(content_type.fields_schema)
+        translatable_fields = []
+
+        # Schema can be either a list of field objects or a dict
+        if isinstance(schema_fields, list):
+            # List format: [{"name": "field_name", "type": "text", "localized": true}, ...]
+            for field in schema_fields:
+                if isinstance(field, dict):
+                    field_name = field.get("name")
+                    if field_name and field.get("localized", True):
+                        translatable_fields.append(field_name)
+        elif isinstance(schema_fields, dict):
+            # Dict format: {"field_name": {"type": "text", "localized": true}, ...}
+            for field_name, field_config in schema_fields.items():
+                if isinstance(field_config, dict):
+                    if field_config.get("localized", True):
+                        translatable_fields.append(field_name)
+                else:
+                    # If field config is not a dict, include it by default
+                    translatable_fields.append(field_name)
+
+        # If no fields are translatable, use None to translate all (backward compat)
+        if not translatable_fields:
+            translatable_fields = None
+
     for locale in locales:
         # Check if translation already exists
         existing = (
@@ -128,20 +190,21 @@ def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: S
             continue  # Skip if already translated
 
         try:
-            # Translate the content
+            # Translate the content, respecting localized field settings
             translated_data = translation_service.translate_dict(
                 entry_data,
                 target_lang=locale.code.split("-")[0],  # Use base language code
                 source_lang=None,
+                translatable_fields=translatable_fields,
             )
 
-            # Create translation record
+            # Create translation record using actual provider
             translation = Translation(
                 content_entry_id=entry_id,
                 locale_id=locale.id,
                 translated_data=json.dumps(translated_data),
                 status="completed",
-                translation_service="google",
+                translation_service=translation_service.provider,
                 quality_score=0.95,
             )
             db.add(translation)
@@ -149,6 +212,111 @@ def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: S
         except Exception as e:
             # Log error but don't fail the entire process
             print(f"Auto-translation failed for locale {locale.code}: {e}")
+            continue
+
+    db.commit()
+
+
+def auto_update_translations_background(entry_id: UUID, organization_id: UUID, db: Session):
+    """
+    Background task to automatically update translations when content is modified.
+    Re-translates content for all enabled locales with auto_translate=True.
+    """
+    translation_service = get_translation_service()
+
+    # Get entry with content type
+    entry = (
+        db.query(ContentEntry)
+        .join(ContentType)
+        .filter(ContentEntry.id == entry_id, ContentType.organization_id == organization_id)
+        .first()
+    )
+
+    if not entry:
+        return
+
+    # Get content type to check schema for localized fields
+    content_type = entry.content_type
+
+    # Get all enabled locales with auto_translate enabled
+    locales = (
+        db.query(Locale)
+        .filter(
+            Locale.organization_id == organization_id,
+            Locale.is_enabled == True,
+            Locale.auto_translate == True,
+        )
+        .all()
+    )
+
+    if not locales:
+        return
+
+    # Parse entry data
+    entry_data = json.loads(entry.data) if entry.data else {}
+
+    # Extract translatable fields from content type schema
+    translatable_fields = None
+    if content_type and content_type.fields_schema:
+        schema_fields = parse_fields_schema(content_type.fields_schema)
+        translatable_fields = []
+
+        if isinstance(schema_fields, list):
+            for field in schema_fields:
+                if isinstance(field, dict):
+                    field_name = field.get("name")
+                    if field_name and field.get("localized", True):
+                        translatable_fields.append(field_name)
+        elif isinstance(schema_fields, dict):
+            for field_name, field_config in schema_fields.items():
+                if isinstance(field_config, dict):
+                    if field_config.get("localized", True):
+                        translatable_fields.append(field_name)
+                else:
+                    translatable_fields.append(field_name)
+
+        if not translatable_fields:
+            translatable_fields = None
+
+    for locale in locales:
+        try:
+            # Translate the content
+            translated_data = translation_service.translate_dict(
+                entry_data,
+                target_lang=locale.code.split("-")[0],
+                source_lang=None,
+                translatable_fields=translatable_fields,
+            )
+
+            # Check if translation exists
+            existing = (
+                db.query(Translation)
+                .filter(
+                    Translation.content_entry_id == entry_id, Translation.locale_id == locale.id
+                )
+                .first()
+            )
+
+            if existing:
+                # Update existing translation
+                existing.translated_data = json.dumps(translated_data)
+                existing.status = "completed"
+                existing.translation_service = translation_service.provider
+                existing.version = (existing.version or 1) + 1
+            else:
+                # Create new translation
+                translation = Translation(
+                    content_entry_id=entry_id,
+                    locale_id=locale.id,
+                    translated_data=json.dumps(translated_data),
+                    status="completed",
+                    translation_service=translation_service.provider,
+                    quality_score=0.95,
+                )
+                db.add(translation)
+
+        except Exception as e:
+            print(f"Auto-translation update failed for locale {locale.code}: {e}")
             continue
 
     db.commit()
@@ -162,7 +330,7 @@ def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: S
 async def create_content_type(
     request: Request,
     content_type_data: ContentTypeCreate,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -201,7 +369,7 @@ async def create_content_type(
     db.refresh(content_type)
 
     # Parse fields_schema back to list
-    fields = json.loads(content_type.fields_schema) if content_type.fields_schema else []
+    fields = parse_fields_schema(content_type.fields_schema)
 
     return ContentTypeResponse(
         id=content_type.id,
@@ -241,7 +409,7 @@ async def list_content_types(
 
     results = []
     for ct in content_types:
-        fields = json.loads(ct.fields_schema) if ct.fields_schema else []
+        fields = parse_fields_schema(ct.fields_schema)
         entry_count = (
             db.query(func.count(ContentEntry.id))
             .filter(ContentEntry.content_type_id == ct.id)
@@ -290,7 +458,7 @@ async def get_content_type(
     if not content_type:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Content type not found")
 
-    fields = json.loads(content_type.fields_schema) if content_type.fields_schema else []
+    fields = parse_fields_schema(content_type.fields_schema)
     entry_count = (
         db.query(func.count(ContentEntry.id))
         .filter(ContentEntry.content_type_id == content_type.id)
@@ -351,7 +519,7 @@ async def update_content_type(
     db.commit()
     db.refresh(content_type)
 
-    fields = json.loads(content_type.fields_schema) if content_type.fields_schema else []
+    fields = parse_fields_schema(content_type.fields_schema)
     entry_count = (
         db.query(func.count(ContentEntry.id))
         .filter(ContentEntry.content_type_id == content_type.id)
@@ -411,7 +579,7 @@ async def create_content_entry(
     request: Request,
     entry_data: ContentEntryCreate,
     background_tasks: BackgroundTasks,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -471,9 +639,23 @@ async def create_content_entry(
         seo_data["og_image"] = entry_data.og_image
 
     # Create entry
+    # For API key auth, author_id may be None if user.id is not a valid UUID
+    author_id = None
+    try:
+        from uuid import UUID as UUIDType
+
+        if isinstance(current_user.id, str):
+            UUIDType(current_user.id)  # Validate it's a UUID
+            author_id = current_user.id
+        else:
+            author_id = current_user.id
+    except (ValueError, AttributeError):
+        # API key auth uses virtual user with non-UUID id
+        author_id = None
+
     entry = ContentEntry(
         content_type_id=entry_data.content_type_id,
-        author_id=current_user.id,
+        author_id=author_id,
         title=title,
         data=json.dumps(entry_data.data),
         slug=slug,
@@ -620,12 +802,18 @@ async def list_content_entries(
 async def get_content_entry(
     request: Request,
     entry_id: UUID,
+    locale: Optional[str] = Query(
+        None, description="Locale code to return translated content (e.g., 'fr', 'es', 'de')"
+    ),
     current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
     Get a specific content entry by ID.
     Supports both JWT and API key authentication.
+
+    If locale parameter is provided, returns the entry with translated data merged in.
+    Only fields marked as 'localized: true' in the content type schema will be translated.
     """
     entry = (
         db.query(ContentEntry)
@@ -640,6 +828,46 @@ async def get_content_entry(
     if not entry:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Content entry not found")
 
+    # If locale is requested, merge translation data
+    if locale:
+        from backend.models.translation import Locale, Translation
+
+        # Find the locale
+        locale_obj = (
+            db.query(Locale)
+            .filter(
+                Locale.code == locale,
+                Locale.organization_id == current_user.organization_id,
+            )
+            .first()
+        )
+
+        if locale_obj:
+            # Get the translation for this entry and locale
+            translation = (
+                db.query(Translation)
+                .filter(
+                    Translation.content_entry_id == entry_id,
+                    Translation.locale_id == locale_obj.id,
+                )
+                .first()
+            )
+
+            if translation and translation.translated_data:
+                # Merge translated data into the entry
+                original_data = json.loads(entry.data) if entry.data else {}
+                translated_data = (
+                    json.loads(translation.translated_data)
+                    if isinstance(translation.translated_data, str)
+                    else translation.translated_data
+                )
+
+                # Merge: translated data takes precedence
+                merged_data = {**original_data, **translated_data}
+
+                # Create a temporary copy of entry with merged data
+                entry.data = json.dumps(merged_data)
+
     return build_entry_response(entry)
 
 
@@ -651,11 +879,12 @@ async def update_content_entry(
     entry_id: UUID,
     entry_data: ContentEntryUpdate,
     background_tasks: BackgroundTasks,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
-    Update a content entry
+    Update a content entry.
+    Supports both JWT and API key authentication.
     """
     entry = (
         db.query(ContentEntry)
@@ -715,6 +944,12 @@ async def update_content_entry(
     await invalidate_cache_pattern(f"content:entry:{current_user.organization_id}:{entry_id}*")
     await invalidate_cache_pattern(f"content:list:{current_user.organization_id}*")
     await invalidate_cache_pattern(f"seo:*:{current_user.organization_id}:{entry_id}*")
+
+    # Auto-update translations if content data changed
+    if entry_data.data is not None:
+        background_tasks.add_task(
+            auto_update_translations_background, entry.id, current_user.organization_id, db
+        )
 
     # Publish webhook event
     background_tasks.add_task(

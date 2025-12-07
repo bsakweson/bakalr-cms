@@ -1,0 +1,147 @@
+{
+  "entries": [
+    {
+      "content_type_api_id": "page",
+      "slug": "home",
+      "status": "published",
+      "seo_title": "Bakalr Boutique - Premium Beauty Supplies",
+      "seo_description": "Shop premium hair care, skincare, cosmetics, and beauty tools. Top brands like Cantu, Shea Moisture, Mielle, and more. Fast shipping!",
+      "data": {
+        "page_key": "home",
+        "template": "home",
+        "sections": [
+          {"type": "hero", "banner_key": "hero-main", "full_width": true},
+          {"type": "featured_categories", "heading": "Shop by Category", "columns": 6, "show_icon": true},
+          {"type": "featured_products", "heading": "Bestsellers", "count": 8, "filter": "bestseller"},
+          {"type": "banner", "banner_key": "promo-extensions"},
+          {"type": "featured_products", "heading": "New Arrivals", "count": 8, "filter": "new_arrival"},
+          {"type": "featured_brands", "heading": "Top Brands", "count": 10},
+          {"type": "testimonials", "heading": "What Our Customers Say", "count": 3},
+          {"type": "newsletter", "heading": "Join Our Newsletter", "subheading": "Get 10% off your first order!"}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "shop",
+      "status": "published",
+      "seo_title": "Shop All Products - Bakalr Boutique",
+      "seo_description": "Browse our full collection of hair care, skincare, cosmetics, and beauty products.",
+      "data": {
+        "page_key": "shop",
+        "template": "listing",
+        "sections": [
+          {"type": "page_header", "heading": "Shop All Products", "show_breadcrumb": true},
+          {"type": "product_grid", "show_filters": true, "show_sort": true, "per_page": 24}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "about",
+      "status": "published",
+      "seo_title": "About Us - Bakalr Boutique",
+      "seo_description": "Learn about Bakalr Boutique's mission to provide premium beauty supplies.",
+      "data": {
+        "page_key": "about",
+        "template": "landing",
+        "sections": [
+          {"type": "hero", "banner_key": "hero-about", "full_width": true},
+          {"type": "rich_text", "content": "<h2>Our Story</h2><p>Bakalr Boutique was founded with a simple mission: to make premium beauty products accessible to everyone.</p>"},
+          {"type": "stats", "items": [
+            {"label": "Products", "value": "5000+"},
+            {"label": "Brands", "value": "100+"},
+            {"label": "Happy Customers", "value": "50,000+"},
+            {"label": "Years in Business", "value": "10+"}
+          ]},
+          {"type": "rich_text", "content": "<h2>Our Values</h2><ul><li><strong>Quality:</strong> We only carry products we believe in.</li><li><strong>Diversity:</strong> Beauty comes in all forms.</li><li><strong>Community:</strong> We support Black-owned and local brands.</li></ul>"}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "contact",
+      "status": "published",
+      "seo_title": "Contact Us - Bakalr Boutique",
+      "seo_description": "Get in touch with Bakalr Boutique for orders, product questions, and more.",
+      "data": {
+        "page_key": "contact",
+        "template": "landing",
+        "sections": [
+          {"type": "page_header", "heading": "Contact Us", "subheading": "We'd love to hear from you!"},
+          {"type": "contact_form", "show_map": true},
+          {"type": "contact_info", "show_hours": true}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "faq",
+      "status": "published",
+      "seo_title": "FAQ - Bakalr Boutique",
+      "seo_description": "Find answers to frequently asked questions about shipping, returns, and orders.",
+      "data": {
+        "page_key": "faq",
+        "template": "landing",
+        "sections": [
+          {"type": "page_header", "heading": "Frequently Asked Questions"},
+          {"type": "faq_list", "group_by_category": true}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "privacy",
+      "status": "published",
+      "seo_title": "Privacy Policy - Bakalr Boutique",
+      "data": {
+        "page_key": "privacy",
+        "template": "landing",
+        "sections": [
+          {"type": "page_header", "heading": "Privacy Policy"},
+          {"type": "rich_text", "content": "<p>Last updated: January 1, 2025</p><h2>Information We Collect</h2><p>We collect information you provide directly to us when you create an account, make a purchase, or contact us.</p>"}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "terms",
+      "status": "published",
+      "seo_title": "Terms of Service - Bakalr Boutique",
+      "data": {
+        "page_key": "terms",
+        "template": "landing",
+        "sections": [
+          {"type": "page_header", "heading": "Terms of Service"},
+          {"type": "rich_text", "content": "<p>Last updated: January 1, 2025</p><h2>Acceptance of Terms</h2><p>By accessing Bakalr Boutique, you agree to these Terms of Service.</p>"}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "cart",
+      "status": "published",
+      "seo_title": "Shopping Cart - Bakalr Boutique",
+      "data": {
+        "page_key": "cart",
+        "template": "cart",
+        "sections": [
+          {"type": "cart_contents"},
+          {"type": "cart_summary"},
+          {"type": "featured_products", "heading": "You May Also Like", "count": 4, "filter": "featured"}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "page",
+      "slug": "checkout",
+      "status": "published",
+      "seo_title": "Checkout - Bakalr Boutique",
+      "data": {
+        "page_key": "checkout",
+        "template": "checkout",
+        "sections": [{"type": "checkout_form"}]
+      }
+    }
+  ]
+}

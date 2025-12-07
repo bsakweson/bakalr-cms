@@ -1,0 +1,85 @@
+{
+  "name": "Auth Page",
+  "api_id": "auth_page",
+  "description": "Authentication pages content (login, register, forgot-password, etc.)",
+  "fields": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "help_text": "Unique key: login, register, forgot_password, reset_password, verify_email, 2fa, 2fa_recovery"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "localized": true,
+      "help_text": "Page title - IS translated"
+    },
+    {
+      "name": "subtitle",
+      "type": "text",
+      "required": false,
+      "localized": true,
+      "help_text": "Page subtitle - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "localized": true,
+      "help_text": "Page description - IS translated"
+    },
+    {
+      "name": "form_labels",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Form field labels and placeholders - IS translated"
+    },
+    {
+      "name": "button_text",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Button texts (primary, secondary, links) - IS translated"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Success/error/info messages - IS translated"
+    },
+    {
+      "name": "links",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Navigation links with labels - IS translated"
+    },
+    {
+      "name": "social_login",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Social login button labels - IS translated"
+    },
+    {
+      "name": "legal_text",
+      "type": "textarea",
+      "required": false,
+      "localized": true,
+      "help_text": "Terms acceptance text, privacy notice - IS translated"
+    },
+    {
+      "name": "image_id",
+      "type": "media",
+      "required": false,
+      "localized": false,
+      "help_text": "Side image or background"
+    }
+  ]
+}

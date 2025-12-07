@@ -1,0 +1,68 @@
+{
+  "name": "Category",
+  "api_id": "category",
+  "description": "Product categories with hierarchy support",
+  "display_field": "name",
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "required": true,
+      "localized": true,
+      "help_text": "Category name - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "localized": true,
+      "help_text": "Full description - IS translated"
+    },
+    {
+      "name": "short_description",
+      "type": "text",
+      "required": false,
+      "localized": true,
+      "help_text": "Brief description - IS translated"
+    },
+    {
+      "name": "image_id",
+      "type": "media",
+      "required": false,
+      "help_text": "Category thumbnail"
+    },
+    {
+      "name": "banner_image_id",
+      "type": "media",
+      "required": false,
+      "help_text": "Category page banner"
+    },
+    {
+      "name": "icon",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "help_text": "Icon name - NOT translated"
+    },
+    {
+      "name": "parent_id",
+      "type": "reference",
+      "required": false,
+      "help_text": "Parent category ID"
+    },
+    {
+      "name": "display_order",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "help_text": "Sort order"
+    },
+    {
+      "name": "featured",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "help_text": "Show in featured"
+    }
+  ]
+}

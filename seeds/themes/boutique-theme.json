@@ -1,0 +1,36 @@
+{
+  "name": "bakalr",
+  "display_name": "Bakalr",
+  "description": "Official Bakalr brand theme - saddle brown primary with warm earth secondary tones",
+  "is_active": true,
+  "is_system_theme": false,
+  "colors": {
+    "primary": "#8B4513",
+    "secondary": "#8B7355",
+    "accent": "#B08968",
+    "background": "#FAF9F7",
+    "surface": "#FFFFFF",
+    "text": "#3D1F08",
+    "textSecondary": "#6B5842",
+    "border": "#E8E2D9",
+    "error": "#D32F2F",
+    "warning": "#F57C00",
+    "success": "#388E3C",
+    "info": "#1976D2"
+  },
+  "typography": {
+    "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "headingFontFamily": "'Playfair Display', Georgia, serif",
+    "fontSize": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem"
+    }
+  },
+  "custom_css": "/* Bakalr Brand Theme */\n.bakalr-gradient { background: linear-gradient(135deg, #8B4513 0%, #7A3C0F 50%, #68340D 100%); }\n.warm-accent { background: linear-gradient(135deg, #B08968 0%, #C5A890 50%, #B08968 100%); }"
+}

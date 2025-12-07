@@ -1,0 +1,43 @@
+{
+  "name": "Footer",
+  "api_id": "footer",
+  "description": "Footer content and configuration",
+  "display_field": "about_text",
+  "fields": [
+    {
+      "name": "about_text",
+      "type": "textarea",
+      "required": false,
+      "localized": true,
+      "help_text": "About text - IS translated"
+    },
+    {
+      "name": "copyright_text",
+      "type": "text",
+      "required": false,
+      "localized": true,
+      "help_text": "Copyright notice - IS translated"
+    },
+    {
+      "name": "columns",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Footer columns with titles/links - IS translated"
+    },
+    {
+      "name": "social_links",
+      "type": "json",
+      "required": false,
+      "localized": false,
+      "help_text": "Social media URLs - NOT translated"
+    },
+    {
+      "name": "payment_icons",
+      "type": "json",
+      "required": false,
+      "localized": false,
+      "help_text": "Payment method icons - NOT translated"
+    }
+  ]
+}

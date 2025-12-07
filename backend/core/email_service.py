@@ -72,6 +72,11 @@ class EmailService:
             attachments: Optional list of file paths
         """
         try:
+            print(f"📧 Preparing to send email to {to_email}...")
+            print(f"   SMTP Host: {settings.SMTP_HOST}:{settings.SMTP_PORT}")
+            print(f"   SMTP User: {settings.SMTP_USER}")
+            print(f"   Template: {template_name}")
+
             # Render template
             template = self.jinja_env.get_template(template_name)
             html_content = template.render(**template_vars)
@@ -87,7 +92,11 @@ class EmailService:
             print(f"✓ Email sent successfully to {to_email}: {subject}")
 
         except Exception as e:
+            import traceback
+
             print(f"✗ Failed to send email to {to_email}: {e}")
+            print(f"   Error type: {type(e).__name__}")
+            traceback.print_exc()
             raise
 
     async def send_verification_email(

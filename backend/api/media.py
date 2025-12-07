@@ -470,6 +470,70 @@ async def serve_media_file(request: Request, filename: str, db: Session = Depend
     return response
 
 
+@router.get("/proxy/{filename}")
+@limiter.limit(get_rate_limit())
+async def proxy_media_file(request: Request, filename: str, db: Session = Depends(get_db)):
+    """
+    Proxy media file - streams the file content directly instead of redirecting.
+
+    This endpoint is useful when the storage backend (e.g., MinIO) is not
+    publicly accessible and you need to serve files through the API.
+
+    Note: For large files, consider using the redirect endpoint instead.
+    """
+    from fastapi.responses import Response
+
+    # Find media by filename
+    media = db.execute(select(Media).where(Media.filename == filename)).scalar_one_or_none()
+
+    if not media:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
+
+    storage = get_storage_backend()
+
+    # Check if file exists
+    if not storage.file_exists(media.file_path):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="File not found in storage"
+        )
+
+    # For local storage, serve file directly
+    from backend.core.storage import LocalStorageBackend
+
+    if isinstance(storage, LocalStorageBackend):
+        file_path = storage.get_full_path(media.file_path)
+        response = FileResponse(
+            path=file_path, media_type=media.mime_type, filename=media.original_filename
+        )
+        add_cache_headers(response, max_age=31536000, public=True)
+        return response
+
+    # For S3, download and stream the content
+    from backend.core.storage import S3StorageBackend
+
+    if isinstance(storage, S3StorageBackend):
+        try:
+            content, content_type = storage.get_file_content(media.file_path)
+            response = Response(
+                content=content,
+                media_type=media.mime_type or content_type,
+                headers={
+                    "Content-Disposition": f'inline; filename="{media.original_filename}"',
+                },
+            )
+            add_cache_headers(response, max_age=31536000, public=True)
+            return response
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Failed to retrieve file: {str(e)}",
+            )
+
+    raise HTTPException(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unknown storage backend"
+    )
+
+
 @router.post("/thumbnail", response_model=ThumbnailResponse)
 @limiter.limit(get_rate_limit())
 async def generate_thumbnail(

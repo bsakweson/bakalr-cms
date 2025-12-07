@@ -99,11 +99,11 @@ services:
     volumes:
       - libretranslate_data:/home/libretranslate/.local
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5000/languages || exit 1"]
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:5000/languages')\" || exit 1"]
       interval: 30s
       timeout: 10s
-      retries: 3
-      start_period: 120s
+      retries: 5
+      start_period: 180s
     restart: unless-stopped
     networks:
       - bakalr-network

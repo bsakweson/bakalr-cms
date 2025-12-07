@@ -28,8 +28,8 @@ class SearchHit(BaseModel):
     content_type_id: str
     content_type_name: str
     content_type_slug: str
-    author_id: str
-    author_name: str
+    author_id: Optional[str] = None
+    author_name: Optional[str] = None
     created_at: Optional[str]
     updated_at: Optional[str]
     published_at: Optional[str]

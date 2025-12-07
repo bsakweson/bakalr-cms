@@ -103,7 +103,7 @@ class ContentEntryResponse(UUIDMixin):
     id: str
     content_type_id: str
     content_type: Optional[Dict[str, Any]] = None
-    author_id: str
+    author_id: Optional[str] = None
     data: Dict[str, Any]
     slug: Optional[str]
     status: str

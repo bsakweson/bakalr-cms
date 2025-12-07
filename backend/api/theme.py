@@ -27,7 +27,7 @@ router = APIRouter(prefix="/themes", tags=["themes"])
 @router.post("", response_model=ThemeResponse, status_code=status.HTTP_201_CREATED)
 def create_theme(
     theme_data: ThemeCreate,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -88,7 +88,7 @@ def list_themes(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     include_system: bool = Query(True, description="Include system themes"),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -124,7 +124,7 @@ def list_themes(
 @router.get("/{theme_id}", response_model=ThemeResponse)
 def get_theme(
     theme_id: UUID,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """Get a specific theme by ID."""
@@ -353,7 +353,7 @@ def set_active_theme(
 @router.post("/{theme_id}/activate", response_model=ThemeResponse)
 def activate_theme(
     theme_id: UUID,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -403,7 +403,7 @@ def activate_theme(
 @router.post("/{theme_id}/deactivate", response_model=ThemeResponse)
 def deactivate_theme(
     theme_id: UUID,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -447,7 +447,7 @@ def deactivate_theme(
 @router.get("/{theme_id}/export")
 def export_theme(
     theme_id: UUID,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -491,7 +491,7 @@ def export_theme(
 @router.get("/{theme_id}/css-variables", response_model=ThemeCSSVariables)
 def get_theme_css_variables(
     theme_id: UUID,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """

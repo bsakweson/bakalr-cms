@@ -1,4 +1,4 @@
-.PHONY: help install setup migrate run-backend run-frontend run dev stop clean test lint format docker-up docker-down docker-logs check-docker install-docker
+.PHONY: help install setup migrate run-backend run-frontend run dev stop clean test lint format docker-up docker-down docker-logs check-docker install-docker seed seed-reset
 
 # Default target
 help:
@@ -18,6 +18,11 @@ help:
 	@echo "  make run-frontend   - Run frontend only (port 3000)"
 	@echo "  make stop           - Stop all running servers"
 	@echo ""
+	@echo "Database & Seeding:"
+	@echo "  make seed           - Seed sample data (keeps existing data)"
+	@echo "  make seed-reset     - Reset and reseed all content data"
+	@echo "  make reset-db       - Reset entire database (WARNING: deletes all data)"
+	@echo ""
 	@echo "Testing & Quality:"
 	@echo "  make test           - Run all tests"
 	@echo "  make test-backend   - Run backend tests only"
@@ -33,7 +38,6 @@ help:
 	@echo ""
 	@echo "Utilities:"
 	@echo "  make clean          - Clean cache and temp files"
-	@echo "  make reset-db       - Reset database (WARNING: deletes data)"
 
 # Installation
 install:
@@ -192,3 +196,16 @@ reset-db:
 	else \
 		echo "❌ Cancelled"; \
 	fi
+
+# Seeding
+seed:
+	@echo "🌱 Seeding sample data..."
+	@echo "   (Requires SEED_ADMIN_PASSWORD environment variable)"
+	@poetry run python seeds/seed_runner.py
+	@echo "✅ Seeding complete"
+
+seed-reset:
+	@echo "🌱 Resetting and reseeding all content data..."
+	@echo "   (Requires SEED_ADMIN_PASSWORD environment variable)"
+	@poetry run python seeds/seed_runner.py --reset
+	@echo "✅ Reset and seeding complete"

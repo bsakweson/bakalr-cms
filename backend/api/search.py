@@ -4,7 +4,7 @@ Search API endpoints for full-text search, autocomplete, and faceting.
 
 from typing import Optional
 
-from fastapi import APIRouter, Depends, Query, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from sqlalchemy.orm import Session
 
 from backend.api.schemas.search import (
@@ -22,20 +22,31 @@ from backend.api.schemas.search import (
 from backend.core.dependencies import get_current_user, get_db
 from backend.core.permissions import PermissionChecker
 from backend.core.rate_limit import get_rate_limit, limiter
-from backend.core.search_service import search_service
+from backend.core.search_service import get_search_service
 from backend.models.content import ContentEntry
 from backend.models.user import User
 
 router = APIRouter(prefix="/search", tags=["Search"])
 
 
+def require_search_service():
+    """Dependency to require search service availability."""
+    service = get_search_service()
+    if service is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Search service is not available. Meilisearch may not be running.",
+        )
+    return service
+
+
 @router.post("", response_model=SearchResponse)
-@limiter.limit(get_rate_limit())
 async def search_content(
     request: Request,
     search_request: SearchRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Full-text search across all content entries.
@@ -67,12 +78,12 @@ async def search_content(
 
 
 @router.get("", response_model=SearchResponse)
-@limiter.limit(get_rate_limit())
 async def search_content_get(
     request: Request,
     query: str = Query(..., description="Search query", min_length=1),
     status: Optional[str] = Query(None, description="Filter by status"),
-    content_type_slug: Optional[str] = Query(None, description="Filter by content type"),
+    content_type_slug: Optional[str] = Query(None, description="Filter by content type slug"),
+    content_type_id: Optional[str] = Query(None, description="Filter by content type ID"),
     limit: int = Query(20, ge=1, le=100, description="Number of results"),
     offset: int = Query(0, ge=0, description="Offset for pagination"),
     sort_by: Optional[str] = Query(
@@ -81,6 +92,7 @@ async def search_content_get(
     sort_order: Optional[str] = Query("desc", description="Sort order (asc, desc)"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Full-text search with query parameters (GET endpoint).
@@ -91,6 +103,8 @@ async def search_content_get(
         filters["status"] = status
     if content_type_slug:
         filters["content_type_slug"] = content_type_slug
+    if content_type_id:
+        filters["content_type_id"] = content_type_id
 
     sort = None
     if sort_by:
@@ -124,12 +138,12 @@ async def search_content_get(
 
 
 @router.post("/autocomplete", response_model=AutocompleteResponse)
-@limiter.limit(get_rate_limit())
 async def autocomplete_search(
     request: Request,
     autocomplete_request: AutocompleteRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Autocomplete suggestions for search-as-you-type.
@@ -156,13 +170,13 @@ async def autocomplete_search(
 
 
 @router.get("/autocomplete", response_model=AutocompleteResponse)
-@limiter.limit(get_rate_limit())
 async def autocomplete_search_get(
     request: Request,
     query: str = Query(..., description="Partial search query", min_length=1),
     limit: int = Query(10, ge=1, le=50, description="Number of suggestions"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Autocomplete suggestions (GET endpoint).
@@ -192,6 +206,7 @@ async def get_facets(
     facet_request: FacetRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Get facet distribution for filtering.
@@ -215,6 +230,7 @@ async def get_facets_get(
     fields: Optional[str] = Query(None, description="Comma-separated facet fields"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Get facet distribution (GET endpoint).
@@ -239,6 +255,7 @@ async def reindex_content(
     reindex_request: ReindexRequest,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Reindex all content entries for current organization.
@@ -278,7 +295,10 @@ async def reindex_content(
 @router.delete("/index", status_code=status.HTTP_204_NO_CONTENT)
 @limiter.limit(get_rate_limit())
 async def clear_search_index(
-    request: Request, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)
+    request: Request,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+    search_service=Depends(require_search_service),
 ):
     """
     Clear the entire search index.

@@ -2,6 +2,7 @@
 Search service using Meilisearch for full-text search, faceting, and autocomplete.
 """
 
+import json
 from typing import Any, Dict, List, Optional
 
 import meilisearch
@@ -109,9 +110,19 @@ class SearchService:
                 elif isinstance(value, (list, dict)):
                     content_text += f" {str(value)}"
 
+        # Determine the best title - check entry.title, then data.name/title, then slug
+        # Skip generic titles like "Entry <type>" that come from templates
+        title = entry.title
+        is_generic_title = title and title.lower().startswith("entry ")
+
+        if (not title or is_generic_title) and isinstance(entry_data, dict):
+            title = entry_data.get("name") or entry_data.get("title") or entry_data.get("headline")
+        if not title:
+            title = entry.slug
+
         return {
             "id": str(entry.id),
-            "title": entry.title or entry.slug,
+            "title": title,
             "slug": entry.slug,
             "content_data": content_text,
             "status": entry.status,
@@ -179,17 +190,17 @@ class SearchService:
             Search results with hits, facets, and metadata
         """
         # Build filter string
-        filter_parts = [f"organization_id = {organization_id}"]
+        filter_parts = [f"organization_id = '{organization_id}'"]
 
         if filters:
             if "status" in filters:
                 filter_parts.append(f"status = '{filters['status']}'")
             if "content_type_id" in filters:
-                filter_parts.append(f"content_type_id = {filters['content_type_id']}")
+                filter_parts.append(f"content_type_id = '{filters['content_type_id']}'")
             if "content_type_slug" in filters:
                 filter_parts.append(f"content_type_slug = '{filters['content_type_slug']}'")
             if "author_id" in filters:
-                filter_parts.append(f"author_id = {filters['author_id']}")
+                filter_parts.append(f"author_id = '{filters['author_id']}'")
 
         filter_str = " AND ".join(filter_parts)
 
@@ -281,5 +292,31 @@ class SearchService:
         return task
 
 
-# Global search service instance
-search_service = SearchService()
+# Global search service instance - lazy initialization to handle Meilisearch being unavailable
+_search_service: Optional[SearchService] = None
+
+
+def get_search_service() -> Optional[SearchService]:
+    """Get search service instance, creating if needed and available."""
+    global _search_service
+    if _search_service is None:
+        try:
+            _search_service = SearchService()
+        except Exception as e:
+            import logging
+
+            logging.warning(
+                f"Meilisearch not available: {e}. Search functionality will be disabled."
+            )
+            return None
+    return _search_service
+
+
+# Backward compatibility - will raise error if Meilisearch not available
+@property
+def search_service() -> SearchService:
+    """Backward compatible access - prefer get_search_service()"""
+    svc = get_search_service()
+    if svc is None:
+        raise RuntimeError("Meilisearch is not available")
+    return svc

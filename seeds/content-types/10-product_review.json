@@ -1,0 +1,56 @@
+{
+  "name": "Product Review",
+  "api_id": "product_review",
+  "description": "Customer product reviews and ratings",
+  "display_field": "title",
+  "fields": [
+    {
+      "name": "product_id",
+      "type": "reference",
+      "required": true,
+      "help_text": "Product being reviewed"
+    },
+    {
+      "name": "customer_name",
+      "type": "text",
+      "required": true,
+      "localized": false,
+      "help_text": "Reviewer name - NOT translated (proper noun)"
+    },
+    {
+      "name": "customer_email",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "help_text": "Email - NOT translated"
+    },
+    {
+      "name": "rating",
+      "type": "number",
+      "required": true,
+      "validation": {"min": 1, "max": 5},
+      "help_text": "Rating 1-5"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": false,
+      "localized": false,
+      "help_text": "Review title - NOT translated (user content)"
+    },
+    {
+      "name": "body",
+      "type": "textarea",
+      "required": true,
+      "localized": false,
+      "help_text": "Review content - NOT translated (user content)"
+    },
+    {
+      "name": "verified_purchase",
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "help_text": "Verified purchase"
+    }
+  ]
+}

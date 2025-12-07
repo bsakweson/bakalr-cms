@@ -109,6 +109,9 @@ class TranslateRequest(BaseModel):
         ..., description="List of locale IDs (UUIDs) to translate to"
     )
     force_retranslate: bool = Field(False, description="Force re-translation even if exists")
+    incremental: bool = Field(
+        False, description="Only translate missing fields (preserves existing translations)"
+    )
 
 
 class TranslateResponse(UUIDMixin):

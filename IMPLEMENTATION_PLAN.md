@@ -2,7 +2,7 @@
 
 ## Progress Summary
 
-**Last Updated:** November 25, 2025
+**Last Updated:** December 7, 2025
 
 ### Completed Phases
 
@@ -33,13 +33,15 @@
 - ✅ **Phase 21**: Deployment & DevOps (Docker containerization, CI/CD pipelines, health checks, deployment documentation)
 - ✅ **Phase 22**: Performance Optimization (query optimization, connection pooling, metrics API, load testing, Web Vitals tracking)
 - ✅ **Phase 23**: Final Documentation & Developer Experience (Getting Started Guide, Developer Guide, LICENSE, CHANGELOG, NOTICE, comprehensive README)
+- ✅ **Phase 24**: Media URL Resolution & Proxy System (S3/MinIO proxy URLs, centralized resolveMediaUrl helper, Media Library pagination)
 
 ### Current Status
 
 - **Database**: SQLite (development) with 27 tables (including notifications, email_logs, notification_preferences)
-- **Backend API**: 152+ REST endpoints across 19 modules + GraphQL API (auth, two_factor, password_reset, api_keys, tenant, content, relationships, translation, seo, media, webhooks, preview, delivery, schedule, field_permissions, themes, content_templates, notifications, search)
+- **Backend API**: 159+ REST endpoints across 24 modules + GraphQL API (auth, two_factor, password_reset, api_keys, tenant, content, relationships, translation, seo, media, webhooks, preview, delivery, schedule, field_permissions, themes, content_templates, notifications, search, analytics, metrics)
 - **GraphQL**: Flexible query interface at /api/v1/graphql with 8 queries, 2 mutations, JWT authentication, GraphiQL playground
 - **Frontend**: Next.js 16.0.4 with TypeScript, TailwindCSS, shadcn/ui, responsive admin dashboard, authentication flow
+- **Media System**: S3/MinIO storage with proxy endpoint (`/api/v1/media/proxy/{filename}`), centralized `resolveMediaUrl()` helper for URL resolution across all components
 - **Error Handling**: RFC 7807 Problem Details with 8 custom exception types, input sanitization with XSS protection
 - **API Versioning**: URL-based versioning (/api/v1, /api/v2) with deprecation headers (Deprecation, Sunset, Link, X-API-Warn)
 - **Content Relationships**: Bidirectional linking between content entries (one-to-many, many-to-one, many-to-many patterns)
@@ -52,13 +54,34 @@
 - **Content Management**: Full CRUD for ContentTypes and ContentEntries with versioning and relationship management (5 endpoints)
 - **Translation**: Automatic translation to enabled locales using Google Translate
 - **SEO**: Comprehensive SEO management with metadata, sitemaps, structured data
-- **Media**: File upload, thumbnails, storage backends (local/S3), CDN support
+- **Media**: File upload, thumbnails, storage backends (local/S3), CDN support, proxy endpoint for Docker/MinIO environments
 - **Search**: Meilisearch-powered full-text search with fuzzy matching, typo tolerance, highlighting, autocomplete, faceted filtering (8 endpoints)
 - **Configuration**: Kubernetes-ready with all features externalized via environment variables
 - **Testing**: 6 test suites with 51+ tests passing (auth, content, translation, seo, tenant switching, graphql)
 - **Theming**: Custom theme system with Dark Chocolate Brown (#3D2817) default, supports custom color palettes, typography, spacing, shadows
 - **Content Templates**: Blueprint system for reusable content structures with field defaults and configurations
 - **Notifications & Email**: In-app notification system with email delivery (FastAPI-Mail), 13 endpoints for notifications, preferences, and email logs, 4 email templates (welcome, password reset, digest, notification)
+
+### Recent Updates (December 7, 2025)
+
+#### Media URL Resolution System
+- **S3 Storage Backend**: Returns proxy URLs (`/api/v1/media/proxy/{filename}`) instead of internal Docker hostnames (`minio:9000`)
+- **Centralized `resolveMediaUrl()` Helper**: Added to `frontend/lib/api/client.ts` for consistent URL resolution
+- **Updated Components**:
+  - `media-picker-modal.tsx` - Media selection in content editor
+  - `media-gallery-editor.tsx` - Gallery field editing
+  - `content-edit-dialog.tsx` - Content editing dialogs
+  - `content-view-dialog.tsx` - Content viewing dialogs
+  - `json-field-editor.tsx` - JSON field display with media galleries
+  - `dashboard/content/[id]/page.tsx` - Content detail page
+  - `dashboard/media/page.tsx` - Media Library with pagination
+  - `MediaDetailsModal.tsx` - Media details popup
+- **Media Library Pagination**: Added pagination (12 items per page) with page navigation
+
+#### Bakalr Boutique Integration
+- **`resolveMediaUrl()` in content-service.ts**: Added helper to resolve CMS proxy URLs to absolute URLs
+- **`getProducts()` Method**: Updated to resolve media gallery URLs for product images
+- **`getProductContent()` Method**: Already using resolveMediaUrl for product detail pages
 
 ### Next Phases
 

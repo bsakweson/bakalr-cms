@@ -1,0 +1,62 @@
+{
+  "entries": [
+    {
+      "content_type_api_id": "navigation",
+      "slug": "header",
+      "status": "published",
+      "data": {
+        "menu_key": "header",
+        "items": [
+          {"label": "Home", "href": "/", "order": 1},
+          {"label": "Shop", "href": "/shop", "order": 2, "children": [
+            {"label": "Hair Care", "href": "/category/hair-care"},
+            {"label": "Hair Styling", "href": "/category/hair-styling"},
+            {"label": "Wigs & Extensions", "href": "/category/wigs-extensions"},
+            {"label": "Skincare", "href": "/category/skincare"},
+            {"label": "Cosmetics", "href": "/category/cosmetics"},
+            {"label": "Nails", "href": "/category/nails"},
+            {"label": "Shop All", "href": "/shop"}
+          ]},
+          {"label": "Brands", "href": "/brands", "order": 3},
+          {"label": "New Arrivals", "href": "/shop?filter=new", "order": 4},
+          {"label": "Sale", "href": "/shop?filter=sale", "order": 5}
+        ],
+        "sign_in_text": "Sign In",
+        "sign_up_text": "Sign Up",
+        "search_placeholder": "Search products...",
+        "view_cart_text": "View Cart"
+      }
+    },
+    {
+      "content_type_api_id": "navigation",
+      "slug": "footer",
+      "status": "published",
+      "data": {
+        "menu_key": "footer",
+        "items": [
+          {"label": "Shop", "href": "/shop", "order": 1},
+          {"label": "About Us", "href": "/about", "order": 2},
+          {"label": "Contact", "href": "/contact", "order": 3},
+          {"label": "FAQ", "href": "/faq", "order": 4},
+          {"label": "Privacy Policy", "href": "/privacy", "order": 5},
+          {"label": "Terms of Service", "href": "/terms", "order": 6}
+        ]
+      }
+    },
+    {
+      "content_type_api_id": "navigation",
+      "slug": "mobile",
+      "status": "published",
+      "data": {
+        "menu_key": "mobile",
+        "items": [
+          {"label": "Home", "href": "/", "icon": "home", "order": 1},
+          {"label": "Shop", "href": "/shop", "icon": "shopping-bag", "order": 2},
+          {"label": "Search", "href": "/search", "icon": "search", "order": 3},
+          {"label": "Account", "href": "/account", "icon": "user", "order": 4},
+          {"label": "Cart", "href": "/cart", "icon": "shopping-cart", "order": 5}
+        ]
+      }
+    }
+  ]
+}

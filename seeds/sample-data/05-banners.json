@@ -1,0 +1,62 @@
+{
+  "entries": [
+    {
+      "content_type_api_id": "banner",
+      "slug": "hero-main",
+      "status": "published",
+      "data": {
+        "banner_key": "hero-main",
+        "headline": "Elevate Your Beauty Routine",
+        "subheadline": "Discover premium hair care, skincare, and cosmetics from top brands. Free shipping on orders over $50!",
+        "cta_text": "Shop Now",
+        "cta_link": "/shop",
+        "overlay_color": "rgba(0,0,0,0.4)",
+        "text_color": "#ffffff",
+        "position": "hero"
+      }
+    },
+    {
+      "content_type_api_id": "banner",
+      "slug": "promo-extensions",
+      "status": "published",
+      "data": {
+        "banner_key": "promo-extensions",
+        "headline": "20% Off All Hair Extensions",
+        "subheadline": "Premium Brazilian, Peruvian, and Malaysian bundles. Limited time offer!",
+        "cta_text": "Shop Extensions",
+        "cta_link": "/category/wigs-extensions",
+        "overlay_color": "rgba(139,69,19,0.8)",
+        "text_color": "#ffffff",
+        "position": "banner"
+      }
+    },
+    {
+      "content_type_api_id": "banner",
+      "slug": "hero-about",
+      "status": "published",
+      "data": {
+        "banner_key": "hero-about",
+        "headline": "Our Story",
+        "subheadline": "Dedicated to bringing you the best in beauty since 2015",
+        "overlay_color": "rgba(0,0,0,0.5)",
+        "text_color": "#ffffff",
+        "position": "hero"
+      }
+    },
+    {
+      "content_type_api_id": "banner",
+      "slug": "summer-sale",
+      "status": "published",
+      "data": {
+        "banner_key": "summer-sale",
+        "headline": "Summer Hair Essentials",
+        "subheadline": "Protect and nourish your hair this summer with our curated collection",
+        "cta_text": "Shop the Collection",
+        "cta_link": "/collection/summer-essentials",
+        "overlay_color": "rgba(255,165,0,0.7)",
+        "text_color": "#ffffff",
+        "position": "banner"
+      }
+    }
+  ]
+}
