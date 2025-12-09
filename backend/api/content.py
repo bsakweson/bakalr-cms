@@ -702,12 +702,20 @@ async def list_content_entries(
     content_type_id: Optional[UUID] = Query(None),
     content_type_slug: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
+    category_id: Optional[str] = Query(
+        None, description="Filter by category_id in data JSON field"
+    ),
+    brand_id: Optional[str] = Query(None, description="Filter by brand_id in data JSON field"),
     page: int = Query(1, ge=1),
     page_size: int = Query(10, ge=1, le=100),
 ):
     """
     List content entries with pagination and filters.
     Supports both JWT and API key authentication.
+
+    Additional filters:
+    - category_id: Filter entries where data->category_id matches
+    - brand_id: Filter entries where data->brand_id matches
     """
     logger.info(f"========== LIST ENTRIES CALLED - Page {page} ==========")
 
@@ -752,6 +760,22 @@ async def list_content_entries(
     if status:
         query = query.filter(ContentEntry.status == status)
 
+    # Filter by category_id in JSON data field (data is stored as Text, cast to JSON)
+    if category_id:
+        from sqlalchemy import cast
+        from sqlalchemy.dialects.postgresql import JSON
+
+        query = query.filter(cast(ContentEntry.data, JSON)["category_id"].astext == category_id)
+        logger.info(f"Filtering by category_id: {category_id}")
+
+    # Filter by brand_id in JSON data field (data is stored as Text, cast to JSON)
+    if brand_id:
+        from sqlalchemy import cast
+        from sqlalchemy.dialects.postgresql import JSON
+
+        query = query.filter(cast(ContentEntry.data, JSON)["brand_id"].astext == brand_id)
+        logger.info(f"Filtering by brand_id: {brand_id}")
+
     total = query.count()
     logger.info(f"Total entries: {total}")
     entries = query.offset((page - 1) * page_size).limit(page_size).all()
@@ -791,6 +815,176 @@ async def list_content_entries(
         items.append(item)
 
     pages = (total + page_size - 1) // page_size
+
+    return ContentEntryListResponse(
+        items=items, total=total, page=page, page_size=page_size, pages=pages
+    )
+
+
+@router.get("/products/by-category/{category_id}", response_model=ContentEntryListResponse)
+@limiter.limit(get_rate_limit())
+async def get_products_by_category(
+    request: Request,
+    category_id: str,
+    current_user: User = Depends(get_current_user_flexible),
+    db: Session = Depends(get_db),
+    status: Optional[str] = Query("published"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(10, ge=1, le=100),
+):
+    """
+    Get products filtered by category_id with pagination.
+    Filters products where data->category_id matches the provided category_id.
+    """
+    logger.info(f"Getting products by category_id: {category_id}")
+
+    # Get product content type
+    product_type = (
+        db.query(ContentType)
+        .filter(
+            ContentType.api_id == "product",
+            ContentType.organization_id == current_user.organization_id,
+        )
+        .first()
+    )
+
+    if not product_type:
+        return ContentEntryListResponse(items=[], total=0, page=page, page_size=page_size, pages=0)
+
+    # Query products with category_id filter using PostgreSQL JSON
+    from sqlalchemy import text
+
+    query = db.query(ContentEntry).filter(
+        ContentEntry.content_type_id == product_type.id,
+        text("data::json->>'category_id' = :cat_id").bindparams(cat_id=category_id),
+    )
+
+    if status:
+        query = query.filter(ContentEntry.status == status)
+
+    total = query.count()
+    entries = query.offset((page - 1) * page_size).limit(page_size).all()
+
+    items = []
+    for entry in entries:
+        data = json.loads(entry.data) if entry.data else {}
+        seo_data = json.loads(entry.seo_data) if entry.seo_data else {}
+
+        ct_from_db = db.query(ContentType).filter(ContentType.id == entry.content_type_id).first()
+        content_type_data = None
+        if ct_from_db:
+            content_type_data = {
+                "id": ct_from_db.id,
+                "name": ct_from_db.name,
+                "api_id": ct_from_db.api_id,
+            }
+
+        item = ContentEntryResponse(
+            id=entry.id,
+            content_type_id=entry.content_type_id,
+            content_type=content_type_data,
+            author_id=entry.author_id,
+            data=data,
+            slug=entry.slug,
+            status=entry.status,
+            version=entry.version,
+            published_at=entry.published_at,
+            seo_title=seo_data.get("seo_title"),
+            seo_description=seo_data.get("seo_description"),
+            seo_keywords=seo_data.get("seo_keywords"),
+            og_image=seo_data.get("og_image"),
+            created_at=entry.created_at,
+            updated_at=entry.updated_at,
+        )
+        items.append(item)
+
+    pages = (total + page_size - 1) // page_size
+    logger.info(f"Found {total} products for category {category_id}")
+
+    return ContentEntryListResponse(
+        items=items, total=total, page=page, page_size=page_size, pages=pages
+    )
+
+
+@router.get("/products/by-brand/{brand_id}", response_model=ContentEntryListResponse)
+@limiter.limit(get_rate_limit())
+async def get_products_by_brand(
+    request: Request,
+    brand_id: str,
+    current_user: User = Depends(get_current_user_flexible),
+    db: Session = Depends(get_db),
+    status: Optional[str] = Query("published"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(10, ge=1, le=100),
+):
+    """
+    Get products filtered by brand_id with pagination.
+    Filters products where data->brand_id matches the provided brand_id.
+    """
+    logger.info(f"Getting products by brand_id: {brand_id}")
+
+    # Get product content type
+    product_type = (
+        db.query(ContentType)
+        .filter(
+            ContentType.api_id == "product",
+            ContentType.organization_id == current_user.organization_id,
+        )
+        .first()
+    )
+
+    if not product_type:
+        return ContentEntryListResponse(items=[], total=0, page=page, page_size=page_size, pages=0)
+
+    # Query products with brand_id filter using PostgreSQL JSON
+    from sqlalchemy import text
+
+    query = db.query(ContentEntry).filter(
+        ContentEntry.content_type_id == product_type.id,
+        text("data::json->>'brand_id' = :brand_id").bindparams(brand_id=brand_id),
+    )
+
+    if status:
+        query = query.filter(ContentEntry.status == status)
+
+    total = query.count()
+    entries = query.offset((page - 1) * page_size).limit(page_size).all()
+
+    items = []
+    for entry in entries:
+        data = json.loads(entry.data) if entry.data else {}
+        seo_data = json.loads(entry.seo_data) if entry.seo_data else {}
+
+        ct_from_db = db.query(ContentType).filter(ContentType.id == entry.content_type_id).first()
+        content_type_data = None
+        if ct_from_db:
+            content_type_data = {
+                "id": ct_from_db.id,
+                "name": ct_from_db.name,
+                "api_id": ct_from_db.api_id,
+            }
+
+        item = ContentEntryResponse(
+            id=entry.id,
+            content_type_id=entry.content_type_id,
+            content_type=content_type_data,
+            author_id=entry.author_id,
+            data=data,
+            slug=entry.slug,
+            status=entry.status,
+            version=entry.version,
+            published_at=entry.published_at,
+            seo_title=seo_data.get("seo_title"),
+            seo_description=seo_data.get("seo_description"),
+            seo_keywords=seo_data.get("seo_keywords"),
+            og_image=seo_data.get("og_image"),
+            created_at=entry.created_at,
+            updated_at=entry.updated_at,
+        )
+        items.append(item)
+
+    pages = (total + page_size - 1) // page_size
+    logger.info(f"Found {total} products for brand {brand_id}")
 
     return ContentEntryListResponse(
         items=items, total=total, page=page, page_size=page_size, pages=pages

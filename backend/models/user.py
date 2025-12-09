@@ -62,6 +62,14 @@ class User(Base, IDMixin, TimestampMixin):
     two_factor_secret = Column(String(255), nullable=True)
     two_factor_backup_codes = Column(String, nullable=True)  # JSON string of hashed backup codes
 
+    # External Identity Provider (Keycloak, etc.)
+    external_id = Column(
+        String(255), unique=True, nullable=True, index=True
+    )  # External IdP user ID (e.g., Keycloak sub claim)
+    external_provider = Column(
+        String(50), nullable=True
+    )  # Provider name: 'keycloak', 'auth0', etc.
+
     # Relationships
     organization = relationship(
         "Organization", foreign_keys=[organization_id], back_populates="users"

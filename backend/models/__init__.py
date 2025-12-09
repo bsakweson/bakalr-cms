@@ -6,12 +6,16 @@ from backend.models.audit_log import AuditLog
 from backend.models.base import IDMixin, TimestampMixin
 from backend.models.content import ContentEntry, ContentType
 from backend.models.content_template import ContentTemplate
+from backend.models.device import Device, DevicePlatform, DeviceStatus
 from backend.models.media import Media
 from backend.models.notification import Notification
+from backend.models.oauth2 import OAuth2AuthorizationCode, OAuth2Client, OAuth2Token
 from backend.models.organization import Organization
 from backend.models.rbac import Permission, Role
 from backend.models.relationship import ContentRelationship
 from backend.models.schedule import ContentSchedule
+from backend.models.session import RefreshTokenRecord, UserSession
+from backend.models.social_identity import SocialIdentity, SocialProvider
 from backend.models.theme import Theme
 from backend.models.translation import Locale, Translation, TranslationGlossary
 from backend.models.user import User
@@ -50,4 +54,14 @@ __all__ = [
     "Theme",
     "ContentTemplate",
     "Notification",
+    "Device",
+    "DeviceStatus",
+    "DevicePlatform",
+    "UserSession",
+    "RefreshTokenRecord",
+    "SocialIdentity",
+    "SocialProvider",
+    "OAuth2Client",
+    "OAuth2AuthorizationCode",
+    "OAuth2Token",
 ]

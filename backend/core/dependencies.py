@@ -1,7 +1,14 @@
 """
 FastAPI dependencies for authentication and authorization
+
+Supports two authentication providers:
+- 'cms': Built-in JWT authentication (default)
+- 'keycloak': External Keycloak IdP authentication
+
+Set AUTH_PROVIDER environment variable to switch providers.
 """
 
+import logging
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -9,19 +16,143 @@ from fastapi import Depends, Header, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
+from backend.core.config import settings
 from backend.core.security import verify_password, verify_token
 from backend.db.session import get_db
 from backend.models.api_key import APIKey
+from backend.models.organization import Organization
 from backend.models.user import User
 
+logger = logging.getLogger(__name__)
+
 security = HTTPBearer()
+
+
+def is_keycloak_auth() -> bool:
+    """Check if Keycloak authentication is enabled"""
+    return getattr(settings, "AUTH_PROVIDER", "cms").lower() == "keycloak"
+
+
+async def _get_user_from_cms_token(token: str, db: Session) -> Optional[User]:
+    """
+    Validate CMS JWT token and return user.
+    """
+    token_data = verify_token(token, token_type="access")
+    if not token_data:
+        return None
+
+    user = db.query(User).filter(User.id == token_data.sub).first()
+    return user
+
+
+async def _get_or_create_user_from_keycloak(token: str, db: Session) -> Optional[User]:
+    """
+    Validate Keycloak JWT token and return/create CMS user.
+
+    If the user doesn't exist in CMS, auto-provision them based on
+    Keycloak token claims.
+    """
+    # Import here to avoid circular imports
+    from backend.core.keycloak_auth import get_keycloak_provider
+
+    provider = get_keycloak_provider()
+    if not provider:
+        logger.error("Keycloak provider not configured")
+        return None
+
+    # Verify token with Keycloak
+    token_data = await provider.verify_token(token)
+    if not token_data:
+        return None
+
+    # Look up user by Keycloak subject ID (stored in external_id)
+    user = db.query(User).filter(User.external_id == token_data.sub).first()
+
+    if user:
+        # Update user info from token if changed
+        updated = False
+        if token_data.email and user.email != token_data.email:
+            user.email = token_data.email
+            updated = True
+        if token_data.given_name and user.first_name != token_data.given_name:
+            user.first_name = token_data.given_name
+            updated = True
+        if token_data.family_name and user.last_name != token_data.family_name:
+            user.last_name = token_data.family_name
+            updated = True
+        if updated:
+            db.commit()
+            db.refresh(user)
+        return user
+
+    # Auto-provision new user from Keycloak token
+    logger.info(f"Auto-provisioning CMS user for Keycloak user: {token_data.sub}")
+
+    # Get or create organization
+    organization = None
+    if token_data.tenant_id:
+        # Look up org by external tenant ID
+        organization = (
+            db.query(Organization).filter(Organization.external_id == token_data.tenant_id).first()
+        )
+
+    if not organization:
+        # Create new organization for this user
+        org_name = token_data.organization_name or f"{token_data.email}'s Organization"
+        org_slug = org_name.lower().replace(" ", "-").replace("'", "").replace("@", "-at-")
+
+        # Ensure unique slug
+        base_slug = org_slug[:50]  # Limit length
+        counter = 1
+        while db.query(Organization).filter(Organization.slug == org_slug).first():
+            org_slug = f"{base_slug}-{counter}"
+            counter += 1
+
+        organization = Organization(
+            name=org_name,
+            slug=org_slug,
+            external_id=token_data.tenant_id,  # Link to Keycloak tenant
+            plan_type="free",
+            is_active=True,
+        )
+        db.add(organization)
+        db.flush()
+        logger.info(f"Created organization: {organization.name} (id={organization.id})")
+
+    # Create user
+    user = User(
+        email=token_data.email,
+        username=token_data.preferred_username,
+        first_name=token_data.given_name,
+        last_name=token_data.family_name,
+        external_id=token_data.sub,  # Keycloak user ID
+        organization_id=organization.id,
+        is_active=True,
+        is_email_verified=token_data.email_verified,  # Trust Keycloak's verification
+        hashed_password="",  # No password - auth via Keycloak
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+    # Assign roles based on Keycloak roles
+    cms_roles = provider.map_roles_to_cms(token_data)
+    logger.info(f"Created user: {user.email} with roles: {cms_roles}")
+
+    # TODO: Actually assign roles from cms_roles list
+    # This would require creating role assignments in the RBAC system
+
+    return user
 
 
 async def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security), db: Session = Depends(get_db)
 ) -> User:
     """
-    Get current authenticated user from JWT token
+    Get current authenticated user from JWT token.
+
+    Supports both CMS JWT and Keycloak JWT based on AUTH_PROVIDER setting.
+    For Keycloak auth, auto-provisions users on first access.
 
     Args:
         credentials: Bearer token from request header
@@ -35,21 +166,16 @@ async def get_current_user(
     """
     token = credentials.credentials
 
-    # Verify token
-    token_data = verify_token(token, token_type="access")
-    if not token_data:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+    # Determine auth provider and validate token
+    if is_keycloak_auth():
+        user = await _get_or_create_user_from_keycloak(token, db)
+    else:
+        user = await _get_user_from_cms_token(token, db)
 
-    # Get user from database
-    user = db.query(User).filter(User.id == token_data.sub).first()
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found",
+            detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
@@ -57,8 +183,8 @@ async def get_current_user(
     if not user.is_active:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Inactive user")
 
-    # Check if email is verified
-    if not user.is_email_verified:
+    # Check email verification (skip for Keycloak - trust their verification)
+    if not is_keycloak_auth() and not user.is_email_verified:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Email not verified. Please check your email for verification link.",

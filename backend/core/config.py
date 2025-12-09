@@ -60,7 +60,13 @@ class Settings(BaseSettings):
         default="", description="Meilisearch API key (optional for development)"
     )
 
-    # Security
+    # Authentication Provider
+    AUTH_PROVIDER: str = Field(
+        default="cms",
+        description="Authentication provider: 'cms' (built-in JWT) or 'keycloak' (external IdP)",
+    )
+
+    # Security (for built-in CMS auth)
     SECRET_KEY: str = Field(
         default="your-secret-key-change-this-in-production-min-32-chars",
         description="JWT secret key - MUST be changed in production",
@@ -71,6 +77,21 @@ class Settings(BaseSettings):
     )
     REFRESH_TOKEN_EXPIRE_DAYS: int = Field(
         default=7, description="Refresh token expiration in days"
+    )
+
+    # Keycloak Configuration (when AUTH_PROVIDER=keycloak)
+    KEYCLOAK_SERVER_URL: str = Field(
+        default="", description="Keycloak server URL (e.g., http://localhost:8080)"
+    )
+    KEYCLOAK_REALM: str = Field(default="", description="Keycloak realm name")
+    KEYCLOAK_CLIENT_ID: str = Field(
+        default="", description="Keycloak client ID for this application"
+    )
+    KEYCLOAK_CLIENT_SECRET: str = Field(
+        default="", description="Keycloak client secret (optional, for confidential clients)"
+    )
+    KEYCLOAK_VERIFY_SSL: bool = Field(
+        default=True, description="Verify SSL certificates when connecting to Keycloak"
     )
 
     # Celery
@@ -183,6 +204,9 @@ class Settings(BaseSettings):
     FRONTEND_URL: str = Field(
         default="http://localhost:3000", description="Frontend application URL for email links"
     )
+    BACKEND_URL: str = Field(
+        default="http://localhost:8000", description="Backend API URL for OAuth2 issuer"
+    )
     TWO_FACTOR_ISSUER_NAME: str = Field(
         default="Bakalr CMS", description="Issuer name displayed in authenticator apps"
     )
@@ -195,6 +219,50 @@ class Settings(BaseSettings):
     TWO_FACTOR_ENFORCE_FOR_ADMINS: bool = Field(
         default=False, description="Require 2FA for admin users"
     )
+
+    # Social Login - Google
+    GOOGLE_CLIENT_ID: str = Field(default="", description="Google OAuth2 client ID")
+    GOOGLE_CLIENT_SECRET: str = Field(default="", description="Google OAuth2 client secret")
+
+    # Social Login - Apple
+    APPLE_CLIENT_ID: str = Field(default="", description="Apple Sign In client ID (Services ID)")
+    APPLE_TEAM_ID: str = Field(default="", description="Apple Developer Team ID")
+    APPLE_KEY_ID: str = Field(default="", description="Apple Sign In Key ID")
+    APPLE_PRIVATE_KEY: str = Field(default="", description="Apple Sign In private key (PEM)")
+
+    # Social Login - Facebook
+    FACEBOOK_CLIENT_ID: str = Field(default="", description="Facebook OAuth2 app ID")
+    FACEBOOK_CLIENT_SECRET: str = Field(default="", description="Facebook OAuth2 app secret")
+
+    # Social Login - GitHub
+    GITHUB_CLIENT_ID: str = Field(default="", description="GitHub OAuth2 client ID")
+    GITHUB_CLIENT_SECRET: str = Field(default="", description="GitHub OAuth2 client secret")
+
+    # Social Login - Microsoft
+    MICROSOFT_CLIENT_ID: str = Field(default="", description="Microsoft OAuth2 client ID")
+    MICROSOFT_CLIENT_SECRET: str = Field(default="", description="Microsoft OAuth2 client secret")
+
+    # Push Notifications - Firebase Cloud Messaging
+    FCM_API_KEY: str = Field(default="", description="Firebase Cloud Messaging API key")
+    FCM_PROJECT_ID: str = Field(default="", description="Firebase project ID")
+
+    # Push Notifications - Apple Push Notification Service
+    APNS_KEY_ID: str = Field(default="", description="APNS authentication key ID")
+    APNS_TEAM_ID: str = Field(default="", description="Apple Developer Team ID for APNS")
+    APNS_BUNDLE_ID: str = Field(default="", description="iOS app bundle ID")
+    APNS_PRODUCTION: bool = Field(default=False, description="Use APNS production server")
+
+    # Push Notifications - Gotify (self-hosted)
+    GOTIFY_SERVER_URL: str = Field(default="", description="Gotify server URL")
+    GOTIFY_APP_TOKEN: str = Field(default="", description="Gotify application token")
+
+    # Push Notifications - Ntfy
+    NTFY_SERVER_URL: str = Field(default="https://ntfy.sh", description="Ntfy server URL")
+    NTFY_DEFAULT_TOPIC: str = Field(default="", description="Default ntfy topic")
+    NTFY_ACCESS_TOKEN: str = Field(default="", description="Ntfy access token (optional)")
+
+    # Geo-Location
+    IPINFO_TOKEN: str = Field(default="", description="ipinfo.io API token (optional)")
 
     # GraphQL Settings
     GRAPHQL_MAX_DEPTH: int = Field(

@@ -36,6 +36,14 @@ class Organization(Base, IDMixin, TimestampMixin):
     # Subscription/Tier (for future use)
     plan_type = Column(String(50), default="free", nullable=False)  # free, basic, pro, enterprise
 
+    # External Identity Provider Integration
+    external_id = Column(
+        String(255), unique=True, nullable=True, index=True
+    )  # External tenant ID (e.g., Keycloak tenant/shop ID)
+    external_provider = Column(
+        String(50), nullable=True
+    )  # Provider name: 'keycloak', 'boutique-platform', etc.
+
     # Settings (stored as JSON)
     settings = Column(Text, nullable=True)  # JSON string
 

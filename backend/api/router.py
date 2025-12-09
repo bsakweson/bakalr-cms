@@ -12,10 +12,12 @@ from backend.api import (
     content,
     content_template,
     delivery,
+    devices,
     field_permissions,
     media,
     metrics,
     notifications,
+    oauth2,
     organization,
     password_reset,
     preview,
@@ -24,6 +26,8 @@ from backend.api import (
     schedule,
     search,
     seo,
+    sessions,
+    social_login,
     tenant,
     theme,
     translation,
@@ -45,6 +49,10 @@ api_router.include_router(two_factor.router)
 api_router.include_router(password_reset.router)
 api_router.include_router(api_keys.router)
 api_router.include_router(tenant.router)
+api_router.include_router(devices.router)
+api_router.include_router(sessions.router)
+api_router.include_router(social_login.router)
+api_router.include_router(oauth2.router)
 api_router.include_router(content.router)
 api_router.include_router(translation.router)
 api_router.include_router(seo.router)
