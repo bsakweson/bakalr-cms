@@ -137,6 +137,201 @@ def init_permissions():
         db.close()
 
 
+# Define role configurations as module-level constant for reuse
+DEFAULT_ROLE_CONFIGS = {
+    "admin": {
+        "description": "Organization administrator with full management access",
+        "level": 80,
+        "permissions": [
+            # Content management (full control)
+            "content.read",
+            "content.create",
+            "content.update",
+            "content.delete",
+            "content.publish",
+            "content.unpublish",
+            "content_type.read",
+            "content_type.create",
+            "content_type.update",
+            "content_type.delete",
+            # Media management (full control)
+            "media.read",
+            "media.upload",
+            "media.update",
+            "media.delete",
+            # User management (full control)
+            "user.read",
+            "user.create",
+            "user.update",
+            "user.delete",
+            "user.manage",
+            # Role management (full control)
+            "role.read",
+            "role.create",
+            "role.update",
+            "role.delete",
+            "permission.read",
+            "permission.assign",
+            # Organization management
+            "organization.read",
+            "organization.update",
+            "organization.settings",
+            # Translation management
+            "translation.read",
+            "translation.create",
+            "translation.update",
+            "translation.delete",
+            "locale.read",
+            "locale.create",
+            "locale.update",
+            "locale.delete",
+            # SEO management
+            "seo.read",
+            "seo.update",
+            # Webhook management
+            "webhook.read",
+            "webhook.create",
+            "webhook.update",
+            "webhook.delete",
+            # Analytics access
+            "analytics.read",
+            # API key management
+            "api_key.read",
+            "api_key.create",
+            "api_key.delete",
+            # Audit logs
+            "audit_log.read",
+            # Theme management
+            "theme.read",
+            "theme.create",
+            "theme.update",
+            "theme.delete",
+            # Template management
+            "template.read",
+            "template.create",
+            "template.update",
+            "template.delete",
+            # Notification management
+            "notification.read",
+            "notification.create",
+            "notification.delete",
+        ],
+    },
+    "editor": {
+        "description": "Content editor with content and media management access",
+        "level": 50,
+        "permissions": [
+            # Content management (full control)
+            "content.read",
+            "content.create",
+            "content.update",
+            "content.delete",
+            "content.publish",
+            "content.unpublish",
+            "content_type.read",
+            # Media management (full control)
+            "media.read",
+            "media.upload",
+            "media.update",
+            "media.delete",
+            # Translation management
+            "translation.read",
+            "translation.create",
+            "translation.update",
+            "translation.delete",
+            "locale.read",
+            # SEO management
+            "seo.read",
+            "seo.update",
+            # Template usage
+            "template.read",
+            # Notifications (read only)
+            "notification.read",
+            # Analytics (read only)
+            "analytics.read",
+        ],
+    },
+    "viewer": {
+        "description": "Read-only access to content and media",
+        "level": 20,
+        "permissions": [
+            # Read-only access to content
+            "content.read",
+            "content_type.read",
+            # Read-only access to media
+            "media.read",
+            # Read-only access to translations
+            "translation.read",
+            "locale.read",
+            # Read-only access to SEO
+            "seo.read",
+            # Read-only access to templates
+            "template.read",
+            # Read-only access to notifications
+            "notification.read",
+            # Read-only access to analytics
+            "analytics.read",
+        ],
+    },
+}
+
+
+def seed_organization_roles(db: Session, organization_id: int) -> dict:
+    """
+    Seed default roles (admin, editor, viewer) for a specific organization.
+
+    This should be called when creating a new organization to ensure
+    all default roles are available immediately.
+
+    Args:
+        db: Database session
+        organization_id: The ID of the organization to seed roles for
+
+    Returns:
+        Dictionary with created role IDs: {"admin": id, "editor": id, "viewer": id}
+    """
+    created_roles = {}
+
+    for role_name, config in DEFAULT_ROLE_CONFIGS.items():
+        # Check if role already exists
+        existing_role = (
+            db.query(Role)
+            .filter(Role.name == role_name, Role.organization_id == organization_id)
+            .first()
+        )
+
+        if existing_role:
+            created_roles[role_name] = existing_role.id
+            continue
+
+        # Create the role
+        role = Role(
+            organization_id=organization_id,
+            name=role_name,
+            description=config["description"],
+            is_system_role=True,
+            level=config["level"],
+        )
+        db.add(role)
+        db.flush()
+
+        # Get all permissions that should be assigned
+        permissions = db.query(Permission).filter(Permission.name.in_(config["permissions"])).all()
+
+        # Assign permissions to role
+        for perm in permissions:
+            role.permissions.append(perm)
+
+        created_roles[role_name] = role.id
+
+    db.flush()
+    print(
+        f"✅ Seeded default roles for organization {organization_id}: {list(created_roles.keys())}"
+    )
+
+    return created_roles
+
+
 def assign_default_role_permissions(db: Session) -> None:
     """
     Ensure all organizations have the three default roles (admin, editor, viewer)
@@ -149,145 +344,6 @@ def assign_default_role_permissions(db: Session) -> None:
     - Editor: Content, media, translation, SEO permissions (no user/role management)
     - Viewer: Read-only permissions across all categories
     """
-
-    # Define role configurations
-    role_configs = {
-        "admin": {
-            "description": "Organization administrator with full management access",
-            "level": 80,
-            "permissions": [
-                # Content management (full control)
-                "content.read",
-                "content.create",
-                "content.update",
-                "content.delete",
-                "content.publish",
-                "content.unpublish",
-                "content_type.read",
-                "content_type.create",
-                "content_type.update",
-                "content_type.delete",
-                # Media management (full control)
-                "media.read",
-                "media.upload",
-                "media.update",
-                "media.delete",
-                # User management (full control)
-                "user.read",
-                "user.create",
-                "user.update",
-                "user.delete",
-                "user.manage",
-                # Role management (full control)
-                "role.read",
-                "role.create",
-                "role.update",
-                "role.delete",
-                "permission.read",
-                "permission.assign",
-                # Organization management
-                "organization.read",
-                "organization.update",
-                "organization.settings",
-                # Translation management
-                "translation.read",
-                "translation.create",
-                "translation.update",
-                "translation.delete",
-                "locale.read",
-                "locale.create",
-                "locale.update",
-                "locale.delete",
-                # SEO management
-                "seo.read",
-                "seo.update",
-                # Webhook management
-                "webhook.read",
-                "webhook.create",
-                "webhook.update",
-                "webhook.delete",
-                # Analytics access
-                "analytics.read",
-                # API key management
-                "api_key.read",
-                "api_key.create",
-                "api_key.delete",
-                # Audit logs
-                "audit_log.read",
-                # Theme management
-                "theme.read",
-                "theme.create",
-                "theme.update",
-                "theme.delete",
-                # Template management
-                "template.read",
-                "template.create",
-                "template.update",
-                "template.delete",
-                # Notification management
-                "notification.read",
-                "notification.create",
-                "notification.delete",
-            ],
-        },
-        "editor": {
-            "description": "Content editor with content and media management access",
-            "level": 50,
-            "permissions": [
-                # Content management (full control)
-                "content.read",
-                "content.create",
-                "content.update",
-                "content.delete",
-                "content.publish",
-                "content.unpublish",
-                "content_type.read",
-                # Media management (full control)
-                "media.read",
-                "media.upload",
-                "media.update",
-                "media.delete",
-                # Translation management
-                "translation.read",
-                "translation.create",
-                "translation.update",
-                "translation.delete",
-                "locale.read",
-                # SEO management
-                "seo.read",
-                "seo.update",
-                # Template usage
-                "template.read",
-                # Notifications (read only)
-                "notification.read",
-                # Analytics (read only)
-                "analytics.read",
-            ],
-        },
-        "viewer": {
-            "description": "Read-only access to content and media",
-            "level": 20,
-            "permissions": [
-                # Read-only access to content
-                "content.read",
-                "content_type.read",
-                # Read-only access to media
-                "media.read",
-                # Read-only access to translations
-                "translation.read",
-                "locale.read",
-                # Read-only access to SEO
-                "seo.read",
-                # Read-only access to templates
-                "template.read",
-                # Read-only access to notifications
-                "notification.read",
-                # Read-only access to analytics
-                "analytics.read",
-            ],
-        },
-    }
-
     # Get all organizations
     from backend.models.organization import Organization
 
@@ -297,7 +353,7 @@ def assign_default_role_permissions(db: Session) -> None:
     roles_updated = 0
 
     for org in organizations:
-        for role_name, config in role_configs.items():
+        for role_name, config in DEFAULT_ROLE_CONFIGS.items():
             # Get or create role
             role = (
                 db.query(Role)
@@ -328,12 +384,26 @@ def assign_default_role_permissions(db: Session) -> None:
             expected_permission_names = set(config["permissions"])
 
             if current_permission_names != expected_permission_names:
-                # Clear existing permissions and add new ones safely
-                role.permissions.clear()
-                db.flush()
-                for perm in permissions:
-                    role.permissions.append(perm)
-                roles_updated += 1
+                try:
+                    # Use direct SQL to avoid StaleDataError in multi-worker environments
+                    from sqlalchemy import text
+
+                    db.execute(
+                        text("DELETE FROM role_permissions WHERE role_id = :role_id"),
+                        {"role_id": role.id},
+                    )
+                    # Expire the role to refresh its permissions collection
+                    db.expire(role)
+                    for perm in permissions:
+                        role.permissions.append(perm)
+                    roles_updated += 1
+                except Exception as e:
+                    # If another worker already updated, skip this role
+                    print(
+                        f"ℹ️  Skipping role {role_name} update (likely handled by another worker): {e}"
+                    )
+                    db.rollback()
+                    continue
 
     if roles_created > 0 or roles_updated > 0:
         db.commit()

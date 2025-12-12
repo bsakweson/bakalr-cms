@@ -90,6 +90,11 @@ async def register(
         db.add(organization)
         db.flush()
         organization_id = organization.id
+
+        # Seed default roles (admin, editor, viewer) for new organization
+        from backend.core.seed_permissions import seed_organization_roles
+
+        seed_organization_roles(db, organization_id)
     else:
         # Verify organization exists
         organization = db.query(Organization).filter(Organization.id == organization_id).first()
@@ -143,31 +148,17 @@ async def register(
 
     if user_count == 1:
         # First user = Organization Owner (Admin role)
+        # Roles are already seeded via seed_organization_roles
         admin_role = (
             db.query(Role)
             .filter(Role.organization_id == organization_id, Role.name == "admin")
             .first()
         )
 
-        if not admin_role:
-            # Create admin role if it doesn't exist
-            from backend.models.rbac import Permission
-
-            admin_role = Role(
-                organization_id=organization_id,
-                name="admin",
-                description="Organization administrator (auto-created)",
-                is_system_role=True,
-                level=80,
-            )
-            db.add(admin_role)
-            db.flush()
-
-            # Assign all non-system permissions to admin
-            permissions = db.query(Permission).filter(Permission.category != "system").all()
-            admin_role.permissions.extend(permissions)
-
-        user.roles.append(admin_role)
+        if admin_role:
+            user.roles.append(admin_role)
+        else:
+            print(f"⚠️  Admin role not found for organization {organization_id}")
 
         # Set this user as organization owner
         org = db.query(Organization).filter(Organization.id == organization_id).first()
@@ -178,31 +169,18 @@ async def register(
         print(f"✅ Assigned admin role to organization creator: {user.email}")
     else:
         # Subsequent users = Viewer role (least permissions)
+        # Roles are already seeded via seed_organization_roles
         viewer_role = (
             db.query(Role)
             .filter(Role.organization_id == organization_id, Role.name == "viewer")
             .first()
         )
 
-        if not viewer_role:
-            # Create viewer role if it doesn't exist
-            viewer_role = Role(
-                organization_id=organization_id,
-                name="viewer",
-                description="Read-only access (auto-created)",
-                is_system_role=True,
-                level=20,
-            )
-            db.add(viewer_role)
-            db.flush()
+        if viewer_role:
+            user.roles.append(viewer_role)
+        else:
+            print(f"⚠️  Viewer role not found for organization {organization_id}")
 
-            # Assign only read permissions
-            from backend.models.rbac import Permission
-
-            read_permissions = db.query(Permission).filter(Permission.name.like("%.read")).all()
-            viewer_role.permissions.extend(read_permissions)
-
-        user.roles.append(viewer_role)
         print(f"ℹ️  Assigned viewer role to new user: {user.email}")
 
     db.commit()

@@ -25,6 +25,7 @@ class EmailService:
     - new_login_alert: New login from unknown device/location
     - content_digest: Content activity digest
     - notification: Generic notification
+    - user_invitation: Invite user to organization
     """
 
     def __init__(self):
@@ -304,6 +305,40 @@ class EmailService:
                 "notification_title": notification_title,
                 "notification_message": notification_message,
                 "action_url": action_url or "",
+                "year": datetime.now(timezone.utc).year,
+            },
+            organization_id=organization_id,
+            locale=locale,
+            user_id=user_id,
+        )
+
+    async def send_invite_email(
+        self,
+        db: Session,
+        to_email: str,
+        user_name: str,
+        inviter_name: str,
+        organization_name: str,
+        role_name: str,
+        invite_token: str,
+        organization_id: int,
+        locale: str = "en",
+        user_id: Optional[int] = None,
+    ):
+        """Send invitation email to join organization."""
+        invite_url = f"{settings.FRONTEND_URL}/accept-invite/{invite_token}"
+
+        return await self.send_email(
+            db=db,
+            to_email=to_email,
+            template_key="user_invitation",
+            variables={
+                "user_name": user_name,
+                "inviter_name": inviter_name,
+                "organization_name": organization_name,
+                "role_name": role_name,
+                "invite_url": invite_url,
+                "expiry_hours": 72,
                 "year": datetime.now(timezone.utc).year,
             },
             organization_id=organization_id,

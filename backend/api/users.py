@@ -3,10 +3,11 @@ User Management API endpoints
 Allows admins to manage users within their organization
 """
 
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
 from pydantic import BaseModel, ConfigDict, EmailStr
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
@@ -145,6 +146,7 @@ async def list_users(
 async def invite_user(
     request: Request,
     invite_data: InviteUserRequest,
+    background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -215,14 +217,25 @@ async def invite_user(
         )
 
     # Create new user (without password, they'll set it via invite link)
+    import secrets
+
     from backend.core.security import get_password_hash
+
+    # Generate a secure invite token for password setup
+    invite_token = secrets.token_urlsafe(32)
 
     new_user = User(
         email=invite_data.email,
-        full_name=invite_data.full_name,
-        hashed_password=get_password_hash("temporary_password_" + invite_data.email),  # Temporary
+        first_name=invite_data.first_name,
+        last_name=invite_data.last_name,
+        hashed_password=get_password_hash(
+            secrets.token_urlsafe(32)
+        ),  # Random secure password (user will reset)
         is_active=True,
         organization_id=current_user.organization_id,
+        # Store invite token for password setup flow
+        email_verification_token=invite_token,
+        email_verification_expires=(datetime.now(timezone.utc) + timedelta(hours=72)).isoformat(),
     )
     db.add(new_user)
     db.flush()
@@ -247,20 +260,66 @@ async def invite_user(
         .first()
     )
 
+    role_name = "member"
     if role:
         role.users.append(new_user)
+        role_name = role.name
+
+    # Get organization name for email
+    organization = (
+        db.query(Organization).filter(Organization.id == current_user.organization_id).first()
+    )
+    organization_name = organization.name if organization else "Organization"
 
     db.commit()
     db.refresh(new_user)
 
-    # TODO: Send invite email with password reset link
+    # Send invite email (async, non-blocking)
+    if invite_data.send_invite_email:
+
+        async def send_invite_email_task():
+            """Send invitation email in background"""
+            from backend.core.email_service import email_service
+            from backend.db.session import SessionLocal
+
+            async_db = SessionLocal()
+            try:
+                inviter_name = (
+                    f"{current_user.first_name} {current_user.last_name}".strip()
+                    if current_user.first_name
+                    else current_user.email
+                )
+                user_name = (
+                    f"{invite_data.first_name} {invite_data.last_name}".strip()
+                    if invite_data.first_name
+                    else invite_data.email.split("@")[0]
+                )
+
+                await email_service.send_invite_email(
+                    db=async_db,
+                    to_email=invite_data.email,
+                    user_name=user_name,
+                    inviter_name=inviter_name,
+                    organization_name=organization_name,
+                    role_name=role_name,
+                    invite_token=invite_token,
+                    organization_id=current_user.organization_id,
+                    user_id=new_user.id,
+                )
+                print(f"✅ Invite email sent to {invite_data.email}")
+            except Exception as e:
+                print(f"❌ Failed to send invite email to {invite_data.email}: {e}")
+            finally:
+                async_db.close()
+
+        background_tasks.add_task(send_invite_email_task)
 
     return InviteUserResponse(
         user_id=new_user.id,
         email=new_user.email,
         message=(
             "User invited successfully. Invite email sent."
-            if request.send_invite_email
+            if invite_data.send_invite_email
             else "User created successfully."
         ),
     )

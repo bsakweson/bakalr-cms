@@ -32,7 +32,7 @@
         "template": "listing",
         "sections": [
           {"type": "page_header", "heading": "Shop All Products", "show_breadcrumb": true},
-          {"type": "product_grid", "show_filters": true, "show_sort": true, "per_page": 24}
+          {"type": "product_grid", "show_filters": true, "show_sort": true, "per_page": 12}
         ]
       }
     },

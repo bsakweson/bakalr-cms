@@ -73,7 +73,103 @@
           "gtm": "GTM-XXXXXXX"
         },
         "maintenance_mode": false,
-        "maintenance_message": "We're updating our store. Please check back soon!"
+        "maintenance_message": "We're updating our store. Please check back soon!",
+        "common_labels": {
+          "products": {
+            "title": "Our Products",
+            "subtitle": "Browse our latest products",
+            "featured": "Featured Products",
+            "featured_subtitle": "Hand-picked favorites from our collection",
+            "view_all": "View All",
+            "explore_all": "Explore All Products",
+            "no_products": "No products found",
+            "loading": "Loading products...",
+            "add_to_cart": "Add to Cart",
+            "out_of_stock": "Out of Stock",
+            "sale": "Sale",
+            "new": "New",
+            "bestseller": "Bestseller"
+          },
+          "categories": {
+            "title": "Shop by Category",
+            "view_all": "View All Categories",
+            "explore_all": "Explore Categories"
+          },
+          "brands": {
+            "title": "Top Brands",
+            "view_all": "View All Brands",
+            "explore_all": "Explore Brands"
+          },
+          "cart": {
+            "title": "Shopping Cart",
+            "empty": "Your cart is empty",
+            "subtotal": "Subtotal",
+            "checkout": "Proceed to Checkout",
+            "continue_shopping": "Continue Shopping",
+            "remove": "Remove",
+            "update": "Update",
+            "add_to_cart": "Add to Cart",
+            "add_more": "Add More"
+          },
+          "product_detail": {
+            "specifications": "Specifications",
+            "selected": "Selected:",
+            "length": "Length",
+            "color": "Color",
+            "no_image": "No Image Available",
+            "sku": "SKU:",
+            "related_products": "Related Products",
+            "view_product": "View Product",
+            "inches": "inches",
+            "discount_off": "OFF"
+          },
+          "pagination": {
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page",
+            "of": "of",
+            "showing": "Showing",
+            "results": "results"
+          },
+          "filters": {
+            "title": "Filters",
+            "clear_all": "Clear All",
+            "apply": "Apply Filters",
+            "sort_by": "Sort by",
+            "price_low_high": "Price: Low to High",
+            "price_high_low": "Price: High to Low",
+            "newest": "Newest",
+            "bestselling": "Bestselling",
+            "price_range": "Price Range",
+            "category": "Category",
+            "brand": "Brand"
+          },
+          "search": {
+            "placeholder": "Search products...",
+            "no_results": "No results found",
+            "results_for": "Results for"
+          },
+          "general": {
+            "back": "Back",
+            "home": "Home",
+            "view_details": "View Details",
+            "learn_more": "Learn More",
+            "read_more": "Read More",
+            "see_more": "See More",
+            "close": "Close",
+            "save": "Save",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "edit": "Edit",
+            "loading": "Loading...",
+            "error": "An error occurred",
+            "success": "Success",
+            "required": "Required"
+          },
+          "footer": {
+            "we_accept": "We accept:"
+          }
+        }
       }
     }
   ]

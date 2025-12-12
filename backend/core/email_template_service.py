@@ -9,7 +9,7 @@ from typing import Any, Dict, Optional
 
 from sqlalchemy.orm import Session
 
-from backend.core.cache import CacheService
+from backend.core.cache import RedisCache
 from backend.models.content import ContentEntry, ContentType
 from backend.models.translation import Locale, Translation
 
@@ -26,7 +26,7 @@ class EmailTemplateService:
     def __init__(self, db: Session, organization_id: int):
         self.db = db
         self.organization_id = organization_id
-        self.cache = CacheService()
+        self.cache = RedisCache()
 
     def _get_email_template_type(self) -> Optional[ContentType]:
         """Get the email_template content type for this organization."""

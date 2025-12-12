@@ -16,6 +16,7 @@ These tables support:
 from typing import Sequence, Union
 
 import sqlalchemy as sa
+from sqlalchemy.dialects.postgresql import UUID
 
 from alembic import op
 
@@ -32,10 +33,10 @@ def upgrade() -> None:
     # Create social_identities table (OAuth2 client - for social login)
     op.create_table(
         "social_identities",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
@@ -69,10 +70,10 @@ def upgrade() -> None:
     # Create oauth2_clients table (OAuth2 provider - CMS as IdP)
     op.create_table(
         "oauth2_clients",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column(
             "organization_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("organizations.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
@@ -106,7 +107,7 @@ def upgrade() -> None:
         # Audit
         sa.Column(
             "created_by",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="SET NULL"),
             nullable=True,
         ),
@@ -118,18 +119,18 @@ def upgrade() -> None:
     # Create oauth2_authorization_codes table
     op.create_table(
         "oauth2_authorization_codes",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column("code_hash", sa.String(255), unique=True, nullable=False, index=True),
         sa.Column(
             "client_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("oauth2_clients.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
         ),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
@@ -151,19 +152,19 @@ def upgrade() -> None:
     # Create oauth2_access_tokens table
     op.create_table(
         "oauth2_access_tokens",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column("token_hash", sa.String(255), unique=True, nullable=False, index=True),
         sa.Column("token_type", sa.String(20), nullable=False, default="Bearer"),
         sa.Column(
             "client_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("oauth2_clients.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
         ),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=True,
             index=True,
@@ -175,7 +176,7 @@ def upgrade() -> None:
         sa.Column("is_revoked", sa.Boolean(), nullable=False, default=False),
         sa.Column("revoked_at", sa.String(50), nullable=True),
         # Refresh token link
-        sa.Column("refresh_token_id", sa.String(36), nullable=True, index=True),
+        sa.Column("refresh_token_id", UUID(as_uuid=True), nullable=True, index=True),
         # Timestamps
         sa.Column("created_at", sa.String(50), nullable=True),
         sa.Column("updated_at", sa.String(50), nullable=True),
@@ -184,18 +185,18 @@ def upgrade() -> None:
     # Create oauth2_refresh_tokens table
     op.create_table(
         "oauth2_refresh_tokens",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column("token_hash", sa.String(255), unique=True, nullable=False, index=True),
         sa.Column(
             "client_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("oauth2_clients.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
         ),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
@@ -207,7 +208,7 @@ def upgrade() -> None:
         sa.Column("is_revoked", sa.Boolean(), nullable=False, default=False),
         sa.Column("revoked_at", sa.String(50), nullable=True),
         # Rotation tracking
-        sa.Column("parent_token_id", sa.String(36), nullable=True),
+        sa.Column("parent_token_id", UUID(as_uuid=True), nullable=True),
         # Timestamps
         sa.Column("created_at", sa.String(50), nullable=True),
         sa.Column("updated_at", sa.String(50), nullable=True),

@@ -16,6 +16,7 @@ These tables support:
 from typing import Sequence, Union
 
 import sqlalchemy as sa
+from sqlalchemy.dialects.postgresql import UUID
 
 from alembic import op
 
@@ -32,17 +33,17 @@ def upgrade() -> None:
     # Create devices table
     op.create_table(
         "devices",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=True,
             index=True,
         ),
         sa.Column(
             "organization_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("organizations.id", ondelete="CASCADE"),
             nullable=True,
             index=True,
@@ -116,24 +117,24 @@ def upgrade() -> None:
     # Create user_sessions table
     op.create_table(
         "user_sessions",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
         ),
         sa.Column(
             "organization_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("organizations.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
         ),
         sa.Column(
             "device_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("devices.id", ondelete="SET NULL"),
             nullable=True,
             index=True,
@@ -198,24 +199,24 @@ def upgrade() -> None:
     # Create refresh_tokens table
     op.create_table(
         "refresh_tokens",
-        sa.Column("id", sa.String(36), primary_key=True),
+        sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column(
             "user_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("users.id", ondelete="CASCADE"),
             nullable=False,
             index=True,
         ),
         sa.Column(
             "session_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("user_sessions.id", ondelete="CASCADE"),
             nullable=True,
             index=True,
         ),
         sa.Column(
             "device_id",
-            sa.String(36),
+            UUID(as_uuid=True),
             sa.ForeignKey("devices.id", ondelete="SET NULL"),
             nullable=True,
             index=True,

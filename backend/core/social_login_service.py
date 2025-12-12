@@ -15,7 +15,7 @@ from urllib.parse import urlencode
 import httpx
 from sqlalchemy.orm import Session
 
-from backend.core.cache import CacheService
+from backend.core.cache import RedisCache
 from backend.core.config import settings
 from backend.models.social_identity import SocialIdentity
 
@@ -514,7 +514,7 @@ class SocialLoginService:
 
     def __init__(self, db: Session):
         self.db = db
-        self.cache = CacheService()
+        self.cache = RedisCache()
         self.providers: Dict[SocialProvider, OAuthProviderBase] = {
             SocialProvider.GOOGLE: GoogleOAuthProvider(),
             SocialProvider.FACEBOOK: FacebookOAuthProvider(),

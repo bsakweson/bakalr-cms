@@ -12,8 +12,9 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from backend.api.dependencies import get_current_user, get_db
+from backend.core.dependencies import get_current_user
 from backend.core.oauth2_provider_service import get_oauth2_provider_service
+from backend.db.session import get_db
 from backend.models.user import User
 
 router = APIRouter(prefix="/oauth", tags=["oauth2-provider"])

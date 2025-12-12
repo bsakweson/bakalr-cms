@@ -8,7 +8,7 @@
       "name": "product_id",
       "type": "reference",
       "required": true,
-      "help_text": "Product being reviewed"
+      "help_text": "Product being reviewed (use product slug)"
     },
     {
       "name": "customer_name",
@@ -51,6 +51,19 @@
       "required": false,
       "default": false,
       "help_text": "Verified purchase"
+    },
+    {
+      "name": "helpful_count",
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "help_text": "Number of helpful votes"
+    },
+    {
+      "name": "review_date",
+      "type": "text",
+      "required": false,
+      "help_text": "Review date (YYYY-MM-DD format)"
     }
   ]
 }

@@ -133,6 +133,28 @@ curl -s -X POST "${CMS_API_URL}/content/entries" \
     }
   }' | jq .
 
+# User Invitation Email Template
+echo ""
+echo "📧 Creating user_invitation template..."
+curl -s -X POST "${CMS_API_URL}/content/entries" \
+  -H "$AUTH_HEADER" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content_type_id": "'"$CONTENT_TYPE_ID"'",
+    "title": "User Invitation",
+    "slug": "user-invitation",
+    "status": "published",
+    "data": {
+      "template_key": "user_invitation",
+      "subject": "You'\''ve been invited to join {{organization_name}}",
+      "heading": "You'\''re Invited!",
+      "body": "<p>Hi {{user_name}},</p><p><strong>{{inviter_name}}</strong> has invited you to join <strong>{{organization_name}}</strong> as a <strong>{{role_name}}</strong>.</p><p>Click the button below to accept the invitation and set up your account:</p>",
+      "cta_text": "Accept Invitation",
+      "cta_url": "{{invite_url}}",
+      "footer_text": "This invitation expires in {{expiry_hours}} hours. If you did not expect this invitation, you can safely ignore this email."
+    }
+  }' | jq .
+
 echo ""
 echo "✅ All email templates created successfully!"
 echo ""
@@ -142,5 +164,6 @@ echo "   - new_login_alert"
 echo "   - password_reset"
 echo "   - welcome"
 echo "   - verify_email"
+echo "   - user_invitation"
 echo ""
 echo "💡 To enable translations, add translations for each template in the CMS admin."

@@ -98,7 +98,7 @@
       "type": "json",
       "required": false,
       "localized": true,
-      "help_text": "Specs key-value - values ARE translated"
+      "help_text": "Specs array [{label, value}] - BOTH label and value ARE translated"
     },
     {
       "name": "ingredients",

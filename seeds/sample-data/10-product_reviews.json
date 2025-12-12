@@ -1,0 +1,325 @@
+{
+  "content_type": "product_review",
+  "entries": [
+    {
+      "slug": "review-sarah-brazilian-water-wave",
+      "title": "Absolutely love it!",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-water-wave-bundle",
+        "customer_name": "Sarah M.",
+        "customer_email": "sarah.m@example.com",
+        "rating": 5,
+        "title": "Absolutely love it!",
+        "body": "This product exceeded my expectations. The quality is amazing and it looks exactly like the pictures. Highly recommend to anyone considering it.",
+        "verified_purchase": true,
+        "helpful_count": 12,
+        "review_date": "2025-11-30"
+      }
+    },
+    {
+      "slug": "review-michelle-brazilian-water-wave",
+      "title": "Great quality, fast shipping",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-water-wave-bundle",
+        "customer_name": "Michelle T.",
+        "customer_email": "michelle.t@example.com",
+        "rating": 4,
+        "title": "Great quality, fast shipping",
+        "body": "Very happy with my purchase. The product arrived quickly and was well packaged. Only giving 4 stars because the color was slightly different from what I expected.",
+        "verified_purchase": true,
+        "helpful_count": 8,
+        "review_date": "2025-11-27"
+      }
+    },
+    {
+      "slug": "review-jessica-brazilian-water-wave",
+      "title": "Best purchase ever!",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-water-wave-bundle",
+        "customer_name": "Jessica L.",
+        "customer_email": "jessica.l@example.com",
+        "rating": 5,
+        "title": "Best purchase ever!",
+        "body": "I've been looking for something like this for months. Finally found it here and it's perfect. Will definitely be ordering again.",
+        "verified_purchase": false,
+        "helpful_count": 5,
+        "review_date": "2025-11-24"
+      }
+    },
+    {
+      "slug": "review-amanda-brazilian-water-wave",
+      "title": "Good but could be better",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-water-wave-bundle",
+        "customer_name": "Amanda K.",
+        "customer_email": "amanda.k@example.com",
+        "rating": 3,
+        "title": "Good but could be better",
+        "body": "The product is decent for the price. It does what it's supposed to do but I feel like there's room for improvement in the packaging.",
+        "verified_purchase": true,
+        "helpful_count": 3,
+        "review_date": "2025-11-20"
+      }
+    },
+    {
+      "slug": "review-tanisha-brazilian-kinky-curly",
+      "title": "Perfect curls!",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-kinky-curly-bundle",
+        "customer_name": "Tanisha W.",
+        "customer_email": "tanisha.w@example.com",
+        "rating": 5,
+        "title": "Perfect curls!",
+        "body": "The curls are absolutely gorgeous and hold their pattern even after washing. Minimal shedding and tangling. This is my third purchase!",
+        "verified_purchase": true,
+        "helpful_count": 15,
+        "review_date": "2025-12-01"
+      }
+    },
+    {
+      "slug": "review-kendra-brazilian-kinky-curly",
+      "title": "Beautiful texture",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-kinky-curly-bundle",
+        "customer_name": "Kendra J.",
+        "customer_email": "kendra.j@example.com",
+        "rating": 4,
+        "title": "Beautiful texture",
+        "body": "Love the texture and softness. The only reason for 4 stars is that the bundles were slightly shorter than expected. Otherwise, great quality!",
+        "verified_purchase": true,
+        "helpful_count": 7,
+        "review_date": "2025-11-28"
+      }
+    },
+    {
+      "slug": "review-lisa-brazilian-kinky-curly",
+      "title": "So soft and natural looking",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-kinky-curly-bundle",
+        "customer_name": "Lisa R.",
+        "customer_email": "lisa.r@example.com",
+        "rating": 5,
+        "title": "So soft and natural looking",
+        "body": "Blends perfectly with my natural hair. I've received so many compliments! The hair is soft, manageable, and looks very natural. Worth every penny.",
+        "verified_purchase": true,
+        "helpful_count": 10,
+        "review_date": "2025-11-22"
+      }
+    },
+    {
+      "slug": "review-monica-brazilian-body-wave",
+      "title": "Gorgeous waves!",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-body-wave-bundle",
+        "customer_name": "Monica S.",
+        "customer_email": "monica.s@example.com",
+        "rating": 5,
+        "title": "Gorgeous waves!",
+        "body": "These bundles are incredible! The waves are bouncy and beautiful. I styled it and got so many compliments. Will definitely purchase again.",
+        "verified_purchase": true,
+        "helpful_count": 18,
+        "review_date": "2025-11-29"
+      }
+    },
+    {
+      "slug": "review-ashley-brazilian-body-wave",
+      "title": "Good value for money",
+      "status": "published",
+      "data": {
+        "product_id": "brazilian-body-wave-bundle",
+        "customer_name": "Ashley P.",
+        "customer_email": "ashley.p@example.com",
+        "rating": 4,
+        "title": "Good value for money",
+        "body": "Nice quality hair at a reasonable price. The wave pattern loosened a bit after the first wash but still looks great. Fast shipping too!",
+        "verified_purchase": true,
+        "helpful_count": 6,
+        "review_date": "2025-11-25"
+      }
+    },
+    {
+      "slug": "review-nicole-vietnamese-raw-straight",
+      "title": "Silky smooth perfection",
+      "status": "published",
+      "data": {
+        "product_id": "vietnamese-raw-straight-bundle",
+        "customer_name": "Nicole D.",
+        "customer_email": "nicole.d@example.com",
+        "rating": 5,
+        "title": "Silky smooth perfection",
+        "body": "This is the best straight hair I've ever purchased. It's so silky and smooth, with zero tangles. The quality is outstanding!",
+        "verified_purchase": true,
+        "helpful_count": 22,
+        "review_date": "2025-12-02"
+      }
+    },
+    {
+      "slug": "review-brittany-vietnamese-raw-straight",
+      "title": "Worth the investment",
+      "status": "published",
+      "data": {
+        "product_id": "vietnamese-raw-straight-bundle",
+        "customer_name": "Brittany C.",
+        "customer_email": "brittany.c@example.com",
+        "rating": 5,
+        "title": "Worth the investment",
+        "body": "Yes, it's a bit pricier but you get what you pay for. This hair is amazing quality and has lasted me months with proper care. No regrets!",
+        "verified_purchase": true,
+        "helpful_count": 14,
+        "review_date": "2025-11-18"
+      }
+    },
+    {
+      "slug": "review-jasmine-indian-natural-wave",
+      "title": "Natural and beautiful",
+      "status": "published",
+      "data": {
+        "product_id": "indian-natural-wave-bundle",
+        "customer_name": "Jasmine H.",
+        "customer_email": "jasmine.h@example.com",
+        "rating": 4,
+        "title": "Natural and beautiful",
+        "body": "The wave pattern is very natural looking. It blends well with my own hair. Took off one star because shipping took a bit longer than expected.",
+        "verified_purchase": true,
+        "helpful_count": 9,
+        "review_date": "2025-11-26"
+      }
+    },
+    {
+      "slug": "review-tiffany-peruvian-loose-wave",
+      "title": "Love, love, love!",
+      "status": "published",
+      "data": {
+        "product_id": "peruvian-loose-wave-bundle",
+        "customer_name": "Tiffany M.",
+        "customer_email": "tiffany.m@example.com",
+        "rating": 5,
+        "title": "Love, love, love!",
+        "body": "I'm obsessed with this hair! The loose wave pattern is so pretty and versatile. I can wear it wavy or straighten it for a different look.",
+        "verified_purchase": true,
+        "helpful_count": 11,
+        "review_date": "2025-11-30"
+      }
+    },
+    {
+      "slug": "review-crystal-ebin-wig-glue",
+      "title": "Best lace glue ever!",
+      "status": "published",
+      "data": {
+        "product_id": "ebin-wonder-lace-bond-wig-glue",
+        "customer_name": "Crystal B.",
+        "customer_email": "crystal.b@example.com",
+        "rating": 5,
+        "title": "Best lace glue ever!",
+        "body": "This glue holds my wig in place all day long, even in humidity. Easy to apply and doesn't damage my edges. My go-to product!",
+        "verified_purchase": true,
+        "helpful_count": 25,
+        "review_date": "2025-12-03"
+      }
+    },
+    {
+      "slug": "review-danielle-ebin-wig-glue",
+      "title": "Strong hold without irritation",
+      "status": "published",
+      "data": {
+        "product_id": "ebin-wonder-lace-bond-wig-glue",
+        "customer_name": "Danielle F.",
+        "customer_email": "danielle.f@example.com",
+        "rating": 5,
+        "title": "Strong hold without irritation",
+        "body": "I have sensitive skin and most wig glues irritate me. This one is gentle but still provides amazing hold. Game changer!",
+        "verified_purchase": true,
+        "helpful_count": 19,
+        "review_date": "2025-11-27"
+      }
+    },
+    {
+      "slug": "review-karen-wig-grip-band",
+      "title": "Comfortable all day",
+      "status": "published",
+      "data": {
+        "product_id": "wig-grip-band-velvet",
+        "customer_name": "Karen L.",
+        "customer_email": "karen.l@example.com",
+        "rating": 5,
+        "title": "Comfortable all day",
+        "body": "This wig grip is so comfortable! No headaches and my wig stays secure without any glue. Perfect for daily wear.",
+        "verified_purchase": true,
+        "helpful_count": 16,
+        "review_date": "2025-11-29"
+      }
+    },
+    {
+      "slug": "review-patricia-wig-grip-band",
+      "title": "Great for beginners",
+      "status": "published",
+      "data": {
+        "product_id": "wig-grip-band-velvet",
+        "customer_name": "Patricia N.",
+        "customer_email": "patricia.n@example.com",
+        "rating": 4,
+        "title": "Great for beginners",
+        "body": "If you're new to wigs and don't want to use glue, this is perfect. The velvet lining is soft and prevents slippage. Easy to adjust.",
+        "verified_purchase": false,
+        "helpful_count": 8,
+        "review_date": "2025-11-23"
+      }
+    },
+    {
+      "slug": "review-sandra-got2b-freeze-spray",
+      "title": "Holds my edges perfectly",
+      "status": "published",
+      "data": {
+        "product_id": "got2b-glued-blasting-freeze-spray",
+        "customer_name": "Sandra W.",
+        "customer_email": "sandra.w@example.com",
+        "rating": 5,
+        "title": "Holds my edges perfectly",
+        "body": "This spray keeps my edges laid all day! I use it for my ponytails and updos. No flaking or residue. Highly recommend!",
+        "verified_purchase": true,
+        "helpful_count": 13,
+        "review_date": "2025-12-01"
+      }
+    },
+    {
+      "slug": "review-maria-bold-hold-tint",
+      "title": "Perfect color match",
+      "status": "published",
+      "data": {
+        "product_id": "bold-hold-lace-tint-spray",
+        "customer_name": "Maria G.",
+        "customer_email": "maria.g@example.com",
+        "rating": 5,
+        "title": "Perfect color match",
+        "body": "Finally found a tint spray that matches my skin tone! Makes my lace look invisible. The melt is chef's kiss! 💋",
+        "verified_purchase": true,
+        "helpful_count": 20,
+        "review_date": "2025-11-28"
+      }
+    },
+    {
+      "slug": "review-angela-bold-hold-tint",
+      "title": "Good product, small bottle",
+      "status": "published",
+      "data": {
+        "product_id": "bold-hold-lace-tint-spray",
+        "customer_name": "Angela R.",
+        "customer_email": "angela.r@example.com",
+        "rating": 4,
+        "title": "Good product, small bottle",
+        "body": "The tint works great and the color is perfect for dark skin tones. Only complaint is the bottle is smaller than expected. But will repurchase!",
+        "verified_purchase": true,
+        "helpful_count": 7,
+        "review_date": "2025-11-21"
+      }
+    }
+  ]
+}

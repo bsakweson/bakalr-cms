@@ -9,7 +9,7 @@ from typing import Optional
 
 import httpx
 
-from backend.core.cache import CacheService
+from backend.core.cache import RedisCache
 from backend.core.config import settings
 
 
@@ -95,7 +95,7 @@ class GeoLocationService:
     IPINFO_URL = "https://ipinfo.io"
 
     def __init__(self):
-        self.cache = CacheService()
+        self.cache = RedisCache()
         self.ipinfo_token = getattr(settings, "IPINFO_TOKEN", None)
 
     def _get_cache_key(self, ip: str) -> str:

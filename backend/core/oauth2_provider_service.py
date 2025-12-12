@@ -15,7 +15,7 @@ from jose import jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
-from backend.core.cache import CacheService
+from backend.core.cache import RedisCache
 from backend.core.config import settings
 from backend.models.oauth2 import (
     OAuth2AccessToken,
@@ -49,7 +49,7 @@ class OAuth2ProviderService:
 
     def __init__(self, db: Session):
         self.db = db
-        self.cache = CacheService()
+        self.cache = RedisCache()
 
     # === Client Management ===
 

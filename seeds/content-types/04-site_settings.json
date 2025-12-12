@@ -116,6 +116,13 @@
       "required": false,
       "localized": true,
       "help_text": "Maintenance message - IS translated"
+    },
+    {
+      "name": "common_labels",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Common UI labels used across pages (products, categories, cart, pagination, filters, etc.) - IS translated"
     }
   ]
 }
