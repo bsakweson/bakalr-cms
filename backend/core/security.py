@@ -159,7 +159,15 @@ def verify_token(token: str, token_type: str = "access") -> Optional[TokenPayloa
         return None
 
 
-def create_token_pair(user_id: UUID, organization_id: UUID, email: str, roles: list[str]) -> Token:
+def create_token_pair(
+    user_id: UUID,
+    organization_id: UUID,
+    email: str,
+    roles: list[str],
+    first_name: Optional[str] = None,
+    last_name: Optional[str] = None,
+    is_organization_owner: bool = False,
+) -> Token:
     """
     Create access and refresh token pair
 
@@ -168,15 +176,33 @@ def create_token_pair(user_id: UUID, organization_id: UUID, email: str, roles: l
         organization_id: Organization ID (UUID)
         email: User email
         roles: List of role names
+        first_name: User's first name (optional)
+        last_name: User's last name (optional)
+        is_organization_owner: Whether user owns the organization (optional)
 
     Returns:
         Token object with access_token and refresh_token
     """
+    # Build full name from first and last name
+    full_name = ""
+    if first_name and last_name:
+        full_name = f"{first_name} {last_name}"
+    elif first_name:
+        full_name = first_name
+    elif last_name:
+        full_name = last_name
+
     token_data = {
         "sub": str(user_id),
         "org_id": str(organization_id),
         "email": email,
         "roles": roles,
+        # Standard OIDC claims for user profile
+        "name": full_name,
+        "given_name": first_name or "",
+        "family_name": last_name or "",
+        # Custom claims
+        "is_organization_owner": is_organization_owner,
     }
 
     access_token = create_access_token(token_data)

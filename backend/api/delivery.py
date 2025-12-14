@@ -8,7 +8,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 
 from backend.api.schemas.delivery import (
     DeliveryContentDetailResponse,
@@ -29,7 +29,7 @@ async def get_content_by_slug(
     slug: str,
     content_type: str,
     response: Response,
-    db: AsyncSession = Depends(get_db),
+    db: Session = Depends(get_db),
 ):
     """
     Get published content by slug (CDN-friendly).
@@ -38,14 +38,14 @@ async def get_content_by_slug(
     - content_type: API ID of the content type
     """
     # Get content type first
-    ct_result = await db.execute(select(ContentType).where(ContentType.api_id == content_type))
+    ct_result = db.execute(select(ContentType).where(ContentType.api_id == content_type))
     content_type_obj = ct_result.scalar_one_or_none()
 
     if not content_type_obj:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Content type not found")
 
     # Get published content entry
-    result = await db.execute(
+    result = db.execute(
         select(ContentEntry).where(
             ContentEntry.slug == slug,
             ContentEntry.content_type_id == content_type_obj.id,
@@ -68,7 +68,7 @@ async def get_content_by_slug(
     )
 
     return DeliveryContentDetailResponse(
-        id=entry.id,
+        id=str(entry.id),
         slug=entry.slug,
         title=entry.title,
         fields=fields,
@@ -84,12 +84,12 @@ async def get_content_by_slug(
 @router.get("/content/{content_id}", response_model=DeliveryContentDetailResponse)
 @limiter.limit(get_rate_limit())
 async def get_content_by_id(
-    request: Request, content_id: UUID, response: Response, db: AsyncSession = Depends(get_db)
+    request: Request, content_id: UUID, response: Response, db: Session = Depends(get_db)
 ):
     """
     Get published content by ID (CDN-friendly).
     """
-    result = await db.execute(
+    result = db.execute(
         select(ContentEntry).where(
             ContentEntry.id == content_id, ContentEntry.status == "published"
         )
@@ -110,7 +110,7 @@ async def get_content_by_id(
     )
 
     return DeliveryContentDetailResponse(
-        id=entry.id,
+        id=str(entry.id),
         slug=entry.slug,
         title=entry.title,
         fields=fields,
@@ -131,7 +131,7 @@ async def list_content(
     page: int = 1,
     page_size: int = 20,
     response: Response = None,
-    db: AsyncSession = Depends(get_db),
+    db: Session = Depends(get_db),
 ):
     """
     List published content by type (CDN-friendly).
@@ -146,14 +146,14 @@ async def list_content(
     offset = (page - 1) * page_size
 
     # Get content type
-    ct_result = await db.execute(select(ContentType).where(ContentType.api_id == content_type))
+    ct_result = db.execute(select(ContentType).where(ContentType.api_id == content_type))
     content_type_obj = ct_result.scalar_one_or_none()
 
     if not content_type_obj:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Content type not found")
 
     # Get total count
-    count_result = await db.execute(
+    count_result = db.execute(
         select(ContentEntry).where(
             ContentEntry.content_type_id == content_type_obj.id, ContentEntry.status == "published"
         )
@@ -161,7 +161,7 @@ async def list_content(
     total = len(list(count_result.scalars().all()))
 
     # Get paginated entries
-    result = await db.execute(
+    result = db.execute(
         select(ContentEntry)
         .where(
             ContentEntry.content_type_id == content_type_obj.id, ContentEntry.status == "published"
@@ -183,7 +183,7 @@ async def list_content(
         fields = json.loads(entry.data) if isinstance(entry.data, str) else entry.data
         items.append(
             DeliveryContentResponse(
-                id=entry.id,
+                id=str(entry.id),
                 slug=entry.slug,
                 title=entry.title,
                 fields=fields,

@@ -81,7 +81,9 @@ class UserResponse(UserBase):
     organization_id: str
     is_active: bool
     is_email_verified: bool
+    is_organization_owner: bool = False
     avatar_url: Optional[str] = None
+    gravatar_url: Optional[str] = None  # Gravatar URL based on email
     bio: Optional[str] = None
     preferences: Optional[str] = None
     roles: List[str] = []
@@ -103,6 +105,7 @@ class TokenResponse(BaseModel):
     refresh_token: str
     token_type: str = "bearer"
     user: UserResponse
+    session_id: Optional[str] = None  # Session ID for session tracking
 
 
 class RefreshTokenRequest(BaseModel):

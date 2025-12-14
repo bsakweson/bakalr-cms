@@ -73,7 +73,7 @@ class TestThemeManagement:
         }
 
         # Create first theme
-        first_response = authenticated_client.post("/api/v1/themes", json=theme_data)
+        authenticated_client.post("/api/v1/themes", json=theme_data)
 
         # Try to create duplicate
         second_response = authenticated_client.post("/api/v1/themes", json=theme_data)
@@ -138,7 +138,7 @@ class TestThemeManagement:
                 "description": "Updated description",
             }
 
-            response = authenticated_client.put(f"/api/v1/themes/{theme_id}", json=update_data)
+            response = authenticated_client.patch(f"/api/v1/themes/{theme_id}", json=update_data)
 
             assert response.status_code in [
                 status.HTTP_200_OK,

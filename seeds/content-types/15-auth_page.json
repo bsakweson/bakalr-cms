@@ -80,6 +80,34 @@
       "required": false,
       "localized": false,
       "help_text": "Side image or background"
+    },
+    {
+      "name": "badge_text",
+      "type": "text",
+      "required": false,
+      "localized": true,
+      "help_text": "Badge text shown in the side panel (e.g., 'Secure Shopping Experience') - IS translated"
+    },
+    {
+      "name": "subtext",
+      "type": "textarea",
+      "required": false,
+      "localized": true,
+      "help_text": "Subtext shown below the main description in side panel - IS translated"
+    },
+    {
+      "name": "benefits",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Array of benefit strings shown in side panel - IS translated"
+    },
+    {
+      "name": "trust_indicator",
+      "type": "json",
+      "required": false,
+      "localized": true,
+      "help_text": "Trust indicator config: {primary, secondary, count} - IS translated"
     }
   ]
 }

@@ -2,6 +2,8 @@
 Rate limiting for Bakalr CMS API
 """
 
+import os
+
 from fastapi import Request
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
@@ -61,10 +63,18 @@ def get_tenant_identifier(request: Request) -> str:
     return get_identifier(request)
 
 
+# Determine storage URI - use memory storage for tests
+def _get_storage_uri() -> str:
+    """Get appropriate storage URI based on environment"""
+    if os.environ.get("TESTING") == "true" or not settings.RATE_LIMIT_ENABLED:
+        return "memory://"
+    return settings.REDIS_URL
+
+
 # Create limiter instance
 limiter = Limiter(
     key_func=get_identifier,
-    storage_uri=settings.REDIS_URL,
+    storage_uri=_get_storage_uri(),
     strategy="fixed-window",  # or "moving-window" for sliding window
     default_limits=["1000/hour", "100/minute"],  # Default limits
 )
@@ -153,10 +163,9 @@ async def check_tenant_quota(request: Request, resource_type: str, amount: int =
     if not hasattr(request.state, "user") or not request.state.user:
         return True
 
-    org_id = request.state.user.organization_id
-
     # TODO: Implement quota checking from database
     # This would check organization subscription tier and usage
+    # org_id = request.state.user.organization_id
     # For now, return True
 
     return True

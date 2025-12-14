@@ -128,7 +128,7 @@ async def switch_organization(
             and_(
                 UserOrganization.user_id == current_user.id,
                 UserOrganization.organization_id == target_org_id,
-                UserOrganization.is_active == True,
+                UserOrganization.is_active.is_(True),
             )
         )
         .first()
@@ -171,12 +171,18 @@ async def switch_organization(
 
     role_names = [role.name for role in user_roles]
 
+    # Check if user is organization owner for target org
+    is_owner = organization.owner_id == current_user.id if organization else False
+
     # Create new token pair with updated organization context
     tokens = create_token_pair(
         user_id=current_user.id,
         organization_id=target_org_id,
         email=current_user.email,
         roles=role_names,
+        first_name=current_user.first_name,
+        last_name=current_user.last_name,
+        is_organization_owner=is_owner,
     )
 
     return SwitchOrganizationResponse(

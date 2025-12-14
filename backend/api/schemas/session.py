@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 # ============ Response Schemas ============
 
@@ -37,8 +37,7 @@ class SessionResponse(BaseModel):
     location_display: str
     device_display: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class SessionListResponse(BaseModel):
@@ -84,8 +83,7 @@ class LoginActivityResponse(BaseModel):
     termination_reason: Optional[str]
     session_duration_minutes: Optional[int]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class LoginActivityListResponse(BaseModel):

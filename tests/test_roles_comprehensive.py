@@ -40,7 +40,7 @@ class TestRolesComprehensive:
         )
 
         # May succeed or fail due to permissions
-        if role_response.status_code == status.HTTP_201_CREATED:
+        if role_response.status_code in [status.HTTP_201_CREATED, status.HTTP_200_OK]:
             role_data = role_response.json()
             assert "id" in role_data
             assert role_data["name"] == "Content Editor"

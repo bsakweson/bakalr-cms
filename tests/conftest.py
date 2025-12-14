@@ -3,12 +3,18 @@ Test configuration and fixtures for pytest
 """
 
 import os
+import warnings
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
+from sqlalchemy.exc import SAWarning
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
+
+# Suppress SQLAlchemy warning about circular foreign key dependencies
+# This is expected with SQLite testing database
+warnings.filterwarnings("ignore", message=".*Can't sort tables for DROP.*", category=SAWarning)
 
 # Set test environment variables before importing app
 os.environ["TESTING"] = "true"  # Indicate we're in test mode
@@ -54,7 +60,11 @@ def db_session():
         yield session
     finally:
         session.close()
-        Base.metadata.drop_all(bind=engine)
+        # Suppress SAWarning about circular FK dependencies during DROP
+        # This is expected with SQLite testing database (organizations <-> users)
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=SAWarning)
+            Base.metadata.drop_all(bind=engine)
 
 
 @pytest.fixture(scope="function")

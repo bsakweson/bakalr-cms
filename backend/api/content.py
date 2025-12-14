@@ -137,8 +137,8 @@ def auto_translate_entry_background(entry_id: UUID, organization_id: UUID, db: S
         db.query(Locale)
         .filter(
             Locale.organization_id == organization_id,
-            Locale.is_enabled == True,
-            Locale.auto_translate == True,
+            Locale.is_enabled.is_(True),
+            Locale.auto_translate.is_(True),
         )
         .all()
     )
@@ -243,8 +243,8 @@ def auto_update_translations_background(entry_id: UUID, organization_id: UUID, d
         db.query(Locale)
         .filter(
             Locale.organization_id == organization_id,
-            Locale.is_enabled == True,
-            Locale.auto_translate == True,
+            Locale.is_enabled.is_(True),
+            Locale.auto_translate.is_(True),
         )
         .all()
     )
@@ -505,6 +505,70 @@ async def update_content_type(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Content type not found")
 
     # Update fields
+    if content_type_update.name is not None:
+        content_type.name = content_type_update.name
+    if content_type_update.description is not None:
+        content_type.description = content_type_update.description
+    if content_type_update.fields is not None:
+        content_type.fields_schema = str(
+            [field.model_dump() for field in content_type_update.fields]
+        )
+    if content_type_update.is_active is not None:
+        content_type.is_published = content_type_update.is_active
+
+    db.commit()
+    db.refresh(content_type)
+
+    fields = parse_fields_schema(content_type.fields_schema)
+    entry_count = (
+        db.query(func.count(ContentEntry.id))
+        .filter(ContentEntry.content_type_id == content_type.id)
+        .scalar()
+    )
+
+    return ContentTypeResponse(
+        id=content_type.id,
+        organization_id=content_type.organization_id,
+        name=content_type.name,
+        api_id=content_type.api_id,
+        description=content_type.description,
+        fields=fields,
+        display_field=None,
+        is_active=content_type.is_published,
+        entry_count=entry_count,
+        created_at=content_type.created_at,
+        updated_at=content_type.updated_at,
+    )
+
+
+@router.patch("/types/{content_type_id}", response_model=ContentTypeResponse)
+@limiter.limit(get_rate_limit())
+async def patch_content_type(
+    request: Request,
+    content_type_id: UUID,
+    content_type_update: ContentTypeUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Partially update a content type (PATCH)
+
+    Only updates the fields that are provided in the request body.
+    Requires admin privileges.
+    """
+    content_type = (
+        db.query(ContentType)
+        .filter(
+            ContentType.id == content_type_id,
+            ContentType.organization_id == current_user.organization_id,
+        )
+        .first()
+    )
+
+    if not content_type:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Content type not found")
+
+    # Only update fields that are explicitly provided (not None)
     if content_type_update.name is not None:
         content_type.name = content_type_update.name
     if content_type_update.description is not None:
