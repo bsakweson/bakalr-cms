@@ -1,0 +1,272 @@
+[
+  {
+    "content_type_api_id": "email_template",
+    "slug": "welcome",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "welcome",
+      "subject": "Welcome to Bakalr Boutique, {{name}}!",
+      "heading": "Welcome to the Family!",
+      "body": "<p>Hi {{name}},</p><p>Thank you for creating your Bakalr Boutique account! We are thrilled to have you join our community of hair care enthusiasts.</p><p>As a member, you will enjoy:</p><ul><li>Exclusive member-only discounts</li><li>Early access to new products</li><li>Personalized product recommendations</li><li>Order tracking and history</li><li>Wishlist and favorites</li></ul><p>Start exploring our premium collection of virgin hair extensions, wigs, and hair care products.</p>",
+      "cta_text": "Start Shopping",
+      "cta_url": "{{site_url}}/products",
+      "footer_text": "Welcome to Bakalr Boutique! If you did not create this account, please ignore this email."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "email-verification",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "email_verification",
+      "subject": "Verify your email address",
+      "heading": "Please Verify Your Email",
+      "body": "<p>Hi {{name}},</p><p>Thank you for signing up! Please verify your email address to complete your registration and unlock all account features.</p><p>This verification link will expire in 24 hours.</p><p>If you did not create an account with us, please ignore this email.</p>",
+      "cta_text": "Verify Email Address",
+      "cta_url": "{{verification_url}}",
+      "footer_text": "This link expires in 24 hours. If you need a new link, please visit our website."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "password-reset",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "password_reset",
+      "subject": "Reset your password - Bakalr Boutique",
+      "heading": "Password Reset Request",
+      "body": "<p>Hi {{name}},</p><p>We received a request to reset the password for your Bakalr Boutique account.</p><p>Click the button below to create a new password. This link will expire in 1 hour.</p><p>If you did not request a password reset, please ignore this email. Your password will remain unchanged.</p>",
+      "cta_text": "Reset Password",
+      "cta_url": "{{reset_url}}",
+      "footer_text": "This link expires in 1 hour. If you did not request this, please ignore this email."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "password-changed",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "password_changed",
+      "subject": "Your password has been changed",
+      "heading": "Password Changed Successfully",
+      "body": "<p>Hi {{name}},</p><p>This email confirms that your Bakalr Boutique account password was successfully changed on {{change_date}}.</p><p>If you made this change, no further action is required.</p><p><strong>If you did NOT change your password</strong>, please reset it immediately and contact our support team.</p>",
+      "cta_text": "Reset Password Now",
+      "cta_url": "{{site_url}}/auth/forgot-password",
+      "footer_text": "If you did not make this change, please contact support immediately."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "account-locked",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "account_locked",
+      "subject": "Your account has been temporarily locked",
+      "heading": "Account Security Alert",
+      "body": "<p>Hi {{name}},</p><p>Your Bakalr Boutique account has been temporarily locked due to multiple failed login attempts.</p><p>This is a security measure to protect your account. You can unlock your account by resetting your password.</p><p>If this was you, please reset your password. If you did not attempt to log in, someone may be trying to access your account.</p>",
+      "cta_text": "Unlock Account",
+      "cta_url": "{{site_url}}/auth/forgot-password",
+      "footer_text": "Your account will automatically unlock after 30 minutes."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "otp-verification",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "otp_verification",
+      "subject": "Your verification code: {{otp_code}}",
+      "heading": "Your Verification Code",
+      "body": "<p>Hi {{name}},</p><p>Your one-time verification code is:</p><div style=\"font-size: 36px; font-weight: bold; letter-spacing: 8px; text-align: center; padding: 30px; margin: 20px 0; background: linear-gradient(135deg, #3D2817 0%, #5C3D2E 100%); color: white; border-radius: 12px;\">{{otp_code}}</div><p>This code will expire in <strong>{{expires_minutes}} minutes</strong>.</p><p>Enter this code in the app to complete your verification.</p><p><strong>Do not share this code with anyone.</strong> Bakalr Boutique will never ask for your verification code.</p>",
+      "footer_text": "This is an automated security message. If you did not request this code, please ignore this email."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "device-verification",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "device_verification",
+      "subject": "Verify Your Device - {{verification_code}}",
+      "heading": "New Device Detected",
+      "body": "<p>Hi {{name}},</p><p>We detected a login from a new device:</p><table style=\"width: 100%; margin: 20px 0;\"><tr><td style=\"padding: 8px 0;\"><strong>Device:</strong></td><td>{{device_name}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Location:</strong></td><td>{{location}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Time:</strong></td><td>{{login_time}}</td></tr></table><p>To verify this device, please enter the following code:</p><div style=\"font-size: 32px; font-weight: bold; letter-spacing: 8px; text-align: center; padding: 20px; background: #f5f5f5; border-radius: 8px;\">{{verification_code}}</div><p>This code expires in <strong>{{expires_minutes}} minutes</strong>.</p><p>If you did not attempt to log in, please secure your account immediately.</p>",
+      "cta_text": "Secure My Account",
+      "cta_url": "{{site_url}}/auth/forgot-password",
+      "footer_text": "This is an automated security message. Do not share this code with anyone."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "new-login-alert",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "new_login_alert",
+      "subject": "New Login to Your Account",
+      "heading": "New Login Detected",
+      "body": "<p>Hi {{name}},</p><p>We noticed a new login to your Bakalr Boutique account:</p><table style=\"width: 100%; border-collapse: collapse; margin: 20px 0;\"><tr><td style=\"padding: 10px; border-bottom: 1px solid #eee;\"><strong>Device:</strong></td><td style=\"padding: 10px; border-bottom: 1px solid #eee;\">{{device_info}}</td></tr><tr><td style=\"padding: 10px; border-bottom: 1px solid #eee;\"><strong>Location:</strong></td><td style=\"padding: 10px; border-bottom: 1px solid #eee;\">{{location}}</td></tr><tr><td style=\"padding: 10px; border-bottom: 1px solid #eee;\"><strong>IP Address:</strong></td><td style=\"padding: 10px; border-bottom: 1px solid #eee;\">{{ip_address}}</td></tr><tr><td style=\"padding: 10px;\"><strong>Time:</strong></td><td style=\"padding: 10px;\">{{login_time}}</td></tr></table><p>If this was you, you can ignore this email.</p><p><strong>If you did not log in</strong>, please secure your account immediately by changing your password.</p>",
+      "cta_text": "Secure My Account",
+      "cta_url": "{{site_url}}/auth/forgot-password",
+      "footer_text": "This is an automated security alert from your account."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "contact-notification",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "contact_notification",
+      "subject": "[Contact Form] {{subject}}",
+      "heading": "New Contact Form Submission",
+      "body": "<p>You have received a new message from the Bakalr Boutique contact form.</p>{{details_html}}",
+      "footer_text": "This message was sent via the Bakalr Boutique contact form.",
+      "label_name": "Name",
+      "label_email": "Email",
+      "label_subject": "Subject",
+      "label_message": "Message"
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "contact-confirmation",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "contact_confirmation",
+      "subject": "We received your message - Bakalr Boutique",
+      "heading": "Thank You for Reaching Out!",
+      "body": "<p>Hi {{name}},</p><p>Thank you for contacting Bakalr Boutique! We have received your message regarding:</p><p style=\"padding: 15px; background: #f9f9f9; border-left: 4px solid #3D2817; margin: 20px 0;\"><strong>{{subject}}</strong></p><p>Our team will review your message and get back to you within 24-48 business hours.</p><p>In the meantime, feel free to browse our premium collection of hair products.</p>",
+      "cta_text": "Browse Products",
+      "cta_url": "{{site_url}}/products",
+      "footer_text": "This is an automated response. Please do not reply to this email."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "order-confirmation",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "order_confirmation",
+      "subject": "Order Confirmed! #{{order_number}}",
+      "heading": "Thank You for Your Order!",
+      "body": "<p>Hi {{name}},</p><p>Great news! We have received your order and it is being processed.</p><table style=\"width: 100%; margin: 20px 0;\"><tr><td style=\"padding: 8px 0;\"><strong>Order Number:</strong></td><td>{{order_number}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Order Date:</strong></td><td>{{order_date}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Total:</strong></td><td>{{order_total}}</td></tr></table><p>We will send you another email with tracking information once your order ships.</p>",
+      "cta_text": "View Order Details",
+      "cta_url": "{{site_url}}/account/orders/{{order_id}}",
+      "footer_text": "Thank you for shopping with Bakalr Boutique!"
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "order-shipped",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "order_shipped",
+      "subject": "Your order is on its way! #{{order_number}}",
+      "heading": "Your Order Has Shipped! \ud83d\ude9a",
+      "body": "<p>Hi {{name}},</p><p>Exciting news! Your order has been shipped and is on its way to you.</p><table style=\"width: 100%; margin: 20px 0;\"><tr><td style=\"padding: 8px 0;\"><strong>Order Number:</strong></td><td>{{order_number}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Tracking Number:</strong></td><td>{{tracking_number}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Carrier:</strong></td><td>{{carrier}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Estimated Delivery:</strong></td><td>{{estimated_delivery}}</td></tr></table><p>You can track your package using the button below.</p>",
+      "cta_text": "Track Your Package",
+      "cta_url": "{{tracking_url}}",
+      "footer_text": "Thank you for shopping with Bakalr Boutique!"
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "order-delivered",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "order_delivered",
+      "subject": "Your order has been delivered! #{{order_number}}",
+      "heading": "Package Delivered! \ud83d\udcec",
+      "body": "<p>Hi {{name}},</p><p>Your Bakalr Boutique order has been delivered!</p><table style=\"width: 100%; margin: 20px 0;\"><tr><td style=\"padding: 8px 0;\"><strong>Order Number:</strong></td><td>{{order_number}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Delivered On:</strong></td><td>{{delivery_date}}</td></tr></table><p>We hope you love your new products! If you have any questions or concerns about your order, please do not hesitate to contact us.</p><p>We would love to hear what you think! Please consider leaving a review.</p>",
+      "cta_text": "Leave a Review",
+      "cta_url": "{{site_url}}/account/orders/{{order_id}}/review",
+      "footer_text": "Thank you for being a valued customer!"
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "order-cancelled",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "order_cancelled",
+      "subject": "Order Cancelled #{{order_number}}",
+      "heading": "Order Cancellation Confirmed",
+      "body": "<p>Hi {{name}},</p><p>Your order #{{order_number}} has been cancelled as requested.</p><p>If you paid for this order, a refund will be processed within 5-10 business days to your original payment method.</p><table style=\"width: 100%; margin: 20px 0;\"><tr><td style=\"padding: 8px 0;\"><strong>Refund Amount:</strong></td><td>{{refund_amount}}</td></tr></table><p>We are sorry to see you go! If there was an issue with your order or if you have any feedback, we would love to hear from you.</p>",
+      "cta_text": "Contact Support",
+      "cta_url": "{{site_url}}/contact",
+      "footer_text": "We hope to see you again soon!"
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "refund-processed",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "refund_processed",
+      "subject": "Refund Processed - {{refund_amount}}",
+      "heading": "Your Refund Has Been Processed",
+      "body": "<p>Hi {{name}},</p><p>We have processed your refund for order #{{order_number}}.</p><table style=\"width: 100%; margin: 20px 0;\"><tr><td style=\"padding: 8px 0;\"><strong>Refund Amount:</strong></td><td>{{refund_amount}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Refund Method:</strong></td><td>{{refund_method}}</td></tr><tr><td style=\"padding: 8px 0;\"><strong>Expected Arrival:</strong></td><td>5-10 business days</td></tr></table><p>The refund will appear on your original payment method. Processing times may vary depending on your bank or card issuer.</p>",
+      "cta_text": "View Order",
+      "cta_url": "{{site_url}}/account/orders/{{order_id}}",
+      "footer_text": "Thank you for your patience."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "abandoned-cart",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "abandoned_cart",
+      "subject": "You left something behind! \ud83d\uded2",
+      "heading": "Forgot Something?",
+      "body": "<p>Hi {{name}},</p><p>We noticed you left some beautiful items in your cart! Your premium hair products are waiting for you.</p>{{cart_items_html}}<p>Complete your purchase now and treat yourself to the gorgeous hair you deserve.</p>",
+      "cta_text": "Complete Your Purchase",
+      "cta_url": "{{site_url}}/cart",
+      "footer_text": "Your cart items are saved for 7 days."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "back-in-stock",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "back_in_stock",
+      "subject": "Its back! {{product_name}} is now in stock",
+      "heading": "Great News! Your Item is Back!",
+      "body": "<p>Hi {{name}},</p><p>The item you have been waiting for is back in stock!</p><div style=\"padding: 20px; background: #f9f9f9; border-radius: 8px; margin: 20px 0; text-align: center;\"><h3 style=\"margin: 0 0 10px 0;\">{{product_name}}</h3><p style=\"font-size: 24px; color: #3D2817; margin: 0;\">{{product_price}}</p></div><p>Do not miss out - popular items sell fast! Grab yours before its gone again.</p>",
+      "cta_text": "Shop Now",
+      "cta_url": "{{product_url}}",
+      "footer_text": "You received this email because you requested to be notified."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "email_template",
+    "slug": "review-request",
+    "title": "Entry email_template",
+    "content_data": {
+      "template_key": "review_request",
+      "subject": "How are you loving your new hair? \u2b50",
+      "heading": "Share Your Experience!",
+      "body": "<p>Hi {{name}},</p><p>Its been a few weeks since your order arrived, and we would love to know what you think!</p><p>Your feedback helps other customers make informed decisions and helps us improve.</p><p><strong>As a thank you for your review, you will receive a 10% discount code for your next purchase!</strong></p>",
+      "cta_text": "Write a Review",
+      "cta_url": "{{site_url}}/account/orders/{{order_id}}/review",
+      "footer_text": "Thank you for being part of the Bakalr Boutique family!"
+    },
+    "status": "published"
+  }
+]

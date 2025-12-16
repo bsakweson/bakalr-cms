@@ -1,0 +1,321 @@
+[
+  {
+    "content_type_api_id": "page",
+    "slug": "home",
+    "title": "Entry page",
+    "content_data": {
+      "page_key": "home",
+      "template": "home",
+      "sections": [
+        {
+          "type": "hero",
+          "banner_key": "hero-main",
+          "full_width": true
+        },
+        {
+          "type": "featured_categories",
+          "heading": "Shop by Category",
+          "columns": 6,
+          "show_icon": true
+        },
+        {
+          "type": "featured_products",
+          "heading": "Bestsellers",
+          "count": 8,
+          "filter": "bestseller"
+        },
+        {
+          "type": "banner",
+          "banner_key": "promo-extensions"
+        },
+        {
+          "type": "featured_products",
+          "heading": "New Arrivals",
+          "count": 8,
+          "filter": "new_arrival"
+        },
+        {
+          "type": "featured_brands",
+          "heading": "Top Brands",
+          "count": 10
+        },
+        {
+          "type": "testimonials",
+          "heading": "What Our Customers Say",
+          "count": 3
+        },
+        {
+          "type": "newsletter",
+          "heading": "Join Our Newsletter",
+          "subheading": "Get 10% off your first order!"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "shop",
+    "title": "Entry page",
+    "content_data": {
+      "page_key": "shop",
+      "template": "listing",
+      "sections": [
+        {
+          "type": "page_header",
+          "heading": "Shop All Products",
+          "show_breadcrumb": true
+        },
+        {
+          "type": "product_grid",
+          "show_filters": true,
+          "show_sort": true,
+          "per_page": 12
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "about",
+    "title": "About Us - Bakalr Boutique",
+    "content_data": {
+      "page_key": "about",
+      "template": "about",
+      "sections": [
+        {
+          "type": "hero",
+          "banner_key": "hero-about",
+          "full_width": true
+        },
+        {
+          "type": "story",
+          "heading": "Our Story",
+          "content": "Founded in 2015, Bakalr Boutique emerged from a simple yet powerful idea: everyone deserves access to premium beauty products that celebrate and enhance their natural beauty. What started as a small online store has grown into a beloved destination for beauty enthusiasts across the country.",
+          "alignment": "center"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "label": "Premium Products",
+              "value": "5,000+",
+              "icon": "sparkles"
+            },
+            {
+              "label": "Trusted Brands",
+              "value": "100+",
+              "icon": "badge-check"
+            },
+            {
+              "label": "Happy Customers",
+              "value": "50,000+",
+              "icon": "heart"
+            },
+            {
+              "label": "Years of Excellence",
+              "value": "10+",
+              "icon": "award"
+            }
+          ]
+        },
+        {
+          "type": "mission",
+          "heading": "Our Mission",
+          "content": "At Bakalr Boutique, we believe beauty is a form of self-expression and self-care. Our mission is to curate the finest beauty products from around the world, making premium skincare, makeup, and wellness accessible to everyone.",
+          "secondary_content": "We're committed to championing diversity in beauty, supporting Black-owned brands, and building a community where everyone feels seen and celebrated.",
+          "highlights_heading": "What Sets Us Apart",
+          "highlights": [
+            {
+              "icon": "✓",
+              "title": "Curated Selection",
+              "description": "Every product is hand-picked by our beauty experts"
+            },
+            {
+              "icon": "✓",
+              "title": "Authenticity Guaranteed",
+              "description": "100% genuine products, always"
+            },
+            {
+              "icon": "✓",
+              "title": "Expert Support",
+              "description": "Our beauty advisors are here to help you find your perfect match"
+            },
+            {
+              "icon": "✓",
+              "title": "Community First",
+              "description": "Supporting local and minority-owned brands"
+            }
+          ]
+        },
+        {
+          "type": "testimonials",
+          "heading": "What Our Customers Say",
+          "subheading": "Join thousands of satisfied beauty enthusiasts"
+        },
+        {
+          "type": "values",
+          "heading": "Our Values",
+          "subheading": "The principles that guide everything we do",
+          "values": [
+            {
+              "icon": "💎",
+              "title": "Quality",
+              "description": "We only carry products we believe in and would use ourselves."
+            },
+            {
+              "icon": "🌍",
+              "title": "Diversity",
+              "description": "Beauty comes in all forms. We celebrate every skin tone and type."
+            },
+            {
+              "icon": "❤️",
+              "title": "Community",
+              "description": "We proudly support Black-owned and local beauty brands."
+            },
+            {
+              "icon": "✨",
+              "title": "Innovation",
+              "description": "We continuously seek out the latest and most effective beauty solutions."
+            }
+          ]
+        },
+        {
+          "type": "cta",
+          "heading": "Ready to Start Your Beauty Journey?",
+          "subheading": "Discover products that celebrate your unique beauty",
+          "button_text": "Shop Now",
+          "button_link": "/products"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "contact",
+    "title": "Entry page",
+    "content_data": {
+      "page_key": "contact",
+      "template": "landing",
+      "sections": [
+        {
+          "type": "page_header",
+          "heading": "Contact Us",
+          "subheading": "We'd love to hear from you!"
+        },
+        {
+          "type": "contact_form",
+          "show_map": true
+        },
+        {
+          "type": "contact_info",
+          "show_hours": true
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "faq",
+    "title": "Entry page",
+    "content_data": {
+      "page_key": "faq",
+      "template": "landing",
+      "sections": [
+        {
+          "type": "page_header",
+          "heading": "Frequently Asked Questions"
+        },
+        {
+          "type": "faq_list",
+          "group_by_category": true
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "privacy",
+    "title": "Privacy Policy - Bakalr Boutique",
+    "content_data": {
+      "page_key": "privacy",
+      "template": "legal",
+      "sections": [
+        {
+          "type": "page_header",
+          "heading": "Privacy Policy",
+          "subheading": "Your privacy is important to us"
+        },
+        {
+          "type": "rich_text",
+          "content": "<p class='text-text-secondary'><strong>Last Updated:</strong> January 1, 2025</p><p class='text-text-secondary'>This Privacy Policy describes how Bakalr Boutique LLC (\"we,\" \"us,\" or \"our\") collects, uses, and shares information about you when you use our website, mobile applications, and other online products and services (collectively, the \"Services\") or when you otherwise interact with us.</p><h2>1. Information We Collect</h2><h3>Information You Provide to Us</h3><p>We collect information you provide directly to us, such as when you:</p><ul><li>Create an account or complete your profile</li><li>Make a purchase or add items to your cart</li><li>Subscribe to our newsletter or marketing communications</li><li>Contact us for customer support</li><li>Participate in surveys, contests, or promotions</li><li>Post reviews or comments on our Services</li></ul><p>This information may include:</p><ul><li><strong>Personal Information:</strong> Name, email address, phone number, shipping and billing addresses</li><li><strong>Payment Information:</strong> Credit card numbers and billing details (processed securely through our payment processors)</li><li><strong>Account Information:</strong> Username, password, purchase history, and preferences</li><li><strong>Communications:</strong> Content of messages you send to us</li></ul><h3>Information We Collect Automatically</h3><p>When you use our Services, we automatically collect certain information, including:</p><ul><li><strong>Device Information:</strong> Device type, operating system, browser type, unique device identifiers</li><li><strong>Usage Information:</strong> Pages viewed, links clicked, time spent on pages, referral URLs</li><li><strong>Location Information:</strong> General location based on IP address</li><li><strong>Cookies and Similar Technologies:</strong> We use cookies, web beacons, and similar technologies to collect information and personalize your experience</li></ul><h2>2. How We Use Your Information</h2><p>We use the information we collect to:</p><ul><li>Process and fulfill your orders, including shipping and delivery</li><li>Communicate with you about your orders, account, and customer service inquiries</li><li>Send you promotional communications (with your consent where required)</li><li>Personalize your shopping experience and show relevant product recommendations</li><li>Improve our Services and develop new features</li><li>Detect, investigate, and prevent fraudulent transactions and abuse</li><li>Comply with legal obligations</li></ul><h2>3. How We Share Your Information</h2><p>We may share your information with:</p><ul><li><strong>Service Providers:</strong> Third parties who perform services on our behalf, such as payment processing, shipping, email delivery, and analytics</li><li><strong>Business Partners:</strong> With your consent, we may share information with brand partners for co-marketing purposes</li><li><strong>Legal Requirements:</strong> When required by law or to protect our rights and safety</li><li><strong>Business Transfers:</strong> In connection with any merger, acquisition, or sale of company assets</li></ul><p>We do not sell your personal information to third parties.</p><h2>4. Your Rights and Choices</h2><p>Depending on your location, you may have certain rights regarding your personal information:</p><ul><li><strong>Access:</strong> Request access to your personal information</li><li><strong>Correction:</strong> Request correction of inaccurate information</li><li><strong>Deletion:</strong> Request deletion of your personal information</li><li><strong>Opt-Out:</strong> Opt out of marketing communications at any time</li><li><strong>Do Not Track:</strong> We currently do not respond to Do Not Track signals</li></ul><h3>California Privacy Rights (CCPA)</h3><p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p><ul><li>Right to know what personal information is collected</li><li>Right to delete personal information</li><li>Right to opt-out of the sale of personal information (we do not sell your data)</li><li>Right to non-discrimination for exercising your privacy rights</li></ul><h2>5. Data Security</h2><p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. This includes:</p><ul><li>SSL/TLS encryption for data transmission</li><li>Secure password hashing using industry-standard algorithms (bcrypt)</li><li>Regular security assessments and monitoring</li><li>Limited access to personal information by employees</li></ul><h2>6. Data Retention</h2><p>We retain your personal information for as long as necessary to:</p><ul><li>Fulfill the purposes for which it was collected</li><li>Comply with legal obligations</li><li>Resolve disputes and enforce agreements</li></ul><h2>7. Children's Privacy</h2><p>Our Services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.</p><h2>8. International Data Transfers</h2><p>Your information may be transferred to and processed in the United States. By using our Services, you consent to the transfer of your information to the United States.</p><h2>9. Updates to This Policy</h2><p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new Privacy Policy on this page and updating the \"Last Updated\" date.</p><h2>10. Contact Us</h2><p>If you have any questions about this Privacy Policy or our privacy practices, please contact us at:</p><p><strong>Bakalr Boutique LLC</strong><br/>Email: privacy@bakalrboutique.com<br/>Address: 123 Beauty Lane, Suite 100<br/>Los Angeles, CA 90001<br/>Phone: (800) 555-0123</p>"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "terms",
+    "title": "Terms of Service - Bakalr Boutique",
+    "content_data": {
+      "page_key": "terms",
+      "template": "legal",
+      "sections": [
+        {
+          "type": "page_header",
+          "heading": "Terms of Service",
+          "subheading": "Please read these terms carefully before using our services"
+        },
+        {
+          "type": "rich_text",
+          "content": "<p class='text-text-secondary'><strong>Last Updated:</strong> January 1, 2025</p><p class='text-text-secondary'>These Terms of Service (\"Terms\") govern your use of the Bakalr Boutique website, mobile applications, and services (collectively, the \"Services\"). By accessing or using our Services, you agree to be bound by these Terms.</p><h2>1. Acceptance of Terms</h2><p>By accessing or using our Services, you represent that you:</p><ul><li>Are at least 18 years old or the age of majority in your jurisdiction</li><li>Have the legal capacity to enter into these Terms</li><li>Are not prohibited from using the Services under applicable laws</li></ul><p>If you are using the Services on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p><h2>2. Account Registration</h2><p>To access certain features of our Services, you may need to create an account. When you create an account, you agree to:</p><ul><li>Provide accurate, current, and complete information</li><li>Maintain and promptly update your account information</li><li>Keep your password secure and confidential</li><li>Notify us immediately of any unauthorized access to your account</li><li>Accept responsibility for all activities under your account</li></ul><p>We reserve the right to suspend or terminate accounts that violate these Terms.</p><h2>3. Products and Orders</h2><h3>Product Information</h3><p>We strive to provide accurate product descriptions, images, and pricing. However, we do not warrant that product descriptions or other content is accurate, complete, or error-free. Colors may vary due to monitor settings.</p><h3>Pricing and Availability</h3><ul><li>All prices are in US dollars unless otherwise stated</li><li>Prices are subject to change without notice</li><li>We reserve the right to limit quantities or refuse orders</li><li>We reserve the right to correct pricing errors</li></ul><h3>Order Acceptance</h3><p>Your order is an offer to purchase. We may accept or decline your order at our discretion. An order confirmation email does not constitute acceptance. We reserve the right to cancel orders due to:</p><ul><li>Product unavailability</li><li>Pricing or description errors</li><li>Suspected fraud or unauthorized transactions</li><li>Violation of these Terms</li></ul><h3>Payment</h3><p>We accept major credit cards, PayPal, and other payment methods as indicated at checkout. By providing payment information, you represent that you are authorized to use the payment method and authorize us to charge the full amount of your order.</p><h2>4. Shipping and Delivery</h2><ul><li>Shipping times are estimates and not guaranteed</li><li>Risk of loss passes to you upon delivery to the carrier</li><li>We are not responsible for delays caused by carriers, customs, or events beyond our control</li><li>International orders may be subject to import duties and taxes</li></ul><h2>5. Returns and Refunds</h2><p>Please refer to our <a href='/returns'>Return Policy</a> for detailed information about returns and refunds. Generally:</p><ul><li>Unused items may be returned within 30 days of delivery</li><li>Items must be in original packaging with all tags attached</li><li>Certain items (cosmetics that have been opened, intimate items, sale items) may not be eligible for return</li><li>Refunds will be issued to the original payment method</li></ul><h2>6. Intellectual Property</h2><p>All content on our Services, including text, graphics, logos, images, software, and other materials (\"Content\"), is owned by or licensed to Bakalr Boutique and is protected by copyright, trademark, and other intellectual property laws.</p><p>You may not:</p><ul><li>Copy, modify, distribute, or create derivative works from our Content</li><li>Use our trademarks without written permission</li><li>Use our Content for commercial purposes without authorization</li><li>Remove any copyright or proprietary notices</li></ul><h2>7. User Content</h2><p>When you submit reviews, comments, or other content (\"User Content\"), you:</p><ul><li>Grant us a non-exclusive, royalty-free, perpetual license to use, display, and distribute your User Content</li><li>Represent that you own or have rights to submit the User Content</li><li>Agree not to submit content that is illegal, offensive, defamatory, or infringes on others' rights</li></ul><p>We may remove User Content at our discretion and are not responsible for User Content submitted by users.</p><h2>8. Prohibited Conduct</h2><p>You agree not to:</p><ul><li>Use the Services for any unlawful purpose</li><li>Violate any applicable laws or regulations</li><li>Infringe on intellectual property rights</li><li>Transmit viruses, malware, or harmful code</li><li>Attempt to gain unauthorized access to our systems</li><li>Interfere with or disrupt the Services</li><li>Engage in fraudulent activity</li><li>Harass, abuse, or harm others</li><li>Use automated means to access the Services without permission</li></ul><h2>9. Disclaimer of Warranties</h2><p>THE SERVICES ARE PROVIDED \"AS IS\" AND \"AS AVAILABLE\" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DISCLAIM ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p><p>WE DO NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE.</p><h2>10. Limitation of Liability</h2><p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, BAKALR BOUTIQUE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR GOODWILL, REGARDLESS OF THE CAUSE OF ACTION.</p><p>OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE PAST 12 MONTHS OR $100, WHICHEVER IS GREATER.</p><h2>11. Indemnification</h2><p>You agree to indemnify and hold harmless Bakalr Boutique, its officers, directors, employees, and agents from any claims, damages, losses, or expenses arising from your use of the Services or violation of these Terms.</p><h2>12. Dispute Resolution</h2><h3>Governing Law</h3><p>These Terms are governed by the laws of the State of California, without regard to conflict of law principles.</p><h3>Arbitration</h3><p>Any disputes arising from these Terms shall be resolved through binding arbitration in Los Angeles County, California, in accordance with the American Arbitration Association rules. You waive any right to participate in class action lawsuits.</p><h3>Time Limitation</h3><p>Any claim arising from these Terms must be filed within one (1) year of the cause of action.</p><h2>13. Changes to Terms</h2><p>We may modify these Terms at any time. Material changes will be communicated through the Services or by email. Your continued use of the Services after changes constitutes acceptance of the modified Terms.</p><h2>14. Severability</h2><p>If any provision of these Terms is found unenforceable, the remaining provisions will continue in full force and effect.</p><h2>15. Contact Information</h2><p>For questions about these Terms, please contact us:</p><p><strong>Bakalr Boutique LLC</strong><br/>Email: legal@bakalrboutique.com<br/>Address: 123 Beauty Lane, Suite 100<br/>Los Angeles, CA 90001<br/>Phone: (800) 555-0123</p>"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "cart",
+    "title": "Entry page",
+    "content_data": {
+      "page_key": "cart",
+      "template": "cart",
+      "sections": [
+        {
+          "type": "cart_contents"
+        },
+        {
+          "type": "cart_summary"
+        },
+        {
+          "type": "featured_products",
+          "heading": "You May Also Like",
+          "count": 4,
+          "filter": "featured"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "checkout",
+    "title": "Entry page",
+    "content_data": {
+      "page_key": "checkout",
+      "template": "checkout",
+      "sections": [
+        {
+          "type": "checkout_form"
+        }
+      ]
+    },
+    "status": "published"
+  }
+]

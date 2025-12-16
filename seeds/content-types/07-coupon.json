@@ -1,0 +1,7 @@
+{
+  "api_id": "coupon",
+  "name": "Coupon",
+  "description": "Promotional coupon codes for discounts",
+  "fields_schema": [],
+  "is_published": true
+}

@@ -1,0 +1,118 @@
+{
+  "api_id": "email_template",
+  "name": "Email Template",
+  "description": "Email templates for transactional emails with auto-translation support",
+  "fields_schema": [
+    {
+      "name": "template_key",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique identifier (e.g., contact_notification)"
+    },
+    {
+      "name": "subject",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Subject line (supports {{variables}})"
+    },
+    {
+      "name": "heading",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Main heading in the email"
+    },
+    {
+      "name": "body",
+      "type": "textarea",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Main content (supports {{variables}})"
+    },
+    {
+      "name": "cta_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Call-to-action button text"
+    },
+    {
+      "name": "cta_url",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Call-to-action URL"
+    },
+    {
+      "name": "footer_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Footer message"
+    },
+    {
+      "name": "label_name",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Label for Name field"
+    },
+    {
+      "name": "label_email",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Label for Email field"
+    },
+    {
+      "name": "label_subject",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Label for Subject field"
+    },
+    {
+      "name": "label_message",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Label for Message field"
+    }
+  ],
+  "is_published": true
+}

@@ -239,7 +239,7 @@ def translate_content_entry_background(
     locale_ids: List[UUID],
     force_retranslate: bool,
     organization_id: UUID,
-    db: Session,
+    db_ignored: Session,  # Keep parameter for backwards compat but don't use
     incremental: bool = False,
 ):
     """Background task to translate content entry.
@@ -250,7 +250,12 @@ def translate_content_entry_background(
     """
     import logging
 
+    from backend.db.session import SessionLocal
+
     logger = logging.getLogger(__name__)
+
+    # Create our own database session for the background task
+    db = SessionLocal()
 
     try:
         translation_service = get_translation_service()
@@ -412,7 +417,10 @@ def translate_content_entry_background(
 
     except Exception as e:
         logger.error(f"Translation failed for entry {entry_id}: {e}", exc_info=True)
+        db.rollback()
         raise
+    finally:
+        db.close()
 
 
 @router.post("/translate", response_model=TranslateResponse)

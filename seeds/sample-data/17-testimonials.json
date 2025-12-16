@@ -1,0 +1,80 @@
+[
+  {
+    "content_type_api_id": "testimonial",
+    "slug": "testimonial-jasmine-w",
+    "title": "Entry testimonial",
+    "content_data": {
+      "customer_name": "Jasmine W.",
+      "customer_title": "Natural Hair Enthusiast",
+      "quote": "Finally found a store that carries ALL my favorite brands! The Mielle oil has been a game changer for my edges. Fast shipping and everything arrived in perfect condition.",
+      "rating": 5,
+      "featured": true
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "testimonial",
+    "slug": "testimonial-marcus-t",
+    "title": "Entry testimonial",
+    "content_data": {
+      "customer_name": "Marcus T.",
+      "customer_title": "Professional Barber",
+      "quote": "Best prices on Andis clippers I've found online. I've ordered multiple times for my shop and the customer service is top notch. Highly recommend for fellow barbers!",
+      "rating": 5,
+      "featured": true
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "testimonial",
+    "slug": "testimonial-keisha-m",
+    "title": "Entry testimonial",
+    "content_data": {
+      "customer_name": "Keisha M.",
+      "customer_title": "Protective Style Queen",
+      "quote": "The bundles I ordered were amazing quality! Minimal shedding and held a curl beautifully. Already planning my next order.",
+      "rating": 5,
+      "featured": false
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "testimonial",
+    "slug": "testimonial-tanya-r",
+    "title": "Entry testimonial",
+    "content_data": {
+      "customer_name": "Tanya R.",
+      "customer_title": "Busy Mom",
+      "quote": "Love being able to get all my family's hair products in one place. From my daughter's Cantu to my husband's grooming products - Bakalr has it all!",
+      "rating": 5,
+      "featured": true
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "testimonial",
+    "slug": "testimonial-nicole-j",
+    "title": "Entry testimonial",
+    "content_data": {
+      "customer_name": "Nicole J.",
+      "customer_title": "Licensed Cosmetologist",
+      "quote": "The wholesale program is perfect for my salon. Great discounts and quick delivery. My clients always ask where I get my products!",
+      "rating": 5,
+      "featured": false
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "testimonial",
+    "slug": "testimonial-deshawn-b",
+    "title": "Entry testimonial",
+    "content_data": {
+      "customer_name": "DeShawn B.",
+      "customer_title": "Loc Journey",
+      "quote": "Been on my loc journey for 2 years and the products here are perfect. The Shea Moisture Loc & Braid Butter keeps my locs moisturized without buildup.",
+      "rating": 4,
+      "featured": false
+    },
+    "status": "published"
+  }
+]

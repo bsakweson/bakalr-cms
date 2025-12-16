@@ -1,0 +1,154 @@
+[
+  {
+    "content_type_api_id": "collection",
+    "slug": "bestselling-bundles",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "Bestselling Bundles",
+      "description": "Our customers have spoken! These are the most loved bundles in our collection. Quality-tested and customer-approved virgin hair bundles from Brazil, Vietnam, Peru, and more.",
+      "short_description": "Our most popular hair bundles",
+      "image_url": "/collections/bestselling-bundles.jpg",
+      "featured": true,
+      "display_order": 1,
+      "product_ids": [
+        "1b916bd5-f4d6-4797-9493-6eab7bc41280",
+        "b932bfbb-c692-488b-b75d-b615ea7b2e06",
+        "28ce09cb-7161-48ff-aa9a-6bbda24c9557"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "raw-hair-collection",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "Raw Hair Collection",
+      "description": "Experience the ultimate in luxury with our Raw Hair Collection. Each bundle is collected from single donors, never chemically processed, and known for exceptional longevity. Investment-worthy hair that lasts 3-5 years with proper care.",
+      "short_description": "Single-donor luxury raw hair",
+      "image_url": "/collections/raw-hair.jpg",
+      "featured": true,
+      "display_order": 2,
+      "product_ids": [
+        "b932bfbb-c692-488b-b75d-b615ea7b2e06",
+        "dd31f83e-e2f0-4196-a536-b77eada1ebb4"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "hd-lace-essentials",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "HD Lace Essentials",
+      "description": "Complete your install with our HD Lace Collection. Featuring the thinnest, most invisible lace available. Our closures and frontals are pre-plucked with baby hairs and bleached knots for an undetectable, natural-looking hairline.",
+      "short_description": "Invisible HD lace closures & frontals",
+      "image_url": "/collections/hd-lace.jpg",
+      "featured": true,
+      "display_order": 3,
+      "product_ids": [
+        "26a44802-81b6-4304-b51e-5512461d09b7",
+        "e75cc797-f613-4d35-820b-8d672677e275",
+        "02ff5d7f-1b63-4a8a-b2d5-57f7326d5d09",
+        "e7d9eb62-58d8-4be9-9c55-37f468984411"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "glueless-wig-collection",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "Glueless Wig Collection",
+      "description": "New to wigs? Start here! Our Glueless Wig Collection features pre-cut lace, adjustable straps, and secure combs - no adhesive needed. Perfect for beginners or anyone who wants a quick, damage-free wig experience.",
+      "short_description": "No glue needed, beginner-friendly wigs",
+      "image_url": "/collections/glueless-wigs.jpg",
+      "featured": true,
+      "display_order": 4,
+      "product_ids": [
+        "cdcb9281-9c48-4c0c-8496-34493db1e2c1"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "wig-installation-kit",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "Wig Installation Essentials",
+      "description": "Get that snatched, natural-looking wig install with our essential products. From professional-grade adhesives to lace melting sprays and tints - we have everything you need for a flawless finish.",
+      "short_description": "Everything for a perfect wig install",
+      "image_url": "/collections/wig-install.jpg",
+      "featured": true,
+      "display_order": 5,
+      "product_ids": [
+        "659f8505-c3b1-4924-9e62-fe195c0dfee4",
+        "5bfb3831-1040-46aa-9b2c-b499bca4446b",
+        "fd6097f1-1543-4a0f-a25f-85443567294f",
+        "5b296e3e-f0f2-4948-87ca-6df01f308115"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "new-arrivals",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "New Arrivals",
+      "description": "Be the first to shop our latest drops! Fresh bundles, new wig styles, and trending accessories. Updated weekly with the hottest new products.",
+      "short_description": "Just dropped - shop new products",
+      "image_url": "/collections/new-arrivals.jpg",
+      "featured": true,
+      "display_order": 6,
+      "product_ids": [
+        "dd31f83e-e2f0-4196-a536-b77eada1ebb4",
+        "e7d9eb62-58d8-4be9-9c55-37f468984411",
+        "cdcb9281-9c48-4c0c-8496-34493db1e2c1",
+        "fd6097f1-1543-4a0f-a25f-85443567294f",
+        "d444d49f-1891-46ea-a034-b8913a269d6b"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "under-100",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "Under $100",
+      "description": "Quality doesn't have to break the bank! Shop our selection of premium hair bundles, closures, and accessories all priced under $100. Perfect for budget-conscious queens who don't compromise on quality.",
+      "short_description": "Quality hair at affordable prices",
+      "image_url": "/collections/under-100.jpg",
+      "featured": false,
+      "display_order": 7,
+      "product_ids": [
+        "3f1e73d4-e204-4d7c-a84a-ba1ed145541b",
+        "d477b675-a9c3-4918-824d-e9bf8e9cb7f4",
+        "26a44802-81b6-4304-b51e-5512461d09b7",
+        "1b916bd5-f4d6-4797-9493-6eab7bc41280"
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "collection",
+    "slug": "blonde-hair-collection",
+    "title": "Entry collection",
+    "content_data": {
+      "name": "Blonde Hair Collection",
+      "description": "Go blonde without the damage! Our pre-colored 613 blonde collection features virgin human hair that can be toned to any shade. From platinum to honey blonde, ash to strawberry - the possibilities are endless.",
+      "short_description": "Pre-colored 613 blonde hair",
+      "image_url": "/collections/blonde-hair.jpg",
+      "featured": true,
+      "display_order": 8,
+      "product_ids": [
+        "9975df81-d34a-44e1-95a0-53f7c349a2f6"
+      ]
+    },
+    "status": "published"
+  }
+]

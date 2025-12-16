@@ -2,11 +2,13 @@
 Storage backend abstraction for local and S3 storage
 """
 
+import os
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Tuple
 
 import boto3
+from botocore.config import Config as BotoConfig
 from botocore.exceptions import ClientError
 
 from backend.core.config import Settings
@@ -127,11 +129,17 @@ class S3StorageBackend(StorageBackend):
     """AWS S3 or S3-compatible storage"""
 
     def __init__(self):
-        # Initialize S3 client
+        # Clear AWS profile environment to prevent SSO interference
+        # when using explicit credentials for MinIO/S3-compatible storage
+        os.environ.pop("AWS_PROFILE", None)
+        os.environ.pop("AWS_DEFAULT_PROFILE", None)
+
+        # Initialize S3 client with explicit credentials
         s3_config = {
             "aws_access_key_id": settings.AWS_ACCESS_KEY_ID,
             "aws_secret_access_key": settings.AWS_SECRET_ACCESS_KEY,
             "region_name": settings.AWS_REGION,
+            "config": BotoConfig(signature_version="s3v4"),
         }
 
         # Add endpoint URL for S3-compatible services (e.g., MinIO)

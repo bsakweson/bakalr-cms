@@ -1,53 +1,105 @@
-{
-  "entries": [
-    {
-      "content_type_api_id": "footer",
-      "slug": "main-footer",
-      "status": "published",
-      "data": {
-        "about_text": "Bakalr Boutique is your destination for premium beauty supplies. We carry the best brands in hair care, skincare, cosmetics, and more.",
-        "copyright_text": "© 2025 Bakalr Boutique. All rights reserved.",
-        "columns": [
-          {
-            "title": "Shop",
-            "links": [
-              {"label": "Hair Care", "href": "/category/hair-care"},
-              {"label": "Skincare", "href": "/category/skincare"},
-              {"label": "Cosmetics", "href": "/category/cosmetics"},
-              {"label": "New Arrivals", "href": "/shop?filter=new"},
-              {"label": "Sale", "href": "/shop?filter=sale"}
-            ]
-          },
-          {
-            "title": "Customer Service",
-            "links": [
-              {"label": "Contact Us", "href": "/contact"},
-              {"label": "FAQ", "href": "/faq"},
-              {"label": "Shipping Info", "href": "/shipping"},
-              {"label": "Returns", "href": "/returns"},
-              {"label": "Track Order", "href": "/account/orders"}
-            ]
-          },
-          {
-            "title": "Company",
-            "links": [
-              {"label": "About Us", "href": "/about"},
-              {"label": "Careers", "href": "/careers"},
-              {"label": "Press", "href": "/press"},
-              {"label": "Privacy Policy", "href": "/privacy"},
-              {"label": "Terms of Service", "href": "/terms"}
-            ]
-          }
-        ],
-        "social_links": {
-          "facebook": "https://facebook.com/bakalrboutique",
-          "instagram": "https://instagram.com/bakalrboutique",
-          "twitter": "https://twitter.com/bakalrboutique",
-          "youtube": "https://youtube.com/@bakalrboutique",
-          "tiktok": "https://tiktok.com/@bakalrboutique"
+[
+  {
+    "content_type_api_id": "footer",
+    "slug": "main-footer",
+    "title": "Entry footer",
+    "content_data": {
+      "about_text": "Bakalr Boutique is your destination for premium beauty supplies. We carry the best brands in hair care, skincare, cosmetics, and more.",
+      "copyright_text": "\u00a9 2025 Bakalr Boutique. All rights reserved.",
+      "columns": [
+        {
+          "title": "Shop",
+          "links": [
+            {
+              "label": "Hair Care",
+              "href": "/category/hair-care"
+            },
+            {
+              "label": "Skincare",
+              "href": "/category/skincare"
+            },
+            {
+              "label": "Cosmetics",
+              "href": "/category/cosmetics"
+            },
+            {
+              "label": "New Arrivals",
+              "href": "/shop?filter=new"
+            },
+            {
+              "label": "Sale",
+              "href": "/shop?filter=sale"
+            }
+          ]
         },
-        "payment_icons": ["visa", "mastercard", "amex", "discover", "paypal", "apple-pay", "google-pay"]
-      }
-    }
-  ]
-}
+        {
+          "title": "Customer Service",
+          "links": [
+            {
+              "label": "Contact Us",
+              "href": "/contact"
+            },
+            {
+              "label": "FAQ",
+              "href": "/faq"
+            },
+            {
+              "label": "Shipping Info",
+              "href": "/shipping"
+            },
+            {
+              "label": "Returns",
+              "href": "/returns"
+            },
+            {
+              "label": "Track Order",
+              "href": "/account/orders"
+            }
+          ]
+        },
+        {
+          "title": "Company",
+          "links": [
+            {
+              "label": "About Us",
+              "href": "/about"
+            },
+            {
+              "label": "Careers",
+              "href": "/careers"
+            },
+            {
+              "label": "Press",
+              "href": "/press"
+            },
+            {
+              "label": "Privacy Policy",
+              "href": "/privacy"
+            },
+            {
+              "label": "Terms of Service",
+              "href": "/terms"
+            }
+          ]
+        }
+      ],
+      "social_links": {
+        "facebook": "https://facebook.com/bakalrboutique",
+        "instagram": "https://instagram.com/bakalrboutique",
+        "twitter": "https://twitter.com/bakalrboutique",
+        "youtube": "https://youtube.com/@bakalrboutique",
+        "tiktok": "https://tiktok.com/@bakalrboutique"
+      },
+      "payment_icons": [
+        "visa",
+        "mastercard",
+        "amex",
+        "discover",
+        "paypal",
+        "apple-pay",
+        "google-pay"
+      ]
+    },
+    "status": "published"
+  }
+]

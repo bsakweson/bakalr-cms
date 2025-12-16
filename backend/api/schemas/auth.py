@@ -112,6 +112,7 @@ class RefreshTokenRequest(BaseModel):
     """Schema for refresh token request"""
 
     refresh_token: str
+    session_id: Optional[str] = None  # Session ID for session lookup
 
 
 class PasswordChangeRequest(BaseModel):

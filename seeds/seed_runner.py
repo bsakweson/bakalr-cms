@@ -10,6 +10,7 @@ Usage:
     poetry run python seeds/seed_runner.py --only content-types
     poetry run python seeds/seed_runner.py --only locales
     poetry run python seeds/seed_runner.py --only sample-data
+    poetry run python seeds/seed_runner.py --file 02-navigation.json  # Single file
     poetry run python seeds/seed_runner.py --reset            # Delete and reseed
     poetry run python seeds/seed_runner.py --dry-run          # Show what would be created
 """
@@ -426,7 +427,12 @@ class SeedRunner:
             log_info(f"Processing: {sample_file.name}")
             data = self._load_json(sample_file)
 
-            entries = data.get("entries", [])
+            # Handle both array format and {"entries": [...]} format
+            if isinstance(data, list):
+                entries = data
+            else:
+                entries = data.get("entries", [])
+
             if not entries:
                 log_warning(f"No entries found in {sample_file.name}")
                 continue
@@ -458,7 +464,8 @@ class SeedRunner:
 
         slug = entry.get("slug")
         status = entry.get("status", "published")
-        data = entry.get("data", {})
+        # Support both "data" and "content_data" field names
+        data = entry.get("content_data") or entry.get("data", {})
 
         # Handle reference placeholders (e.g., _brand_slug, _category_slug)
         # These will be resolved to actual IDs after the referenced entries exist
@@ -555,6 +562,59 @@ class SeedRunner:
         log_header(f"Seeding {component} Complete!")
         return True
 
+    def run_file(self, filename: str):
+        """Run seed for a specific file from sample-data"""
+        if not self.authenticate():
+            return False
+
+        sample_data_dir = SEEDS_DIR / "sample-data"
+
+        # Try to find the file (with or without path)
+        if "/" in filename or "\\" in filename:
+            sample_file = Path(filename)
+        else:
+            sample_file = sample_data_dir / filename
+
+        if not sample_file.exists():
+            # Try glob pattern match
+            matches = list(sample_data_dir.glob(f"*{filename}*"))
+            if matches:
+                sample_file = matches[0]
+            else:
+                log_error(f"File not found: {filename}")
+                log_info("Available files in sample-data:")
+                for f in sorted(sample_data_dir.glob("*.json")):
+                    log_info(f"  - {f.name}")
+                return False
+
+        log_header(f"Seeding File: {sample_file.name}")
+
+        # Get content type IDs
+        if not self.created_content_types and not self.dry_run:
+            self._fetch_content_type_ids()
+
+        # Track entries for reference resolution
+        self.created_entries: Dict[str, str] = {}
+
+        log_info(f"Processing: {sample_file.name}")
+        data = self._load_json(sample_file)
+
+        # Handle both array format and {"entries": [...]} format
+        if isinstance(data, list):
+            entries = data
+        else:
+            entries = data.get("entries", [])
+
+        if not entries:
+            log_warning(f"No entries found in {sample_file.name}")
+            return True
+
+        for entry in entries:
+            self._create_content_entry(entry)
+
+        log_header(f"Seeding {sample_file.name} Complete!")
+        return True
+
 
 def main():
     parser = argparse.ArgumentParser(description="Bakalr CMS Seed Runner")
@@ -577,6 +637,10 @@ def main():
         "--only",
         choices=["themes", "locales", "content-types", "sample-data"],
         help="Only seed a specific component",
+    )
+    parser.add_argument(
+        "--file",
+        help="Only seed a specific file from sample-data (e.g., 02-navigation.json)",
     )
     parser.add_argument(
         "--dry-run",
@@ -605,7 +669,9 @@ def main():
             sys.exit(1)
         log_success("Data cleared. Proceeding with seeding...")
 
-    if args.only:
+    if args.file:
+        success = runner.run_file(args.file)
+    elif args.only:
         success = runner.run_only(args.only)
     else:
         success = runner.run_all()

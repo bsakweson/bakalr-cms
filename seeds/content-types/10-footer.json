@@ -1,0 +1,58 @@
+{
+  "api_id": "footer",
+  "name": "Footer",
+  "description": "Footer content and configuration",
+  "fields_schema": [
+    {
+      "name": "about_text",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "About text - IS translated"
+    },
+    {
+      "name": "copyright_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Copyright notice - IS translated"
+    },
+    {
+      "name": "columns",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Footer columns with titles/links - IS translated"
+    },
+    {
+      "name": "social_links",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Social media URLs - NOT translated"
+    },
+    {
+      "name": "payment_icons",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Payment method icons - NOT translated"
+    }
+  ],
+  "is_published": true
+}

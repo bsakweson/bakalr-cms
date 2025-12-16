@@ -1,0 +1,1573 @@
+[
+  {
+    "content_type_api_id": "product",
+    "slug": "vietnamese-raw-straight-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Vietnamese Raw Straight Virgin Hair Bundle",
+      "sku": "VNM-STR-BUNDLE",
+      "description": "Experience the ultimate in luxury hair with our Vietnamese Raw Straight bundles. Collected from single donors in Vietnam, this hair has never been chemically processed and maintains its natural cuticle alignment. Known for its incredible shine, silky texture, and exceptional longevity - properly maintained, this hair can last 3-5 years. Each bundle weighs approximately 100g.",
+      "short_description": "Single-donor raw Vietnamese, cuticle-aligned",
+      "base_price_cents": 18999,
+      "compare_at_price_cents": 24999,
+      "currency": "USD",
+      "tags": [
+        "vietnamese",
+        "raw-hair",
+        "straight",
+        "luxury",
+        "single-donor"
+      ],
+      "available_sizes": [
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        },
+        {
+          "value": "26",
+          "label": "26 inches"
+        },
+        {
+          "value": "28",
+          "label": "28 inches"
+        },
+        {
+          "value": "30",
+          "label": "30 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "Raw Virgin Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "Vietnam"
+        },
+        {
+          "label": "Texture",
+          "value": "Silky Straight"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        },
+        {
+          "label": "Donor",
+          "value": "Single Donor"
+        },
+        {
+          "label": "Processing",
+          "value": "100% Unprocessed"
+        },
+        {
+          "label": "Lifespan",
+          "value": "3-5 years with proper care"
+        }
+      ],
+      "how_to_use": "Handle with care. Use only sulfate-free, silicone-free products. Avoid excessive heat. Store properly when not in use.",
+      "weight_grams": 100,
+      "featured": true,
+      "new_arrival": false,
+      "bestseller": true,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        },
+        {
+          "value": "27",
+          "label": "#27 Honey Blonde",
+          "hex": "#c99550"
+        },
+        {
+          "value": "30",
+          "label": "#30 Auburn",
+          "hex": "#8b4513"
+        },
+        {
+          "value": "613",
+          "label": "#613 Platinum Blonde",
+          "hex": "#f5e6c8"
+        },
+        {
+          "value": "1b-27",
+          "label": "Ombre 1B/27",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "1b-30",
+          "label": "Ombre 1B/30",
+          "hex": "#2d2d2d"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "vietnamese-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "peruvian-loose-wave-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Peruvian Loose Wave Virgin Hair Bundle",
+      "sku": "PER-LW-BUNDLE",
+      "description": "Our Peruvian Loose Wave bundles feature a relaxed, beachy wave pattern perfect for effortless, everyday glamour. Lightweight yet full-bodied, this hair blends seamlessly with most textures. 100% virgin human hair, cuticle-aligned.",
+      "short_description": "Lightweight Peruvian loose wave, natural luster",
+      "base_price_cents": 7999,
+      "compare_at_price_cents": 10999,
+      "currency": "USD",
+      "tags": [
+        "peruvian",
+        "loose-wave",
+        "virgin-hair",
+        "bundles"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Virgin Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "Peru"
+        },
+        {
+          "label": "Texture",
+          "value": "Loose Wave"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        },
+        {
+          "label": "Weft",
+          "value": "Double Wefted"
+        }
+      ],
+      "weight_grams": 100,
+      "featured": false,
+      "new_arrival": false,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "peruvian-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "malaysian-deep-wave-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Malaysian Deep Wave Virgin Hair Bundle",
+      "sku": "MYS-DW-BUNDLE",
+      "description": "Get glamorous volume with our Malaysian Deep Wave bundles. This defined wave pattern holds beautifully and adds incredible fullness to your look. The hair has a natural shine and is incredibly soft to the touch.",
+      "short_description": "Ultra-soft Malaysian deep wave, defined curls",
+      "base_price_cents": 8499,
+      "compare_at_price_cents": 11999,
+      "currency": "USD",
+      "tags": [
+        "malaysian",
+        "deep-wave",
+        "virgin-hair",
+        "bundles",
+        "voluminous"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        },
+        {
+          "value": "26",
+          "label": "26 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Virgin Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "Malaysia"
+        },
+        {
+          "label": "Texture",
+          "value": "Deep Wave"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        }
+      ],
+      "weight_grams": 100,
+      "featured": true,
+      "new_arrival": false,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "malaysian-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "indian-natural-wave-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Indian Natural Wave Virgin Hair Bundle",
+      "sku": "IND-NW-BUNDLE",
+      "description": "Our Indian Natural Wave bundles feature a subtle, natural wave pattern that blends perfectly with relaxed and natural African American hair textures. Great for beginners and easy to maintain.",
+      "short_description": "Natural wave Indian Remy, easy to blend",
+      "base_price_cents": 6999,
+      "compare_at_price_cents": 8999,
+      "currency": "USD",
+      "tags": [
+        "indian",
+        "natural-wave",
+        "remy",
+        "bundles",
+        "beginner-friendly"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Indian Remy Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "India"
+        },
+        {
+          "label": "Texture",
+          "value": "Natural Wave"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        }
+      ],
+      "weight_grams": 100,
+      "featured": false,
+      "new_arrival": false,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "indian-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "cambodian-raw-wavy-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Cambodian Raw Wavy Virgin Hair Bundle",
+      "sku": "KHM-RAW-BUNDLE",
+      "description": "Discover the hidden gem of the hair industry with our Cambodian Raw Wavy bundles. This thick, naturally wavy hair is known for its incredible durability and volume. Perfect for those who want full, luxurious styles.",
+      "short_description": "Thick raw Cambodian, naturally wavy",
+      "base_price_cents": 15999,
+      "compare_at_price_cents": 19999,
+      "currency": "USD",
+      "tags": [
+        "cambodian",
+        "raw-hair",
+        "wavy",
+        "thick",
+        "luxury"
+      ],
+      "available_sizes": [
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        },
+        {
+          "value": "26",
+          "label": "26 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "Raw Virgin Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "Cambodia"
+        },
+        {
+          "label": "Texture",
+          "value": "Natural Wavy"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        },
+        {
+          "label": "Processing",
+          "value": "100% Unprocessed"
+        }
+      ],
+      "weight_grams": 100,
+      "featured": true,
+      "new_arrival": true,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "cambodian-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "hd-lace-closure-4x4-body-wave",
+    "title": "Entry product",
+    "content_data": {
+      "name": "HD Lace Closure 4x4 - Body Wave",
+      "sku": "HD-CLS-4X4-BW",
+      "description": "Our HD Lace Closures feature the thinnest, most invisible lace available. The 4x4 size provides natural-looking middle or side part coverage. Pre-plucked hairline with baby hairs and bleached knots for an undetectable install.",
+      "short_description": "Invisible HD lace, pre-plucked with baby hairs",
+      "base_price_cents": 7999,
+      "compare_at_price_cents": 9999,
+      "currency": "USD",
+      "tags": [
+        "closure",
+        "hd-lace",
+        "4x4",
+        "body-wave",
+        "pre-plucked"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Size",
+          "value": "4x4 inches"
+        },
+        {
+          "label": "Lace Type",
+          "value": "HD Lace (Swiss)"
+        },
+        {
+          "label": "Texture",
+          "value": "Body Wave"
+        },
+        {
+          "label": "Pre-plucked",
+          "value": "Yes"
+        },
+        {
+          "label": "Bleached Knots",
+          "value": "Yes"
+        },
+        {
+          "label": "Baby Hairs",
+          "value": "Yes"
+        }
+      ],
+      "weight_grams": 50,
+      "featured": true,
+      "new_arrival": false,
+      "bestseller": true,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "closures"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "hd-lace-closure-5x5-straight",
+    "title": "Entry product",
+    "content_data": {
+      "name": "HD Lace Closure 5x5 - Straight",
+      "sku": "HD-CLS-5X5-STR",
+      "description": "Upgrade to our 5x5 HD Lace Closure for more parting space and styling versatility. The straight texture gives a sleek, polished finish. HD lace melts seamlessly into all skin tones.",
+      "short_description": "5x5 HD lace, more parting freedom",
+      "base_price_cents": 8999,
+      "compare_at_price_cents": 11999,
+      "currency": "USD",
+      "tags": [
+        "closure",
+        "hd-lace",
+        "5x5",
+        "straight",
+        "pre-plucked"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Size",
+          "value": "5x5 inches"
+        },
+        {
+          "label": "Lace Type",
+          "value": "HD Lace (Swiss)"
+        },
+        {
+          "label": "Texture",
+          "value": "Straight"
+        },
+        {
+          "label": "Pre-plucked",
+          "value": "Yes"
+        },
+        {
+          "label": "Bleached Knots",
+          "value": "Yes"
+        }
+      ],
+      "weight_grams": 55,
+      "featured": false,
+      "new_arrival": false,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "closures"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "hd-lace-frontal-13x4-body-wave",
+    "title": "Entry product",
+    "content_data": {
+      "name": "HD Lace Frontal 13x4 - Body Wave",
+      "sku": "HD-FRT-13X4-BW",
+      "description": "Our 13x4 HD Lace Frontal provides ear-to-ear coverage with a natural hairline that looks like it's growing from your scalp. Style your hair freely - side parts, middle parts, even slicked back! Pre-plucked with baby hairs and bleached knots.",
+      "short_description": "Ear-to-ear HD lace frontal, ultimate versatility",
+      "base_price_cents": 12999,
+      "compare_at_price_cents": 16999,
+      "currency": "USD",
+      "tags": [
+        "frontal",
+        "hd-lace",
+        "13x4",
+        "body-wave",
+        "pre-plucked"
+      ],
+      "available_sizes": [
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Size",
+          "value": "13x4 inches"
+        },
+        {
+          "label": "Lace Type",
+          "value": "HD Lace (Swiss)"
+        },
+        {
+          "label": "Texture",
+          "value": "Body Wave"
+        },
+        {
+          "label": "Coverage",
+          "value": "Ear to Ear"
+        },
+        {
+          "label": "Pre-plucked",
+          "value": "Yes"
+        },
+        {
+          "label": "Bleached Knots",
+          "value": "Yes"
+        },
+        {
+          "label": "Baby Hairs",
+          "value": "Yes"
+        }
+      ],
+      "weight_grams": 80,
+      "featured": true,
+      "new_arrival": false,
+      "bestseller": true,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "frontals"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "hd-lace-frontal-13x6-deep-wave",
+    "title": "Entry product",
+    "content_data": {
+      "name": "HD Lace Frontal 13x6 - Deep Wave",
+      "sku": "HD-FRT-13X6-DW",
+      "description": "Maximum styling freedom with our 13x6 HD Lace Frontal. The extended 6-inch parting space allows for deeper side parts and more versatile styling. Deep wave texture for glamorous volume.",
+      "short_description": "13x6 extended parting, deep wave glamour",
+      "base_price_cents": 15999,
+      "compare_at_price_cents": 19999,
+      "currency": "USD",
+      "tags": [
+        "frontal",
+        "hd-lace",
+        "13x6",
+        "deep-wave",
+        "extended-lace"
+      ],
+      "available_sizes": [
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Size",
+          "value": "13x6 inches"
+        },
+        {
+          "label": "Lace Type",
+          "value": "HD Lace (Swiss)"
+        },
+        {
+          "label": "Texture",
+          "value": "Deep Wave"
+        },
+        {
+          "label": "Coverage",
+          "value": "Ear to Ear with Deep Parting"
+        }
+      ],
+      "weight_grams": 90,
+      "featured": true,
+      "new_arrival": true,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "frontals"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "glueless-lace-front-wig-body-wave",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Glueless Lace Front Wig - Body Wave",
+      "sku": "GLU-LFW-BW",
+      "description": "Perfect for wig beginners! Our Glueless Lace Front Wig features pre-cut HD lace, adjustable straps, and secure combs - no glue needed! 100% virgin human hair in body wave texture. Pre-plucked hairline with baby hairs. Just put it on and go!",
+      "short_description": "No glue needed, beginner-friendly, pre-cut lace",
+      "base_price_cents": 17999,
+      "compare_at_price_cents": 24999,
+      "currency": "USD",
+      "tags": [
+        "wig",
+        "glueless",
+        "lace-front",
+        "body-wave",
+        "beginner-friendly"
+      ],
+      "available_sizes": [
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        },
+        {
+          "value": "26",
+          "label": "26 inches"
+        }
+      ],
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Virgin Human Hair"
+        },
+        {
+          "label": "Cap Construction",
+          "value": "Glueless with Elastic Band"
+        },
+        {
+          "label": "Lace",
+          "value": "Pre-cut HD Lace"
+        },
+        {
+          "label": "Density",
+          "value": "180%"
+        },
+        {
+          "label": "Cap Size",
+          "value": "Adjustable (21.5-23 inches)"
+        }
+      ],
+      "weight_grams": 200,
+      "featured": true,
+      "new_arrival": true,
+      "bestseller": true
+    },
+    "status": "published",
+    "_category_slug": "glueless-wigs"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "full-lace-wig-straight-613-blonde",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Full Lace Wig - 613 Blonde Straight",
+      "sku": "FL-WIG-613-STR",
+      "description": "Make a statement with our stunning 613 Blonde Full Lace Wig. 100% virgin human hair that can be toned to any shade. Full lace construction allows for high ponytails, updos, and any style you desire. Pre-plucked hairline.",
+      "short_description": "613 platinum blonde, full lace, ultimate styling",
+      "base_price_cents": 29999,
+      "compare_at_price_cents": 39999,
+      "currency": "USD",
+      "tags": [
+        "wig",
+        "full-lace",
+        "613-blonde",
+        "straight",
+        "platinum"
+      ],
+      "available_sizes": [
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        },
+        {
+          "value": "26",
+          "label": "26 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Virgin Human Hair"
+        },
+        {
+          "label": "Color",
+          "value": "613 Platinum Blonde"
+        },
+        {
+          "label": "Cap Construction",
+          "value": "Full Lace"
+        },
+        {
+          "label": "Density",
+          "value": "180%"
+        },
+        {
+          "label": "Can Be Toned",
+          "value": "Yes"
+        }
+      ],
+      "weight_grams": 220,
+      "featured": true,
+      "new_arrival": false,
+      "bestseller": false
+    },
+    "status": "published",
+    "_category_slug": "full-lace-wigs"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "brazilian-kinky-curly-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Brazilian Kinky Curly Virgin Hair Bundle",
+      "sku": "BRZ-KC-BUNDLE",
+      "description": "Embrace your natural texture with our Brazilian Kinky Curly bundles. This tight curl pattern blends seamlessly with 4A-4C natural hair types. Perfect for protective styles that look completely natural.",
+      "short_description": "Natural 4A-4C texture match, perfect blend",
+      "base_price_cents": 9499,
+      "compare_at_price_cents": 12999,
+      "currency": "USD",
+      "tags": [
+        "brazilian",
+        "kinky-curly",
+        "virgin-hair",
+        "natural-texture",
+        "4c-friendly"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Virgin Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "Brazil"
+        },
+        {
+          "label": "Texture",
+          "value": "Kinky Curly (3C-4A)"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        },
+        {
+          "label": "Blends With",
+          "value": "4A-4C Natural Hair"
+        }
+      ],
+      "weight_grams": 100,
+      "featured": false,
+      "new_arrival": false,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "brazilian-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "brazilian-water-wave-bundle",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Brazilian Water Wave Virgin Hair Bundle",
+      "sku": "BRZ-WW-BUNDLE",
+      "description": "Get that fresh-from-the-beach look with our Brazilian Water Wave bundles. This beautiful crimped wave pattern creates stunning volume and movement. Perfect for summer styles!",
+      "short_description": "Beachy crimped waves, summer-ready",
+      "base_price_cents": 8999,
+      "compare_at_price_cents": 11999,
+      "currency": "USD",
+      "tags": [
+        "brazilian",
+        "water-wave",
+        "virgin-hair",
+        "bundles",
+        "summer"
+      ],
+      "available_sizes": [
+        {
+          "value": "10",
+          "label": "10 inches"
+        },
+        {
+          "value": "12",
+          "label": "12 inches"
+        },
+        {
+          "value": "14",
+          "label": "14 inches"
+        },
+        {
+          "value": "16",
+          "label": "16 inches"
+        },
+        {
+          "value": "18",
+          "label": "18 inches"
+        },
+        {
+          "value": "20",
+          "label": "20 inches"
+        },
+        {
+          "value": "22",
+          "label": "22 inches"
+        },
+        {
+          "value": "24",
+          "label": "24 inches"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hair Type",
+          "value": "100% Virgin Human Hair"
+        },
+        {
+          "label": "Origin",
+          "value": "Brazil"
+        },
+        {
+          "label": "Texture",
+          "value": "Water Wave"
+        },
+        {
+          "label": "Weight",
+          "value": "100g per bundle"
+        }
+      ],
+      "weight_grams": 100,
+      "featured": false,
+      "new_arrival": true,
+      "bestseller": false,
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "brazilian-hair"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "ebin-wonder-lace-bond-wig-glue",
+    "title": "Entry product",
+    "content_data": {
+      "name": "EBIN New York Wonder Lace Bond Adhesive",
+      "sku": "EBIN-WLB-GLUE",
+      "description": "The #1 selling lace wig glue! EBIN Wonder Lace Bond provides extreme hold for up to 3 weeks. Waterproof formula withstands sweat, rain, and humidity. Dries clear and leaves no residue.",
+      "short_description": "Extreme hold, waterproof, 3-week wear",
+      "base_price_cents": 899,
+      "compare_at_price_cents": 1299,
+      "currency": "USD",
+      "tags": [
+        "wig-glue",
+        "adhesive",
+        "lace-bond",
+        "waterproof",
+        "ebin"
+      ],
+      "available_sizes": [
+        {
+          "value": "0.5oz",
+          "label": "0.5 oz"
+        },
+        {
+          "value": "1oz",
+          "label": "1 oz"
+        },
+        {
+          "value": "2oz",
+          "label": "2 oz"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Hold Time",
+          "value": "Up to 3 weeks"
+        },
+        {
+          "label": "Waterproof",
+          "value": "Yes"
+        },
+        {
+          "label": "Residue",
+          "value": "No residue"
+        }
+      ],
+      "weight_grams": 30,
+      "featured": true,
+      "new_arrival": false,
+      "bestseller": true
+    },
+    "status": "published",
+    "_category_slug": "wig-glue-adhesive"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "got2b-glued-blasting-freeze-spray",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Got2b Glued Blasting Freeze Spray",
+      "sku": "G2B-FREEZE-SPRAY",
+      "description": "The iconic Got2b Glued Freeze Spray for laying edges and melting lace! Creates an invisible hold that lasts all day. Perfect for baby hairs and flyaways.",
+      "short_description": "Iconic edge control spray, all-day hold",
+      "base_price_cents": 699,
+      "currency": "USD",
+      "tags": [
+        "edge-control",
+        "freeze-spray",
+        "got2b",
+        "lace-melting"
+      ],
+      "specifications": [
+        {
+          "label": "Hold Level",
+          "value": "Extreme"
+        },
+        {
+          "label": "Volume",
+          "value": "12 oz"
+        }
+      ],
+      "weight_grams": 340,
+      "featured": false,
+      "new_arrival": false,
+      "bestseller": true
+    },
+    "status": "published",
+    "_category_slug": "hair-styling"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "bold-hold-lace-tint-spray",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Bold Hold Lace Tint Spray",
+      "sku": "BH-TINT-SPRAY",
+      "description": "Match your lace to your skin tone with Bold Hold Lace Tint! This easy-to-use spray helps your lace blend seamlessly for an undetectable install. Available in multiple shades.",
+      "short_description": "Lace tinting spray, undetectable blend",
+      "base_price_cents": 1299,
+      "currency": "USD",
+      "tags": [
+        "lace-tint",
+        "bold-hold",
+        "wig-install",
+        "customization"
+      ],
+      "available_colors": [
+        {
+          "value": "light",
+          "label": "Light",
+          "hex": "#f5deb3"
+        },
+        {
+          "value": "light-medium",
+          "label": "Light Medium",
+          "hex": "#deb887"
+        },
+        {
+          "value": "medium",
+          "label": "Medium",
+          "hex": "#d2691e"
+        },
+        {
+          "value": "medium-dark",
+          "label": "Medium Dark",
+          "hex": "#8b4513"
+        },
+        {
+          "value": "dark",
+          "label": "Dark",
+          "hex": "#654321"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Coverage",
+          "value": "Full Coverage"
+        },
+        {
+          "label": "Volume",
+          "value": "4 oz"
+        }
+      ],
+      "weight_grams": 120,
+      "featured": false,
+      "new_arrival": true,
+      "bestseller": false
+    },
+    "status": "published",
+    "_category_slug": "lace-melting"
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "wig-grip-band-velvet",
+    "title": "Entry product",
+    "content_data": {
+      "name": "Velvet Wig Grip Band - Adjustable",
+      "sku": "WIG-GRIP-VEL",
+      "description": "Secure your wig without glue or tape! Our Velvet Wig Grip Band features a soft, comfortable velvet interior that grips your wig securely. Adjustable to fit all head sizes. Protects your edges and hairline.",
+      "short_description": "Glueless wig security, protects edges",
+      "base_price_cents": 999,
+      "currency": "USD",
+      "tags": [
+        "wig-grip",
+        "glueless",
+        "edge-protection",
+        "velvet"
+      ],
+      "available_colors": [
+        {
+          "value": "natural-black",
+          "label": "Natural Black",
+          "hex": "#1a1a1a",
+          "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "1b",
+          "label": "#1B Off Black",
+          "hex": "#2d2d2d",
+          "image": "https://images.unsplash.com/photo-1605980776566-0ed5fd7a6c39?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "2",
+          "label": "#2 Dark Brown",
+          "hex": "#3d2314",
+          "image": "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "4",
+          "label": "#4 Medium Brown",
+          "hex": "#5a3825",
+          "image": "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "27",
+          "label": "#27 Honey Blonde",
+          "hex": "#c99550",
+          "image": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "30",
+          "label": "#30 Auburn",
+          "hex": "#8b4513",
+          "image": "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "613",
+          "label": "#613 Platinum Blonde",
+          "hex": "#f5e6c8",
+          "image": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "1b-27",
+          "label": "Ombre 1B/27",
+          "hex": "#2d2d2d",
+          "image": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&h=600&fit=crop"
+        },
+        {
+          "value": "1b-30",
+          "label": "Ombre 1B/30",
+          "hex": "#2d2d2d",
+          "image": "https://images.unsplash.com/photo-1534180477871-5d6cc81f3920?w=600&h=600&fit=crop"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Material",
+          "value": "Velvet"
+        },
+        {
+          "label": "Adjustable",
+          "value": "Yes"
+        },
+        {
+          "label": "Fits",
+          "value": "20-24 inch circumference"
+        }
+      ],
+      "weight_grams": 30,
+      "featured": false,
+      "new_arrival": false,
+      "bestseller": false,
+      "media_gallery": [
+        {
+          "url": "/api/v1/media/proxy/8c013e70-51f2-44ab-a18b-aff50f81ca17_vietnamese-straight-2.jpg",
+          "alt": "8c013e70-51f2-44ab-a18b-aff50f81ca17_vietnamese-straight-2.jpg"
+        }
+      ]
+    },
+    "status": "published",
+    "_category_slug": "wig-accessories"
+  }
+]

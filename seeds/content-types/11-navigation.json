@@ -1,0 +1,68 @@
+{
+  "api_id": "navigation",
+  "name": "Navigation",
+  "description": "Navigation menus for header, footer, and mobile with translatable UI strings",
+  "fields_schema": [
+    {
+      "name": "menu_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique key: 'header', 'footer', 'mobile' - NOT translated"
+    },
+    {
+      "name": "items",
+      "type": "json",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Menu items array with label, href, order, icon, and optional children"
+    },
+    {
+      "name": "sign_in_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Sign In button text (header only)"
+    },
+    {
+      "name": "sign_up_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Sign Up button text (header only)"
+    },
+    {
+      "name": "search_placeholder",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Search input placeholder text (header only)"
+    },
+    {
+      "name": "view_cart_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "View Cart tooltip/button text (header only)"
+    }
+  ],
+  "is_published": true
+}

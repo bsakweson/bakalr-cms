@@ -1,0 +1,178 @@
+{
+  "api_id": "site_settings",
+  "name": "Site Settings",
+  "description": "Global site settings (one entry per organization)",
+  "fields_schema": [
+    {
+      "name": "site_name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Site name - IS translated"
+    },
+    {
+      "name": "tagline",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Site tagline - IS translated"
+    },
+    {
+      "name": "logo_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Site logo"
+    },
+    {
+      "name": "favicon_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Favicon"
+    },
+    {
+      "name": "default_locale",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": "en",
+      "validation": null,
+      "help_text": "Default locale code - NOT translated"
+    },
+    {
+      "name": "enabled_locales",
+      "type": "json",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of locale codes - NOT translated"
+    },
+    {
+      "name": "default_currency",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": "USD",
+      "validation": null,
+      "help_text": "Default currency code (e.g., USD, EUR, MXN)"
+    },
+    {
+      "name": "symbol",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": "$",
+      "validation": null,
+      "help_text": "Default currency symbol (e.g., $, \u20ac, \u00a3)"
+    },
+    {
+      "name": "enabled_currencies",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of currency objects: [{code, symbol, name, flag, exchange_rate}]"
+    },
+    {
+      "name": "contact_email",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Contact email - NOT translated"
+    },
+    {
+      "name": "contact_phone",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Phone number - NOT translated"
+    },
+    {
+      "name": "contact_address",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Physical address - IS translated"
+    },
+    {
+      "name": "social_links",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Social media URLs - NOT translated"
+    },
+    {
+      "name": "analytics_ids",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Analytics IDs - NOT translated"
+    },
+    {
+      "name": "maintenance_mode",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Enable maintenance mode"
+    },
+    {
+      "name": "maintenance_message",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Maintenance message - IS translated"
+    },
+    {
+      "name": "common_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Common UI labels used across pages (products, categories, cart, pagination, filters, etc.) - IS translated"
+    }
+  ],
+  "is_published": true
+}

@@ -1,0 +1,81 @@
+{
+  "api_id": "product_review",
+  "name": "Product Review",
+  "description": "Customer product reviews and ratings",
+  "fields_schema": [
+    {
+      "name": "product_id",
+      "type": "reference",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Product being reviewed"
+    },
+    {
+      "name": "customer_name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Reviewer name - NOT translated (proper noun)"
+    },
+    {
+      "name": "customer_email",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Email - NOT translated"
+    },
+    {
+      "name": "rating",
+      "type": "number",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": {
+        "min": 1,
+        "max": 5
+      },
+      "help_text": "Rating 1-5"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Review title - NOT translated (user content)"
+    },
+    {
+      "name": "body",
+      "type": "textarea",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Review content - NOT translated (user content)"
+    },
+    {
+      "name": "verified_purchase",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Verified purchase"
+    }
+  ],
+  "is_published": true
+}

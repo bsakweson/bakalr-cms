@@ -1,0 +1,98 @@
+{
+  "api_id": "product_variant",
+  "name": "Product Variant",
+  "description": "Product variants for size/color combinations",
+  "fields_schema": [
+    {
+      "name": "sku",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Variant SKU - NOT translated"
+    },
+    {
+      "name": "variant_name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Display name - IS translated"
+    },
+    {
+      "name": "product_id",
+      "type": "reference",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Parent product"
+    },
+    {
+      "name": "color",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Color object - name IS translated"
+    },
+    {
+      "name": "size",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Size object - name IS translated"
+    },
+    {
+      "name": "price_modifier_cents",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": 0,
+      "validation": null,
+      "help_text": "Price adjustment in cents"
+    },
+    {
+      "name": "media_gallery",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Variant images - NOT translated"
+    },
+    {
+      "name": "weight_modifier_grams",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": 0,
+      "validation": null,
+      "help_text": "Weight adjustment"
+    },
+    {
+      "name": "barcode",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "UPC/EAN - NOT translated"
+    }
+  ],
+  "is_published": true
+}

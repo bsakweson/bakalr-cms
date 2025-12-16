@@ -1,0 +1,60 @@
+[
+  {
+    "content_type_api_id": "coupon",
+    "slug": "save10",
+    "title": "Entry coupon",
+    "content_data": {
+      "code": "SAVE10",
+      "discount_type": "percentage",
+      "discount_value": 10,
+      "active": true
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "coupon",
+    "slug": "welcome20",
+    "title": "Entry coupon",
+    "content_data": {
+      "code": "WELCOME20",
+      "discount_type": "percentage",
+      "discount_value": 20,
+      "min_order_amount": 25,
+      "max_discount": 100,
+      "active": true,
+      "description": "Welcome! 20% off orders over $25",
+      "free_shipping": false
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "coupon",
+    "slug": "freeship",
+    "title": "Entry coupon",
+    "content_data": {
+      "code": "FREESHIP",
+      "discount_type": "fixed",
+      "discount_value": 0,
+      "min_order_amount": 30,
+      "active": true,
+      "description": "Free shipping on orders over $30",
+      "free_shipping": true
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "coupon",
+    "slug": "flat15",
+    "title": "Entry coupon",
+    "content_data": {
+      "code": "FLAT15",
+      "discount_type": "fixed",
+      "discount_value": 15,
+      "min_order_amount": 75,
+      "active": true,
+      "description": "$15 off orders over $75",
+      "free_shipping": false
+    },
+    "status": "published"
+  }
+]

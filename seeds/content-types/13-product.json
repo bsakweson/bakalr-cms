@@ -1,0 +1,218 @@
+{
+  "api_id": "product",
+  "name": "Product",
+  "description": "Product catalog entries with variants, media, and specifications",
+  "fields_schema": [
+    {
+      "name": "name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Product name - IS translated"
+    },
+    {
+      "name": "sku",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "SKU - NOT translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Full description - IS translated"
+    },
+    {
+      "name": "short_description",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Brief description - IS translated"
+    },
+    {
+      "name": "base_price_cents",
+      "type": "number",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Base price in cents"
+    },
+    {
+      "name": "compare_at_price_cents",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Original price in cents"
+    },
+    {
+      "name": "currency",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": "USD",
+      "validation": null,
+      "help_text": "Currency code - NOT translated"
+    },
+    {
+      "name": "category_id",
+      "type": "reference",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Primary category"
+    },
+    {
+      "name": "brand_id",
+      "type": "reference",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand"
+    },
+    {
+      "name": "tags",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Tags array - NOT translated (used for filtering)"
+    },
+    {
+      "name": "media_gallery",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Media items array - NOT translated"
+    },
+    {
+      "name": "available_colors",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Color options - names ARE translated"
+    },
+    {
+      "name": "available_sizes",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Size options - names ARE translated"
+    },
+    {
+      "name": "specifications",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Specs key-value - values ARE translated"
+    },
+    {
+      "name": "ingredients",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Ingredients list - IS translated"
+    },
+    {
+      "name": "how_to_use",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Usage instructions - IS translated"
+    },
+    {
+      "name": "weight_grams",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Weight in grams"
+    },
+    {
+      "name": "dimensions",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Dimensions object - NOT translated"
+    },
+    {
+      "name": "featured",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Featured product"
+    },
+    {
+      "name": "new_arrival",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "New arrival"
+    },
+    {
+      "name": "bestseller",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Bestseller"
+    }
+  ],
+  "is_published": true
+}

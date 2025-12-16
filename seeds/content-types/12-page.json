@@ -1,0 +1,48 @@
+{
+  "api_id": "page",
+  "name": "Page",
+  "description": "Every page on the site is driven by this content type with page builder sections",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique key like 'home', 'about', 'contact' - NOT translated"
+    },
+    {
+      "name": "template",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Page template: home, listing, detail, landing - NOT translated"
+    },
+    {
+      "name": "sections",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page builder sections - text content IS translated"
+    },
+    {
+      "name": "og_image_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Open Graph image"
+    }
+  ],
+  "is_published": true
+}

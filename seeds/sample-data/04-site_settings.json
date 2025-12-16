@@ -1,0 +1,200 @@
+[
+  {
+    "content_type_api_id": "site_settings",
+    "slug": "main-settings",
+    "title": "Entry site_settings",
+    "content_data": {
+      "site_name": "Bakalr Boutique",
+      "tagline": "Your Beauty, Our Passion",
+      "default_locale": "en",
+      "enabled_locales": [
+        "en",
+        "es",
+        "fr"
+      ],
+      "default_currency": "USD",
+      "symbol": "$",
+      "enabled_currencies": [
+        {
+          "code": "USD",
+          "symbol": "$",
+          "name": "US Dollar",
+          "flag": "\ud83c\uddfa\ud83c\uddf8",
+          "exchange_rate": 1,
+          "decimal_places": 2,
+          "position": "before"
+        },
+        {
+          "code": "EUR",
+          "symbol": "\u20ac",
+          "name": "Euro",
+          "flag": "\ud83c\uddea\ud83c\uddfa",
+          "exchange_rate": 0.92,
+          "decimal_places": 2,
+          "position": "before"
+        },
+        {
+          "code": "MXN",
+          "symbol": "$",
+          "name": "Mexican Peso",
+          "flag": "\ud83c\uddf2\ud83c\uddfd",
+          "exchange_rate": 17.5,
+          "decimal_places": 2,
+          "position": "before"
+        },
+        {
+          "code": "GBP",
+          "symbol": "\u00a3",
+          "name": "British Pound",
+          "flag": "\ud83c\uddec\ud83c\udde7",
+          "exchange_rate": 0.79,
+          "decimal_places": 2,
+          "position": "before"
+        },
+        {
+          "code": "CAD",
+          "symbol": "CA$",
+          "name": "Canadian Dollar",
+          "flag": "\ud83c\udde8\ud83c\udde6",
+          "exchange_rate": 1.36,
+          "decimal_places": 2,
+          "position": "before"
+        }
+      ],
+      "contact_email": "hello@bakalr-boutique.com",
+      "contact_phone": "+1 (555) 123-4567",
+      "contact_address": "123 Beauty Ave, Suite 100\nLos Angeles, CA 90001",
+      "social_links": {
+        "facebook": "https://facebook.com/bakalrboutique",
+        "instagram": "https://instagram.com/bakalrboutique",
+        "twitter": "https://twitter.com/bakalrboutique",
+        "youtube": "https://youtube.com/@bakalrboutique",
+        "tiktok": "https://tiktok.com/@bakalrboutique"
+      },
+      "analytics_ids": {
+        "ga4": "G-XXXXXXXXXX",
+        "gtm": "GTM-XXXXXXX"
+      },
+      "maintenance_mode": false,
+      "maintenance_message": "We're updating our store. Please check back soon!",
+      "common_labels": {
+        "products": {
+          "title": "Our Products",
+          "subtitle": "Browse our latest products",
+          "view_all": "View All",
+          "explore_all": "Explore All Products",
+          "no_products": "No products found",
+          "loading": "Loading products...",
+          "add_to_cart": "Add to Cart",
+          "out_of_stock": "Out of Stock",
+          "sale": "Sale",
+          "new": "New",
+          "bestseller": "Bestseller",
+          "featured": "Featured Products",
+          "featured_subtitle": "Hand-picked favorites from our collection"
+        },
+        "categories": {
+          "title": "Shop by Category",
+          "view_all": "View All Categories",
+          "explore_all": "Explore Categories"
+        },
+        "brands": {
+          "title": "Top Brands",
+          "view_all": "View All Brands",
+          "explore_all": "Explore Brands"
+        },
+        "cart": {
+          "title": "Shopping Cart",
+          "empty": "Your cart is empty",
+          "subtotal": "Subtotal",
+          "checkout": "Proceed to Checkout",
+          "continue_shopping": "Continue Shopping",
+          "remove": "Remove",
+          "update": "Update",
+          "add_to_cart": "Add to Cart",
+          "add_more": "Add More"
+        },
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next",
+          "page": "Page",
+          "of": "of",
+          "showing": "Showing",
+          "results": "results"
+        },
+        "filters": {
+          "title": "Filters",
+          "clear_all": "Clear All",
+          "apply": "Apply Filters",
+          "sort_by": "Sort by",
+          "price_low_high": "Price: Low to High",
+          "price_high_low": "Price: High to Low",
+          "newest": "Newest",
+          "bestselling": "Bestselling",
+          "price_range": "Price Range",
+          "category": "Category",
+          "brand": "Brand"
+        },
+        "search": {
+          "placeholder": "Search products...",
+          "no_results": "No results found",
+          "results_for": "Results for"
+        },
+        "general": {
+          "back": "Back",
+          "home": "Home",
+          "view_details": "View Details",
+          "learn_more": "Learn More",
+          "read_more": "Read More",
+          "see_more": "See More",
+          "close": "Close",
+          "save": "Save",
+          "cancel": "Cancel",
+          "delete": "Delete",
+          "edit": "Edit",
+          "loading": "Loading...",
+          "error": "An error occurred",
+          "success": "Success",
+          "required": "Required"
+        },
+        "footer": {
+          "we_accept": "We accept:"
+        },
+        "product_detail": {
+          "specifications": "Specifications",
+          "selected": "Selected:",
+          "length": "Length",
+          "no_image": "No Image Available",
+          "sku": "SKU:",
+          "related_products": "Related Products",
+          "view_product": "View Product",
+          "inches": "inches",
+          "discount_off": "OFF",
+          "color": "Color"
+        },
+        "reviews": {
+          "title": "Customer Reviews",
+          "rating_breakdown": "Rating Breakdown",
+          "write_review": "Write a Review",
+          "verified_purchase": "Verified Purchase",
+          "helpful": "Helpful",
+          "most_recent": "Most Recent",
+          "highest_rated": "Highest Rated",
+          "lowest_rated": "Lowest Rated",
+          "out_of": "out of",
+          "customer_reviews": "customer reviews",
+          "star": "star",
+          "stars": "stars",
+          "view_product": "View Product",
+          "no_reviews": "No reviews yet. Be the first to review this product!",
+          "load_more": "Load More Reviews",
+          "showing": "Showing",
+          "of": "of",
+          "reviews_label": "reviews"
+        }
+      },
+      "_updated_at": "1765507899"
+    },
+    "status": "published"
+  }
+]

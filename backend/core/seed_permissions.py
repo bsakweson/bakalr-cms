@@ -139,6 +139,84 @@ def init_permissions():
 
 # Define role configurations as module-level constant for reuse
 DEFAULT_ROLE_CONFIGS = {
+    "owner": {
+        "description": "Store owner with full access to everything",
+        "level": 100,
+        "permissions": [
+            # Full system access
+            "system.admin",
+            "system.settings",
+            # Content management (full control)
+            "content.read",
+            "content.create",
+            "content.update",
+            "content.delete",
+            "content.publish",
+            "content.unpublish",
+            "content_type.read",
+            "content_type.create",
+            "content_type.update",
+            "content_type.delete",
+            # Media management (full control)
+            "media.read",
+            "media.upload",
+            "media.update",
+            "media.delete",
+            # User management (full control)
+            "user.read",
+            "user.create",
+            "user.update",
+            "user.delete",
+            "user.manage",
+            # Role management (full control)
+            "role.read",
+            "role.create",
+            "role.update",
+            "role.delete",
+            "permission.read",
+            "permission.manage",
+            # Organization management (full control)
+            "organization.read",
+            "organization.update",
+            "organization.delete",
+            # Translation management
+            "translation.read",
+            "translation.create",
+            "translation.update",
+            "translation.delete",
+            "locale.read",
+            "locale.create",
+            "locale.update",
+            "locale.delete",
+            # SEO management
+            "seo.read",
+            "seo.update",
+            # Webhook management
+            "webhook.read",
+            "webhook.create",
+            "webhook.update",
+            "webhook.delete",
+            # Analytics access
+            "analytics.view",
+            "analytics.export",
+            # Audit logs
+            "audit.view",
+            # Theme management
+            "theme.read",
+            "theme.create",
+            "theme.update",
+            "theme.delete",
+            # Template management
+            "template.read",
+            "template.create",
+            "template.update",
+            "template.delete",
+            # Notification management
+            "notification.read",
+            "notification.create",
+            "notification.delete",
+        ],
+    },
     "admin": {
         "description": "Organization administrator with full management access",
         "level": 80,
@@ -251,6 +329,105 @@ DEFAULT_ROLE_CONFIGS = {
             "analytics.read",
         ],
     },
+    "manager": {
+        "description": "Store manager with daily operations, employee, and inventory management",
+        "level": 70,
+        "permissions": [
+            # Content management
+            "content.read",
+            "content.create",
+            "content.update",
+            "content.publish",
+            "content.unpublish",
+            "content_type.read",
+            # Media management
+            "media.read",
+            "media.upload",
+            "media.update",
+            # User management (limited)
+            "user.read",
+            "user.create",
+            "user.update",
+            # Role read only
+            "role.read",
+            # Translation management
+            "translation.read",
+            "translation.create",
+            "translation.update",
+            "locale.read",
+            # SEO management
+            "seo.read",
+            "seo.update",
+            # Analytics access
+            "analytics.view",
+            "analytics.export",
+            # Template usage
+            "template.read",
+            # Notifications
+            "notification.read",
+        ],
+    },
+    "inventory_manager": {
+        "description": "Inventory manager with product, category, and stock management",
+        "level": 50,
+        "permissions": [
+            # Content management (products/inventory focused)
+            "content.read",
+            "content.create",
+            "content.update",
+            "content.publish",
+            "content_type.read",
+            # Media management
+            "media.read",
+            "media.upload",
+            "media.update",
+            # Translation (read)
+            "translation.read",
+            "locale.read",
+            # Analytics (read)
+            "analytics.view",
+            # Template usage
+            "template.read",
+            # Notifications
+            "notification.read",
+        ],
+    },
+    "sales": {
+        "description": "Sales associate with order processing and customer assistance",
+        "level": 40,
+        "permissions": [
+            # Content read only
+            "content.read",
+            "content_type.read",
+            # Media read only
+            "media.read",
+            # Translation read only
+            "translation.read",
+            "locale.read",
+            # Analytics read only
+            "analytics.view",
+            # Template read only
+            "template.read",
+            # Notifications
+            "notification.read",
+        ],
+    },
+    "employee": {
+        "description": "General employee with basic view access",
+        "level": 30,
+        "permissions": [
+            # Read-only access to content
+            "content.read",
+            "content_type.read",
+            # Read-only access to media
+            "media.read",
+            # Read-only access to translations
+            "translation.read",
+            "locale.read",
+            # Notifications
+            "notification.read",
+        ],
+    },
     "viewer": {
         "description": "Read-only access to content and media",
         "level": 20,
@@ -270,7 +447,7 @@ DEFAULT_ROLE_CONFIGS = {
             # Read-only access to notifications
             "notification.read",
             # Read-only access to analytics
-            "analytics.read",
+            "analytics.view",
         ],
     },
 }
@@ -278,7 +455,9 @@ DEFAULT_ROLE_CONFIGS = {
 
 def seed_organization_roles(db: Session, organization_id: int) -> dict:
     """
-    Seed default roles (admin, editor, viewer) for a specific organization.
+    Seed default roles for a specific organization.
+
+    Roles seeded: owner, admin, editor, manager, inventory_manager, sales, employee, viewer
 
     This should be called when creating a new organization to ensure
     all default roles are available immediately.
@@ -288,7 +467,7 @@ def seed_organization_roles(db: Session, organization_id: int) -> dict:
         organization_id: The ID of the organization to seed roles for
 
     Returns:
-        Dictionary with created role IDs: {"admin": id, "editor": id, "viewer": id}
+        Dictionary with created role IDs mapping role names to their IDs
     """
     created_roles = {}
 
@@ -334,14 +513,20 @@ def seed_organization_roles(db: Session, organization_id: int) -> dict:
 
 def assign_default_role_permissions(db: Session) -> None:
     """
-    Ensure all organizations have the three default roles (admin, editor, viewer)
-    with appropriate permissions assigned.
+    Ensure all organizations have default roles with appropriate permissions assigned.
+
+    Roles: owner, admin, editor, manager, inventory_manager, sales, employee, viewer
 
     This creates missing roles and assigns/updates permissions for existing roles.
 
     Permission Strategy:
-    - Admin: All permissions except system.*
+    - Owner: Full system access including all permissions
+    - Admin: All permissions except system.* (billing handled separately)
     - Editor: Content, media, translation, SEO permissions (no user/role management)
+    - Manager: Operations, employee, inventory management
+    - Inventory Manager: Products, categories, stock management
+    - Sales: Orders, customers (read and process)
+    - Employee: Basic view access
     - Viewer: Read-only permissions across all categories
     """
     # Get all organizations

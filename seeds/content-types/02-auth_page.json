@@ -1,0 +1,158 @@
+{
+  "api_id": "auth_page",
+  "name": "Auth Page",
+  "description": "Authentication pages content (login, register, forgot-password, etc.)",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique key: login, register, forgot_password, reset_password, verify_email, 2fa, 2fa_recovery"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title - IS translated"
+    },
+    {
+      "name": "subtitle",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page subtitle - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page description - IS translated"
+    },
+    {
+      "name": "form_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field labels and placeholders - IS translated"
+    },
+    {
+      "name": "button_text",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Button texts (primary, secondary, links) - IS translated"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Success/error/info messages - IS translated"
+    },
+    {
+      "name": "links",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Navigation links with labels - IS translated"
+    },
+    {
+      "name": "social_login",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Social login button labels - IS translated"
+    },
+    {
+      "name": "legal_text",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Terms acceptance text, privacy notice - IS translated"
+    },
+    {
+      "name": "image_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Side image or background"
+    },
+    {
+      "name": "badge_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Badge text shown in the side panel (e.g., Secure Shopping Experience) - IS translated"
+    },
+    {
+      "name": "subtext",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Subtext shown below the main description in side panel - IS translated"
+    },
+    {
+      "name": "benefits",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of benefit strings shown in side panel - IS translated"
+    },
+    {
+      "name": "trust_indicator",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Trust indicator config: {primary, secondary, count} - IS translated"
+    }
+  ],
+  "is_published": true
+}

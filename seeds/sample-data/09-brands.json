@@ -1,0 +1,342 @@
+[
+  {
+    "content_type_api_id": "brand",
+    "slug": "bakalr-hair",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Bakalr Hair",
+      "description": "Bakalr Hair is our signature house brand offering premium virgin human hair extensions. We source directly from ethical suppliers in Vietnam, Brazil, Cambodia, and India. Every bundle is quality-tested, cuticle-aligned, and backed by our satisfaction guarantee.",
+      "short_description": "Our signature premium virgin hair brand",
+      "website": "https://bakalrboutique.com",
+      "country": "USA",
+      "founded_year": 2020,
+      "logo_url": "/brands/bakalr-hair.png",
+      "featured": true,
+      "display_order": 1
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "unice-hair",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "UNice Hair",
+      "description": "UNice Hair is a leading global hair brand known for high-quality virgin and Remy human hair. With millions of customers worldwide, UNice offers a wide range of textures, lengths, and wig styles at accessible price points.",
+      "short_description": "Global leader in virgin human hair",
+      "website": "https://www.unice.com",
+      "country": "China",
+      "founded_year": 2011,
+      "logo_url": "/brands/unice.png",
+      "featured": true,
+      "display_order": 2
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "beauty-forever",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Beauty Forever",
+      "description": "Beauty Forever specializes in 100% virgin human hair extensions and wigs. Known for their consistent quality, thick bundles, and extensive color options including pre-colored blonde and burgundy hair.",
+      "short_description": "Quality virgin hair with color options",
+      "website": "https://www.beautyforever.com",
+      "country": "China",
+      "founded_year": 2014,
+      "logo_url": "/brands/beauty-forever.png",
+      "featured": true,
+      "display_order": 3
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "isee-hair",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "ISEE Hair",
+      "description": "ISEE Hair is a trusted name in the hair industry, offering premium virgin human hair bundles, closures, and wigs. Known for their exceptional customer service and quality guarantee.",
+      "short_description": "Premium virgin hair with great service",
+      "website": "https://www.iseehair.com",
+      "country": "China",
+      "founded_year": 2016,
+      "logo_url": "/brands/isee.png",
+      "featured": false,
+      "display_order": 4
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "tinashe-hair",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Tinashe Hair",
+      "description": "Tinashe Hair offers luxury-grade virgin human hair known for its silky texture and minimal shedding. Their HD lace wigs and frontals are particularly popular among influencers and professionals.",
+      "short_description": "Luxury virgin hair, influencer favorite",
+      "website": "https://www.tinashehair.com",
+      "country": "China",
+      "founded_year": 2015,
+      "logo_url": "/brands/tinashe.png",
+      "featured": true,
+      "display_order": 5
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "nadula-hair",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Nadula Hair",
+      "description": "Nadula Hair is known for affordable luxury, offering high-quality virgin human hair at competitive prices. Their Brazilian and Malaysian hair collections are bestsellers.",
+      "short_description": "Affordable luxury virgin hair",
+      "website": "https://www.nadula.com",
+      "country": "China",
+      "founded_year": 2012,
+      "logo_url": "/brands/nadula.png",
+      "featured": false,
+      "display_order": 6
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "ebin-new-york",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "EBIN New York",
+      "description": "EBIN New York is the #1 name in wig adhesives and styling products. Their Wonder Lace Bond and edge control products are salon staples and bestsellers worldwide.",
+      "short_description": "#1 wig adhesive and styling brand",
+      "website": "https://www.ebinnewyork.com",
+      "country": "USA",
+      "founded_year": 2014,
+      "logo_url": "/brands/ebin.png",
+      "featured": true,
+      "display_order": 7
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "bold-hold",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Bold Hold",
+      "description": "Bold Hold revolutionized wig installation with their professional-grade adhesives and lace tints. Used by celebrity stylists and lace wig enthusiasts worldwide.",
+      "short_description": "Professional wig installation products",
+      "website": "https://www.boldhold.com",
+      "country": "USA",
+      "founded_year": 2017,
+      "logo_url": "/brands/bold-hold.png",
+      "featured": true,
+      "display_order": 8
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "got2b",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "got2b",
+      "description": "got2b by Schwarzkopf is famous for their Glued styling products, which have become essential for wig installation and edge control. The iconic yellow bottle is a beauty staple.",
+      "short_description": "Iconic edge control and styling",
+      "website": "https://www.schwarzkopf.com/got2b",
+      "country": "Germany",
+      "founded_year": 2001,
+      "logo_url": "/brands/got2b.png",
+      "featured": false,
+      "display_order": 9
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "xpression",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "X-Pression",
+      "description": "X-Pression is the world's leading braiding hair brand. Their Kanekalon braiding hair is lightweight, tangle-free, and available in every color imaginable.",
+      "short_description": "World's #1 braiding hair brand",
+      "website": "https://www.xpressionhair.com",
+      "country": "Nigeria",
+      "founded_year": 1995,
+      "logo_url": "/brands/xpression.png",
+      "featured": true,
+      "display_order": 10
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "freetress",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "FreeTress",
+      "description": "FreeTress offers affordable synthetic hair for braids, twists, crochet styles, and wigs. Known for their realistic textures and wide variety of styles.",
+      "short_description": "Affordable synthetic braiding hair",
+      "website": "https://www.freetress.com",
+      "country": "USA",
+      "founded_year": 2000,
+      "logo_url": "/brands/freetress.png",
+      "featured": false,
+      "display_order": 11
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "outre",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Outre",
+      "description": "Outre offers innovative synthetic and human hair wigs, weaves, and braiding hair. Known for their trendy styles and collaborations with influencers.",
+      "short_description": "Trendy wigs and braiding hair",
+      "website": "https://www.outre.com",
+      "country": "USA",
+      "founded_year": 1998,
+      "logo_url": "/brands/outre.png",
+      "featured": true,
+      "display_order": 12
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "sensationnel",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Sensationnel",
+      "description": "Sensationnel is a leader in synthetic hair innovation, known for their realistic textures like Cloud 9 Swiss Lace and Butta Lace wigs. Affordable glamour for everyone.",
+      "short_description": "Innovative synthetic wigs",
+      "website": "https://www.sensationnel.com",
+      "country": "USA",
+      "founded_year": 1991,
+      "logo_url": "/brands/sensationnel.png",
+      "featured": true,
+      "display_order": 13
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "cantu",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Cantu",
+      "description": "Cantu Shea Butter is a beloved Black-owned hair care brand known for affordable, effective products for natural and textured hair. Their leave-in conditioner is an icon.",
+      "short_description": "Affordable textured hair care",
+      "website": "https://www.cantubeauty.com",
+      "country": "USA",
+      "founded_year": 2003,
+      "logo_url": "/brands/cantu.png",
+      "featured": true,
+      "display_order": 14
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "mielle-organics",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Mielle Organics",
+      "description": "Mielle Organics is a Black woman-owned brand creating organic, natural hair care products. Their Rosemary Mint Oil went viral for promoting hair growth.",
+      "short_description": "Black-owned organic hair care",
+      "website": "https://www.mielleorganics.com",
+      "country": "USA",
+      "founded_year": 2014,
+      "logo_url": "/brands/mielle.png",
+      "featured": true,
+      "display_order": 15
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "shea-moisture",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "SheaMoisture",
+      "description": "SheaMoisture offers premium natural hair care products made with ethically-sourced shea butter. A staple brand for natural hair care and protective styling.",
+      "short_description": "Premium natural hair care",
+      "website": "https://www.sheamoisture.com",
+      "country": "USA",
+      "founded_year": 1991,
+      "logo_url": "/brands/shea-moisture.png",
+      "featured": true,
+      "display_order": 16
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "ardell",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Ardell",
+      "description": "Ardell is the world's most recognized lash brand. From natural Wispies to dramatic magnetic lashes, Ardell has styles for every occasion.",
+      "short_description": "World's #1 false lash brand",
+      "website": "https://www.ardellshop.com",
+      "country": "USA",
+      "founded_year": 1971,
+      "logo_url": "/brands/ardell.png",
+      "featured": false,
+      "display_order": 17
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "babyliss-pro",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "BaBylissPRO",
+      "description": "BaBylissPRO is the professional's choice for hair tools. Their flat irons, dryers, and curling irons are trusted by stylists worldwide for salon-quality results.",
+      "short_description": "Professional-grade hair tools",
+      "website": "https://www.babylisspro.com",
+      "country": "France",
+      "founded_year": 1961,
+      "logo_url": "/brands/babyliss.png",
+      "featured": true,
+      "display_order": 18
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "andis",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Andis",
+      "description": "Andis is a legendary name in clippers and trimmers. Trusted by barbers for over 100 years, their T-Outliner is an industry standard for precision edging.",
+      "short_description": "Professional clippers & trimmers",
+      "website": "https://www.andis.com",
+      "country": "USA",
+      "founded_year": 1922,
+      "logo_url": "/brands/andis.png",
+      "featured": true,
+      "display_order": 19
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "brand",
+    "slug": "wahl",
+    "title": "Entry brand",
+    "content_data": {
+      "name": "Wahl",
+      "description": "Wahl Professional has been the choice of barbers and stylists since 1919. Known for powerful, reliable clippers and trimmers built to last.",
+      "short_description": "Legendary professional clippers",
+      "website": "https://www.wahl.com",
+      "country": "USA",
+      "founded_year": 1919,
+      "logo_url": "/brands/wahl.png",
+      "featured": false,
+      "display_order": 20
+    },
+    "status": "published"
+  }
+]

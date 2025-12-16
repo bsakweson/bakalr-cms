@@ -14,19 +14,9 @@ from backend.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Language code mapping for LibreTranslate
-# Maps our locale codes to LibreTranslate's expected codes
-LIBRETRANSLATE_LANG_MAP = {
-    "zh": "zh-Hans",  # Chinese -> Chinese Simplified
-    "zh-CN": "zh-Hans",  # Chinese (China) -> Chinese Simplified
-    "zh-TW": "zh-Hant",  # Chinese (Taiwan) -> Chinese Traditional (if supported)
-}
-
-# Reverse mapping for detection results
-LIBRETRANSLATE_LANG_REVERSE_MAP = {
-    "zh-Hans": "zh",
-    "zh-Hant": "zh",
-}
+# Note: When using nllb-proxy (LibreTranslate-compatible), all language code mapping
+# is handled by the proxy itself. The CMS passes standard ISO codes (en, fr, es, zh)
+# and the proxy converts them to NLLB FLORES-200 codes internally.
 
 
 class TranslationService:
@@ -117,20 +107,16 @@ class TranslationService:
 
         try:
             if self.provider == "libretranslate":
-                # Use LibreTranslate
+                # Use LibreTranslate (or nllb-proxy which is compatible)
                 url = f"{settings.LIBRETRANSLATE_URL}/translate"
                 headers = {"Content-Type": "application/json"}
                 if settings.LIBRETRANSLATE_API_KEY:
                     headers["Authorization"] = f"Bearer {settings.LIBRETRANSLATE_API_KEY}"
 
-                # Map language codes for LibreTranslate compatibility
-                lt_source = LIBRETRANSLATE_LANG_MAP.get(source_lang, source_lang)
-                lt_target = LIBRETRANSLATE_LANG_MAP.get(target_lang, target_lang)
-
                 payload = {
                     "q": text,
-                    "source": lt_source,
-                    "target": lt_target,
+                    "source": source_lang,
+                    "target": target_lang,
                     "format": "text",
                 }
 

@@ -479,24 +479,44 @@ async def refresh_token(
         is_organization_owner=is_owner,
     )
 
-    # Update existing session or create new one
+    # Update existing session - do NOT create new sessions on refresh
     import hashlib
     from datetime import datetime, timezone
+    from uuid import UUID
 
-    from backend.core.session_service import SessionService
     from backend.models.session import UserSession
 
-    # Try to find existing session by refresh token hash
-    old_token_hash = hashlib.sha256(request_body.refresh_token.encode()).hexdigest()
-    existing_session = (
-        db.query(UserSession)
-        .filter(
-            UserSession.user_id == user.id,
-            UserSession.refresh_token_hash == old_token_hash,
-            UserSession.is_active.is_(True),
+    # Try to find existing session - first by session_id, then by refresh token hash
+    existing_session = None
+
+    # Try session_id first (most reliable)
+    if request_body.session_id:
+        try:
+            session_uuid = UUID(request_body.session_id)
+            existing_session = (
+                db.query(UserSession)
+                .filter(
+                    UserSession.id == session_uuid,
+                    UserSession.user_id == user.id,
+                    UserSession.is_active.is_(True),
+                )
+                .first()
+            )
+        except (ValueError, TypeError):
+            pass  # Invalid UUID, continue to hash lookup
+
+    # Fallback to refresh token hash lookup
+    if not existing_session:
+        old_token_hash = hashlib.sha256(request_body.refresh_token.encode()).hexdigest()
+        existing_session = (
+            db.query(UserSession)
+            .filter(
+                UserSession.user_id == user.id,
+                UserSession.refresh_token_hash == old_token_hash,
+                UserSession.is_active.is_(True),
+            )
+            .first()
         )
-        .first()
-    )
 
     session_id = None
     if existing_session:
@@ -508,23 +528,16 @@ async def refresh_token(
         db.commit()
         session_id = str(existing_session.id)
     else:
-        # Create new session if not found (fallback)
-        session_service = SessionService(db)
-        client_ip = request.headers.get("X-Forwarded-For", "").split(",")[0].strip() or (
-            request.client.host if request.client else "unknown"
-        )
-        user_agent = request.headers.get("User-Agent")
+        # Log warning instead of creating new session - this prevents session explosion
+        import logging
 
-        session = session_service.create_session(
-            user=user,
-            ip_address=client_ip,
-            user_agent_string=user_agent,
-            device_id=None,
-            login_method="refresh",
-            mfa_verified=False,
-            refresh_token=tokens.refresh_token,
+        logger = logging.getLogger(__name__)
+        logger.warning(
+            f"Refresh token used but no matching session found for user {user.id}. Session ID: {request_body.session_id}"
         )
-        session_id = str(session.id)
+        # Return the provided session_id even if we couldn't find the session
+        # The session may have been cleaned up but the refresh token is still valid
+        session_id = request_body.session_id
 
     # Prepare user response
     user_response = UserResponse(
@@ -720,16 +733,70 @@ async def change_password(
     return {"message": "Password changed successfully"}
 
 
+class LogoutRequest(BaseModel):
+    """Request schema for logout"""
+
+    session_id: Optional[str] = None
+
+
 @router.post("/logout")
 @limiter.limit(get_rate_limit())
-async def logout(request: Request, current_user: User = Depends(get_current_user)):
+async def logout(
+    request: Request,
+    logout_request: Optional[LogoutRequest] = None,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     """
-    Logout current user
+    Logout current user and terminate the session.
 
-    Note: JWT tokens are stateless, so logout is handled client-side
-    by removing tokens. This endpoint is for completeness and can be
-    extended to add token to a blacklist if needed.
+    If session_id is provided, terminates that specific session.
+    Otherwise, attempts to find and terminate the current session.
     """
+    from backend.models.session import RefreshTokenRecord, UserSession
+
+    session_id = logout_request.session_id if logout_request else None
+
+    if session_id:
+        # Terminate specific session
+        session = (
+            db.query(UserSession)
+            .filter(
+                UserSession.id == session_id,
+                UserSession.user_id == current_user.id,
+            )
+            .first()
+        )
+
+        if session:
+            session.terminate()
+            # Also invalidate any refresh tokens for this session
+            db.query(RefreshTokenRecord).filter(
+                RefreshTokenRecord.session_id == session_id
+            ).delete()
+            db.commit()
+    else:
+        # Try to find session from token
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header[7:]
+            payload = verify_token(token)
+            if payload and payload.get("session_id"):
+                session = (
+                    db.query(UserSession)
+                    .filter(
+                        UserSession.id == payload["session_id"],
+                        UserSession.user_id == current_user.id,
+                    )
+                    .first()
+                )
+                if session:
+                    session.terminate()
+                    db.query(RefreshTokenRecord).filter(
+                        RefreshTokenRecord.session_id == payload["session_id"]
+                    ).delete()
+                    db.commit()
+
     return {"message": "Logged out successfully"}
 
 
@@ -1028,7 +1095,7 @@ async def upload_avatar(
     The uploaded image is stored and the user's avatar_url is automatically updated.
     Previous avatar files are NOT deleted automatically to support CDN caching.
     """
-    from backend.core.media_utils import generate_unique_filename, get_file_extension, get_mime_type
+    from backend.core.media_utils import generate_unique_filename, get_file_extension
     from backend.core.storage import get_storage_backend
 
     # Validate file is provided and has content

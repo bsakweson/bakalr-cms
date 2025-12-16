@@ -1,0 +1,48 @@
+{
+  "api_id": "faq",
+  "name": "FAQ",
+  "description": "Frequently asked questions",
+  "fields_schema": [
+    {
+      "name": "question",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "The question - IS translated"
+    },
+    {
+      "name": "answer",
+      "type": "textarea",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "The answer - IS translated"
+    },
+    {
+      "name": "category",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Category key: shipping, returns, products - NOT translated"
+    },
+    {
+      "name": "display_order",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": 0,
+      "validation": null,
+      "help_text": "Sort order"
+    }
+  ],
+  "is_published": true
+}

@@ -1,0 +1,88 @@
+{
+  "api_id": "promotion",
+  "name": "Promotion",
+  "description": "Sales and promotional campaigns",
+  "fields_schema": [
+    {
+      "name": "name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Promotion name - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Description - IS translated"
+    },
+    {
+      "name": "code",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Promo code - NOT translated"
+    },
+    {
+      "name": "discount_type",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Type: percentage, fixed, free_shipping - NOT translated"
+    },
+    {
+      "name": "discount_value",
+      "type": "number",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Discount amount"
+    },
+    {
+      "name": "banner_image_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Promo banner"
+    },
+    {
+      "name": "start_date",
+      "type": "datetime",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Start date"
+    },
+    {
+      "name": "end_date",
+      "type": "datetime",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "End date"
+    }
+  ],
+  "is_published": true
+}

@@ -1,0 +1,118 @@
+{
+  "api_id": "brand",
+  "name": "Brand",
+  "description": "Product brands with metadata for filtering",
+  "fields_schema": [
+    {
+      "name": "name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand name - NOT translated (proper noun)"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand description - IS translated"
+    },
+    {
+      "name": "logo_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand logo"
+    },
+    {
+      "name": "banner_image_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand page banner"
+    },
+    {
+      "name": "website_url",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Website URL - NOT translated"
+    },
+    {
+      "name": "featured",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Show in featured"
+    },
+    {
+      "name": "display_order",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": 0,
+      "validation": null,
+      "help_text": "Sort order"
+    },
+    {
+      "name": "country_of_origin",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Country - IS translated"
+    },
+    {
+      "name": "is_black_owned",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Black-owned brand"
+    },
+    {
+      "name": "is_organic",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Uses organic ingredients"
+    },
+    {
+      "name": "is_cruelty_free",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Cruelty-free"
+    }
+  ],
+  "is_published": true
+}

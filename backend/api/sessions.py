@@ -489,3 +489,114 @@ async def get_security_overview(
         last_password_change=None,  # TODO: Track password changes
         account_created_at=current_user.created_at,
     )
+
+
+@router.post("/cleanup", response_model=dict)
+async def cleanup_inactive_sessions(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+    x_session_id: Optional[str] = Header(None, alias="X-Session-ID"),
+):
+    """
+    Clean up duplicate and inactive sessions for the current user.
+
+    This endpoint:
+    1. Keeps only one active session per device (the most recent)
+    2. Removes sessions that have been inactive for more than 7 days
+    3. Cleans up orphaned refresh tokens
+
+    Returns the number of sessions cleaned up.
+    """
+    # Parse current session ID to preserve it
+    current_session_uuid = None
+    if x_session_id:
+        try:
+            current_session_uuid = UUID(x_session_id)
+        except ValueError:
+            pass
+
+    # Get all active sessions for user
+    all_sessions = (
+        db.query(UserSession)
+        .filter(
+            UserSession.user_id == current_user.id,
+            UserSession.is_active == True,
+        )
+        .order_by(desc(UserSession.last_active_at))
+        .all()
+    )
+
+    # Group sessions by device or IP if no device
+    sessions_by_device = {}
+    for session in all_sessions:
+        key = session.device_id if session.device_id else f"ip:{session.ip_address}"
+        if key not in sessions_by_device:
+            sessions_by_device[key] = []
+        sessions_by_device[key].append(session)
+
+    sessions_to_deactivate = []
+
+    # For each device, keep only the most recent session (and current session)
+    for key, sessions in sessions_by_device.items():
+        # Sort by last_active_at descending
+        sorted_sessions = sorted(
+            sessions, key=lambda s: s.last_active_at or s.created_at, reverse=True
+        )
+
+        # Keep the first one (most recent) and the current session
+        for i, session in enumerate(sorted_sessions):
+            if i == 0:
+                continue  # Keep the most recent
+            if current_session_uuid and session.id == current_session_uuid:
+                continue  # Keep current session
+            sessions_to_deactivate.append(session)
+
+    # Also deactivate sessions inactive for more than 7 days
+    seven_days_ago = datetime.now(timezone.utc) - timedelta(days=7)
+    for session in all_sessions:
+        last_active = session.last_active_at or session.created_at
+        if last_active.tzinfo is None:
+            last_active = last_active.replace(tzinfo=timezone.utc)
+
+        if last_active < seven_days_ago:
+            if session not in sessions_to_deactivate:
+                if not (current_session_uuid and session.id == current_session_uuid):
+                    sessions_to_deactivate.append(session)
+
+    # Deactivate the sessions
+    deactivated_count = 0
+    for session in sessions_to_deactivate:
+        session.is_active = False
+        session.terminated_at = datetime.now(timezone.utc)
+        session.termination_reason = "cleanup"
+        deactivated_count += 1
+
+    # Clean up orphaned refresh tokens (tokens without valid sessions)
+    orphaned_tokens = (
+        db.query(RefreshTokenRecord)
+        .filter(
+            RefreshTokenRecord.user_id == current_user.id,
+            RefreshTokenRecord.is_revoked == False,
+        )
+        .all()
+    )
+
+    revoked_tokens = 0
+    active_session_ids = {
+        s.id for s in all_sessions if s.is_active and s not in sessions_to_deactivate
+    }
+
+    for token in orphaned_tokens:
+        if token.session_id not in active_session_ids:
+            token.is_revoked = True
+            token.revoked_at = datetime.now(timezone.utc)
+            revoked_tokens += 1
+
+    db.commit()
+
+    return {
+        "message": "Session cleanup completed",
+        "sessions_deactivated": deactivated_count,
+        "tokens_revoked": revoked_tokens,
+        "active_sessions_remaining": len(active_session_ids),
+    }

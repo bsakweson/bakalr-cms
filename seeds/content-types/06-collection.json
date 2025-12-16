@@ -1,0 +1,58 @@
+{
+  "api_id": "collection",
+  "name": "Collection",
+  "description": "Curated product collections",
+  "fields_schema": [
+    {
+      "name": "name",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Collection name - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Description - IS translated"
+    },
+    {
+      "name": "image_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Cover image"
+    },
+    {
+      "name": "product_ids",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Product IDs - NOT translated"
+    },
+    {
+      "name": "featured",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Show in featured"
+    }
+  ],
+  "is_published": true
+}
