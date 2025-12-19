@@ -172,6 +172,66 @@
       "default": null,
       "validation": null,
       "help_text": "Common UI labels used across pages (products, categories, cart, pagination, filters, etc.) - IS translated"
+    },
+    {
+      "name": "payment_methods",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of payment method objects: [{id, name, description, icon, color, category, enabled, configFields, regions}]"
+    },
+    {
+      "name": "timezones",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of timezone objects: [{value, label}]"
+    },
+    {
+      "name": "date_formats",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of date format objects: [{value, label}]"
+    },
+    {
+      "name": "shipping_settings",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Shipping configuration: {freeShippingThreshold, defaultRate, zones}"
+    },
+    {
+      "name": "notification_settings",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Notification preferences: {newOrder, lowStock, customerRegistration, orderStatus, newsletter}"
+    },
+    {
+      "name": "store_settings",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Store configuration: {enableGuestCheckout, showOutOfStock, enableReviews, enableWishlist, itemsPerPage, defaultSort}"
     }
   ],
   "is_published": true

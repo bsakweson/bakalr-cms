@@ -53,6 +53,7 @@ async def lifespan(app: FastAPI):
         # Seed default permissions
         print("🌱 Seeding default permissions...")
         from backend.core.seed_permissions import init_permissions
+
         init_permissions()
 
     # Initialize Redis cache
@@ -245,6 +246,36 @@ Get started by registering an account at `/api/v1/auth/register`.
         ),  # Enable GraphiQL playground in debug mode
     )
     app.include_router(graphql_app, prefix="/api/v1/graphql")
+
+    # ============================================
+    # JWKS and OpenID Connect Discovery Endpoints
+    # ============================================
+    from backend.core.jwt_keys import jwt_key_manager
+
+    @app.get("/.well-known/jwks.json", tags=["OpenID Connect"])
+    async def get_jwks():
+        """
+        JSON Web Key Set (JWKS) endpoint.
+
+        Returns the public keys used to verify JWT tokens signed by this server.
+        This endpoint is used by other services to validate access tokens.
+        """
+        return jwt_key_manager.get_jwks()
+
+    @app.get("/.well-known/openid-configuration", tags=["OpenID Connect"])
+    async def get_openid_configuration(request: Request):
+        """
+        OpenID Connect Discovery endpoint.
+
+        Returns the OpenID Connect configuration document that describes
+        the authorization server's endpoints and capabilities.
+        """
+        # Determine issuer URL from request or settings
+        issuer = settings.JWT_ISSUER
+        if issuer == "http://localhost:8000":
+            # Use the actual request URL in development
+            issuer = str(request.base_url).rstrip("/")
+        return jwt_key_manager.get_openid_configuration(issuer)
 
     # Scalar API documentation (modern interactive UI)
     @app.get("/api/scalar", include_in_schema=False)

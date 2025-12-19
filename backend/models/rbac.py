@@ -18,6 +18,15 @@ role_permissions = Table(
     ),
 )
 
+# Association table for Role-ApiScope many-to-many relationship
+# This allows assigning boutique platform scopes to roles
+role_api_scopes = Table(
+    "role_api_scopes",
+    Base.metadata,
+    Column("role_id", GUID, ForeignKey("roles.id", ondelete="CASCADE"), primary_key=True),
+    Column("api_scope_id", GUID, ForeignKey("api_scopes.id", ondelete="CASCADE"), primary_key=True),
+)
+
 
 class Permission(Base, IDMixin, TimestampMixin):
     """
@@ -85,6 +94,7 @@ class Role(Base, IDMixin, TimestampMixin):
     # Relationships
     organization = relationship("Organization", back_populates="roles")
     permissions = relationship("Permission", secondary=role_permissions, back_populates="roles")
+    api_scopes = relationship("ApiScope", secondary=role_api_scopes, backref="roles")
     users = relationship("User", secondary="user_roles", back_populates="roles")
 
     def __repr__(self):

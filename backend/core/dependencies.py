@@ -459,8 +459,9 @@ async def get_current_user_flexible(
 
     # For API key auth, create a virtual user object with organization_id
     # This allows existing endpoints to work without modification
+    # Use None for id since uploaded_by_id is nullable in most models
     virtual_user = User(
-        id="api-key-user",
+        id=None,
         organization_id=auth_context["organization_id"],
         email="api-key@system",
         is_active=True,

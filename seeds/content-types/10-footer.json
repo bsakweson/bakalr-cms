@@ -5,13 +5,13 @@
   "fields_schema": [
     {
       "name": "about_text",
-      "type": "textarea",
+      "type": "richtext",
       "required": false,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "About text - IS translated"
+      "help_text": "About text with formatting - IS translated"
     },
     {
       "name": "copyright_text",

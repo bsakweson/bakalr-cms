@@ -25,13 +25,13 @@
     },
     {
       "name": "description",
-      "type": "textarea",
+      "type": "richtext",
       "required": false,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Full description - IS translated"
+      "help_text": "Full description with formatting - IS translated"
     },
     {
       "name": "short_description",
@@ -145,23 +145,23 @@
     },
     {
       "name": "ingredients",
-      "type": "textarea",
+      "type": "richtext",
       "required": false,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Ingredients list - IS translated"
+      "help_text": "Ingredients list with formatting - IS translated"
     },
     {
       "name": "how_to_use",
-      "type": "textarea",
+      "type": "richtext",
       "required": false,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Usage instructions - IS translated"
+      "help_text": "Usage instructions with formatting - IS translated"
     },
     {
       "name": "weight_grams",

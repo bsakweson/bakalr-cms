@@ -2,6 +2,7 @@
 
 # Import all models to ensure they're registered with SQLAlchemy
 from backend.models.api_key import APIKey
+from backend.models.api_scope import ApiScope
 from backend.models.audit_log import AuditLog
 from backend.models.base import IDMixin, TimestampMixin
 from backend.models.content import ContentEntry, ContentType
@@ -49,6 +50,7 @@ __all__ = [
     "TranslationGlossary",
     "Media",
     "APIKey",
+    "ApiScope",
     "AuditLog",
     "Webhook",
     "WebhookDelivery",

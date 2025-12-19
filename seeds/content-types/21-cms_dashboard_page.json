@@ -1,0 +1,148 @@
+{
+  "api_id": "cms_dashboard_page",
+  "name": "CMS Dashboard Page",
+  "description": "Dashboard pages for CMS admin interface - labels, buttons, tables, forms",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique key: dashboard, content, content_types, media, users, etc."
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title"
+    },
+    {
+      "name": "description",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page description/subtitle"
+    },
+    {
+      "name": "tabs",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Tab labels if page has tabs"
+    },
+    {
+      "name": "buttons",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Button labels: add, edit, delete, save, cancel, etc."
+    },
+    {
+      "name": "table_headers",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Table column headers"
+    },
+    {
+      "name": "form_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field labels"
+    },
+    {
+      "name": "form_placeholders",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field placeholders"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Success/error/info messages"
+    },
+    {
+      "name": "empty_states",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Empty state messages and descriptions"
+    },
+    {
+      "name": "filters",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Filter labels and options"
+    },
+    {
+      "name": "stats",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Stat card labels"
+    },
+    {
+      "name": "tooltips",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Tooltip/help text content"
+    },
+    {
+      "name": "confirmations",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Confirmation dialog text"
+    }
+  ],
+  "is_published": true
+}

@@ -36,7 +36,7 @@ from backend.api.schemas.media import (
     ThumbnailResponse,
 )
 from backend.core.cache_middleware import add_cache_headers
-from backend.core.dependencies import get_current_user
+from backend.core.dependencies import get_current_user_flexible
 from backend.core.media_utils import (
     create_thumbnail,
     ensure_upload_directories,
@@ -71,7 +71,7 @@ async def upload_media(
     tags: Optional[str] = None,  # JSON array as string
     background_tasks: BackgroundTasks = None,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """
     Upload a media file
@@ -190,7 +190,7 @@ async def list_media(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """
     List media files with filtering and pagination
@@ -258,7 +258,7 @@ async def search_media(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     media_type: Optional[MediaType] = None,
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
 ):
     """
@@ -315,7 +315,7 @@ async def get_media(
     request: Request,
     media_id: UUID,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """Get media file details"""
     media = db.execute(
@@ -345,7 +345,7 @@ async def update_media(
     media_id: UUID,
     update_data: MediaUpdateRequest,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """Update media metadata"""
     media = db.execute(
@@ -390,7 +390,7 @@ async def delete_media(
     media_id: UUID,
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """Delete media file"""
     media = db.execute(
@@ -540,7 +540,7 @@ async def generate_thumbnail(
     request: Request,
     thumbnail_request: ThumbnailRequest,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """Generate thumbnail for image"""
     media = db.execute(
@@ -662,7 +662,9 @@ async def serve_thumbnail(request: Request, filename: str, db: Session = Depends
 @router.get("/stats/overview", response_model=MediaStats)
 @limiter.limit(get_rate_limit())
 async def get_media_stats(
-    request: Request, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)
+    request: Request,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """Get media storage statistics"""
     # Total files
@@ -709,7 +711,7 @@ async def bulk_delete_media(
     request: Request,
     delete_request: BulkDeleteRequest,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(get_current_user_flexible),
 ):
     """Delete multiple media files"""
     deleted_count = 0

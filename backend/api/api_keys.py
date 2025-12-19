@@ -294,8 +294,6 @@ def update_api_key(
         organization_id=api_key.organization_id,
     )
 
-    return APIKeyResponseSchema.model_validate(api_key)
-
 
 @router.post(
     "/{key_id}/permissions",

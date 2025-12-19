@@ -15,13 +15,13 @@
     },
     {
       "name": "answer",
-      "type": "textarea",
+      "type": "richtext",
       "required": true,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "The answer - IS translated"
+      "help_text": "The answer with formatting support - IS translated"
     },
     {
       "name": "category",

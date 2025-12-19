@@ -35,13 +35,13 @@
     },
     {
       "name": "body",
-      "type": "textarea",
+      "type": "richtext",
       "required": true,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Main content (supports {{variables}})"
+      "help_text": "Main content with formatting (supports {{variables}})"
     },
     {
       "name": "cta_text",

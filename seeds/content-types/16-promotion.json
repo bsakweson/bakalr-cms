@@ -15,13 +15,13 @@
     },
     {
       "name": "description",
-      "type": "textarea",
+      "type": "richtext",
       "required": false,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Description - IS translated"
+      "help_text": "Description with formatting - IS translated"
     },
     {
       "name": "code",

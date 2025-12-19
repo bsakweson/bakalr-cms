@@ -69,9 +69,13 @@ class Settings(BaseSettings):
     # Security (for built-in CMS auth)
     SECRET_KEY: str = Field(
         default="your-secret-key-change-this-in-production-min-32-chars",
-        description="JWT secret key - MUST be changed in production",
+        description="Secret key for general encryption - MUST be changed in production",
     )
-    ALGORITHM: str = Field(default="HS256", description="JWT algorithm")
+    ALGORITHM: str = Field(default="RS256", description="JWT algorithm (RS256 recommended)")
+    JWT_ISSUER: str = Field(
+        default="http://localhost:8000",
+        description="JWT issuer URL - should match the CMS backend URL",
+    )
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(
         default=30, description="Access token expiration in minutes"
     )

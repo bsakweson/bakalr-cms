@@ -171,6 +171,14 @@ async def switch_organization(
 
     role_names = [role.name for role in user_roles]
 
+    # Get permissions for target organization (permissions are role-based)
+    # Temporarily set user's organization_id to target for permission lookup
+    original_org_id = current_user.organization_id
+    current_user.organization_id = target_org_id
+    user_permissions = PermissionChecker.get_user_permissions(current_user, db)
+    user_api_scopes = PermissionChecker.get_user_api_scopes(current_user, db)
+    current_user.organization_id = original_org_id  # Restore original
+
     # Check if user is organization owner for target org
     is_owner = organization.owner_id == current_user.id if organization else False
 
@@ -180,6 +188,8 @@ async def switch_organization(
         organization_id=target_org_id,
         email=current_user.email,
         roles=role_names,
+        permissions=user_permissions,
+        api_scopes=user_api_scopes,
         first_name=current_user.first_name,
         last_name=current_user.last_name,
         is_organization_owner=is_owner,

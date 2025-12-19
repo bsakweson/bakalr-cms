@@ -2,6 +2,7 @@
 Authentication API endpoints
 """
 
+from datetime import datetime, timezone
 from typing import List, Optional
 from uuid import UUID
 
@@ -10,6 +11,7 @@ from fastapi import (
     BackgroundTasks,
     Depends,
     File,
+    Header,
     HTTPException,
     Request,
     UploadFile,
@@ -38,8 +40,26 @@ from backend.core.security import (
     verify_token,
 )
 from backend.db.session import get_db
+from backend.models.api_key import APIKey
 from backend.models.organization import Organization
 from backend.models.user import User
+
+
+# API Key Validation Schemas (for external services)
+class ValidateApiKeyResponse(BaseModel):
+    """Response schema for API key validation"""
+
+    valid: bool
+    organization_id: Optional[UUID] = None
+    organization_name: Optional[str] = None
+    organization_slug: Optional[str] = None
+    api_key_id: Optional[UUID] = None
+    api_key_name: Optional[str] = None
+    permissions: List[str] = []
+    expires_at: Optional[datetime] = None
+    message: str
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Account Deletion Schemas
@@ -64,6 +84,79 @@ class DeleteAccountResponse(BaseModel):
 
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
+
+
+@router.post("/validate-api-key", response_model=ValidateApiKeyResponse)
+@limiter.limit(get_rate_limit())
+async def validate_api_key(
+    request: Request,
+    x_api_key: str = Header(..., alias="X-API-Key"),
+    db: Session = Depends(get_db),
+):
+    """
+    Validate an API key and return its permissions and organization context.
+
+    This endpoint is designed for external services (like boutique-platform)
+    to validate API keys against the CMS as the central auth authority.
+
+    No authentication required - the API key itself is the credential being validated.
+
+    Returns:
+        ValidateApiKeyResponse with validation result, permissions, and org context
+    """
+    if not x_api_key:
+        return ValidateApiKeyResponse(
+            valid=False,
+            message="No API key provided",
+        )
+
+    # Query all active API keys
+    api_keys = db.query(APIKey).filter(APIKey.is_active == True).all()
+
+    # Check each key's hash
+    for api_key in api_keys:
+        if verify_password(x_api_key, api_key.key_hash):
+            # Check expiration
+            expires_at_value = api_key.expires_at
+            if isinstance(expires_at_value, str):
+                from dateutil import parser
+
+                expires_at_value = parser.parse(expires_at_value)
+
+            if expires_at_value and datetime.now(timezone.utc) > expires_at_value:
+                return ValidateApiKeyResponse(
+                    valid=False,
+                    message="API key has expired",
+                )
+
+            # Update last used timestamp
+            api_key.last_used_at = datetime.now(timezone.utc)
+            db.commit()
+
+            # Parse permissions
+            permissions = api_key.permissions.split(",") if api_key.permissions else []
+
+            # Get organization details
+            organization = (
+                db.query(Organization).filter(Organization.id == api_key.organization_id).first()
+            )
+
+            return ValidateApiKeyResponse(
+                valid=True,
+                organization_id=api_key.organization_id,
+                organization_name=organization.name if organization else None,
+                organization_slug=organization.slug if organization else None,
+                api_key_id=api_key.id,
+                api_key_name=api_key.name,
+                permissions=permissions,
+                expires_at=expires_at_value,
+                message="API key is valid",
+            )
+
+    return ValidateApiKeyResponse(
+        valid=False,
+        message="Invalid API key",
+    )
 
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
@@ -128,9 +221,28 @@ async def register(
         organization_id = organization.id
 
         # Seed default roles (admin, editor, viewer) for new organization
-        from backend.core.seed_permissions import seed_organization_roles
+        from backend.core.seed_permissions import (
+            create_organization_boutique_api_key,
+            seed_organization_boutique_scopes,
+            seed_organization_roles,
+        )
 
         seed_organization_roles(db, organization_id)
+
+        # Seed boutique platform API scopes for the new organization
+        seed_organization_boutique_scopes(db, organization_id)
+
+        # Create boutique platform API key for the new organization
+        # Note: The API key is created here but the full key is only logged during creation
+        # The organization owner should retrieve/regenerate it from the admin dashboard
+        api_key_result = create_organization_boutique_api_key(db, organization_id)
+        if api_key_result.get("api_key"):
+            # Store the API key temporarily to return to the user
+            # This is the ONLY time the full key is available
+            boutique_api_key = api_key_result["api_key"]
+            print(
+                f"🔑 Boutique API Key created for new organization: {api_key_result['key_prefix']}..."
+            )
     else:
         # Verify organization exists
         organization = db.query(Organization).filter(Organization.id == organization_id).first()
@@ -225,15 +337,23 @@ async def register(
     # Get user roles for token
     role_names = [role.name for role in user.roles]
 
+    # Get user permissions for token (CMS permissions)
+    user_permissions = PermissionChecker.get_user_permissions(user, db)
+
+    # Get user API scopes for token (boutique platform permissions)
+    user_api_scopes = PermissionChecker.get_user_api_scopes(user, db)
+
     # Check if user is organization owner
     is_owner = organization.owner_id == user.id if organization else False
 
-    # Create token pair
+    # Create token pair with roles, CMS permissions, AND API scopes
     tokens = create_token_pair(
         user_id=user.id,
         organization_id=user.organization_id,
         email=user.email,
         roles=role_names,
+        permissions=user_permissions,
+        api_scopes=user_api_scopes,
         first_name=user.first_name,
         last_name=user.last_name,
         is_organization_owner=is_owner,
@@ -370,16 +490,24 @@ async def login(request: Request, credentials: UserLogin, db: Session = Depends(
     # Get user roles for token
     role_names = [role.name for role in user.roles]
 
+    # Get user permissions for token (these are dynamically assigned via roles in CMS)
+    user_permissions = PermissionChecker.get_user_permissions(user, db)
+
+    # Get user API scopes for token (boutique platform permissions)
+    user_api_scopes = PermissionChecker.get_user_api_scopes(user, db)
+
     # Get organization to check ownership
     organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
     is_owner = organization.owner_id == user.id if organization else False
 
-    # Create token pair
+    # Create token pair with roles, CMS permissions, AND API scopes
     tokens = create_token_pair(
         user_id=user.id,
         organization_id=user.organization_id,
         email=user.email,
         roles=role_names,
+        permissions=user_permissions,
+        api_scopes=user_api_scopes,
         first_name=user.first_name,
         last_name=user.last_name,
         is_organization_owner=is_owner,
@@ -464,16 +592,24 @@ async def refresh_token(
     # Get user roles for token
     role_names = [role.name for role in user.roles]
 
+    # Get user permissions for token (CMS permissions)
+    user_permissions = PermissionChecker.get_user_permissions(user, db)
+
+    # Get user API scopes for token (boutique platform permissions)
+    user_api_scopes = PermissionChecker.get_user_api_scopes(user, db)
+
     # Get organization to check ownership
     organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
     is_owner = organization.owner_id == user.id if organization else False
 
-    # Create new token pair
+    # Create new token pair with roles, CMS permissions, AND API scopes
     tokens = create_token_pair(
         user_id=user.id,
         organization_id=user.organization_id,
         email=user.email,
         roles=role_names,
+        permissions=user_permissions,
+        api_scopes=user_api_scopes,
         first_name=user.first_name,
         last_name=user.last_name,
         is_organization_owner=is_owner,

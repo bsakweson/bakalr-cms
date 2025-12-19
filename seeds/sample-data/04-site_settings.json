@@ -193,6 +193,77 @@
           "reviews_label": "reviews"
         }
       },
+      "payment_methods": [
+        {"id": "stripe", "name": "Stripe", "description": "Accept credit cards, Apple Pay, Google Pay and more", "icon": "S", "color": "#635BFF", "category": "card", "enabled": true, "regions": []},
+        {"id": "paypal", "name": "PayPal", "description": "Accept PayPal payments worldwide", "icon": "PP", "color": "#003087", "category": "wallet", "enabled": true, "regions": []},
+        {"id": "cod", "name": "Cash on Delivery", "description": "Customers pay when package arrives", "icon": "💵", "color": "#27AE60", "category": "cash", "enabled": true, "regions": []},
+        {"id": "mpesa", "name": "M-Pesa", "description": "Mobile money payments (Kenya, Tanzania, DRC, etc.)", "icon": "M", "color": "#4BA228", "category": "mobile", "enabled": false, "regions": ["KE", "TZ", "CD", "GH", "MZ", "EG"]},
+        {"id": "mtn_momo", "name": "MTN Mobile Money", "description": "MTN MoMo payments (Ghana, Uganda, Rwanda, etc.)", "icon": "MTN", "color": "#FFCB05", "category": "mobile", "enabled": false, "regions": ["GH", "UG", "RW", "BJ", "CI", "CM", "CG"]},
+        {"id": "airtel_money", "name": "Airtel Money", "description": "Airtel mobile payments (Kenya, Uganda, Tanzania, etc.)", "icon": "A", "color": "#ED1C24", "category": "mobile", "enabled": false, "regions": ["KE", "UG", "TZ", "MW", "ZM", "RW", "CD"]},
+        {"id": "orange_money", "name": "Orange Money", "description": "Orange mobile payments (West & Central Africa)", "icon": "O", "color": "#FF6600", "category": "mobile", "enabled": false, "regions": ["SN", "ML", "CI", "BF", "CM", "GN", "MG"]},
+        {"id": "wave", "name": "Wave", "description": "Wave mobile money (Senegal, Côte d'Ivoire)", "icon": "W", "color": "#1DC4E9", "category": "mobile", "enabled": false, "regions": ["SN", "CI", "ML", "BF", "GM", "UG"]},
+        {"id": "flutterwave", "name": "Flutterwave", "description": "African payment gateway (cards, bank, mobile money)", "icon": "FW", "color": "#F5A623", "category": "card", "enabled": false, "regions": ["NG", "GH", "KE", "ZA", "UG", "TZ", "RW"]},
+        {"id": "paystack", "name": "Paystack", "description": "African payment gateway (Nigeria, Ghana, South Africa)", "icon": "PS", "color": "#00C3F7", "category": "card", "enabled": false, "regions": ["NG", "GH", "ZA"]},
+        {"id": "apple_pay", "name": "Apple Pay", "description": "Accept Apple Pay (requires Stripe or similar)", "icon": "", "color": "#000000", "category": "wallet", "enabled": false, "regions": []},
+        {"id": "google_pay", "name": "Google Pay", "description": "Accept Google Pay (requires Stripe or similar)", "icon": "G", "color": "#4285F4", "category": "wallet", "enabled": false, "regions": []},
+        {"id": "bank_transfer", "name": "Bank Transfer", "description": "Accept direct bank transfers", "icon": "BK", "color": "#2C3E50", "category": "bank", "enabled": false, "regions": []},
+        {"id": "bitcoin", "name": "Bitcoin", "description": "Accept Bitcoin payments", "icon": "₿", "color": "#F7931A", "category": "crypto", "enabled": false, "regions": []},
+        {"id": "klarna", "name": "Klarna", "description": "Buy now, pay later (Europe, US)", "icon": "K", "color": "#FFB3C7", "category": "wallet", "enabled": false, "regions": ["US", "GB", "DE", "SE", "NO", "FI", "DK", "NL", "BE", "AT", "CH", "AU"]},
+        {"id": "afterpay", "name": "Afterpay/Clearpay", "description": "Buy now, pay later installments", "icon": "AP", "color": "#B2FCE4", "category": "wallet", "enabled": false, "regions": ["US", "AU", "NZ", "GB", "CA"]}
+      ],
+      "timezones": [
+        {"value": "UTC", "label": "UTC (Coordinated Universal Time)"},
+        {"value": "America/New_York", "label": "Eastern Time (US & Canada)"},
+        {"value": "America/Chicago", "label": "Central Time (US & Canada)"},
+        {"value": "America/Denver", "label": "Mountain Time (US & Canada)"},
+        {"value": "America/Los_Angeles", "label": "Pacific Time (US & Canada)"},
+        {"value": "America/Toronto", "label": "Eastern Time (Canada)"},
+        {"value": "America/Mexico_City", "label": "Mexico City"},
+        {"value": "America/Sao_Paulo", "label": "Brasilia"},
+        {"value": "Europe/London", "label": "London"},
+        {"value": "Europe/Paris", "label": "Paris"},
+        {"value": "Europe/Berlin", "label": "Berlin"},
+        {"value": "Europe/Moscow", "label": "Moscow"},
+        {"value": "Africa/Lagos", "label": "Lagos"},
+        {"value": "Africa/Johannesburg", "label": "Johannesburg"},
+        {"value": "Africa/Nairobi", "label": "Nairobi"},
+        {"value": "Africa/Cairo", "label": "Cairo"},
+        {"value": "Asia/Dubai", "label": "Dubai"},
+        {"value": "Asia/Kolkata", "label": "Mumbai, Kolkata, New Delhi"},
+        {"value": "Asia/Singapore", "label": "Singapore"},
+        {"value": "Asia/Hong_Kong", "label": "Hong Kong"},
+        {"value": "Asia/Tokyo", "label": "Tokyo"},
+        {"value": "Australia/Sydney", "label": "Sydney"},
+        {"value": "Pacific/Auckland", "label": "Auckland"}
+      ],
+      "date_formats": [
+        {"value": "MM/DD/YYYY", "label": "MM/DD/YYYY (US)"},
+        {"value": "DD/MM/YYYY", "label": "DD/MM/YYYY (Europe)"},
+        {"value": "YYYY-MM-DD", "label": "YYYY-MM-DD (ISO)"},
+        {"value": "DD.MM.YYYY", "label": "DD.MM.YYYY (Germany)"},
+        {"value": "YYYY/MM/DD", "label": "YYYY/MM/DD (Japan)"}
+      ],
+      "shipping_settings": {
+        "freeShippingThreshold": 100,
+        "defaultRate": 9.99,
+        "zones": []
+      },
+      "notification_settings": {
+        "newOrder": true,
+        "lowStock": true,
+        "customerRegistration": false,
+        "orderStatus": true,
+        "newsletter": false
+      },
+      "store_settings": {
+        "enableGuestCheckout": false,
+        "showOutOfStock": true,
+        "enableReviews": true,
+        "enableWishlist": true,
+        "enableCompare": false,
+        "itemsPerPage": 12,
+        "defaultSort": "newest"
+      },
       "_updated_at": "1765507899"
     },
     "status": "published"

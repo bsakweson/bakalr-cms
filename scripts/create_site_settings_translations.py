@@ -25,25 +25,96 @@ def deep_translate(
     result = {}
     indent = "  " * depth
 
+    # Fields that should never be translated (technical/ID fields)
+    skip_keys = {
+        "id",
+        "key",
+        "slug",
+        "code",
+        "icon",
+        "color",
+        "href",
+        "url",
+        "src",
+        "path",
+        "route",
+        "name",
+        "category",
+    }
+
+    # Brand names that should never be translated
+    brand_names = {
+        "stripe",
+        "paypal",
+        "m-pesa",
+        "mpesa",
+        "mtn mobile money",
+        "mtn momo",
+        "airtel money",
+        "orange money",
+        "wave",
+        "flutterwave",
+        "paystack",
+        "apple pay",
+        "google pay",
+        "bitcoin",
+        "klarna",
+        "afterpay",
+        "clearpay",
+        "visa",
+        "mastercard",
+        "amex",
+        "american express",
+    }
+
     for key, value in data.items():
+        # Skip technical fields and name field (usually brand names for payment methods)
+        if key.lower() in skip_keys:
+            result[key] = value
+            continue
+
         if isinstance(value, str):
             try:
-                translation = trans_service.translate_text(
-                    text=value, target_lang=locale, source_lang="en"
-                )
-                result[key] = translation.get("translated_text", value)
-                if depth < 3:  # Only print first few levels
-                    print(f"{indent}  ✓ {key}: {value[:20]}... → {result[key][:30]}...")
+                # Skip URLs, paths, and brand names
+                if value.startswith(("http://", "https://", "/", "#", "mailto:", "tel:")):
+                    result[key] = value
+                elif value.lower() in brand_names:
+                    result[key] = value  # Keep brand names as-is
+                else:
+                    translation = trans_service.translate_text(
+                        text=value, target_lang=locale, source_lang="en"
+                    )
+                    result[key] = translation.get("translated_text", value)
+                    if depth < 3:  # Only print first few levels
+                        print(f"{indent}  ✓ {key}: {value[:30]}... → {result[key][:30]}...")
             except Exception as e:
                 print(f"{indent}  ✗ {key}: {e}")
                 result[key] = value
         elif isinstance(value, dict):
-            print(f"{indent}  {key}:")
+            if depth < 4:
+                print(f"{indent}  {key}:")
             result[key] = deep_translate(value, trans_service, locale, depth + 1)
         elif isinstance(value, list):
-            result[key] = value  # Keep lists as-is (usually not translatable)
+            # Recursively translate arrays of objects (e.g., payment_methods)
+            translated_list = []
+            for i, item in enumerate(value):
+                if isinstance(item, dict):
+                    if depth < 2:
+                        print(f"{indent}  {key}[{i}]:")
+                    translated_list.append(deep_translate(item, trans_service, locale, depth + 1))
+                elif isinstance(item, str) and not item.startswith(("http://", "https://", "/")):
+                    try:
+                        translation = trans_service.translate_text(
+                            text=item, target_lang=locale, source_lang="en"
+                        )
+                        translated_list.append(translation.get("translated_text", item))
+                    except:
+                        translated_list.append(item)
+                else:
+                    translated_list.append(item)
+            result[key] = translated_list
         else:
-            result[key] = value  # Keep non-strings as-is
+            result[key] = value  # Keep non-strings as-is (numbers, booleans, etc.)
 
     return result
 
@@ -113,6 +184,20 @@ def main():
             trans_data["common_labels"] = deep_translate(
                 common_labels, translation_service, locale_code
             )
+
+            # Translate payment_methods array (names and descriptions)
+            payment_methods = base_data.get("payment_methods", [])
+            if payment_methods:
+                print("\nTranslating payment_methods...")
+                trans_data["payment_methods"] = []
+                for i, pm in enumerate(payment_methods):
+                    if isinstance(pm, dict):
+                        print(f"  payment_methods[{i}] ({pm.get('id', 'unknown')}):")
+                        trans_data["payment_methods"].append(
+                            deep_translate(pm, translation_service, locale_code, depth=2)
+                        )
+                    else:
+                        trans_data["payment_methods"].append(pm)
 
             # Also translate some other key fields
             for field in ["tagline", "maintenance_message"]:

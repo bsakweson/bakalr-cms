@@ -12,6 +12,10 @@ from jose import JWTError, jwt
 from pydantic import BaseModel
 
 from backend.core.config import settings
+from backend.core.jwt_keys import jwt_key_manager
+
+# JWT Algorithm - RS256 for asymmetric signing
+JWT_ALGORITHM = "RS256"
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -82,14 +86,14 @@ class TokenPayload(BaseModel):
 
 def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
     """
-    Create JWT access token
+    Create JWT access token using RS256 algorithm.
 
     Args:
         data: Token payload data
         expires_delta: Token expiration time (default: 30 minutes)
 
     Returns:
-        Encoded JWT token
+        Encoded JWT token signed with RSA private key
     """
     to_encode = data.copy()
 
@@ -100,34 +104,72 @@ def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta]
             minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
         )
 
-    to_encode.update({"exp": expire, "type": "access"})
+    # Add standard JWT claims
+    to_encode.update(
+        {
+            "exp": expire,
+            "iat": datetime.now(timezone.utc),
+            "iss": settings.JWT_ISSUER,
+            "type": "access",
+        }
+    )
 
-    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    # Get private key PEM for jose library
+    from cryptography.hazmat.primitives import serialization
+
+    private_key_pem = jwt_key_manager.private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption(),
+    ).decode()
+
+    encoded_jwt = jwt.encode(
+        to_encode, private_key_pem, algorithm=JWT_ALGORITHM, headers={"kid": jwt_key_manager.key_id}
+    )
     return encoded_jwt
 
 
 def create_refresh_token(data: Dict[str, Any]) -> str:
     """
-    Create JWT refresh token
+    Create JWT refresh token using RS256 algorithm.
 
     Args:
         data: Token payload data
 
     Returns:
-        Encoded JWT refresh token
+        Encoded JWT refresh token signed with RSA private key
     """
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
 
-    to_encode.update({"exp": expire, "type": "refresh"})
+    # Add standard JWT claims
+    to_encode.update(
+        {
+            "exp": expire,
+            "iat": datetime.now(timezone.utc),
+            "iss": settings.JWT_ISSUER,
+            "type": "refresh",
+        }
+    )
 
-    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    # Get private key PEM for jose library
+    from cryptography.hazmat.primitives import serialization
+
+    private_key_pem = jwt_key_manager.private_key.private_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PrivateFormat.PKCS8,
+        encryption_algorithm=serialization.NoEncryption(),
+    ).decode()
+
+    encoded_jwt = jwt.encode(
+        to_encode, private_key_pem, algorithm=JWT_ALGORITHM, headers={"kid": jwt_key_manager.key_id}
+    )
     return encoded_jwt
 
 
 def verify_token(token: str, token_type: str = "access") -> Optional[TokenPayload]:
     """
-    Verify and decode JWT token
+    Verify and decode JWT token using RS256 algorithm.
 
     Args:
         token: JWT token string
@@ -137,7 +179,20 @@ def verify_token(token: str, token_type: str = "access") -> Optional[TokenPayloa
         TokenPayload if valid, None otherwise
     """
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        # Get public key PEM for jose library
+        from cryptography.hazmat.primitives import serialization
+
+        public_key_pem = jwt_key_manager.public_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo,
+        ).decode()
+
+        payload = jwt.decode(
+            token,
+            public_key_pem,
+            algorithms=[JWT_ALGORITHM],
+            options={"verify_aud": False},  # We don't use audience claim
+        )
 
         # Verify token type
         if payload.get("type") != token_type:
@@ -164,6 +219,8 @@ def create_token_pair(
     organization_id: UUID,
     email: str,
     roles: list[str],
+    permissions: list[str] = None,
+    api_scopes: list[str] = None,
     first_name: Optional[str] = None,
     last_name: Optional[str] = None,
     is_organization_owner: bool = False,
@@ -176,6 +233,8 @@ def create_token_pair(
         organization_id: Organization ID (UUID)
         email: User email
         roles: List of role names
+        permissions: List of CMS permission names (e.g., ["content.read", "user.manage"])
+        api_scopes: List of API scope names for external platforms (e.g., ["inventory.read", "orders.create"])
         first_name: User's first name (optional)
         last_name: User's last name (optional)
         is_organization_owner: Whether user owns the organization (optional)
@@ -197,6 +256,8 @@ def create_token_pair(
         "org_id": str(organization_id),
         "email": email,
         "roles": roles,
+        "permissions": permissions or [],
+        "api_scopes": api_scopes or [],  # Boutique platform permissions
         # Standard OIDC claims for user profile
         "name": full_name,
         "given_name": first_name or "",

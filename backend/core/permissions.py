@@ -171,6 +171,34 @@ class PermissionChecker:
         return list(permissions)
 
     @staticmethod
+    def get_user_api_scopes(user: User, db: Session = None) -> List[str]:
+        """
+        Get all API scopes for a user based on their roles.
+
+        API scopes are boutique platform permissions (inventory.read, orders.create, etc.)
+        that are assigned to roles via the role_api_scopes table.
+
+        Args:
+            user: User object
+            db: Database session (optional, used for eager loading if needed)
+
+        Returns:
+            List of API scope names
+        """
+        api_scopes = set()
+
+        for role in user.roles:
+            if role.organization_id != user.organization_id:
+                continue
+
+            # Get API scopes assigned to this role
+            if hasattr(role, "api_scopes"):
+                for scope in role.api_scopes:
+                    api_scopes.add(scope.name)
+
+        return list(api_scopes)
+
+    @staticmethod
     def require_permission(user: User, permission_name: str, db: Session) -> None:
         """
         Raise exception if user doesn't have permission

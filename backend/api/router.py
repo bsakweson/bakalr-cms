@@ -7,6 +7,7 @@ from fastapi import APIRouter
 from backend.api import (
     analytics,
     api_keys,
+    api_scopes,
     audit_logs,
     auth,
     content,
@@ -48,6 +49,7 @@ api_router.include_router(audit_logs.router)
 api_router.include_router(two_factor.router)
 api_router.include_router(password_reset.router)
 api_router.include_router(api_keys.router)
+api_router.include_router(api_scopes.router)
 api_router.include_router(tenant.router)
 api_router.include_router(devices.router)
 api_router.include_router(sessions.router)

@@ -67,9 +67,9 @@ COPY --chown=appuser:appuser backend ./backend
 COPY --chown=appuser:appuser alembic ./alembic
 COPY --chown=appuser:appuser alembic.ini ./
 
-# Create directories for uploads and logs
-RUN mkdir -p /app/uploads /app/logs \
-    && chown -R appuser:appuser /app/uploads /app/logs
+# Create directories for uploads, logs, and JWT keys
+RUN mkdir -p /app/uploads /app/logs /app/keys \
+    && chown -R appuser:appuser /app/uploads /app/logs /app/keys
 
 # Switch to non-root user
 USER appuser

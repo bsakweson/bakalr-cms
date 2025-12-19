@@ -123,20 +123,6 @@ def seed_default_permissions(db: Session) -> None:
         print(f"ℹ️  {existing_count} permissions already exist")
 
 
-def init_permissions():
-    """
-    Initialize permissions on application startup.
-
-    This function is called from the FastAPI lifespan event.
-    """
-    db = SessionLocal()
-    try:
-        seed_default_permissions(db)
-        assign_default_role_permissions(db)
-    finally:
-        db.close()
-
-
 # Define role configurations as module-level constant for reuse
 DEFAULT_ROLE_CONFIGS = {
     "owner": {
@@ -511,6 +497,416 @@ def seed_organization_roles(db: Session, organization_id: int) -> dict:
     return created_roles
 
 
+# Boutique platform API scope definitions
+# These must match the scope names used in ROLE_API_SCOPES_CONFIG
+BOUTIQUE_SCOPES = [
+    # Admin
+    {
+        "name": "admin.full",
+        "label": "Full Admin Access",
+        "description": "Full administrative access to all platform features",
+        "category": "admin",
+    },
+    # Inventory Scopes
+    {
+        "name": "inventory.read",
+        "label": "Read Inventory",
+        "description": "View inventory items and stock levels",
+        "category": "inventory",
+    },
+    {
+        "name": "inventory.create",
+        "label": "Create Inventory",
+        "description": "Create new inventory items",
+        "category": "inventory",
+    },
+    {
+        "name": "inventory.update",
+        "label": "Update Inventory",
+        "description": "Update inventory items and stock",
+        "category": "inventory",
+    },
+    {
+        "name": "inventory.delete",
+        "label": "Delete Inventory",
+        "description": "Delete inventory items",
+        "category": "inventory",
+    },
+    {
+        "name": "inventory.stats",
+        "label": "Inventory Statistics",
+        "description": "View inventory statistics",
+        "category": "inventory",
+    },
+    {
+        "name": "inventory.reserve",
+        "label": "Reserve Inventory",
+        "description": "Reserve inventory stock",
+        "category": "inventory",
+    },
+    {
+        "name": "inventory.release",
+        "label": "Release Inventory",
+        "description": "Release reserved inventory",
+        "category": "inventory",
+    },
+    # Orders Scopes
+    {
+        "name": "orders.read",
+        "label": "Read Orders",
+        "description": "View orders and order details",
+        "category": "orders",
+    },
+    {
+        "name": "orders.create",
+        "label": "Create Orders",
+        "description": "Create new orders",
+        "category": "orders",
+    },
+    {
+        "name": "orders.update",
+        "label": "Update Orders",
+        "description": "Update order status and details",
+        "category": "orders",
+    },
+    {
+        "name": "orders.cancel",
+        "label": "Cancel Orders",
+        "description": "Cancel orders",
+        "category": "orders",
+    },
+    {
+        "name": "orders.stats",
+        "label": "Order Statistics",
+        "description": "View order statistics",
+        "category": "orders",
+    },
+    # Customer Scopes
+    {
+        "name": "customers.read",
+        "label": "Read Customers",
+        "description": "View customer information",
+        "category": "customers",
+    },
+    {
+        "name": "customers.create",
+        "label": "Create Customers",
+        "description": "Create new customers",
+        "category": "customers",
+    },
+    {
+        "name": "customers.update",
+        "label": "Update Customers",
+        "description": "Update customer information",
+        "category": "customers",
+    },
+    {
+        "name": "customers.delete",
+        "label": "Delete Customers",
+        "description": "Delete customers",
+        "category": "customers",
+    },
+    # Wishlist Scopes
+    {
+        "name": "wishlist.read",
+        "label": "Read Wishlist",
+        "description": "View wishlist items",
+        "category": "customers",
+    },
+    {
+        "name": "wishlist.create",
+        "label": "Create Wishlist",
+        "description": "Add items to wishlist",
+        "category": "customers",
+    },
+    {
+        "name": "wishlist.delete",
+        "label": "Delete Wishlist",
+        "description": "Remove items from wishlist",
+        "category": "customers",
+    },
+    # Addresses Scopes
+    {
+        "name": "addresses.read",
+        "label": "Read Addresses",
+        "description": "View customer addresses",
+        "category": "customers",
+    },
+    {
+        "name": "addresses.create",
+        "label": "Create Addresses",
+        "description": "Create customer addresses",
+        "category": "customers",
+    },
+    {
+        "name": "addresses.update",
+        "label": "Update Addresses",
+        "description": "Update customer addresses",
+        "category": "customers",
+    },
+    {
+        "name": "addresses.delete",
+        "label": "Delete Addresses",
+        "description": "Delete customer addresses",
+        "category": "customers",
+    },
+    # Products Scopes
+    {
+        "name": "products.read",
+        "label": "Read Products",
+        "description": "View products and catalog",
+        "category": "products",
+    },
+    {
+        "name": "products.create",
+        "label": "Create Products",
+        "description": "Create new products",
+        "category": "products",
+    },
+    {
+        "name": "products.update",
+        "label": "Update Products",
+        "description": "Update product information",
+        "category": "products",
+    },
+    {
+        "name": "products.delete",
+        "label": "Delete Products",
+        "description": "Delete products",
+        "category": "products",
+    },
+    # Payments Scopes
+    {
+        "name": "payments.read",
+        "label": "Read Payments",
+        "description": "View payment information",
+        "category": "payments",
+    },
+    {
+        "name": "payments.create",
+        "label": "Create Payments",
+        "description": "Process payments",
+        "category": "payments",
+    },
+    {
+        "name": "payments.refund",
+        "label": "Refund Payments",
+        "description": "Process refunds",
+        "category": "payments",
+    },
+    # Shipping Scopes
+    {
+        "name": "shipping.read",
+        "label": "Read Shipping",
+        "description": "View shipping information",
+        "category": "shipping",
+    },
+    {
+        "name": "shipping.create",
+        "label": "Create Shipping",
+        "description": "Create shipments",
+        "category": "shipping",
+    },
+    {
+        "name": "shipping.update",
+        "label": "Update Shipping",
+        "description": "Update shipment status",
+        "category": "shipping",
+    },
+    {
+        "name": "shipping.track",
+        "label": "Track Shipping",
+        "description": "Track shipments",
+        "category": "shipping",
+    },
+]
+
+
+def seed_organization_boutique_scopes(db: Session, organization_id: int) -> dict:
+    """
+    Seed boutique platform API scopes for a specific organization.
+
+    This creates all boutique API scopes and assigns them to roles based on
+    the ROLE_API_SCOPES_CONFIG mapping.
+
+    Args:
+        db: Database session
+        organization_id: The ID of the organization to seed scopes for
+
+    Returns:
+        Dictionary with 'scopes_created' and 'mappings_created' counts
+    """
+    from backend.models.api_key import ApiScope
+
+    result = {"scopes_created": 0, "mappings_created": 0}
+    scope_map = {}
+
+    # Create API scopes
+    for scope_data in BOUTIQUE_SCOPES:
+        existing = (
+            db.query(ApiScope)
+            .filter(
+                ApiScope.organization_id == organization_id,
+                ApiScope.name == scope_data["name"],
+                ApiScope.platform == "boutique",
+            )
+            .first()
+        )
+
+        if not existing:
+            scope = ApiScope(
+                organization_id=organization_id,
+                name=scope_data["name"],
+                label=scope_data["label"],
+                description=scope_data["description"],
+                category=scope_data["category"],
+                platform="boutique",
+                is_active=True,
+            )
+            db.add(scope)
+            db.flush()
+            scope_map[scope_data["name"]] = scope
+            result["scopes_created"] += 1
+        else:
+            scope_map[scope_data["name"]] = existing
+
+    # Assign scopes to roles
+    roles = db.query(Role).filter(Role.organization_id == organization_id).all()
+
+    for role in roles:
+        if role.name not in ROLE_API_SCOPES_CONFIG:
+            continue
+
+        expected_scope_names = ROLE_API_SCOPES_CONFIG[role.name]
+        current_scope_names = (
+            {s.name for s in role.api_scopes} if hasattr(role, "api_scopes") else set()
+        )
+
+        for scope_name in expected_scope_names:
+            if scope_name in scope_map and scope_name not in current_scope_names:
+                role.api_scopes.append(scope_map[scope_name])
+                result["mappings_created"] += 1
+
+    db.flush()
+
+    if result["scopes_created"] > 0:
+        print(
+            f"✅ Seeded {result['scopes_created']} boutique API scopes for organization {organization_id}"
+        )
+    if result["mappings_created"] > 0:
+        print(
+            f"✅ Created {result['mappings_created']} role-scope mappings for organization {organization_id}"
+        )
+
+    return result
+
+
+# Define scopes for the boutique platform API key
+# These are the scopes needed for anonymous/public access and logged-in customers
+BOUTIQUE_API_KEY_SCOPES = [
+    # Products - public catalog browsing
+    "products.read",
+    # Inventory - check stock availability
+    "inventory.read",
+    # Orders - placing orders
+    "orders.create",
+    "orders.read",
+    # Customers - registration and profile
+    "customers.create",
+    "customers.read",
+    "customers.update",
+    # Wishlist - customer wishlist management
+    "wishlist.read",
+    "wishlist.create",
+    "wishlist.delete",
+    # Addresses - customer address management
+    "addresses.read",
+    "addresses.create",
+    "addresses.update",
+    "addresses.delete",
+    # Payments - processing payments
+    "payments.create",
+    "payments.read",
+    # Shipping - tracking shipments
+    "shipping.read",
+    "shipping.track",
+]
+
+
+def create_organization_boutique_api_key(
+    db: Session, organization_id, created_by_id=None, key_name: str = "Boutique Platform API Key"
+) -> dict:
+    """
+    Create a boutique platform API key for a new organization.
+
+    This API key is used by the boutique frontend to access the platform services
+    for both anonymous browsing and authenticated customer operations.
+
+    Args:
+        db: Database session
+        organization_id: The ID of the organization
+        created_by_id: The ID of the user creating the key (optional, for system keys)
+        key_name: Name for the API key (default: "Boutique Platform API Key")
+
+    Returns:
+        Dictionary with 'api_key' (the full key - only shown once) and 'key_id'
+    """
+    from backend.core.security import generate_api_key, hash_api_key
+    from backend.models.api_key import APIKey
+
+    # Check if a boutique API key already exists for this organization
+    existing_key = (
+        db.query(APIKey)
+        .filter(
+            APIKey.organization_id == organization_id,
+            APIKey.name == key_name,
+            APIKey.is_active == True,
+        )
+        .first()
+    )
+
+    if existing_key:
+        print(f"ℹ️  Boutique API key already exists for organization {organization_id}")
+        return {
+            "api_key": None,  # Can't retrieve the original key
+            "key_id": existing_key.id,
+            "key_prefix": existing_key.key_prefix,
+            "already_existed": True,
+        }
+
+    # Generate new API key
+    full_key = generate_api_key()
+    key_prefix = full_key[:8]
+    key_hash = hash_api_key(full_key)
+
+    # Create the API key with boutique scopes
+    api_key = APIKey(
+        name=key_name,
+        description="Auto-generated API key for boutique platform access. Grants permissions for public catalog browsing, customer operations, and order management.",
+        key_hash=key_hash,
+        key_prefix=key_prefix,
+        permissions=",".join(BOUTIQUE_API_KEY_SCOPES),
+        organization_id=organization_id,
+        created_by_id=created_by_id,
+        is_active=True,
+        expires_at=None,  # Never expires by default
+    )
+
+    db.add(api_key)
+    db.flush()
+
+    print(f"✅ Created boutique platform API key for organization {organization_id}")
+    print(f"   Key prefix: {key_prefix}...")
+    print(f"   Scopes: {len(BOUTIQUE_API_KEY_SCOPES)} permissions granted")
+
+    return {
+        "api_key": full_key,  # Only returned on creation!
+        "key_id": api_key.id,
+        "key_prefix": key_prefix,
+        "already_existed": False,
+    }
+
+
 def assign_default_role_permissions(db: Session) -> None:
     """
     Ensure all organizations have default roles with appropriate permissions assigned.
@@ -598,3 +994,264 @@ def assign_default_role_permissions(db: Session) -> None:
             print(f"✅ Updated permissions for {roles_updated} roles")
     else:
         print("ℹ️  All roles already configured correctly")
+
+
+# Define which API scopes each boutique role should have
+# This maps role names to their boutique platform API scopes
+ROLE_API_SCOPES_CONFIG = {
+    "owner": [
+        # Full access to everything
+        "admin.full",
+        "inventory.read",
+        "inventory.create",
+        "inventory.update",
+        "inventory.delete",
+        "inventory.stats",
+        "inventory.reserve",
+        "inventory.release",
+        "orders.read",
+        "orders.create",
+        "orders.update",
+        "orders.cancel",
+        "orders.stats",
+        "customers.read",
+        "customers.create",
+        "customers.update",
+        "customers.delete",
+        "wishlist.read",
+        "wishlist.create",
+        "wishlist.delete",
+        "addresses.read",
+        "addresses.create",
+        "addresses.update",
+        "addresses.delete",
+        "products.read",
+        "products.create",
+        "products.update",
+        "products.delete",
+        "payments.read",
+        "payments.create",
+        "payments.refund",
+        "shipping.read",
+        "shipping.create",
+        "shipping.update",
+        "shipping.track",
+    ],
+    "admin": [
+        # Full access (same as owner for boutique operations)
+        "admin.full",
+        "inventory.read",
+        "inventory.create",
+        "inventory.update",
+        "inventory.delete",
+        "inventory.stats",
+        "inventory.reserve",
+        "inventory.release",
+        "orders.read",
+        "orders.create",
+        "orders.update",
+        "orders.cancel",
+        "orders.stats",
+        "customers.read",
+        "customers.create",
+        "customers.update",
+        "customers.delete",
+        "wishlist.read",
+        "wishlist.create",
+        "wishlist.delete",
+        "addresses.read",
+        "addresses.create",
+        "addresses.update",
+        "addresses.delete",
+        "products.read",
+        "products.create",
+        "products.update",
+        "products.delete",
+        "payments.read",
+        "payments.create",
+        "payments.refund",
+        "shipping.read",
+        "shipping.create",
+        "shipping.update",
+        "shipping.track",
+    ],
+    "manager": [
+        # Operations management - can do most things except admin
+        "inventory.read",
+        "inventory.create",
+        "inventory.update",
+        "inventory.stats",
+        "inventory.reserve",
+        "inventory.release",
+        "orders.read",
+        "orders.create",
+        "orders.update",
+        "orders.stats",
+        "customers.read",
+        "customers.create",
+        "customers.update",
+        "wishlist.read",
+        "wishlist.create",
+        "wishlist.delete",
+        "addresses.read",
+        "addresses.create",
+        "addresses.update",
+        "addresses.delete",
+        "products.read",
+        "products.create",
+        "products.update",
+        "payments.read",
+        "payments.create",
+        "shipping.read",
+        "shipping.create",
+        "shipping.update",
+        "shipping.track",
+    ],
+    "inventory_manager": [
+        # Inventory and product management
+        "inventory.read",
+        "inventory.create",
+        "inventory.update",
+        "inventory.delete",
+        "inventory.stats",
+        "inventory.reserve",
+        "inventory.release",
+        "products.read",
+        "products.create",
+        "products.update",
+        "products.delete",
+        "orders.read",  # Read orders to see what's needed
+    ],
+    "sales": [
+        # Sales operations - orders, customers, payments
+        "orders.read",
+        "orders.create",
+        "orders.update",
+        "customers.read",
+        "customers.create",
+        "customers.update",
+        "wishlist.read",
+        "addresses.read",
+        "addresses.create",
+        "addresses.update",
+        "products.read",  # Read products to help customers
+        "inventory.read",  # Check stock availability
+        "payments.read",
+        "payments.create",
+        "shipping.read",
+        "shipping.track",
+    ],
+    "employee": [
+        # Basic read access
+        "inventory.read",
+        "products.read",
+        "orders.read",
+        "customers.read",
+        "wishlist.read",
+        "addresses.read",
+    ],
+    "viewer": [
+        # Read-only access
+        "inventory.read",
+        "products.read",
+        "orders.read",
+        "customers.read",
+        "wishlist.read",
+        "addresses.read",
+        "payments.read",
+        "shipping.read",
+    ],
+    "editor": [
+        # Content-focused role - limited boutique access
+        "products.read",
+        "inventory.read",
+    ],
+}
+
+
+def assign_role_api_scopes(db: Session) -> None:
+    """
+    Assign boutique platform API scopes to roles.
+
+    This creates the role -> api_scope mappings that allow users
+    with certain roles to have corresponding boutique permissions.
+    """
+    from sqlalchemy import text
+
+    from backend.models.api_scope import ApiScope
+    from backend.models.organization import Organization
+
+    organizations = db.query(Organization).all()
+
+    scopes_assigned = 0
+
+    for org in organizations:
+        # Get all API scopes for this organization
+        scopes = (
+            db.query(ApiScope)
+            .filter(
+                ApiScope.organization_id == org.id,
+                ApiScope.platform == "boutique",
+                ApiScope.is_active == True,
+            )
+            .all()
+        )
+
+        if not scopes:
+            print(f"ℹ️  No boutique API scopes found for organization {org.name}")
+            continue
+
+        scope_by_name = {s.name: s for s in scopes}
+
+        # Get all roles for this organization
+        roles = db.query(Role).filter(Role.organization_id == org.id).all()
+
+        for role in roles:
+            if role.name not in ROLE_API_SCOPES_CONFIG:
+                continue
+
+            expected_scope_names = set(ROLE_API_SCOPES_CONFIG[role.name])
+            current_scope_names = (
+                {s.name for s in role.api_scopes} if hasattr(role, "api_scopes") else set()
+            )
+
+            # Only update if different
+            if current_scope_names != expected_scope_names:
+                try:
+                    # Clear existing api_scopes for this role
+                    db.execute(
+                        text("DELETE FROM role_api_scopes WHERE role_id = :role_id"),
+                        {"role_id": role.id},
+                    )
+                    db.expire(role)
+
+                    # Add the expected scopes
+                    for scope_name in expected_scope_names:
+                        if scope_name in scope_by_name:
+                            role.api_scopes.append(scope_by_name[scope_name])
+                            scopes_assigned += 1
+                except Exception as e:
+                    print(f"⚠️  Error updating API scopes for role {role.name}: {e}")
+                    db.rollback()
+                    continue
+
+    if scopes_assigned > 0:
+        db.commit()
+        print(f"✅ Assigned {scopes_assigned} API scopes to roles")
+    else:
+        print("ℹ️  All role API scopes already configured correctly")
+
+
+def init_permissions():
+    """
+    Initialize permissions on application startup.
+
+    This function is called from the FastAPI lifespan event.
+    """
+    db = SessionLocal()
+    try:
+        seed_default_permissions(db)
+        assign_default_role_permissions(db)
+        assign_role_api_scopes(db)  # Also assign boutique API scopes to roles
+    finally:
+        db.close()
