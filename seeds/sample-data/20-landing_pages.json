@@ -1,0 +1,85 @@
+[
+  {
+    "content_type_api_id": "landing_page",
+    "slug": "cms-landing",
+    "title": "Bakalr CMS - Modern Headless Content Management System",
+    "content_data": {
+      "page_key": "cms-landing",
+      "title": "Bakalr CMS - Modern Headless CMS",
+      "hero_title": "Bakalr CMS",
+      "hero_subtitle": "Modern Headless Content Management System",
+      "hero_description": "Build powerful content experiences with our headless CMS featuring multi-language support, advanced theming, GraphQL API, and real-time collaboration.",
+      "primary_cta_text": "Sign In",
+      "primary_cta_url": "/login",
+      "secondary_cta_text": "Get Started",
+      "secondary_cta_url": "/register",
+      "features_heading": "Key Features",
+      "features": [
+        {
+          "icon": "🌍",
+          "title": "Multi-Language",
+          "description": "Automatic translation to multiple languages"
+        },
+        {
+          "icon": "🎨",
+          "title": "Custom Theming",
+          "description": "Beautiful dark chocolate brown theme"
+        },
+        {
+          "icon": "⚡",
+          "title": "GraphQL API",
+          "description": "Flexible querying with REST & GraphQL"
+        }
+      ],
+      "testimonials_heading": "What Our Users Say",
+      "cta_section_heading": "Ready to Get Started?",
+      "cta_section_description": "Join thousands of developers building amazing content experiences with Bakalr CMS.",
+      "background_style": "gradient"
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "landing_page",
+    "slug": "boutique-landing",
+    "title": "Bakalr Boutique - Premium Beauty Products",
+    "content_data": {
+      "page_key": "boutique-landing",
+      "title": "Bakalr Boutique - Premium Hair & Beauty",
+      "hero_title": "Bakalr Boutique",
+      "hero_subtitle": "Premium Hair & Beauty Products",
+      "hero_description": "Discover premium virgin hair extensions, wigs, and beauty essentials. Quality you can trust, beauty you can see.",
+      "primary_cta_text": "Shop Now",
+      "primary_cta_url": "/shop",
+      "secondary_cta_text": "Learn More",
+      "secondary_cta_url": "/about",
+      "features_heading": "Why Choose Us",
+      "features": [
+        {
+          "icon": "💎",
+          "title": "Premium Quality",
+          "description": "100% virgin human hair from trusted sources"
+        },
+        {
+          "icon": "🚚",
+          "title": "Fast Shipping",
+          "description": "Free shipping on orders over $100"
+        },
+        {
+          "icon": "💯",
+          "title": "Satisfaction Guaranteed",
+          "description": "30-day money-back guarantee"
+        },
+        {
+          "icon": "🎁",
+          "title": "Exclusive Deals",
+          "description": "Member-only discounts and early access"
+        }
+      ],
+      "testimonials_heading": "Customer Love",
+      "cta_section_heading": "Transform Your Look Today",
+      "cta_section_description": "Join thousands of satisfied customers who trust Bakalr Boutique for their hair and beauty needs.",
+      "background_style": "gradient"
+    },
+    "status": "published"
+  }
+]

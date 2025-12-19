@@ -1,0 +1,168 @@
+{
+  "api_id": "landing_page",
+  "name": "Landing Page",
+  "description": "Marketing landing pages like the main site landing page, campaign pages",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique key like 'cms-landing', 'promo-campaign' - NOT translated"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO page title"
+    },
+    {
+      "name": "hero_title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Large hero heading text"
+    },
+    {
+      "name": "hero_subtitle",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Subtitle below hero heading"
+    },
+    {
+      "name": "hero_description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Longer description paragraph"
+    },
+    {
+      "name": "primary_cta_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Primary call-to-action button text"
+    },
+    {
+      "name": "primary_cta_url",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Primary CTA link URL"
+    },
+    {
+      "name": "secondary_cta_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Secondary call-to-action button text"
+    },
+    {
+      "name": "secondary_cta_url",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Secondary CTA link URL"
+    },
+    {
+      "name": "features_heading",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Features section heading"
+    },
+    {
+      "name": "features",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Array of feature cards with icon, title, description"
+    },
+    {
+      "name": "testimonials_heading",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Testimonials section heading"
+    },
+    {
+      "name": "cta_section_heading",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Bottom CTA section heading"
+    },
+    {
+      "name": "cta_section_description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Bottom CTA section description"
+    },
+    {
+      "name": "background_style",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": "gradient",
+      "validation": null,
+      "help_text": "Background style: gradient, solid, image"
+    },
+    {
+      "name": "hero_image_id",
+      "type": "media",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Hero background/feature image"
+    }
+  ],
+  "is_published": true
+}

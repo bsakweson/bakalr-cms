@@ -1,0 +1,161 @@
+[
+  {
+    "content_type_api_id": "system_page",
+    "slug": "404-not-found",
+    "title": "404 Not Found",
+    "content_data": {
+      "page_key": "404",
+      "status_code": "404",
+      "title": "Page Not Found",
+      "heading": "404",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "button_text": "Go to Dashboard",
+      "button_url": "/dashboard",
+      "secondary_button_text": "Go Home",
+      "secondary_button_url": "/",
+      "icon": "🔍",
+      "show_search": true,
+      "suggestions": [
+        {
+          "text": "Check the URL for typos",
+          "icon": "link"
+        },
+        {
+          "text": "Use the navigation menu",
+          "icon": "menu"
+        },
+        {
+          "text": "Try searching for what you need",
+          "icon": "search"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "system_page",
+    "slug": "403-forbidden",
+    "title": "403 Access Denied",
+    "content_data": {
+      "page_key": "403",
+      "status_code": "403",
+      "title": "Access Denied",
+      "heading": "403",
+      "description": "You don't have permission to access this resource.",
+      "button_text": "Go to Dashboard",
+      "button_url": "/dashboard",
+      "secondary_button_text": "Contact Support",
+      "secondary_button_url": "/contact",
+      "icon": "🚫",
+      "show_search": false,
+      "suggestions": [
+        {
+          "text": "Check if you're logged in with the correct account",
+          "icon": "user"
+        },
+        {
+          "text": "Contact your administrator for access",
+          "icon": "mail"
+        },
+        {
+          "text": "Request the necessary permissions",
+          "icon": "key"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "system_page",
+    "slug": "500-server-error",
+    "title": "500 Server Error",
+    "content_data": {
+      "page_key": "500",
+      "status_code": "500",
+      "title": "Something Went Wrong",
+      "heading": "500",
+      "description": "An unexpected error occurred. Our team has been notified and is working to fix it.",
+      "button_text": "Try Again",
+      "button_url": "javascript:location.reload()",
+      "secondary_button_text": "Go Home",
+      "secondary_button_url": "/",
+      "icon": "⚠️",
+      "show_search": false,
+      "suggestions": [
+        {
+          "text": "Try refreshing the page",
+          "icon": "refresh"
+        },
+        {
+          "text": "Clear your browser cache",
+          "icon": "trash"
+        },
+        {
+          "text": "Contact support if the issue persists",
+          "icon": "headphones"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "system_page",
+    "slug": "503-maintenance",
+    "title": "503 Maintenance Mode",
+    "content_data": {
+      "page_key": "503",
+      "status_code": "503",
+      "title": "Under Maintenance",
+      "heading": "We'll Be Back Soon",
+      "description": "We're currently performing scheduled maintenance to improve your experience. Please check back in a few minutes.",
+      "button_text": "Check Status",
+      "button_url": "https://status.bakalr.com",
+      "secondary_button_text": "Contact Us",
+      "secondary_button_url": "/contact",
+      "icon": "🔧",
+      "show_search": false,
+      "suggestions": [
+        {
+          "text": "Follow us on social media for updates",
+          "icon": "bell"
+        },
+        {
+          "text": "Check our status page for real-time information",
+          "icon": "activity"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "system_page",
+    "slug": "offline",
+    "title": "You're Offline",
+    "content_data": {
+      "page_key": "offline",
+      "status_code": "0",
+      "title": "No Internet Connection",
+      "heading": "You're Offline",
+      "description": "It looks like you've lost your internet connection. Please check your network settings and try again.",
+      "button_text": "Try Again",
+      "button_url": "javascript:location.reload()",
+      "icon": "📡",
+      "show_search": false,
+      "suggestions": [
+        {
+          "text": "Check your Wi-Fi or mobile data connection",
+          "icon": "wifi"
+        },
+        {
+          "text": "Try moving closer to your router",
+          "icon": "signal"
+        },
+        {
+          "text": "Restart your network device",
+          "icon": "power"
+        }
+      ]
+    },
+    "status": "published"
+  }
+]

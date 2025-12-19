@@ -1,0 +1,128 @@
+{
+  "api_id": "system_page",
+  "name": "System Page",
+  "description": "System pages like 404 Not Found, 403 Forbidden, 500 Error, Maintenance Mode",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique key like '404', '403', '500', 'maintenance' - NOT translated"
+    },
+    {
+      "name": "status_code",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "HTTP status code: 404, 403, 500, 503"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title shown to user"
+    },
+    {
+      "name": "heading",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Main heading (e.g., 'Page Not Found')"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Description text below heading"
+    },
+    {
+      "name": "button_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Primary action button text"
+    },
+    {
+      "name": "button_url",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Button link URL"
+    },
+    {
+      "name": "secondary_button_text",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Secondary action button text"
+    },
+    {
+      "name": "secondary_button_url",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Secondary button link URL"
+    },
+    {
+      "name": "icon",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Icon name or emoji"
+    },
+    {
+      "name": "show_search",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "Show search box on error page"
+    },
+    {
+      "name": "suggestions",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Helpful links/suggestions array"
+    }
+  ],
+  "is_published": true
+}
