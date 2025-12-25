@@ -173,10 +173,18 @@ def seed_default_permissions(db: Session) -> None:
         ("customers.manage", "Full customer management", "customers"),
         # ==================== REFERENCE DATA PERMISSIONS ====================
         # Reference data management (departments, roles, statuses, etc.)
-        ("reference_data.read", "Read reference data (departments, roles, statuses)", "reference_data"),
+        (
+            "reference_data.read",
+            "Read reference data (departments, roles, statuses)",
+            "reference_data",
+        ),
         ("reference_data.create", "Create reference data entries", "reference_data"),
         ("reference_data.update", "Update reference data entries", "reference_data"),
-        ("reference_data.delete", "Delete reference data entries (non-system only)", "reference_data"),
+        (
+            "reference_data.delete",
+            "Delete reference data entries (non-system only)",
+            "reference_data",
+        ),
     ]
 
     created_count = 0

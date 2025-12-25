@@ -131,10 +131,10 @@ def get_template_categories(
         .distinct()
         .all()
     )
-    
+
     # Extract category strings from tuples
     category_list = sorted([c[0] for c in categories if c[0]])
-    
+
     return {"categories": category_list}
 
 

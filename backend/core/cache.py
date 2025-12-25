@@ -7,8 +7,8 @@ import json
 from functools import wraps
 from typing import Any, Callable, Optional
 
-import redis.asyncio as redis
 import redis as sync_redis
+import redis.asyncio as redis
 
 from backend.core.config import settings
 

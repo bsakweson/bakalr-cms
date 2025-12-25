@@ -245,9 +245,7 @@ async def list_media(
 
     pages = (total + size - 1) // size
 
-    return MediaListResponse(
-        items=items, total=total, page=page, size=size, pages=pages
-    )
+    return MediaListResponse(items=items, total=total, page=page, size=size, pages=pages)
 
 
 @router.get("/search", response_model=MediaListResponse)
@@ -304,9 +302,7 @@ async def search_media(
 
     pages = (total + size - 1) // size
 
-    return MediaListResponse(
-        items=items, total=total, page=page, size=size, pages=pages
-    )
+    return MediaListResponse(items=items, total=total, page=page, size=size, pages=pages)
 
 
 @router.get("/{media_id}", response_model=MediaResponse)

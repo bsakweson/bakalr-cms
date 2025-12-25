@@ -276,7 +276,7 @@ class SeedRunner:
             return True
 
         items = types_result if isinstance(types_result, list) else types_result.get("items", [])
-        
+
         if not items:
             log_info("Database is empty - no content types found")
             print()
@@ -289,27 +289,25 @@ class SeedRunner:
         for ct in items:
             api_id = ct.get("api_id")
             name = ct.get("name")
-            
+
             # Count entries for this content type (API uses content_type_slug)
-            entries_result = self._api_get(f"content/entries?content_type_slug={api_id}&page_size=1")
+            entries_result = self._api_get(
+                f"content/entries?content_type_slug={api_id}&page_size=1"
+            )
             entry_count = 0
             if entries_result:
                 entry_count = entries_result.get("total", 0)
-            
-            inventory.append({
-                "name": name,
-                "api_id": api_id,
-                "entries": entry_count
-            })
+
+            inventory.append({"name": name, "api_id": api_id, "entries": entry_count})
             total_entries += entry_count
 
         # Display inventory
         print(f"\n{'Content Type':<35} {'API ID':<30} {'Entries':>8}")
         print("-" * 75)
-        
+
         for item in sorted(inventory, key=lambda x: x["name"]):
             print(f"{item['name']:<35} {item['api_id']:<30} {item['entries']:>8}")
-        
+
         print("-" * 75)
         print(f"{'TOTAL':<35} {len(inventory)} content types{' ':>13} {total_entries:>8}")
         print()
@@ -368,7 +366,7 @@ class SeedRunner:
         # Find the content type file
         content_types_dir = SEEDS_DIR / "content-types"
         ct_file = content_types_dir / content_type_file
-        
+
         if not ct_file.exists():
             # Try without path prefix
             matching = list(content_types_dir.glob(f"*{content_type_file}*"))
@@ -382,7 +380,7 @@ class SeedRunner:
         # Load the content type definition to get api_id
         ct_data = self._load_json(ct_file)
         api_id = ct_data.get("api_id")
-        
+
         if not api_id:
             log_error(f"No api_id found in {ct_file.name}")
             return False
@@ -393,7 +391,9 @@ class SeedRunner:
         types_result = self._api_get("content/types")
         content_type_id = None
         if types_result:
-            items = types_result if isinstance(types_result, list) else types_result.get("items", [])
+            items = (
+                types_result if isinstance(types_result, list) else types_result.get("items", [])
+            )
             for ct in items:
                 if ct.get("api_id") == api_id:
                     content_type_id = ct.get("id")
@@ -402,7 +402,9 @@ class SeedRunner:
         if content_type_id:
             # Delete all content entries of this type
             log_info(f"Fetching entries for content type: {api_id}...")
-            entries_result = self._api_get(f"content/entries?content_type_slug={api_id}&page_size=1000")
+            entries_result = self._api_get(
+                f"content/entries?content_type_slug={api_id}&page_size=1000"
+            )
             if entries_result:
                 items = entries_result.get("items", [])
                 log_info(f"Found {len(items)} entries to delete")
@@ -436,7 +438,7 @@ class SeedRunner:
         # Find the content type file
         content_types_dir = SEEDS_DIR / "content-types"
         ct_file = content_types_dir / content_type_file
-        
+
         if not ct_file.exists():
             matching = list(content_types_dir.glob(f"*{content_type_file}*"))
             if matching:
@@ -459,7 +461,9 @@ class SeedRunner:
         if ct_data.get("display_field"):
             payload["display_field"] = ct_data["display_field"]
 
-        result = self._api_post("content/types", payload, description=f"content type: {ct_data['name']}")
+        result = self._api_post(
+            "content/types", payload, description=f"content type: {ct_data['name']}"
+        )
         if result and not result.get("_already_exists"):
             self.created_content_types[api_id] = result.get("id")
             log_success(f"Created content type: {ct_data['name']} (id: {result.get('id')})")
@@ -473,7 +477,7 @@ class SeedRunner:
             self.created_entries = {}
             for sample_file in sorted(sample_data_dir.glob("*.json")):
                 data = self._load_json(sample_file)
-                
+
                 # Check if this file contains entries for our content type
                 if isinstance(data, list):
                     entries = data
@@ -485,7 +489,11 @@ class SeedRunner:
                 # Filter entries that match our content type
                 matching_entries = []
                 for entry in entries:
-                    entry_ct = entry.get("content_type_api_id") or entry.get("content_type") or shared_content_type
+                    entry_ct = (
+                        entry.get("content_type_api_id")
+                        or entry.get("content_type")
+                        or shared_content_type
+                    )
                     if entry_ct == api_id:
                         matching_entries.append(entry)
 
@@ -879,7 +887,7 @@ def main():
     # Get email and password from args (which fall back to env vars)
     email = args.email
     password = args.password
-    
+
     # Only prompt interactively if not in dry-run mode and values not provided
     if not args.dry_run:
         if not email:
@@ -891,7 +899,7 @@ def main():
             except (EOFError, KeyboardInterrupt):
                 log_error("\nEmail is required. Use --email or SEED_ADMIN_EMAIL env var")
                 sys.exit(1)
-        
+
         if not password:
             try:
                 password = getpass.getpass("Admin password: ")
@@ -919,7 +927,7 @@ def main():
         runner.show_inventory()
         try:
             proceed = input("Proceed with seeding? [Y/n]: ").strip().lower()
-            if proceed and proceed not in ('y', 'yes'):
+            if proceed and proceed not in ("y", "yes"):
                 log_info("Aborted by user")
                 sys.exit(0)
         except (EOFError, KeyboardInterrupt):

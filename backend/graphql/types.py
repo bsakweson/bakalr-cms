@@ -1,15 +1,17 @@
 """
 GraphQL types for core models.
 """
-from typing import Optional, List
+
 from datetime import datetime
+from typing import List, Optional
+
 import strawberry
-from uuid import UUID
 
 
 @strawberry.type
 class OrganizationType:
     """Organization/Tenant GraphQL type."""
+
     id: strawberry.ID
     name: str
     slug: str
@@ -20,6 +22,7 @@ class OrganizationType:
 @strawberry.type
 class UserType:
     """User GraphQL type."""
+
     id: strawberry.ID
     email: str
     full_name: Optional[str]
@@ -31,6 +34,7 @@ class UserType:
 @strawberry.type
 class ContentTypeType:
     """Content Type (schema) GraphQL type."""
+
     id: strawberry.ID
     name: str
     slug: str
@@ -43,6 +47,7 @@ class ContentTypeType:
 @strawberry.type
 class ContentEntryType:
     """Content Entry GraphQL type."""
+
     id: strawberry.ID
     slug: str
     status: str
@@ -59,6 +64,7 @@ class ContentEntryType:
 @strawberry.type
 class MediaType:
     """Media/Asset GraphQL type."""
+
     id: strawberry.ID
     filename: str
     original_filename: str
@@ -77,6 +83,7 @@ class MediaType:
 @strawberry.type
 class TranslationType:
     """Translation GraphQL type."""
+
     id: strawberry.ID
     locale: str
     field_name: str
@@ -89,6 +96,7 @@ class TranslationType:
 @strawberry.type
 class LocaleType:
     """Locale GraphQL type."""
+
     id: strawberry.ID
     code: str
     name: str
@@ -99,6 +107,7 @@ class LocaleType:
 @strawberry.type
 class ThemeType:
     """Theme GraphQL type."""
+
     id: strawberry.ID
     name: str
     is_system_theme: bool
@@ -112,6 +121,7 @@ class ThemeType:
 @strawberry.type
 class ContentTemplateType:
     """Content Template GraphQL type."""
+
     id: strawberry.ID
     name: str
     description: Optional[str]
@@ -135,6 +145,7 @@ class Pageable:
         sort: Optional sort field
         direction: Sort direction ('asc' or 'desc')
     """
+
     page: int = 0  # Zero-based page number (Spring convention)
     size: int = 20
     sort: Optional[str] = None
@@ -175,6 +186,7 @@ class PageInfo:
         sort: Sort field used
         direction: Sort direction used
     """
+
     total_elements: int
     total_pages: int
     size: int
@@ -188,9 +200,13 @@ class PageInfo:
     direction: str = "desc"
 
     @staticmethod
-    def from_pageable(pageable: Pageable, total_elements: int, number_of_elements: int) -> "PageInfo":
+    def from_pageable(
+        pageable: Pageable, total_elements: int, number_of_elements: int
+    ) -> "PageInfo":
         """Create PageInfo from a Pageable request and query results."""
-        total_pages = (total_elements + pageable.size - 1) // pageable.size if pageable.size > 0 else 0
+        total_pages = (
+            (total_elements + pageable.size - 1) // pageable.size if pageable.size > 0 else 0
+        )
         return PageInfo(
             total_elements=total_elements,
             total_pages=total_pages,
@@ -214,6 +230,7 @@ PaginationInfo = PageInfo
 @strawberry.type
 class ContentEntryConnection:
     """Paginated content entries (Page<ContentEntry>)."""
+
     content: List[ContentEntryType]  # Spring uses 'content' not 'items'
     page_info: PageInfo
 
@@ -227,6 +244,7 @@ class ContentEntryConnection:
 @strawberry.type
 class MediaConnection:
     """Paginated media items (Page<Media>)."""
+
     content: List[MediaType]  # Spring uses 'content' not 'items'
     page_info: PageInfo
 

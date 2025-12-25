@@ -25,7 +25,7 @@ from backend.api.schemas.reference_data import (
     ReferenceDataUpdate,
 )
 from backend.core.cache import cache_response, invalidate_cache_pattern
-from backend.core.dependencies import get_current_user, get_current_user_flexible, require_permission
+from backend.core.dependencies import get_current_user_flexible, require_permission
 from backend.core.rate_limit import get_rate_limit, limiter
 from backend.db.session import get_db
 from backend.models.content import ContentEntry, ContentType
@@ -153,7 +153,9 @@ async def list_reference_data_types(
 async def get_reference_data(
     request: Request,
     type: str = Query(..., description="Type of reference data (department, role, status, etc.)"),
-    locale: str = Query("en", description="Locale code for translated labels (e.g., 'en', 'es', 'fr')"),
+    locale: str = Query(
+        "en", description="Locale code for translated labels (e.g., 'en', 'es', 'fr')"
+    ),
     include_inactive: bool = Query(False, description="Include inactive items"),
     current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
@@ -232,9 +234,7 @@ async def get_reference_data(
         description = data.get("description")
 
         if locale != "en":
-            translated_label = get_translated_label(
-                db, entry, locale, current_user.organization_id
-            )
+            translated_label = get_translated_label(db, entry, locale, current_user.organization_id)
             if translated_label:
                 label = translated_label
 
@@ -348,11 +348,7 @@ async def create_reference_data(
         )
 
     # Check for duplicate code within same type
-    entries = (
-        db.query(ContentEntry)
-        .filter(ContentEntry.content_type_id == content_type.id)
-        .all()
-    )
+    entries = db.query(ContentEntry).filter(ContentEntry.content_type_id == content_type.id).all()
 
     for entry in entries:
         entry_data = parse_entry_data(entry)
@@ -395,9 +391,7 @@ async def create_reference_data(
     # Invalidate cache
     await invalidate_cache_pattern(f"reference_data:*:{current_user.organization_id}:*")
 
-    logger.info(
-        f"Created reference data: {data.data_type}/{data.code} by user {current_user.id}"
-    )
+    logger.info(f"Created reference data: {data.data_type}/{data.code} by user {current_user.id}")
 
     return ReferenceDataFullResponse(
         id=str(entry.id),
@@ -491,9 +485,7 @@ async def update_reference_data(
     # Invalidate cache
     await invalidate_cache_pattern(f"reference_data:*:{current_user.organization_id}:*")
 
-    logger.info(
-        f"Updated reference data: {data_type}/{code} by user {current_user.id}"
-    )
+    logger.info(f"Updated reference data: {data_type}/{code} by user {current_user.id}")
 
     return ReferenceDataFullResponse(
         id=str(target_entry.id),
@@ -572,9 +564,7 @@ async def delete_reference_data(
     # Invalidate cache
     await invalidate_cache_pattern(f"reference_data:*:{current_user.organization_id}:*")
 
-    logger.info(
-        f"Deleted reference data: {data_type}/{code} by user {current_user.id}"
-    )
+    logger.info(f"Deleted reference data: {data_type}/{code} by user {current_user.id}")
 
 
 @router.get("/validate/{data_type}/{code}")

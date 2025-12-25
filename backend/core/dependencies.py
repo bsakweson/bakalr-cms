@@ -403,7 +403,9 @@ async def get_current_user_or_api_key(
             if token_data:
                 user = db.query(User).filter(User.id == token_data.sub).first()
                 # Skip email verification check in test mode
-                skip_email_verification = os.environ.get("SKIP_EMAIL_VERIFICATION", "").lower() == "true"
+                skip_email_verification = (
+                    os.environ.get("SKIP_EMAIL_VERIFICATION", "").lower() == "true"
+                )
                 if user and user.is_active and (user.is_email_verified or skip_email_verification):
                     return (user, None)
         except Exception:
@@ -492,6 +494,7 @@ def require_permission(permission: str):
     Returns:
         A dependency function that validates the permission and returns the user
     """
+
     async def permission_checker(
         current_user: User = Depends(get_current_user),
         db: Session = Depends(get_db),

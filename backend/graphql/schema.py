@@ -47,7 +47,7 @@ def to_content_entry_type(entry: ContentEntry) -> ContentEntryType:
     if entry.published_at:
         if isinstance(entry.published_at, str):
             try:
-                published_at = datetime.fromisoformat(entry.published_at.replace('Z', '+00:00'))
+                published_at = datetime.fromisoformat(entry.published_at.replace("Z", "+00:00"))
             except ValueError:
                 published_at = None
         else:
@@ -71,6 +71,7 @@ def to_content_entry_type(entry: ContentEntry) -> ContentEntryType:
 def to_content_type_type(ct: ContentType) -> ContentTypeType:
     """Convert ContentType to GraphQL type."""
     import json
+
     # Parse fields_schema from JSON string
     fields = json.loads(ct.fields_schema) if ct.fields_schema else []
     return ContentTypeType(
@@ -201,15 +202,9 @@ class Query:
         # Use joinedload to eagerly load relationships
         entry = (
             context.db.query(ContentEntry)
-            .options(
-                joinedload(ContentEntry.content_type),
-                joinedload(ContentEntry.author)
-            )
+            .options(joinedload(ContentEntry.content_type), joinedload(ContentEntry.author))
             .join(ContentType)
-            .filter(
-                ContentEntry.id == id,
-                ContentType.organization_id == context.organization_id
-            )
+            .filter(ContentEntry.id == id, ContentType.organization_id == context.organization_id)
             .first()
         )
 
@@ -243,7 +238,9 @@ class Query:
         # Build Pageable from input or backward-compatible params
         if pageable is None:
             # Handle backward compatibility: per_page -> size
-            effective_size = size if size is not None else (per_page if per_page is not None else 20)
+            effective_size = (
+                size if size is not None else (per_page if per_page is not None else 20)
+            )
             # Convert 1-based page to 0-based if old convention used
             effective_page = page if page is not None else 0
             pageable = Pageable(page=effective_page, size=effective_size)
@@ -252,10 +249,7 @@ class Query:
         # Use joinedload to eagerly load relationships for efficient serialization
         query = (
             context.db.query(ContentEntry)
-            .options(
-                joinedload(ContentEntry.content_type),
-                joinedload(ContentEntry.author)
-            )
+            .options(joinedload(ContentEntry.content_type), joinedload(ContentEntry.author))
             .join(ContentType)
             .filter(ContentType.organization_id == context.organization_id)
         )
@@ -323,7 +317,9 @@ class Query:
 
         # Build Pageable from input or backward-compatible params
         if pageable is None:
-            effective_size = size if size is not None else (per_page if per_page is not None else 20)
+            effective_size = (
+                size if size is not None else (per_page if per_page is not None else 20)
+            )
             effective_page = page if page is not None else 0
             pageable = Pageable(page=effective_page, size=effective_size)
 
@@ -407,7 +403,9 @@ class Mutation:
     """GraphQL Mutation type for write operations."""
 
     @strawberry.field
-    def publish_content(self, info: Info[GraphQLContext, None], id: strawberry.ID) -> ContentEntryType:
+    def publish_content(
+        self, info: Info[GraphQLContext, None], id: strawberry.ID
+    ) -> ContentEntryType:
         """Publish a content entry."""
         context: GraphQLContext = info.context
         context.require_permission("content.publish")
@@ -416,15 +414,9 @@ class Mutation:
         # Use joinedload to eagerly load relationships
         entry = (
             context.db.query(ContentEntry)
-            .options(
-                joinedload(ContentEntry.content_type),
-                joinedload(ContentEntry.author)
-            )
+            .options(joinedload(ContentEntry.content_type), joinedload(ContentEntry.author))
             .join(ContentType)
-            .filter(
-                ContentEntry.id == id,
-                ContentType.organization_id == context.organization_id
-            )
+            .filter(ContentEntry.id == id, ContentType.organization_id == context.organization_id)
             .first()
         )
 
@@ -441,7 +433,9 @@ class Mutation:
         return to_content_entry_type(entry)
 
     @strawberry.field
-    def unpublish_content(self, info: Info[GraphQLContext, None], id: strawberry.ID) -> ContentEntryType:
+    def unpublish_content(
+        self, info: Info[GraphQLContext, None], id: strawberry.ID
+    ) -> ContentEntryType:
         """Unpublish a content entry."""
         context: GraphQLContext = info.context
         context.require_permission("content.update")
@@ -450,15 +444,9 @@ class Mutation:
         # Use joinedload to eagerly load relationships
         entry = (
             context.db.query(ContentEntry)
-            .options(
-                joinedload(ContentEntry.content_type),
-                joinedload(ContentEntry.author)
-            )
+            .options(joinedload(ContentEntry.content_type), joinedload(ContentEntry.author))
             .join(ContentType)
-            .filter(
-                ContentEntry.id == id,
-                ContentType.organization_id == context.organization_id
-            )
+            .filter(ContentEntry.id == id, ContentType.organization_id == context.organization_id)
             .first()
         )
 
