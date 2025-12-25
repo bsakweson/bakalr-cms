@@ -1,0 +1,177 @@
+{
+  "api_id": "ecommerce_page",
+  "name": "E-commerce Page",
+  "description": "Order confirmation, payment status, order tracking, and checkout flow pages",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique identifier: order-confirmation, payment-failed, payment-processing, order-tracking, order-lookup"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title - IS translated"
+    },
+    {
+      "name": "heading",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Main heading displayed on page"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page description/subheading"
+    },
+    {
+      "name": "icon",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Icon name: check-circle, x-circle, loader, package, search"
+    },
+    {
+      "name": "icon_color",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Icon color class: text-green-500, text-red-500, text-blue-500"
+    },
+    {
+      "name": "primary_button",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Primary CTA button {text, url, icon}"
+    },
+    {
+      "name": "secondary_button",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Secondary button {text, url, icon}"
+    },
+    {
+      "name": "info_sections",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Info blocks shown on page [{title, content, icon}]"
+    },
+    {
+      "name": "labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page-specific labels - IS translated"
+    },
+    {
+      "name": "form_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field labels for tracking lookup forms"
+    },
+    {
+      "name": "form_placeholders",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field placeholders"
+    },
+    {
+      "name": "status_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Order/payment status labels"
+    },
+    {
+      "name": "timeline_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Order tracking timeline labels"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Success/error/info messages"
+    },
+    {
+      "name": "meta_title",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta title"
+    },
+    {
+      "name": "meta_description",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta description"
+    }
+  ]
+}

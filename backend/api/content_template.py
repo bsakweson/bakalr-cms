@@ -112,6 +112,32 @@ def create_template(
     return template
 
 
+@router.get("/categories", response_model=dict)
+@limiter.limit(get_rate_limit())
+def get_template_categories(
+    request: Request,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Get all unique template categories for the organization."""
+    # Query distinct categories from templates
+    categories = (
+        db.query(ContentTemplate.category)
+        .filter(
+            ContentTemplate.organization_id == current_user.organization_id,
+            ContentTemplate.category.isnot(None),
+            ContentTemplate.category != "",
+        )
+        .distinct()
+        .all()
+    )
+    
+    # Extract category strings from tuples
+    category_list = sorted([c[0] for c in categories if c[0]])
+    
+    return {"categories": category_list}
+
+
 @router.get("", response_model=ContentTemplateListResponse)
 @limiter.limit(get_rate_limit())
 def list_templates(

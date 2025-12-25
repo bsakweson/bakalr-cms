@@ -5,17 +5,21 @@ Bakalr CMS Seed Runner
 Seeds the CMS with themes, content types, locales, and sample data.
 
 Usage:
-    poetry run python seeds/seed_runner.py                    # Full seed
+    poetry run python seeds/seed_runner.py                    # Full seed (shows inventory first)
+    poetry run python seeds/seed_runner.py --inventory        # Show inventory only
+    poetry run python seeds/seed_runner.py --no-inventory     # Skip inventory check
     poetry run python seeds/seed_runner.py --only themes      # Only themes
     poetry run python seeds/seed_runner.py --only content-types
     poetry run python seeds/seed_runner.py --only locales
     poetry run python seeds/seed_runner.py --only sample-data
     poetry run python seeds/seed_runner.py --file 02-navigation.json  # Single file
-    poetry run python seeds/seed_runner.py --reset            # Delete and reseed
+    poetry run python seeds/seed_runner.py --reset            # Delete and reseed all
+    poetry run python seeds/seed_runner.py --reset-type 01-page.json  # Reset specific content type
     poetry run python seeds/seed_runner.py --dry-run          # Show what would be created
 """
 
 import argparse
+import getpass
 import json
 import os
 import sys
@@ -78,7 +82,7 @@ class SeedRunner:
         dry_run: bool = False,
     ):
         self.api_url = api_url.rstrip("/")
-        self.email = email or os.getenv("SEED_ADMIN_EMAIL", "bsakweson@gmail.com")
+        self.email = email or os.getenv("SEED_ADMIN_EMAIL", "")
         self.password = password or os.getenv("SEED_ADMIN_PASSWORD", "")
         self.dry_run = dry_run
         self.token: Optional[str] = None
@@ -256,6 +260,62 @@ class SeedRunner:
                 log_error(f"Unexpected error: {e}")
                 return False
 
+    # ==================== INVENTORY ====================
+
+    def show_inventory(self):
+        """Show current inventory of content types and entries in the database"""
+        log_header("Current Database Inventory")
+
+        if not self.token and not self.authenticate():
+            return False
+
+        # Get all content types
+        types_result = self._api_get("content/types")
+        if not types_result:
+            log_warning("Could not fetch content types")
+            return True
+
+        items = types_result if isinstance(types_result, list) else types_result.get("items", [])
+        
+        if not items:
+            log_info("Database is empty - no content types found")
+            print()
+            return True
+
+        # Build inventory
+        total_entries = 0
+        inventory = []
+
+        for ct in items:
+            api_id = ct.get("api_id")
+            name = ct.get("name")
+            
+            # Count entries for this content type (API uses content_type_slug)
+            entries_result = self._api_get(f"content/entries?content_type_slug={api_id}&page_size=1")
+            entry_count = 0
+            if entries_result:
+                entry_count = entries_result.get("total", 0)
+            
+            inventory.append({
+                "name": name,
+                "api_id": api_id,
+                "entries": entry_count
+            })
+            total_entries += entry_count
+
+        # Display inventory
+        print(f"\n{'Content Type':<35} {'API ID':<30} {'Entries':>8}")
+        print("-" * 75)
+        
+        for item in sorted(inventory, key=lambda x: x["name"]):
+            print(f"{item['name']:<35} {item['api_id']:<30} {item['entries']:>8}")
+        
+        print("-" * 75)
+        print(f"{'TOTAL':<35} {len(inventory)} content types{' ':>13} {total_entries:>8}")
+        print()
+
+        return True
+
     # ==================== RESET DATA ====================
 
     def reset_all(self):
@@ -267,7 +327,7 @@ class SeedRunner:
 
         # First delete all content entries
         log_info("Fetching content entries to delete...")
-        entries_result = self._api_get("content/entries?per_page=1000")
+        entries_result = self._api_get("content/entries?page_size=1000")
         if entries_result:
             items = entries_result.get("items", [])
             log_info(f"Found {len(items)} content entries to delete")
@@ -296,6 +356,145 @@ class SeedRunner:
                     log_error(f"Failed to delete content type: {name}")
 
         log_success("Reset complete!")
+        return True
+
+    def reset_content_type(self, content_type_file: str):
+        """Reset a specific content type and its data by file name"""
+        log_header(f"Resetting Content Type: {content_type_file}")
+
+        if not self.authenticate():
+            return False
+
+        # Find the content type file
+        content_types_dir = SEEDS_DIR / "content-types"
+        ct_file = content_types_dir / content_type_file
+        
+        if not ct_file.exists():
+            # Try without path prefix
+            matching = list(content_types_dir.glob(f"*{content_type_file}*"))
+            if matching:
+                ct_file = matching[0]
+            else:
+                log_error(f"Content type file not found: {content_type_file}")
+                log_info(f"Available files: {[f.name for f in content_types_dir.glob('*.json')]}")
+                return False
+
+        # Load the content type definition to get api_id
+        ct_data = self._load_json(ct_file)
+        api_id = ct_data.get("api_id")
+        
+        if not api_id:
+            log_error(f"No api_id found in {ct_file.name}")
+            return False
+
+        log_info(f"Resetting content type: {ct_data['name']} (api_id: {api_id})")
+
+        # Find the content type ID
+        types_result = self._api_get("content/types")
+        content_type_id = None
+        if types_result:
+            items = types_result if isinstance(types_result, list) else types_result.get("items", [])
+            for ct in items:
+                if ct.get("api_id") == api_id:
+                    content_type_id = ct.get("id")
+                    break
+
+        if content_type_id:
+            # Delete all content entries of this type
+            log_info(f"Fetching entries for content type: {api_id}...")
+            entries_result = self._api_get(f"content/entries?content_type_slug={api_id}&page_size=1000")
+            if entries_result:
+                items = entries_result.get("items", [])
+                log_info(f"Found {len(items)} entries to delete")
+                for entry in items:
+                    entry_id = entry.get("id")
+                    slug = entry.get("slug")
+                    if self._api_delete(f"content/entries/{entry_id}"):
+                        log_success(f"Deleted entry: {slug}")
+                    else:
+                        log_error(f"Failed to delete entry: {slug}")
+
+            # Delete the content type itself
+            log_info(f"Deleting content type: {ct_data['name']}...")
+            if self._api_delete(f"content/types/{content_type_id}"):
+                log_success(f"Deleted content type: {ct_data['name']}")
+            else:
+                log_error(f"Failed to delete content type: {ct_data['name']}")
+        else:
+            log_warning(f"Content type {api_id} not found in database, will create fresh")
+
+        log_success(f"Reset complete for: {api_id}")
+        return True
+
+    def seed_content_type_file(self, content_type_file: str):
+        """Seed a specific content type and find its related sample data"""
+        log_header(f"Re-seeding Content Type: {content_type_file}")
+
+        if not self.token and not self.authenticate():
+            return False
+
+        # Find the content type file
+        content_types_dir = SEEDS_DIR / "content-types"
+        ct_file = content_types_dir / content_type_file
+        
+        if not ct_file.exists():
+            matching = list(content_types_dir.glob(f"*{content_type_file}*"))
+            if matching:
+                ct_file = matching[0]
+            else:
+                log_error(f"Content type file not found: {content_type_file}")
+                return False
+
+        # Load and create the content type
+        ct_data = self._load_json(ct_file)
+        api_id = ct_data.get("api_id")
+
+        log_info(f"Creating content type: {ct_data['name']}")
+        payload = {
+            "name": ct_data["name"],
+            "api_id": ct_data["api_id"],
+            "description": ct_data.get("description", ""),
+            "fields": ct_data.get("fields", []),
+        }
+        if ct_data.get("display_field"):
+            payload["display_field"] = ct_data["display_field"]
+
+        result = self._api_post("content/types", payload, description=f"content type: {ct_data['name']}")
+        if result and not result.get("_already_exists"):
+            self.created_content_types[api_id] = result.get("id")
+            log_success(f"Created content type: {ct_data['name']} (id: {result.get('id')})")
+
+        # Fetch content type IDs for reference
+        self._fetch_content_type_ids()
+
+        # Find and seed related sample data files
+        sample_data_dir = SEEDS_DIR / "sample-data"
+        if sample_data_dir.exists():
+            self.created_entries = {}
+            for sample_file in sorted(sample_data_dir.glob("*.json")):
+                data = self._load_json(sample_file)
+                
+                # Check if this file contains entries for our content type
+                if isinstance(data, list):
+                    entries = data
+                    shared_content_type = None
+                else:
+                    entries = data.get("entries", [])
+                    shared_content_type = data.get("content_type")
+
+                # Filter entries that match our content type
+                matching_entries = []
+                for entry in entries:
+                    entry_ct = entry.get("content_type_api_id") or entry.get("content_type") or shared_content_type
+                    if entry_ct == api_id:
+                        matching_entries.append(entry)
+
+                if matching_entries:
+                    log_info(f"Found {len(matching_entries)} entries in {sample_file.name}")
+                    for entry in matching_entries:
+                        self._create_content_entry(entry, shared_content_type=shared_content_type)
+
+        log_success(f"Re-seeding complete for: {api_id}")
         return True
 
     # ==================== SEED THEMES ====================
@@ -430,15 +629,18 @@ class SeedRunner:
             # Handle both array format and {"entries": [...]} format
             if isinstance(data, list):
                 entries = data
+                shared_content_type = None
             else:
                 entries = data.get("entries", [])
+                # Support top-level content_type that applies to all entries
+                shared_content_type = data.get("content_type")
 
             if not entries:
                 log_warning(f"No entries found in {sample_file.name}")
                 continue
 
             for entry in entries:
-                self._create_content_entry(entry)
+                self._create_content_entry(entry, shared_content_type=shared_content_type)
 
     def _fetch_content_type_ids(self):
         """Fetch existing content type IDs"""
@@ -451,9 +653,10 @@ class SeedRunner:
                 api_id = ct.get("api_id") or ct.get("slug")  # fallback for compatibility
                 self.created_content_types[api_id] = ct["id"]
 
-    def _create_content_entry(self, entry: Dict):
+    def _create_content_entry(self, entry: Dict, shared_content_type: Optional[str] = None):
         """Create a single content entry"""
-        content_type_api_id = entry.get("content_type_api_id")
+        # Support per-entry content_type_api_id or shared content_type from parent
+        content_type_api_id = entry.get("content_type_api_id") or shared_content_type
         content_type_id = self.created_content_types.get(content_type_api_id)
 
         if not content_type_id and not self.dry_run:
@@ -464,8 +667,8 @@ class SeedRunner:
 
         slug = entry.get("slug")
         status = entry.get("status", "published")
-        # Support both "data" and "content_data" field names
-        data = entry.get("content_data") or entry.get("data", {})
+        # Support "data", "content_data", and "fields" field names
+        data = entry.get("content_data") or entry.get("data") or entry.get("fields", {})
 
         # Handle reference placeholders (e.g., _brand_slug, _category_slug)
         # These will be resolved to actual IDs after the referenced entries exist
@@ -516,7 +719,7 @@ class SeedRunner:
                 if result.get("_already_exists"):
                     # Fetch the existing entry ID for reference resolution
                     existing = self._api_get(
-                        f"content/entries?slug={slug}&content_type_api_id={content_type_api_id}"
+                        f"content/entries?slug={slug}&content_type_slug={content_type_api_id}"
                     )
                     if existing and existing.get("items"):
                         entry_id = existing["items"][0].get("id")
@@ -602,15 +805,18 @@ class SeedRunner:
         # Handle both array format and {"entries": [...]} format
         if isinstance(data, list):
             entries = data
+            shared_content_type = None
         else:
             entries = data.get("entries", [])
+            # Support top-level content_type that applies to all entries
+            shared_content_type = data.get("content_type")
 
         if not entries:
             log_warning(f"No entries found in {sample_file.name}")
             return True
 
         for entry in entries:
-            self._create_content_entry(entry)
+            self._create_content_entry(entry, shared_content_type=shared_content_type)
 
         log_header(f"Seeding {sample_file.name} Complete!")
         return True
@@ -652,15 +858,74 @@ def main():
         action="store_true",
         help="Delete existing content entries and content types before seeding",
     )
+    parser.add_argument(
+        "--reset-type",
+        metavar="FILE",
+        help="Reset a specific content type and its data (e.g., 01-page.json)",
+    )
+    parser.add_argument(
+        "--inventory",
+        action="store_true",
+        help="Show current database inventory and exit",
+    )
+    parser.add_argument(
+        "--no-inventory",
+        action="store_true",
+        help="Skip showing inventory before seeding",
+    )
 
     args = parser.parse_args()
 
+    # Get email and password from args (which fall back to env vars)
+    email = args.email
+    password = args.password
+    
+    # Only prompt interactively if not in dry-run mode and values not provided
+    if not args.dry_run:
+        if not email:
+            try:
+                email = input("Admin email: ").strip()
+                if not email:
+                    log_error("Email is required")
+                    sys.exit(1)
+            except (EOFError, KeyboardInterrupt):
+                log_error("\nEmail is required. Use --email or SEED_ADMIN_EMAIL env var")
+                sys.exit(1)
+        
+        if not password:
+            try:
+                password = getpass.getpass("Admin password: ")
+                if not password:
+                    log_error("Password is required")
+                    sys.exit(1)
+            except (EOFError, KeyboardInterrupt):
+                log_error("\nPassword is required. Use --password or SEED_ADMIN_PASSWORD env var")
+                sys.exit(1)
+
     runner = SeedRunner(
         api_url=args.api_url,
-        email=args.email,
-        password=args.password,
+        email=email,
+        password=password,
         dry_run=args.dry_run,
     )
+
+    # If --inventory flag, just show inventory and exit
+    if args.inventory:
+        runner.show_inventory()
+        sys.exit(0)
+
+    # Show inventory before any operation (unless --no-inventory)
+    if not args.no_inventory and not args.dry_run:
+        runner.show_inventory()
+        try:
+            proceed = input("Proceed with seeding? [Y/n]: ").strip().lower()
+            if proceed and proceed not in ('y', 'yes'):
+                log_info("Aborted by user")
+                sys.exit(0)
+        except (EOFError, KeyboardInterrupt):
+            print()
+            log_info("Aborted by user")
+            sys.exit(0)
 
     if args.reset:
         log_info("Running reset to clear existing data...")
@@ -668,6 +933,14 @@ def main():
             log_error("Reset failed!")
             sys.exit(1)
         log_success("Data cleared. Proceeding with seeding...")
+
+    if args.reset_type:
+        if not runner.reset_content_type(args.reset_type):
+            log_error("Reset content type failed!")
+            sys.exit(1)
+        # After reset, re-seed just that content type and its sample data
+        runner.seed_content_type_file(args.reset_type)
+        sys.exit(0)
 
     if args.file:
         success = runner.run_file(args.file)

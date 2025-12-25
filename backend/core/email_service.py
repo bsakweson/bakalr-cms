@@ -87,10 +87,23 @@ class EmailService:
 
             if not rendered:
                 print(f"   ❌ Template '{template_key}' not found in CMS")
+                # In development/testing, skip email if template not found
+                if settings.DEBUG or settings.ENVIRONMENT in ("development", "testing"):
+                    print(f"   ⚠️ Skipping email (template missing, DEBUG mode)")
+                    return {
+                        "subject": f"[Missing Template: {template_key}]",
+                        "html": f"<p>Email skipped - template '{template_key}' not found</p>",
+                        "text": f"Email skipped - template '{template_key}' not found",
+                        "skipped": True
+                    }
                 raise ValueError(
                     f"Email template '{template_key}' not found. "
                     "Please create it in CMS content with type 'email_template'."
                 )
+
+            # If email was skipped due to missing template, return early
+            if rendered.get("skipped"):
+                return rendered
 
             # Create message
             message = MessageSchema(

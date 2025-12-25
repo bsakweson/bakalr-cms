@@ -917,11 +917,11 @@ async def logout(
         if auth_header.startswith("Bearer "):
             token = auth_header[7:]
             payload = verify_token(token)
-            if payload and payload.get("session_id"):
+            if payload and payload.session_id:
                 session = (
                     db.query(UserSession)
                     .filter(
-                        UserSession.id == payload["session_id"],
+                        UserSession.id == payload.session_id,
                         UserSession.user_id == current_user.id,
                     )
                     .first()
@@ -929,7 +929,7 @@ async def logout(
                 if session:
                     session.terminate()
                     db.query(RefreshTokenRecord).filter(
-                        RefreshTokenRecord.session_id == payload["session_id"]
+                        RefreshTokenRecord.session_id == payload.session_id
                     ).delete()
                     db.commit()
 

@@ -71,7 +71,7 @@ async def list_audit_logs(
     """
     Get audit logs with filtering and pagination
     """
-    PermissionChecker.require_permission(current_user, "view_audit_logs", db)
+    PermissionChecker.require_permission(current_user, "audit.logs", db)
     # Base query
     query = db.query(AuditLog).filter(AuditLog.organization_id == org.id)
 
@@ -143,7 +143,7 @@ async def get_audit_stats(
     """
     Get audit log statistics
     """
-    PermissionChecker.require_permission(current_user, "view_audit_logs", db)
+    PermissionChecker.require_permission(current_user, "audit.logs", db)
     # Total logs
     total_logs = db.query(AuditLog).filter(AuditLog.organization_id == org.id).count()
 

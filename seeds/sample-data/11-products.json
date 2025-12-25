@@ -1,1573 +1,3739 @@
 [
   {
     "content_type_api_id": "product",
-    "slug": "vietnamese-raw-straight-bundle",
-    "title": "Entry product",
+    "slug": "straight-jet-black-bundle",
+    "title": "Product: Brazilian Straight Hair Bundle - Jet Black #1",
     "content_data": {
-      "name": "Vietnamese Raw Straight Virgin Hair Bundle",
-      "sku": "VNM-STR-BUNDLE",
-      "description": "Experience the ultimate in luxury hair with our Vietnamese Raw Straight bundles. Collected from single donors in Vietnam, this hair has never been chemically processed and maintains its natural cuticle alignment. Known for its incredible shine, silky texture, and exceptional longevity - properly maintained, this hair can last 3-5 years. Each bundle weighs approximately 100g.",
-      "short_description": "Single-donor raw Vietnamese, cuticle-aligned",
-      "base_price_cents": 18999,
-      "compare_at_price_cents": 24999,
-      "currency": "USD",
-      "tags": [
-        "vietnamese",
-        "raw-hair",
-        "straight",
-        "luxury",
-        "single-donor"
-      ],
-      "available_sizes": [
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        },
-        {
-          "value": "26",
-          "label": "26 inches"
-        },
-        {
-          "value": "28",
-          "label": "28 inches"
-        },
-        {
-          "value": "30",
-          "label": "30 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "Raw Virgin Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "Vietnam"
-        },
-        {
-          "label": "Texture",
-          "value": "Silky Straight"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        },
-        {
-          "label": "Donor",
-          "value": "Single Donor"
-        },
-        {
-          "label": "Processing",
-          "value": "100% Unprocessed"
-        },
-        {
-          "label": "Lifespan",
-          "value": "3-5 years with proper care"
-        }
-      ],
-      "how_to_use": "Handle with care. Use only sulfate-free, silicone-free products. Avoid excessive heat. Store properly when not in use.",
-      "weight_grams": 100,
-      "featured": true,
-      "new_arrival": false,
-      "bestseller": true,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        },
-        {
-          "value": "27",
-          "label": "#27 Honey Blonde",
-          "hex": "#c99550"
-        },
-        {
-          "value": "30",
-          "label": "#30 Auburn",
-          "hex": "#8b4513"
-        },
-        {
-          "value": "613",
-          "label": "#613 Platinum Blonde",
-          "hex": "#f5e6c8"
-        },
-        {
-          "value": "1b-27",
-          "label": "Ombre 1B/27",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "1b-30",
-          "label": "Ombre 1B/30",
-          "hex": "#2d2d2d"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "vietnamese-hair"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "peruvian-loose-wave-bundle",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Peruvian Loose Wave Virgin Hair Bundle",
-      "sku": "PER-LW-BUNDLE",
-      "description": "Our Peruvian Loose Wave bundles feature a relaxed, beachy wave pattern perfect for effortless, everyday glamour. Lightweight yet full-bodied, this hair blends seamlessly with most textures. 100% virgin human hair, cuticle-aligned.",
-      "short_description": "Lightweight Peruvian loose wave, natural luster",
-      "base_price_cents": 7999,
-      "compare_at_price_cents": 10999,
-      "currency": "USD",
-      "tags": [
-        "peruvian",
-        "loose-wave",
-        "virgin-hair",
-        "bundles"
-      ],
-      "available_sizes": [
-        {
-          "value": "10",
-          "label": "10 inches"
-        },
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Virgin Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "Peru"
-        },
-        {
-          "label": "Texture",
-          "value": "Loose Wave"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        },
-        {
-          "label": "Weft",
-          "value": "Double Wefted"
-        }
-      ],
-      "weight_grams": 100,
-      "featured": false,
-      "new_arrival": false,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "peruvian-hair"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "malaysian-deep-wave-bundle",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Malaysian Deep Wave Virgin Hair Bundle",
-      "sku": "MYS-DW-BUNDLE",
-      "description": "Get glamorous volume with our Malaysian Deep Wave bundles. This defined wave pattern holds beautifully and adds incredible fullness to your look. The hair has a natural shine and is incredibly soft to the touch.",
-      "short_description": "Ultra-soft Malaysian deep wave, defined curls",
-      "base_price_cents": 8499,
-      "compare_at_price_cents": 11999,
-      "currency": "USD",
-      "tags": [
-        "malaysian",
-        "deep-wave",
-        "virgin-hair",
-        "bundles",
-        "voluminous"
-      ],
-      "available_sizes": [
-        {
-          "value": "10",
-          "label": "10 inches"
-        },
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        },
-        {
-          "value": "26",
-          "label": "26 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Virgin Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "Malaysia"
-        },
-        {
-          "label": "Texture",
-          "value": "Deep Wave"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        }
-      ],
-      "weight_grams": 100,
-      "featured": true,
-      "new_arrival": false,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "malaysian-hair"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "indian-natural-wave-bundle",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Indian Natural Wave Virgin Hair Bundle",
-      "sku": "IND-NW-BUNDLE",
-      "description": "Our Indian Natural Wave bundles feature a subtle, natural wave pattern that blends perfectly with relaxed and natural African American hair textures. Great for beginners and easy to maintain.",
-      "short_description": "Natural wave Indian Remy, easy to blend",
-      "base_price_cents": 6999,
-      "compare_at_price_cents": 8999,
-      "currency": "USD",
-      "tags": [
-        "indian",
-        "natural-wave",
-        "remy",
-        "bundles",
-        "beginner-friendly"
-      ],
-      "available_sizes": [
-        {
-          "value": "10",
-          "label": "10 inches"
-        },
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Indian Remy Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "India"
-        },
-        {
-          "label": "Texture",
-          "value": "Natural Wave"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        }
-      ],
-      "weight_grams": 100,
-      "featured": false,
-      "new_arrival": false,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "indian-hair"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "cambodian-raw-wavy-bundle",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Cambodian Raw Wavy Virgin Hair Bundle",
-      "sku": "KHM-RAW-BUNDLE",
-      "description": "Discover the hidden gem of the hair industry with our Cambodian Raw Wavy bundles. This thick, naturally wavy hair is known for its incredible durability and volume. Perfect for those who want full, luxurious styles.",
-      "short_description": "Thick raw Cambodian, naturally wavy",
-      "base_price_cents": 15999,
-      "compare_at_price_cents": 19999,
-      "currency": "USD",
-      "tags": [
-        "cambodian",
-        "raw-hair",
-        "wavy",
-        "thick",
-        "luxury"
-      ],
-      "available_sizes": [
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        },
-        {
-          "value": "26",
-          "label": "26 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "Raw Virgin Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "Cambodia"
-        },
-        {
-          "label": "Texture",
-          "value": "Natural Wavy"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        },
-        {
-          "label": "Processing",
-          "value": "100% Unprocessed"
-        }
-      ],
-      "weight_grams": 100,
-      "featured": true,
-      "new_arrival": true,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "cambodian-hair"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "hd-lace-closure-4x4-body-wave",
-    "title": "Entry product",
-    "content_data": {
-      "name": "HD Lace Closure 4x4 - Body Wave",
-      "sku": "HD-CLS-4X4-BW",
-      "description": "Our HD Lace Closures feature the thinnest, most invisible lace available. The 4x4 size provides natural-looking middle or side part coverage. Pre-plucked hairline with baby hairs and bleached knots for an undetectable install.",
-      "short_description": "Invisible HD lace, pre-plucked with baby hairs",
-      "base_price_cents": 7999,
-      "compare_at_price_cents": 9999,
-      "currency": "USD",
-      "tags": [
-        "closure",
-        "hd-lace",
-        "4x4",
-        "body-wave",
-        "pre-plucked"
-      ],
-      "available_sizes": [
-        {
-          "value": "10",
-          "label": "10 inches"
-        },
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Size",
-          "value": "4x4 inches"
-        },
-        {
-          "label": "Lace Type",
-          "value": "HD Lace (Swiss)"
-        },
-        {
-          "label": "Texture",
-          "value": "Body Wave"
-        },
-        {
-          "label": "Pre-plucked",
-          "value": "Yes"
-        },
-        {
-          "label": "Bleached Knots",
-          "value": "Yes"
-        },
-        {
-          "label": "Baby Hairs",
-          "value": "Yes"
-        }
-      ],
-      "weight_grams": 50,
-      "featured": true,
-      "new_arrival": false,
-      "bestseller": true,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "closures"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "hd-lace-closure-5x5-straight",
-    "title": "Entry product",
-    "content_data": {
-      "name": "HD Lace Closure 5x5 - Straight",
-      "sku": "HD-CLS-5X5-STR",
-      "description": "Upgrade to our 5x5 HD Lace Closure for more parting space and styling versatility. The straight texture gives a sleek, polished finish. HD lace melts seamlessly into all skin tones.",
-      "short_description": "5x5 HD lace, more parting freedom",
-      "base_price_cents": 8999,
-      "compare_at_price_cents": 11999,
-      "currency": "USD",
-      "tags": [
-        "closure",
-        "hd-lace",
-        "5x5",
-        "straight",
-        "pre-plucked"
-      ],
-      "available_sizes": [
-        {
-          "value": "10",
-          "label": "10 inches"
-        },
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Size",
-          "value": "5x5 inches"
-        },
-        {
-          "label": "Lace Type",
-          "value": "HD Lace (Swiss)"
-        },
-        {
-          "label": "Texture",
-          "value": "Straight"
-        },
-        {
-          "label": "Pre-plucked",
-          "value": "Yes"
-        },
-        {
-          "label": "Bleached Knots",
-          "value": "Yes"
-        }
-      ],
-      "weight_grams": 55,
-      "featured": false,
-      "new_arrival": false,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "closures"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "hd-lace-frontal-13x4-body-wave",
-    "title": "Entry product",
-    "content_data": {
-      "name": "HD Lace Frontal 13x4 - Body Wave",
-      "sku": "HD-FRT-13X4-BW",
-      "description": "Our 13x4 HD Lace Frontal provides ear-to-ear coverage with a natural hairline that looks like it's growing from your scalp. Style your hair freely - side parts, middle parts, even slicked back! Pre-plucked with baby hairs and bleached knots.",
-      "short_description": "Ear-to-ear HD lace frontal, ultimate versatility",
-      "base_price_cents": 12999,
-      "compare_at_price_cents": 16999,
-      "currency": "USD",
-      "tags": [
-        "frontal",
-        "hd-lace",
-        "13x4",
-        "body-wave",
-        "pre-plucked"
-      ],
-      "available_sizes": [
-        {
-          "value": "12",
-          "label": "12 inches"
-        },
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Size",
-          "value": "13x4 inches"
-        },
-        {
-          "label": "Lace Type",
-          "value": "HD Lace (Swiss)"
-        },
-        {
-          "label": "Texture",
-          "value": "Body Wave"
-        },
-        {
-          "label": "Coverage",
-          "value": "Ear to Ear"
-        },
-        {
-          "label": "Pre-plucked",
-          "value": "Yes"
-        },
-        {
-          "label": "Bleached Knots",
-          "value": "Yes"
-        },
-        {
-          "label": "Baby Hairs",
-          "value": "Yes"
-        }
-      ],
-      "weight_grams": 80,
-      "featured": true,
-      "new_arrival": false,
-      "bestseller": true,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "frontals"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "hd-lace-frontal-13x6-deep-wave",
-    "title": "Entry product",
-    "content_data": {
-      "name": "HD Lace Frontal 13x6 - Deep Wave",
-      "sku": "HD-FRT-13X6-DW",
-      "description": "Maximum styling freedom with our 13x6 HD Lace Frontal. The extended 6-inch parting space allows for deeper side parts and more versatile styling. Deep wave texture for glamorous volume.",
-      "short_description": "13x6 extended parting, deep wave glamour",
-      "base_price_cents": 15999,
-      "compare_at_price_cents": 19999,
-      "currency": "USD",
-      "tags": [
-        "frontal",
-        "hd-lace",
-        "13x6",
-        "deep-wave",
-        "extended-lace"
-      ],
-      "available_sizes": [
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Size",
-          "value": "13x6 inches"
-        },
-        {
-          "label": "Lace Type",
-          "value": "HD Lace (Swiss)"
-        },
-        {
-          "label": "Texture",
-          "value": "Deep Wave"
-        },
-        {
-          "label": "Coverage",
-          "value": "Ear to Ear with Deep Parting"
-        }
-      ],
-      "weight_grams": 90,
-      "featured": true,
-      "new_arrival": true,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "frontals"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "glueless-lace-front-wig-body-wave",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Glueless Lace Front Wig - Body Wave",
-      "sku": "GLU-LFW-BW",
-      "description": "Perfect for wig beginners! Our Glueless Lace Front Wig features pre-cut HD lace, adjustable straps, and secure combs - no glue needed! 100% virgin human hair in body wave texture. Pre-plucked hairline with baby hairs. Just put it on and go!",
-      "short_description": "No glue needed, beginner-friendly, pre-cut lace",
-      "base_price_cents": 17999,
-      "compare_at_price_cents": 24999,
-      "currency": "USD",
-      "tags": [
-        "wig",
-        "glueless",
-        "lace-front",
-        "body-wave",
-        "beginner-friendly"
-      ],
-      "available_sizes": [
-        {
-          "value": "14",
-          "label": "14 inches"
-        },
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        },
-        {
-          "value": "26",
-          "label": "26 inches"
-        }
-      ],
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Virgin Human Hair"
-        },
-        {
-          "label": "Cap Construction",
-          "value": "Glueless with Elastic Band"
-        },
-        {
-          "label": "Lace",
-          "value": "Pre-cut HD Lace"
-        },
-        {
-          "label": "Density",
-          "value": "180%"
-        },
-        {
-          "label": "Cap Size",
-          "value": "Adjustable (21.5-23 inches)"
-        }
-      ],
-      "weight_grams": 200,
-      "featured": true,
-      "new_arrival": true,
-      "bestseller": true
-    },
-    "status": "published",
-    "_category_slug": "glueless-wigs"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "full-lace-wig-straight-613-blonde",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Full Lace Wig - 613 Blonde Straight",
-      "sku": "FL-WIG-613-STR",
-      "description": "Make a statement with our stunning 613 Blonde Full Lace Wig. 100% virgin human hair that can be toned to any shade. Full lace construction allows for high ponytails, updos, and any style you desire. Pre-plucked hairline.",
-      "short_description": "613 platinum blonde, full lace, ultimate styling",
-      "base_price_cents": 29999,
-      "compare_at_price_cents": 39999,
-      "currency": "USD",
-      "tags": [
-        "wig",
-        "full-lace",
-        "613-blonde",
-        "straight",
-        "platinum"
-      ],
-      "available_sizes": [
-        {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
-        },
-        {
-          "value": "26",
-          "label": "26 inches"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Virgin Human Hair"
-        },
-        {
-          "label": "Color",
-          "value": "613 Platinum Blonde"
-        },
-        {
-          "label": "Cap Construction",
-          "value": "Full Lace"
-        },
-        {
-          "label": "Density",
-          "value": "180%"
-        },
-        {
-          "label": "Can Be Toned",
-          "value": "Yes"
-        }
-      ],
-      "weight_grams": 220,
-      "featured": true,
-      "new_arrival": false,
-      "bestseller": false
-    },
-    "status": "published",
-    "_category_slug": "full-lace-wigs"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "brazilian-kinky-curly-bundle",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Brazilian Kinky Curly Virgin Hair Bundle",
-      "sku": "BRZ-KC-BUNDLE",
-      "description": "Embrace your natural texture with our Brazilian Kinky Curly bundles. This tight curl pattern blends seamlessly with 4A-4C natural hair types. Perfect for protective styles that look completely natural.",
-      "short_description": "Natural 4A-4C texture match, perfect blend",
-      "base_price_cents": 9499,
+      "name": "Brazilian Straight Hair Bundle - Jet Black #1",
+      "sku": "STR-JB-12",
+      "slug": "straight-jet-black-bundle",
+      "description": "<p>Premium 100% virgin Brazilian straight hair bundles. Silky smooth texture, no tangling, no shedding. Can be colored, bleached, and heat styled.</p><ul><li>100% Human Virgin Hair</li><li>Double Weft</li><li>Natural Black Color</li><li>Can be dyed and bleached</li><li>Lasts 12+ months with proper care</li></ul>",
+      "short_description": "",
+      "price_cents": 8999,
       "compare_at_price_cents": 12999,
       "currency": "USD",
+      "category_slug": "brazilian-hair",
+      "brand_slug": "k-hair-vietnam",
       "tags": [
+        "straight",
         "brazilian",
-        "kinky-curly",
-        "virgin-hair",
-        "natural-texture",
-        "4c-friendly"
+        "virgin",
+        "jet-black",
+        "bundle",
+        "best-seller"
       ],
-      "available_sizes": [
+      "variants": [
         {
-          "value": "10",
-          "label": "10 inches"
+          "sku": "STR-JB-12",
+          "price_cents": 8999,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "12",
-          "label": "12 inches"
+          "sku": "STR-JB-14",
+          "price_cents": 9999,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "14",
-          "label": "14 inches"
+          "sku": "STR-JB-16",
+          "price_cents": 10999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "16",
-          "label": "16 inches"
+          "sku": "STR-JB-18",
+          "price_cents": 11999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "18",
-          "label": "18 inches"
+          "sku": "STR-JB-20",
+          "price_cents": 12999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "20",
-          "label": "20 inches"
+          "sku": "STR-JB-22",
+          "price_cents": 13999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "STR-JB-24",
+          "price_cents": 14999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "STR-JB-26",
+          "price_cents": 16999,
+          "compare_at_price_cents": 20999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "STR-JB-28",
+          "price_cents": 18999,
+          "compare_at_price_cents": 22999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "STR-JB-30",
+          "price_cents": 20999,
+          "compare_at_price_cents": 25999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
         }
       ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Virgin Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "Brazil"
-        },
-        {
-          "label": "Texture",
-          "value": "Kinky Curly (3C-4A)"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        },
-        {
-          "label": "Blends With",
-          "value": "4A-4C Natural Hair"
-        }
-      ],
-      "weight_grams": 100,
-      "featured": false,
+      "specifications": {},
+      "seo_title": "Brazilian Straight Hair Bundle | Premium Virgin Hair",
+      "seo_description": "Shop premium Brazilian straight hair bundles. 100% virgin human hair that lasts 12+ months.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
       "new_arrival": false,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
+      "on_sale": true,
+      "media_ids": [
+        "41795575-17b1-4407-9c96-0fc83df9187d",
+        "825a0a12-8f6d-4e8f-9af8-8faf4b3f8061",
+        "9394f31a-8db1-4cbe-a81e-abb5839c5d1f",
+        "8f2db59c-6ead-4460-9687-de249ef44ad9"
       ]
-    },
-    "status": "published",
-    "_category_slug": "brazilian-hair"
+    }
   },
   {
     "content_type_api_id": "product",
-    "slug": "brazilian-water-wave-bundle",
-    "title": "Entry product",
+    "slug": "body-wave-natural-bundle",
+    "title": "Product: Body Wave Hair Bundle - Natural Black #1B",
     "content_data": {
-      "name": "Brazilian Water Wave Virgin Hair Bundle",
-      "sku": "BRZ-WW-BUNDLE",
-      "description": "Get that fresh-from-the-beach look with our Brazilian Water Wave bundles. This beautiful crimped wave pattern creates stunning volume and movement. Perfect for summer styles!",
-      "short_description": "Beachy crimped waves, summer-ready",
-      "base_price_cents": 8999,
+      "name": "Body Wave Hair Bundle - Natural Black #1B",
+      "sku": "BW-NB-12",
+      "slug": "body-wave-natural-bundle",
+      "description": "<p>Luxurious body wave texture with beautiful bounce and movement. 100% virgin human hair that blends seamlessly with natural hair.</p><ul><li>100% Human Virgin Hair</li><li>Soft S-wave pattern</li><li>Minimal shedding</li><li>Can be straightened and curled</li><li>Lasts 12+ months with proper care</li></ul>",
+      "short_description": "",
+      "price_cents": 9499,
+      "compare_at_price_cents": 13499,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "5s-hair-vietnam",
+      "tags": [
+        "body-wave",
+        "virgin",
+        "natural-black",
+        "bundle",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "BW-NB-12",
+          "price_cents": 9499,
+          "compare_at_price_cents": 13499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-14",
+          "price_cents": 10499,
+          "compare_at_price_cents": 14499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-16",
+          "price_cents": 11499,
+          "compare_at_price_cents": 15499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-18",
+          "price_cents": 12499,
+          "compare_at_price_cents": 16499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-20",
+          "price_cents": 13499,
+          "compare_at_price_cents": 17499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-22",
+          "price_cents": 14499,
+          "compare_at_price_cents": 18499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-24",
+          "price_cents": 15499,
+          "compare_at_price_cents": 19499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-26",
+          "price_cents": 17499,
+          "compare_at_price_cents": 21499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-28",
+          "price_cents": 19499,
+          "compare_at_price_cents": 23499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BW-NB-30",
+          "price_cents": 21499,
+          "compare_at_price_cents": 26499,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Body Wave Hair Bundle | Premium Virgin Hair",
+      "seo_description": "Shop body wave hair bundles. Beautiful bounce and movement that lasts.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "beefc99a-db40-4a24-93bb-1d8cbda9a375",
+        "50b34d2d-ad31-4cff-8fe8-bc239d0ef176",
+        "f817fdf9-5605-458a-bb6a-85941d863ad3",
+        "5621c57f-4d84-4ff9-b4a0-16c519faa530"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "deep-wave-bundle",
+    "title": "Product: Deep Wave Curly Hair Bundle",
+    "content_data": {
+      "name": "Deep Wave Curly Hair Bundle",
+      "sku": "DW-12",
+      "slug": "deep-wave-bundle",
+      "description": "<p>Gorgeous deep wave curls that hold pattern beautifully. Perfect for a glamorous, voluminous look. 100% virgin human hair.</p><ul><li>100% Human Virgin Hair</li><li>Tight curl pattern</li><li>Holds curl when wet</li><li>Minimal tangling</li><li>Lasts 12+ months with proper care</li></ul>",
+      "short_description": "",
+      "price_cents": 9999,
+      "compare_at_price_cents": 13999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "tinashe-hair",
+      "tags": [
+        "deep-wave",
+        "curly",
+        "virgin",
+        "bundle",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "DW-12",
+          "price_cents": 9999,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-14",
+          "price_cents": 10999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-16",
+          "price_cents": 11999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-18",
+          "price_cents": 12999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-20",
+          "price_cents": 13999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-22",
+          "price_cents": 14999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-24",
+          "price_cents": 15999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "DW-26",
+          "price_cents": 17999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Deep Wave Hair Bundle | Premium Curly Hair",
+      "seo_description": "Shop deep wave curly hair bundles. Gorgeous curls that last.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "f1a38f51-405a-45b2-94b3-48563c2cac6b",
+        "66611222-9ef9-499d-a5e4-12268a7ae3ec",
+        "e2af05a9-7c66-441c-810f-59670c43fcaf",
+        "214be1bc-3fdc-4dea-a05c-3444d14871da"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "hd-lace-closure-4x4",
+    "title": "Product: HD Lace Closure 4x4 - Straight",
+    "content_data": {
+      "name": "HD Lace Closure 4x4 - Straight",
+      "sku": "CL-4x4-STR-10-FP",
+      "slug": "hd-lace-closure-4x4",
+      "description": "<p>Invisible HD lace closure that melts into any skin tone. Pre-plucked hairline with baby hairs for the most natural look.</p><ul><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Baby hairs included</li><li>Free/Middle/Three part</li><li>Swiss lace quality</li></ul>",
+      "short_description": "",
+      "price_cents": 7998,
       "compare_at_price_cents": 11999,
       "currency": "USD",
+      "category_slug": "closures",
+      "brand_slug": "west-kiss-hair",
       "tags": [
-        "brazilian",
-        "water-wave",
-        "virgin-hair",
-        "bundles",
-        "summer"
+        "closure",
+        "4x4",
+        "hd-lace",
+        "straight",
+        "best-seller"
       ],
-      "available_sizes": [
+      "variants": [
         {
-          "value": "10",
-          "label": "10 inches"
+          "sku": "CL-4x4-STR-10-FP",
+          "price_cents": 7998,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "12",
-          "label": "12 inches"
+          "sku": "CL-4x4-STR-12-FP",
+          "price_cents": 8999,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "14",
-          "label": "14 inches"
+          "sku": "CL-4x4-STR-14-FP",
+          "price_cents": 9999,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
         },
         {
-          "value": "16",
-          "label": "16 inches"
-        },
-        {
-          "value": "18",
-          "label": "18 inches"
-        },
-        {
-          "value": "20",
-          "label": "20 inches"
-        },
-        {
-          "value": "22",
-          "label": "22 inches"
-        },
-        {
-          "value": "24",
-          "label": "24 inches"
+          "sku": "CL-4x4-STR-16-FP",
+          "price_cents": 10999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
         }
       ],
-      "specifications": [
-        {
-          "label": "Hair Type",
-          "value": "100% Virgin Human Hair"
-        },
-        {
-          "label": "Origin",
-          "value": "Brazil"
-        },
-        {
-          "label": "Texture",
-          "value": "Water Wave"
-        },
-        {
-          "label": "Weight",
-          "value": "100g per bundle"
-        }
-      ],
-      "weight_grams": 100,
-      "featured": false,
-      "new_arrival": true,
-      "bestseller": false,
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825"
-        }
-      ]
-    },
-    "status": "published",
-    "_category_slug": "brazilian-hair"
+      "specifications": {},
+      "seo_title": "HD Lace Closure 4x4 | Invisible Lace",
+      "seo_description": "Premium HD lace closure. Melts into skin for undetectable install.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
   },
   {
     "content_type_api_id": "product",
-    "slug": "ebin-wonder-lace-bond-wig-glue",
-    "title": "Entry product",
+    "slug": "hd-lace-frontal-13x4",
+    "title": "Product: HD Lace Frontal 13x4 - Body Wave",
     "content_data": {
-      "name": "EBIN New York Wonder Lace Bond Adhesive",
-      "sku": "EBIN-WLB-GLUE",
-      "description": "The #1 selling lace wig glue! EBIN Wonder Lace Bond provides extreme hold for up to 3 weeks. Waterproof formula withstands sweat, rain, and humidity. Dries clear and leaves no residue.",
-      "short_description": "Extreme hold, waterproof, 3-week wear",
-      "base_price_cents": 899,
+      "name": "HD Lace Frontal 13x4 - Body Wave",
+      "sku": "FR-13x4-BW-12",
+      "slug": "hd-lace-frontal-13x4",
+      "description": "<p>Ear to ear HD lace frontal for maximum styling versatility. Pre-plucked with natural hairline and baby hairs.</p><ul><li>13x4 inch coverage</li><li>HD Invisible Lace</li><li>Ear to ear coverage</li><li>Pre-plucked natural hairline</li><li>Can be parted anywhere</li></ul>",
+      "short_description": "",
+      "price_cents": 12999,
+      "compare_at_price_cents": 17999,
+      "currency": "USD",
+      "category_slug": "frontals",
+      "brand_slug": "west-kiss-hair",
+      "tags": [
+        "frontal",
+        "13x4",
+        "hd-lace",
+        "body-wave",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "FR-13x4-BW-12",
+          "price_cents": 12999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "FR-13x4-BW-14",
+          "price_cents": 13999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "FR-13x4-BW-16",
+          "price_cents": 14999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "FR-13x4-BW-18",
+          "price_cents": 15999,
+          "compare_at_price_cents": 20999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "FR-13x4-BW-20",
+          "price_cents": 16999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "HD Lace Frontal 13x4 | Ear to Ear Coverage",
+      "seo_description": "Premium HD lace frontal. Ear to ear coverage for versatile styling.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "kinky-curly-bundle",
+    "title": "Product: Kinky Curly Hair Bundle - 4C Texture",
+    "content_data": {
+      "name": "Kinky Curly Hair Bundle - 4C Texture",
+      "sku": "KC-4C-10",
+      "slug": "kinky-curly-bundle",
+      "description": "<p>Beautiful 4C kinky curly texture that blends perfectly with natural African American hair. Full, voluminous, and gorgeous.</p><ul><li>100% Human Virgin Hair</li><li>4C Texture match</li><li>Full and voluminous</li><li>Blends with natural hair</li><li>Minimal shedding</li></ul>",
+      "short_description": "",
+      "price_cents": 10999,
+      "compare_at_price_cents": 14999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "mielle-organics",
+      "tags": [
+        "kinky-curly",
+        "4c",
+        "natural",
+        "afro",
+        "bundle",
+        "textured"
+      ],
+      "variants": [
+        {
+          "sku": "KC-4C-10",
+          "price_cents": 10999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KC-4C-12",
+          "price_cents": 11999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KC-4C-14",
+          "price_cents": 12999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KC-4C-16",
+          "price_cents": 13999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KC-4C-18",
+          "price_cents": 14999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KC-4C-20",
+          "price_cents": 15999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Kinky Curly Hair Bundle | Natural 4C Texture",
+      "seo_description": "Premium kinky curly hair for natural texture matching.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "a8aadf4d-ac67-4a5c-ae22-894324b5c28e",
+        "df134cbd-fdf2-49f8-af45-218342f28c02",
+        "01ae2091-b2e3-4c9f-bb9a-43aa6a1a686c",
+        "2ea05d6f-bdcf-4642-b02b-fbb24a046d9f"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "honey-blonde-straight-bundle",
+    "title": "Product: Honey Blonde Straight Bundle #27",
+    "content_data": {
+      "name": "Honey Blonde Straight Bundle #27",
+      "sku": "HB-STR-12",
+      "slug": "honey-blonde-straight-bundle",
+      "description": "<p>Stunning pre-colored honey blonde straight hair. No bleaching needed - ready to install for an instant glam look.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #27 Blonde</li><li>Silky straight texture</li><li>Can be heat styled</li><li>Color-safe</li></ul>",
+      "short_description": "",
+      "price_cents": 11999,
+      "compare_at_price_cents": 15999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "beauty-forever-hair",
+      "tags": [
+        "blonde",
+        "honey-blonde",
+        "27",
+        "straight",
+        "colored",
+        "bundle"
+      ],
+      "variants": [
+        {
+          "sku": "HB-STR-12",
+          "price_cents": 11999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "HB-STR-14",
+          "price_cents": 12999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "HB-STR-16",
+          "price_cents": 13999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "HB-STR-18",
+          "price_cents": 14999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "HB-STR-20",
+          "price_cents": 15999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "HB-STR-22",
+          "price_cents": 16999,
+          "compare_at_price_cents": 20999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "HB-STR-24",
+          "price_cents": 17999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Honey Blonde Hair Bundle #27 | Pre-Colored",
+      "seo_description": "Pre-colored honey blonde straight hair. Ready to install.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "70147d61-3560-4569-973e-f5709cb2556b",
+        "a914a89e-f1de-4f13-9eb9-e13ec91eed75",
+        "ed3abe0f-2023-492d-a3bc-b2c19ad66c6e",
+        "3a16f199-d652-4c53-94b0-270db5468fb9"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "burgundy-body-wave-bundle",
+    "title": "Product: Burgundy Body Wave Bundle #99J",
+    "content_data": {
+      "name": "Burgundy Body Wave Bundle #99J",
+      "sku": "BUR-BW-12",
+      "slug": "burgundy-body-wave-bundle",
+      "description": "<p>Rich burgundy wine colored body wave hair. Bold, beautiful, and ready to turn heads.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #99J Burgundy</li><li>Soft body wave texture</li><li>Vibrant color</li><li>Fade resistant</li></ul>",
+      "short_description": "",
+      "price_cents": 11999,
+      "compare_at_price_cents": 15999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "beauty-forever-hair",
+      "tags": [
+        "burgundy",
+        "wine",
+        "99j",
+        "body-wave",
+        "colored",
+        "bundle"
+      ],
+      "variants": [
+        {
+          "sku": "BUR-BW-12",
+          "price_cents": 11999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BUR-BW-14",
+          "price_cents": 12999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BUR-BW-16",
+          "price_cents": 13999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BUR-BW-18",
+          "price_cents": 14999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BUR-BW-20",
+          "price_cents": 15999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BUR-BW-22",
+          "price_cents": 16999,
+          "compare_at_price_cents": 20999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Burgundy Body Wave Bundle #99J | Wine Color",
+      "seo_description": "Bold burgundy body wave hair for a stunning look.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "0b422f4c-8dfd-4253-8b13-a76962ff308f",
+        "a78815bf-52d7-425e-a1af-9011271906a9",
+        "f5817b19-e392-4a0a-b292-13bec588bd91",
+        "4657cf36-10c7-48fc-aff4-495d51612ca9"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "lace-front-wig-straight",
+    "title": "Product: HD Lace Front Wig - Straight",
+    "content_data": {
+      "name": "HD Lace Front Wig - Straight",
+      "sku": "WIG-LF-STR-14-150",
+      "slug": "lace-front-wig-straight",
+      "description": "<p>Ready to wear HD lace front wig. Pre-plucked, pre-styled, and perfect for beginners and pros alike.</p><ul><li>HD Invisible Lace Front</li><li>Pre-plucked hairline</li><li>Adjustable straps</li><li>150% Density</li><li>Glueless option available</li></ul>",
+      "short_description": "",
+      "price_cents": 18999,
+      "compare_at_price_cents": 24999,
+      "currency": "USD",
+      "category_slug": "wigs",
+      "brand_slug": "unice-hair",
+      "tags": [
+        "wig",
+        "lace-front",
+        "straight",
+        "hd-lace",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "WIG-LF-STR-14-150",
+          "price_cents": 18999,
+          "compare_at_price_cents": 24999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "WIG-LF-STR-16-150",
+          "price_cents": 20999,
+          "compare_at_price_cents": 26999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "WIG-LF-STR-18-150",
+          "price_cents": 22999,
+          "compare_at_price_cents": 28999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "WIG-LF-STR-20-150",
+          "price_cents": 24999,
+          "compare_at_price_cents": 30999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "WIG-LF-STR-22-150",
+          "price_cents": 26999,
+          "compare_at_price_cents": 32999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "WIG-LF-STR-24-150",
+          "price_cents": 28999,
+          "compare_at_price_cents": 34999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "WIG-LF-STR-26-150",
+          "price_cents": 30999,
+          "compare_at_price_cents": 37999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "HD Lace Front Wig | Ready to Wear",
+      "seo_description": "Premium HD lace front wig. Pre-plucked and ready to install.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "sleek-ponytail-extension",
+    "title": "Product: Sleek Ponytail Extension - Straight",
+    "content_data": {
+      "name": "Sleek Ponytail Extension - Straight",
+      "sku": "PONY-STR-18",
+      "slug": "sleek-ponytail-extension",
+      "description": "<p>Instant glam with our wrap-around ponytail extension. Easy to install, no glue or heat needed.</p><ul><li>Wrap-around style</li><li>Comb and drawstring attachment</li><li>Natural looking</li><li>Heat friendly</li><li>Reusable</li></ul>",
+      "short_description": "",
+      "price_cents": 4999,
+      "compare_at_price_cents": 7998,
+      "currency": "USD",
+      "category_slug": "straight-hair",
+      "brand_slug": "nadula-hair",
+      "tags": [
+        "ponytail",
+        "straight",
+        "sleek",
+        "easy-install"
+      ],
+      "variants": [
+        {
+          "sku": "PONY-STR-18",
+          "price_cents": 4999,
+          "compare_at_price_cents": 7998,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "PONY-STR-22",
+          "price_cents": 5999,
+          "compare_at_price_cents": 8999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "PONY-STR-26",
+          "price_cents": 6998,
+          "compare_at_price_cents": 9999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "PONY-STR-30",
+          "price_cents": 7998,
+          "compare_at_price_cents": 10999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Ponytail Extension | Instant Glam",
+      "seo_description": "Easy wrap-around ponytail for instant length and style.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "curly-ponytail-extension",
+    "title": "Product: Curly Ponytail Extension",
+    "content_data": {
+      "name": "Curly Ponytail Extension",
+      "sku": "PONY-CRL-14",
+      "slug": "curly-ponytail-extension",
+      "description": "<p>Voluminous curly ponytail for a fun, flirty look. Easy clip-in and wrap style.</p><ul><li>Wrap-around style</li><li>Bouncy curls</li><li>Comb and drawstring</li><li>Lightweight</li><li>Reusable</li></ul>",
+      "short_description": "",
+      "price_cents": 5499,
+      "compare_at_price_cents": 8499,
+      "currency": "USD",
+      "category_slug": "curly-hair",
+      "brand_slug": "nadula-hair",
+      "tags": [
+        "ponytail",
+        "curly",
+        "bouncy",
+        "easy-install"
+      ],
+      "variants": [
+        {
+          "sku": "PONY-CRL-14",
+          "price_cents": 5499,
+          "compare_at_price_cents": 8499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "PONY-CRL-18",
+          "price_cents": 6498,
+          "compare_at_price_cents": 9499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "PONY-CRL-22",
+          "price_cents": 7498,
+          "compare_at_price_cents": 10499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Curly Ponytail Extension | Bouncy Curls",
+      "seo_description": "Fun and flirty curly ponytail. Easy to install.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "bundle-deal-3pcs-straight",
+    "title": "Product: 3 Bundle Deal - Straight Hair",
+    "content_data": {
+      "name": "3 Bundle Deal - Straight Hair",
+      "sku": "BD3-STR-12-14-16",
+      "slug": "bundle-deal-3pcs-straight",
+      "description": "<p>Save big with our 3 bundle deal! Perfect for a full sew-in installation. Includes 3 bundles of matching straight hair.</p><ul><li>3 Bundles included</li><li>100% Virgin Hair</li><li>Same batch - perfect match</li><li>Great value</li></ul>",
+      "short_description": "",
+      "price_cents": 23999,
+      "compare_at_price_cents": 32999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "isee-hair",
+      "tags": [
+        "bundle-deal",
+        "3-bundles",
+        "straight",
+        "value",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "BD3-STR-12-14-16",
+          "price_cents": 23999,
+          "compare_at_price_cents": 32999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD3-STR-14-16-18",
+          "price_cents": 26999,
+          "compare_at_price_cents": 35999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD3-STR-16-18-20",
+          "price_cents": 29999,
+          "compare_at_price_cents": 39999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD3-STR-18-20-22",
+          "price_cents": 32999,
+          "compare_at_price_cents": 42999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD3-STR-20-22-24",
+          "price_cents": 35999,
+          "compare_at_price_cents": 45999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "3 Bundle Deal Straight Hair | Save Big",
+      "seo_description": "3 bundle deal for a full sew-in. Great value.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "bundle-deal-4pcs-closure",
+    "title": "Product: 4 Bundle + Closure Deal - Body Wave",
+    "content_data": {
+      "name": "4 Bundle + Closure Deal - Body Wave",
+      "sku": "BD4C-BW-12-18",
+      "slug": "bundle-deal-4pcs-closure",
+      "description": "<p>Complete install package! 4 bundles plus matching closure for a full, natural-looking sew-in.</p><ul><li>4 Bundles + 4x4 Closure</li><li>100% Virgin Hair</li><li>Perfect match guaranteed</li><li>Everything you need</li></ul>",
+      "short_description": "",
+      "price_cents": 37999,
+      "compare_at_price_cents": 49999,
+      "currency": "USD",
+      "category_slug": "closures",
+      "brand_slug": "isee-hair",
+      "tags": [
+        "bundle-deal",
+        "4-bundles",
+        "closure",
+        "body-wave",
+        "complete",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "BD4C-BW-12-18",
+          "price_cents": 37999,
+          "compare_at_price_cents": 49999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD4C-BW-14-20",
+          "price_cents": 42999,
+          "compare_at_price_cents": 54999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD4C-BW-16-22",
+          "price_cents": 47999,
+          "compare_at_price_cents": 59999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BD4C-BW-18-24",
+          "price_cents": 52999,
+          "compare_at_price_cents": 65999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "4 Bundle + Closure Deal | Complete Install",
+      "seo_description": "Complete sew-in package. 4 bundles plus closure.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "2f2b4b6f-2466-4823-bc5a-4dc8deff1810",
+        "f1fccfe8-aaa9-4d5f-a5d1-95a40cf26c75",
+        "29ee61a1-96c2-4b27-b7df-77aafabf3ae5",
+        "b9898454-a016-4f0f-8cd7-2e9c8a58377b"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "rebecca-straight-bundle",
+    "title": "Product: Virgin Straight Hair Bundle",
+    "content_data": {
+      "name": "Virgin Straight Hair Bundle",
+      "sku": "RBH-STR-12",
+      "slug": "rebecca-straight-bundle",
+      "description": "<p>Premium 100% virgin straight hair bundles direct from Xuchang factory. Silky smooth, no tangling, no shedding. Double weft machine made - ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Double Drawn Available</li><li>Can be colored/bleached</li><li>12+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 4999,
+      "compare_at_price_cents": 8999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "rebecca-hair-factory",
+      "tags": [
+        "straight",
+        "virgin",
+        "factory-direct",
+        "machine-weft",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "RBH-STR-12",
+          "price_cents": 4999,
+          "compare_at_price_cents": 8999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-14",
+          "price_cents": 5499,
+          "compare_at_price_cents": 9999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-16",
+          "price_cents": 5999,
+          "compare_at_price_cents": 10999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-18",
+          "price_cents": 6498,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-20",
+          "price_cents": 6998,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-22",
+          "price_cents": 7998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-24",
+          "price_cents": 8999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-26",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-28",
+          "price_cents": 10999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-STR-30",
+          "price_cents": 11999,
+          "compare_at_price_cents": 20999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Virgin Straight Hair Bundle | Factory Direct",
+      "seo_description": "Premium virgin straight hair bundles direct from factory. Best wholesale prices.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "rebecca-bodywave-bundle",
+    "title": "Product: Body Wave Hair Bundle",
+    "content_data": {
+      "name": "Body Wave Hair Bundle",
+      "sku": "RBH-BW-12",
+      "slug": "rebecca-bodywave-bundle",
+      "description": "<p>Luxurious body wave texture direct from factory. Beautiful bounce and movement. Machine weft - ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Soft S-wave pattern</li><li>Minimal shedding</li><li>12+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 4999,
+      "compare_at_price_cents": 9499,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "rebecca-hair-factory",
+      "tags": [
+        "body-wave",
+        "virgin",
+        "factory-direct",
+        "machine-weft",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "RBH-BW-12",
+          "price_cents": 4999,
+          "compare_at_price_cents": 9499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-14",
+          "price_cents": 5499,
+          "compare_at_price_cents": 10499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-16",
+          "price_cents": 5999,
+          "compare_at_price_cents": 11499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-18",
+          "price_cents": 6498,
+          "compare_at_price_cents": 12499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-20",
+          "price_cents": 6998,
+          "compare_at_price_cents": 13499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-22",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-24",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-26",
+          "price_cents": 9999,
+          "compare_at_price_cents": 17499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-28",
+          "price_cents": 10999,
+          "compare_at_price_cents": 19499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-BW-30",
+          "price_cents": 11999,
+          "compare_at_price_cents": 21499,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Body Wave Hair Bundle | Factory Direct",
+      "seo_description": "Premium body wave bundles direct from factory.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "rebecca-deepwave-bundle",
+    "title": "Product: Deep Wave Curly Bundle",
+    "content_data": {
+      "name": "Deep Wave Curly Bundle",
+      "sku": "RBH-DW-12",
+      "slug": "rebecca-deepwave-bundle",
+      "description": "<p>Gorgeous deep wave curls from factory. Holds pattern beautifully. Machine weft - ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Tight curl pattern</li><li>Holds curl when wet</li><li>12+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 5499,
+      "compare_at_price_cents": 9999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "rebecca-hair-factory",
+      "tags": [
+        "deep-wave",
+        "curly",
+        "virgin",
+        "factory-direct",
+        "machine-weft",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "RBH-DW-12",
+          "price_cents": 5499,
+          "compare_at_price_cents": 9999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-14",
+          "price_cents": 5999,
+          "compare_at_price_cents": 10999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-16",
+          "price_cents": 6498,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-18",
+          "price_cents": 6998,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-20",
+          "price_cents": 7998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-22",
+          "price_cents": 8999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-24",
+          "price_cents": 9999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DW-26",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Deep Wave Curly Bundle | Factory Direct",
+      "seo_description": "Premium deep wave curly bundles direct from factory.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "longqi-straight-bundle",
+    "title": "Product: Premium Virgin Straight Bundle",
+    "content_data": {
+      "name": "Premium Virgin Straight Bundle",
+      "sku": "LQH-STR-12",
+      "slug": "longqi-straight-bundle",
+      "description": "<p>High quality virgin straight bundles from Longqi factory. Double weft machine made for durability.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Double Weft</li><li>Natural shine</li><li>12+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 5499,
+      "compare_at_price_cents": 9499,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "longqi-hair-factory",
+      "tags": [
+        "straight",
+        "virgin",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "LQH-STR-12",
+          "price_cents": 5499,
+          "compare_at_price_cents": 9499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-14",
+          "price_cents": 5999,
+          "compare_at_price_cents": 10499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-16",
+          "price_cents": 6498,
+          "compare_at_price_cents": 11499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-18",
+          "price_cents": 6998,
+          "compare_at_price_cents": 12499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-20",
+          "price_cents": 7998,
+          "compare_at_price_cents": 13499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-22",
+          "price_cents": 8999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-24",
+          "price_cents": 9999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-STR-26",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Premium Virgin Straight Bundle | Longqi Factory",
+      "seo_description": "Premium quality straight bundles from Longqi factory.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "longqi-bodywave-bundle",
+    "title": "Product: Premium Body Wave Bundle",
+    "content_data": {
+      "name": "Premium Body Wave Bundle",
+      "sku": "LQH-BW-12",
+      "slug": "longqi-bodywave-bundle",
+      "description": "<p>Quality body wave from Longqi factory. Beautiful movement and bounce.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Double Weft</li><li>Soft wave pattern</li><li>12+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 5499,
+      "compare_at_price_cents": 9499,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "longqi-hair-factory",
+      "tags": [
+        "body-wave",
+        "virgin",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "LQH-BW-12",
+          "price_cents": 5499,
+          "compare_at_price_cents": 9499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-BW-14",
+          "price_cents": 5999,
+          "compare_at_price_cents": 10499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-BW-16",
+          "price_cents": 6498,
+          "compare_at_price_cents": 11499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-BW-18",
+          "price_cents": 6998,
+          "compare_at_price_cents": 12499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-BW-20",
+          "price_cents": 7998,
+          "compare_at_price_cents": 13499,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-BW-22",
+          "price_cents": 8999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-BW-24",
+          "price_cents": 9999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 80,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Premium Body Wave Bundle | Longqi Factory",
+      "seo_description": "Premium quality body wave from Longqi factory.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "kbl-premium-straight",
+    "title": "Product: KBL Premium Straight Bundle",
+    "content_data": {
+      "name": "KBL Premium Straight Bundle",
+      "sku": "KBL-STR-12",
+      "slug": "kbl-premium-straight",
+      "description": "<p>Premium quality virgin straight from KBL Guangzhou. Higher grade factory for premium product lines.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Premium Grade</li><li>Cuticle Aligned</li><li>18+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 6498,
+      "compare_at_price_cents": 11999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "kbl-hair-factory",
+      "tags": [
+        "straight",
+        "virgin",
+        "factory-direct",
+        "premium",
+        "kbl",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "KBL-STR-12",
+          "price_cents": 6498,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-14",
+          "price_cents": 6998,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-16",
+          "price_cents": 7998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-18",
+          "price_cents": 8999,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-20",
+          "price_cents": 9999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-22",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-24",
+          "price_cents": 11999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-STR-26",
+          "price_cents": 12999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 60,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "KBL Premium Straight Bundle | Guangzhou Factory",
+      "seo_description": "Premium grade straight bundles from KBL factory.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "yl-hd-closure-4x4",
+    "title": "Product: HD Lace Closure 4x4 - Straight",
+    "content_data": {
+      "name": "HD Lace Closure 4x4 - Straight",
+      "sku": "YL-CL4x4-STR-10",
+      "slug": "yl-hd-closure-4x4",
+      "description": "<p>Premium HD lace closure from YL Hair - the HD lace specialists. Pre-plucked with baby hairs. Ready to sell.</p><ul><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Baby hairs included</li><li>Free/Middle/Three part</li><li>Swiss HD lace</li></ul>",
+      "short_description": "",
+      "price_cents": 4499,
+      "compare_at_price_cents": 8999,
+      "currency": "USD",
+      "category_slug": "closures",
+      "brand_slug": "yl-hair-factory",
+      "tags": [
+        "closure",
+        "4x4",
+        "hd-lace",
+        "straight",
+        "factory-direct",
+        "pre-plucked",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "YL-CL4x4-STR-10",
+          "price_cents": 4499,
+          "compare_at_price_cents": 8999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-CL4x4-STR-12",
+          "price_cents": 4999,
+          "compare_at_price_cents": 9999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-CL4x4-STR-14",
+          "price_cents": 5499,
+          "compare_at_price_cents": 10999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-CL4x4-STR-16",
+          "price_cents": 5999,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-CL4x4-STR-18",
+          "price_cents": 6498,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "HD Lace Closure 4x4 | YL Factory",
+      "seo_description": "Premium HD lace closure from the lace specialists.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "yl-hd-frontal-13x4",
+    "title": "Product: HD Lace Frontal 13x4 - Body Wave",
+    "content_data": {
+      "name": "HD Lace Frontal 13x4 - Body Wave",
+      "sku": "YL-FR13x4-BW-12",
+      "slug": "yl-hd-frontal-13x4",
+      "description": "<p>Ear to ear HD lace frontal from YL Hair. Pre-plucked with natural hairline. Ready to sell.</p><ul><li>13x4 inch coverage</li><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Baby hairs included</li><li>Can be parted anywhere</li></ul>",
+      "short_description": "",
+      "price_cents": 6998,
+      "compare_at_price_cents": 13999,
+      "currency": "USD",
+      "category_slug": "frontals",
+      "brand_slug": "yl-hair-factory",
+      "tags": [
+        "frontal",
+        "13x4",
+        "hd-lace",
+        "body-wave",
+        "factory-direct",
+        "pre-plucked",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "YL-FR13x4-BW-12",
+          "price_cents": 6998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x4-BW-14",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x4-BW-16",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x4-BW-18",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x4-BW-20",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "HD Lace Frontal 13x4 | YL Factory",
+      "seo_description": "Premium HD lace frontal from the lace specialists.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "yl-hd-frontal-13x6",
+    "title": "Product: HD Lace Frontal 13x6 - Straight",
+    "content_data": {
+      "name": "HD Lace Frontal 13x6 - Straight",
+      "sku": "YL-FR13x6-STR-12",
+      "slug": "yl-hd-frontal-13x6",
+      "description": "<p>Deep part HD lace frontal 13x6 from YL Hair. Extra parting space. Pre-plucked. Ready to sell.</p><ul><li>13x6 inch coverage</li><li>Deep parting space</li><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Versatile styling</li></ul>",
+      "short_description": "",
+      "price_cents": 8999,
+      "compare_at_price_cents": 15999,
+      "currency": "USD",
+      "category_slug": "frontals",
+      "brand_slug": "yl-hair-factory",
+      "tags": [
+        "frontal",
+        "13x6",
+        "hd-lace",
+        "straight",
+        "factory-direct",
+        "deep-part",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "YL-FR13x6-STR-12",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x6-STR-14",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x6-STR-16",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x6-STR-18",
+          "price_cents": 11999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "YL-FR13x6-STR-20",
+          "price_cents": 12999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "HD Lace Frontal 13x6 | YL Factory",
+      "seo_description": "Deep part HD lace frontal from YL Hair.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "beaudiva-blonde-bundle",
+    "title": "Product: Honey Blonde Straight Bundle #27",
+    "content_data": {
+      "name": "Honey Blonde Straight Bundle #27",
+      "sku": "BDV-BLN-12",
+      "slug": "beaudiva-blonde-bundle",
+      "description": "<p>Pre-colored honey blonde bundles from Beaudiva - colored hair specialists. No bleaching needed. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #27</li><li>Machine Weft (Ready to Sell)</li><li>Color-safe</li><li>Can be heat styled</li></ul>",
+      "short_description": "",
+      "price_cents": 5999,
+      "compare_at_price_cents": 11999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "beaudiva-hair-factory",
+      "tags": [
+        "blonde",
+        "honey-blonde",
+        "27",
+        "straight",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "BDV-BLN-12",
+          "price_cents": 5999,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BLN-14",
+          "price_cents": 6498,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BLN-16",
+          "price_cents": 6998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BLN-18",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BLN-20",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BLN-22",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Honey Blonde Bundle #27 | Beaudiva Factory",
+      "seo_description": "Pre-colored honey blonde from the color specialists.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "beaudiva-burgundy-bundle",
+    "title": "Product: Burgundy Body Wave Bundle #99J",
+    "content_data": {
+      "name": "Burgundy Body Wave Bundle #99J",
+      "sku": "BDV-BRG-12",
+      "slug": "beaudiva-burgundy-bundle",
+      "description": "<p>Pre-colored burgundy body wave from Beaudiva. Rich wine red color. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #99J</li><li>Machine Weft (Ready to Sell)</li><li>Rich burgundy color</li><li>Can be heat styled</li></ul>",
+      "short_description": "",
+      "price_cents": 5999,
+      "compare_at_price_cents": 11999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "beaudiva-hair-factory",
+      "tags": [
+        "burgundy",
+        "99j",
+        "body-wave",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "BDV-BRG-12",
+          "price_cents": 5999,
+          "compare_at_price_cents": 11999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BRG-14",
+          "price_cents": 6498,
+          "compare_at_price_cents": 12999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BRG-16",
+          "price_cents": 6998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BRG-18",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-BRG-20",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 50,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Burgundy Body Wave #99J | Beaudiva Factory",
+      "seo_description": "Pre-colored burgundy from the color specialists.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "beaudiva-ombre-bundle",
+    "title": "Product: Ombre Straight Bundle 1B/27",
+    "content_data": {
+      "name": "Ombre Straight Bundle 1B/27",
+      "sku": "BDV-OMB-12",
+      "slug": "beaudiva-ombre-bundle",
+      "description": "<p>Beautiful ombre bundles from Beaudiva - dark roots to honey blonde tips. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>1B to #27 Ombre</li><li>Machine Weft (Ready to Sell)</li><li>Seamless color transition</li><li>Can be heat styled</li></ul>",
+      "short_description": "",
+      "price_cents": 6498,
+      "compare_at_price_cents": 12499,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "beaudiva-hair-factory",
+      "tags": [
+        "ombre",
+        "1b-27",
+        "straight",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "BDV-OMB-12",
+          "price_cents": 6498,
+          "compare_at_price_cents": 12499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-OMB-14",
+          "price_cents": 6998,
+          "compare_at_price_cents": 13499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-OMB-16",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-OMB-18",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-OMB-20",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16499,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Ombre Bundle 1B/27 | Beaudiva Factory",
+      "seo_description": "Beautiful ombre from the color specialists.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "beaudiva-613-bundle",
+    "title": "Product: Platinum Blonde Bundle #613",
+    "content_data": {
+      "name": "Platinum Blonde Bundle #613",
+      "sku": "BDV-613-12",
+      "slug": "beaudiva-613-bundle",
+      "description": "<p>Premium platinum blonde bundles from Beaudiva. Ready for any custom color or wear as-is. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Pre-bleached #613</li><li>Machine Weft (Ready to Sell)</li><li>Can be custom colored</li><li>Silky texture</li></ul>",
+      "short_description": "",
+      "price_cents": 6998,
+      "compare_at_price_cents": 13999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "beaudiva-hair-factory",
+      "tags": [
+        "platinum",
+        "blonde",
+        "613",
+        "straight",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "BDV-613-12",
+          "price_cents": 6998,
+          "compare_at_price_cents": 13999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-613-14",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-613-16",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-613-18",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "BDV-613-20",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Platinum Blonde Bundle #613 | Beaudiva Factory",
+      "seo_description": "Premium platinum blonde from the color specialists.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "vietnam-raw-straight",
+    "title": "Product: Vietnamese Raw Hair Bundle - Straight",
+    "content_data": {
+      "name": "Vietnamese Raw Hair Bundle - Straight",
+      "sku": "APO-RAW-STR-12",
+      "slug": "vietnam-raw-straight",
+      "description": "<p>Authentic raw Vietnamese hair from village collectors. Unprocessed, cuticle aligned. Premium quality. Ready to sell.</p><ul><li>100% Raw Vietnamese Hair</li><li>Unprocessed/Virgin</li><li>Cuticle Aligned</li><li>Double Drawn</li><li>24+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 7998,
+      "compare_at_price_cents": 14999,
+      "currency": "USD",
+      "category_slug": "vietnamese-hair",
+      "brand_slug": "apohair-factory",
+      "tags": [
+        "raw",
+        "vietnamese",
+        "straight",
+        "virgin",
+        "cuticle-aligned",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "APO-RAW-STR-12",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "APO-RAW-STR-14",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "APO-RAW-STR-16",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "APO-RAW-STR-18",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "APO-RAW-STR-20",
+          "price_cents": 11999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "APO-RAW-STR-22",
+          "price_cents": 12999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "APO-RAW-STR-24",
+          "price_cents": 13999,
+          "compare_at_price_cents": 23999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Vietnamese Raw Hair | Apohair Factory",
+      "seo_description": "Authentic raw Vietnamese hair from village collectors.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "vietnam-raw-wavy",
+    "title": "Product: Vietnamese Raw Hair Bundle - Wavy",
+    "content_data": {
+      "name": "Vietnamese Raw Hair Bundle - Wavy",
+      "sku": "LUX-RAW-WAV-12",
+      "slug": "vietnam-raw-wavy",
+      "description": "<p>Natural wavy raw Vietnamese hair. Unprocessed with natural wave pattern. Premium quality. Ready to sell.</p><ul><li>100% Raw Vietnamese Hair</li><li>Natural Wave Pattern</li><li>Cuticle Aligned</li><li>Double Drawn</li><li>24+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 7998,
+      "compare_at_price_cents": 14999,
+      "currency": "USD",
+      "category_slug": "vietnamese-hair",
+      "brand_slug": "luxshine-hair-factory",
+      "tags": [
+        "raw",
+        "vietnamese",
+        "wavy",
+        "virgin",
+        "cuticle-aligned",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "LUX-RAW-WAV-12",
+          "price_cents": 7998,
+          "compare_at_price_cents": 14999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LUX-RAW-WAV-14",
+          "price_cents": 8999,
+          "compare_at_price_cents": 15999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LUX-RAW-WAV-16",
+          "price_cents": 9999,
+          "compare_at_price_cents": 16999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LUX-RAW-WAV-18",
+          "price_cents": 10999,
+          "compare_at_price_cents": 17999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LUX-RAW-WAV-20",
+          "price_cents": 11999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LUX-RAW-WAV-22",
+          "price_cents": 12999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LUX-RAW-WAV-24",
+          "price_cents": 13999,
+          "compare_at_price_cents": 23999,
+          "inventory_quantity": 40,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Vietnamese Raw Wavy Hair | Luxshine Factory",
+      "seo_description": "Natural wavy raw Vietnamese hair.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "india-temple-hair",
+    "title": "Product: Indian Temple Hair Bundle - Straight",
+    "content_data": {
+      "name": "Indian Temple Hair Bundle - Straight",
+      "sku": "CTH-TEMP-STR-12",
+      "slug": "india-temple-hair",
+      "description": "<p>Authentic South Indian temple hair. Highest quality raw hair available. Single donor, cuticle intact. Ready to sell.</p><ul><li>100% Temple Hair</li><li>Single Donor</li><li>Cuticle Intact</li><li>Remy Quality</li><li>36+ months lifespan</li></ul>",
+      "short_description": "",
+      "price_cents": 9999,
+      "compare_at_price_cents": 18999,
+      "currency": "USD",
+      "category_slug": "indian-hair",
+      "brand_slug": "chennai-temple-hair",
+      "tags": [
+        "temple",
+        "indian",
+        "straight",
+        "virgin",
+        "single-donor",
+        "factory-direct",
+        "luxury",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "CTH-TEMP-STR-12",
+          "price_cents": 9999,
+          "compare_at_price_cents": 18999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "CTH-TEMP-STR-14",
+          "price_cents": 10999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "CTH-TEMP-STR-16",
+          "price_cents": 11999,
+          "compare_at_price_cents": 21999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "CTH-TEMP-STR-18",
+          "price_cents": 13999,
+          "compare_at_price_cents": 24999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "CTH-TEMP-STR-20",
+          "price_cents": 15999,
+          "compare_at_price_cents": 27999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "CTH-TEMP-STR-22",
+          "price_cents": 17999,
+          "compare_at_price_cents": 30999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "CTH-TEMP-STR-24",
+          "price_cents": 19999,
+          "compare_at_price_cents": 34999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Indian Temple Hair | Chennai Factory",
+      "seo_description": "Authentic South Indian temple hair - highest quality.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "factory-bundle-deal-3pc",
+    "title": "Product: 3 Bundle Deal - Straight (12\" 14\" 16\")",
+    "content_data": {
+      "name": "3 Bundle Deal - Straight (12\" 14\" 16\")",
+      "sku": "RBH-DEAL-STR-3PC",
+      "slug": "factory-bundle-deal-3pc",
+      "description": "<p>Bundle deal direct from factory. 3 bundles of straight hair at discounted price. Machine weft - ready to sell.</p><ul><li>3 Bundles Included</li><li>12\" + 14\" + 16\"</li><li>Machine Weft</li><li>Same Texture Guaranteed</li><li>Best Value</li></ul>",
+      "short_description": "",
+      "price_cents": 12999,
+      "compare_at_price_cents": 24999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "rebecca-hair-factory",
+      "tags": [
+        "bundle-deal",
+        "straight",
+        "3-bundle",
+        "factory-direct",
+        "value",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "RBH-DEAL-STR-3PC",
+          "price_cents": 12999,
+          "compare_at_price_cents": 24999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DEAL-BW-3PC",
+          "price_cents": 12999,
+          "compare_at_price_cents": 24999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "RBH-DEAL-DW-3PC",
+          "price_cents": 13999,
+          "compare_at_price_cents": 26999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "3 Bundle Deal Straight | Factory Direct",
+      "seo_description": "Best value 3 bundle deal direct from factory.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "factory-bundle-deal-4pc",
+    "title": "Product: 4 Bundle Deal with Closure (14\" 16\" 18\" + 12\" Closure)",
+    "content_data": {
+      "name": "4 Bundle Deal with Closure (14\" 16\" 18\" + 12\" Closure)",
+      "sku": "LQH-DEAL-STR-4PC",
+      "slug": "factory-bundle-deal-4pc",
+      "description": "<p>Complete look bundle deal. 3 bundles + closure direct from factory. Everything needed for a sew-in. Ready to sell.</p><ul><li>3 Bundles + 4x4 Closure</li><li>14\" + 16\" + 18\" + 12\" Closure</li><li>Machine Weft</li><li>HD Lace Closure</li><li>Complete Look</li></ul>",
+      "short_description": "",
+      "price_cents": 19999,
+      "compare_at_price_cents": 37999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "longqi-hair-factory",
+      "tags": [
+        "bundle-deal",
+        "closure-deal",
+        "4-piece",
+        "factory-direct",
+        "complete-look",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "LQH-DEAL-STR-4PC",
+          "price_cents": 19999,
+          "compare_at_price_cents": 37999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-DEAL-BW-4PC",
+          "price_cents": 19999,
+          "compare_at_price_cents": 37999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "LQH-DEAL-DW-4PC",
+          "price_cents": 20999,
+          "compare_at_price_cents": 39999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "4 Bundle Deal with Closure | Factory Direct",
+      "seo_description": "Complete look with 3 bundles + closure.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "factory-frontal-deal",
+    "title": "Product: 4 Bundle Deal with Frontal (16\" 18\" 20\" + 14\" Frontal)",
+    "content_data": {
+      "name": "4 Bundle Deal with Frontal (16\" 18\" 20\" + 14\" Frontal)",
+      "sku": "KBL-DEAL-STR-FR",
+      "slug": "factory-frontal-deal",
+      "description": "<p>Premium bundle deal with 13x4 frontal. Full head coverage for glamorous look. Ready to sell.</p><ul><li>3 Bundles + 13x4 Frontal</li><li>16\" + 18\" + 20\" + 14\" Frontal</li><li>Machine Weft</li><li>HD Lace Frontal</li><li>Maximum Versatility</li></ul>",
+      "short_description": "",
+      "price_cents": 26999,
+      "compare_at_price_cents": 47999,
+      "currency": "USD",
+      "category_slug": "bundles",
+      "brand_slug": "kbl-hair-factory",
+      "tags": [
+        "bundle-deal",
+        "frontal-deal",
+        "4-piece",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "variants": [
+        {
+          "sku": "KBL-DEAL-STR-FR",
+          "price_cents": 26999,
+          "compare_at_price_cents": 47999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-DEAL-BW-FR",
+          "price_cents": 26999,
+          "compare_at_price_cents": 47999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        },
+        {
+          "sku": "KBL-DEAL-DW-FR",
+          "price_cents": 27999,
+          "compare_at_price_cents": 49999,
+          "inventory_quantity": 20,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "4 Bundle Deal with Frontal | Factory Direct",
+      "seo_description": "Premium deal with 3 bundles + 13x4 frontal.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "got2b-glued-spray",
+    "title": "Product: Got2b Glued Blasting Freeze Spray - 12 oz",
+    "content_data": {
+      "name": "Got2b Glued Blasting Freeze Spray - 12 oz",
+      "sku": "G2B-GLU-12",
+      "slug": "got2b-glued-spray",
+      "description": "<p>Ultimate hold spray for wigs, weaves, and extreme styles. Water-resistant formula that holds through humidity.</p><ul><li>Extreme Hold</li><li>Water Resistant</li><li>No White Residue</li><li>Quick Drying</li></ul>",
+      "short_description": "",
+      "price_cents": 799,
+      "compare_at_price_cents": 1099,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "got2b",
+      "tags": [
+        "hairspray",
+        "wig-glue",
+        "freeze-hold",
+        "styling",
+        "best-seller"
+      ],
+      "variants": [
+        {
+          "sku": "G2B-GLU-12",
+          "price_cents": 799,
+          "compare_at_price_cents": 1099,
+          "inventory_quantity": 100,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Got2b Glued Blasting Freeze Spray - 12 oz",
+      "seo_description": "",
+      "published": true,
+      "featured": false,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "861a61ff-f3c2-462e-90f8-3907f546af67",
+        "6f62fc12-e5bd-49dd-8049-144912f467a6",
+        "f57be9f3-37ee-4d6c-8d19-b1e9465f4b33",
+        "02ab2ec1-5680-4e98-988a-7ea4e463b9a3"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "wahl-magic-clip-cordless",
+    "title": "Product: Wahl Professional 5 Star Magic Clip Cordless",
+    "content_data": {
+      "name": "Wahl Professional 5 Star Magic Clip Cordless",
+      "sku": "WAL-MCL-8148",
+      "slug": "wahl-magic-clip-cordless",
+      "description": "<p>Professional cordless clipper with stagger-tooth blade for seamless blending and fading. 90-minute runtime.</p><ul><li>Cordless/Corded</li><li>90 Min Runtime</li><li>Stagger-Tooth Blade</li><li>Zero-Gap Capable</li></ul>",
+      "short_description": "",
+      "price_cents": 14999,
+      "compare_at_price_cents": 19999,
+      "currency": "USD",
+      "category_slug": "clippers-trimmers",
+      "brand_slug": "wahl",
+      "tags": [
+        "clipper",
+        "cordless",
+        "barber",
+        "professional",
+        "fade-master"
+      ],
+      "variants": [
+        {
+          "sku": "WAL-MCL-8148",
+          "price_cents": 14999,
+          "compare_at_price_cents": 19999,
+          "inventory_quantity": 25,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Wahl Professional 5 Star Magic Clip Cordless",
+      "seo_description": "",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "ab41fa9a-0a3f-4f6e-8bee-4384fa2dbded",
+        "b4980b47-d54c-426b-88df-b544029ea115",
+        "231cade6-fa83-4a6d-9d40-4d23872a85e1",
+        "f3b9db5d-4253-4e22-996b-d90adb986dcf"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "wahl-detailer-trimmer",
+    "title": "Product: Wahl Professional 5 Star Detailer Trimmer",
+    "content_data": {
+      "name": "Wahl Professional 5 Star Detailer Trimmer",
+      "sku": "WAL-DTL-8081",
+      "slug": "wahl-detailer-trimmer",
+      "description": "<p>Precision trimmer for detailed line work and close trimming. Extra-wide T-blade for crisp lines.</p><ul><li>Rotary Motor</li><li>T-Wide Blade</li><li>Close Cutting</li><li>Professional Grade</li></ul>",
+      "short_description": "",
+      "price_cents": 6999,
+      "compare_at_price_cents": 8999,
+      "currency": "USD",
+      "category_slug": "clippers-trimmers",
+      "brand_slug": "wahl",
+      "tags": [
+        "trimmer",
+        "detailer",
+        "barber",
+        "professional",
+        "line-up"
+      ],
+      "variants": [
+        {
+          "sku": "WAL-DTL-8081",
+          "price_cents": 6999,
+          "compare_at_price_cents": 8999,
+          "inventory_quantity": 30,
+          "length": "",
+          "color": "",
+          "texture": ""
+        }
+      ],
+      "specifications": {},
+      "seo_title": "Wahl Professional 5 Star Detailer Trimmer",
+      "seo_description": "",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "ors-olive-oil-moisturizer",
+    "title": "Product: ORS Olive Oil Moisturizing Hair Lotion",
+    "content_data": {
+      "name": "ORS Olive Oil Moisturizing Hair Lotion",
+      "sku": "ORS-OOL-8",
+      "slug": "ors-olive-oil-moisturizer",
+      "description": "<p>Nourishing olive oil hair lotion that adds brilliant shine without heavy buildup. Perfect for daily moisture maintenance.</p><ul><li>Olive Oil Formula</li><li>Non-greasy</li><li>Adds shine</li><li>Daily use</li></ul>",
+      "short_description": "Nourishing olive oil hair lotion that adds brilliant shine without heavy buildup. Perfect for daily moisture maintenance.",
+      "price_cents": 699,
+      "compare_at_price_cents": 999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "ors",
+      "tags": [
+        "moisturizer",
+        "olive-oil",
+        "daily-use",
+        "best-seller"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "ORS Olive Oil Moisturizing Hair Lotion",
+      "seo_description": "Nourishing olive oil hair lotion that adds brilliant shine without heavy buildup. Perfect for daily moisture maintenance.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "32b70844-bd6f-473a-ad4a-3f73e0d974ac",
+        "3fd1c46b-5970-474a-acd7-1aee8e103041"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "cantu-leave-in-conditioner",
+    "title": "Product: Cantu Shea Butter Leave-In Conditioning Repair Cream",
+    "content_data": {
+      "name": "Cantu Shea Butter Leave-In Conditioning Repair Cream",
+      "sku": "CAN-LIC-12",
+      "slug": "cantu-leave-in-conditioner",
+      "description": "<p>Made with pure shea butter to replace vital moisture. Helps repair and prevent split ends while softening hair.</p><ul><li>Pure Shea Butter</li><li>Repairs damage</li><li>Prevents breakage</li><li>No mineral oil or sulfates</li></ul>",
+      "short_description": "Made with pure shea butter to replace vital moisture. Helps repair and prevent split ends while softening hair.",
+      "price_cents": 799,
+      "compare_at_price_cents": 1199,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "cantu",
+      "tags": [
+        "leave-in",
+        "shea-butter",
+        "repair",
+        "curly-hair",
+        "best-seller"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Cantu Shea Butter Leave-In Conditioning Repair Cream",
+      "seo_description": "Made with pure shea butter to replace vital moisture. Helps repair and prevent split ends while softening hair.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "2190998c-aaf4-4f34-acd8-278111b15ecd"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "mielle-rosemary-mint-oil",
+    "title": "Product: Mielle Rosemary Mint Scalp & Hair Strengthening Oil",
+    "content_data": {
+      "name": "Mielle Rosemary Mint Scalp & Hair Strengthening Oil",
+      "sku": "MIE-RMO-2",
+      "slug": "mielle-rosemary-mint-oil",
+      "description": "<p>Viral TikTok sensation! Biotin-infused oil that nourishes the scalp and strengthens hair. Promotes healthy hair growth.</p><ul><li>Rosemary & Mint Formula</li><li>Biotin Infused</li><li>Promotes Growth</li><li>Strengthens Hair</li></ul>",
+      "short_description": "Viral TikTok sensation! Biotin-infused oil that nourishes the scalp and strengthens hair. Promotes healthy hair growth.",
+      "price_cents": 999,
+      "compare_at_price_cents": 1499,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "mielle",
+      "tags": [
+        "hair-oil",
+        "rosemary",
+        "scalp-care",
+        "growth",
+        "best-seller",
+        "viral"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Mielle Rosemary Mint Scalp & Hair Strengthening Oil",
+      "seo_description": "Viral TikTok sensation! Biotin-infused oil that nourishes the scalp and strengthens hair. Promotes healthy hair growth.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "e9c3a5ba-916d-49ac-977f-1bb82f7a390e"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "eco-styler-argan-oil-gel",
+    "title": "Product: Eco Styler Argan Oil Styling Gel",
+    "content_data": {
+      "name": "Eco Styler Argan Oil Styling Gel",
+      "sku": "ECO-AGO-32",
+      "slug": "eco-styler-argan-oil-gel",
+      "description": "<p>Professional styling gel with argan oil. Provides maximum hold without flaking while adding moisture and shine.</p><ul><li>Argan Oil Enriched</li><li>Maximum Hold</li><li>No Flaking</li><li>Alcohol-free</li></ul>",
+      "short_description": "Professional styling gel with argan oil. Provides maximum hold without flaking while adding moisture and shine.",
+      "price_cents": 899,
       "compare_at_price_cents": 1299,
       "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "eco-styler",
       "tags": [
-        "wig-glue",
-        "adhesive",
-        "lace-bond",
-        "waterproof",
-        "ebin"
+        "gel",
+        "argan-oil",
+        "styling",
+        "edge-control",
+        "max-hold"
       ],
-      "available_sizes": [
-        {
-          "value": "0.5oz",
-          "label": "0.5 oz"
-        },
-        {
-          "value": "1oz",
-          "label": "1 oz"
-        },
-        {
-          "value": "2oz",
-          "label": "2 oz"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Hold Time",
-          "value": "Up to 3 weeks"
-        },
-        {
-          "label": "Waterproof",
-          "value": "Yes"
-        },
-        {
-          "label": "Residue",
-          "value": "No residue"
-        }
-      ],
-      "weight_grams": 30,
-      "featured": true,
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Eco Styler Argan Oil Styling Gel",
+      "seo_description": "Professional styling gel with argan oil. Provides maximum hold without flaking while adding moisture and shine.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
       "new_arrival": false,
-      "bestseller": true
-    },
-    "status": "published",
-    "_category_slug": "wig-glue-adhesive"
+      "on_sale": true,
+      "media_ids": [
+        "b47f5072-ba69-4e21-9f30-396f3f586e95",
+        "4abc8133-51ae-4721-92a2-2b11679cc266"
+      ]
+    }
   },
   {
     "content_type_api_id": "product",
-    "slug": "got2b-glued-blasting-freeze-spray",
-    "title": "Entry product",
+    "slug": "shea-moisture-jamaican-black-castor-oil",
+    "title": "Product: Shea Moisture Jamaican Black Castor Oil Strengthen & Restore Shampoo",
+    "content_data": {
+      "name": "Shea Moisture Jamaican Black Castor Oil Strengthen & Restore Shampoo",
+      "sku": "SHM-JBC-13",
+      "slug": "shea-moisture-jamaican-black-castor-oil",
+      "description": "<p>Cleanse and strengthen damaged hair with Jamaican Black Castor Oil. Sulfate-free formula for all hair types.</p><ul><li>Jamaican Black Castor Oil</li><li>Sulfate-Free</li><li>Strengthens Hair</li><li>For Damaged Hair</li></ul>",
+      "short_description": "Cleanse and strengthen damaged hair with Jamaican Black Castor Oil. Sulfate-free formula for all hair types.",
+      "price_cents": 1299,
+      "compare_at_price_cents": 1698,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "shea-moisture",
+      "tags": [
+        "shampoo",
+        "castor-oil",
+        "strengthen",
+        "natural",
+        "sulfate-free"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Shea Moisture Jamaican Black Castor Oil Strengthen & Restore Shampoo",
+      "seo_description": "Cleanse and strengthen damaged hair with Jamaican Black Castor Oil. Sulfate-free formula for all hair types.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "d18271c7-3320-4fd2-bdd4-141c4fc3a164"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "got2b-glued-spray",
+    "title": "Product: Got2b Glued Blasting Freeze Spray",
     "content_data": {
       "name": "Got2b Glued Blasting Freeze Spray",
-      "sku": "G2B-FREEZE-SPRAY",
-      "description": "The iconic Got2b Glued Freeze Spray for laying edges and melting lace! Creates an invisible hold that lasts all day. Perfect for baby hairs and flyaways.",
-      "short_description": "Iconic edge control spray, all-day hold",
-      "base_price_cents": 699,
+      "sku": "G2B-GLU-6",
+      "slug": "got2b-glued-spray",
+      "description": "<p>Ultimate hold spray for wigs, weaves, and extreme styles. Water-resistant formula that holds through humidity.</p><ul><li>Extreme Hold</li><li>Water Resistant</li><li>No White Residue</li><li>Quick Drying</li></ul>",
+      "short_description": "Ultimate hold spray for wigs, weaves, and extreme styles. Water-resistant formula that holds through humidity.",
+      "price_cents": 799,
+      "compare_at_price_cents": 1099,
       "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "got2b",
+      "tags": [
+        "hairspray",
+        "wig-glue",
+        "freeze-hold",
+        "styling",
+        "best-seller"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Got2b Glued Blasting Freeze Spray",
+      "seo_description": "Ultimate hold spray for wigs, weaves, and extreme styles. Water-resistant formula that holds through humidity.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "861a61ff-f3c2-462e-90f8-3907f546af67",
+        "6f62fc12-e5bd-49dd-8049-144912f467a6",
+        "f57be9f3-37ee-4d6c-8d19-b1e9465f4b33",
+        "02ab2ec1-5680-4e98-988a-7ea4e463b9a3"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "as-i-am-leave-in-conditioner",
+    "title": "Product: As I Am Leave-In Conditioner",
+    "content_data": {
+      "name": "As I Am Leave-In Conditioner",
+      "sku": "AIA-LIC-8",
+      "slug": "as-i-am-leave-in-conditioner",
+      "description": "<p>Creamy leave-in that provides moisture, slip, and softness. Perfect for natural hair types 3-4.</p><ul><li>Coconut Oil</li><li>Green Tea Extract</li><li>Easy Detangling</li><li>For Natural Hair</li></ul>",
+      "short_description": "Creamy leave-in that provides moisture, slip, and softness. Perfect for natural hair types 3-4.",
+      "price_cents": 1099,
+      "compare_at_price_cents": 1499,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "as-i-am",
+      "tags": [
+        "leave-in",
+        "natural-hair",
+        "coconut",
+        "detangle"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "As I Am Leave-In Conditioner",
+      "seo_description": "Creamy leave-in that provides moisture, slip, and softness. Perfect for natural hair types 3-4.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "003380e6-6cf6-4bdf-9f70-b9a0c09d0deb",
+        "07854f7f-14cf-4e76-9430-deeac9913ebd"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "jamaican-mango-lime-locking-gel",
+    "title": "Product: Jamaican Mango & Lime Locking Firm Hold Gel",
+    "content_data": {
+      "name": "Jamaican Mango & Lime Locking Firm Hold Gel",
+      "sku": "JML-LOG-16",
+      "slug": "jamaican-mango-lime-locking-gel",
+      "description": "<p>Professional strength locking gel for starting and maintaining locs. Firm hold without buildup.</p><ul><li>Firm Hold</li><li>No Residue</li><li>For Locs & Twists</li><li>Professional Grade</li></ul>",
+      "short_description": "Professional strength locking gel for starting and maintaining locs. Firm hold without buildup.",
+      "price_cents": 899,
+      "compare_at_price_cents": 1299,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "jamaican-mango-lime",
+      "tags": [
+        "locking-gel",
+        "dreadlocks",
+        "firm-hold",
+        "loc-care"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Jamaican Mango & Lime Locking Firm Hold Gel",
+      "seo_description": "Professional strength locking gel for starting and maintaining locs. Firm hold without buildup.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "e4711fe3-6982-4f2c-857f-ec3b421adc07"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "murrays-edgewax-extreme",
+    "title": "Product: Murray's Edgewax Extreme Hold",
+    "content_data": {
+      "name": "Murray's Edgewax Extreme Hold",
+      "sku": "MUR-EDG-4",
+      "slug": "murrays-edgewax-extreme",
+      "description": "<p>Maximum hold edge control for laid edges all day. Water-based formula that washes out easily.</p><ul><li>Extreme Hold</li><li>No Flaking</li><li>Water-based</li><li>All Day Hold</li></ul>",
+      "short_description": "Maximum hold edge control for laid edges all day. Water-based formula that washes out easily.",
+      "price_cents": 599,
+      "compare_at_price_cents": 899,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "murray's-pomade",
       "tags": [
         "edge-control",
-        "freeze-spray",
-        "got2b",
-        "lace-melting"
+        "pomade",
+        "extreme-hold",
+        "slick-edges"
       ],
-      "specifications": [
-        {
-          "label": "Hold Level",
-          "value": "Extreme"
-        },
-        {
-          "label": "Volume",
-          "value": "12 oz"
-        }
-      ],
-      "weight_grams": 340,
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Murray's Edgewax Extreme Hold",
+      "seo_description": "Maximum hold edge control for laid edges all day. Water-based formula that washes out easily.",
+      "published": true,
       "featured": false,
-      "new_arrival": false,
-      "bestseller": true
-    },
-    "status": "published",
-    "_category_slug": "hair-styling"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "bold-hold-lace-tint-spray",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Bold Hold Lace Tint Spray",
-      "sku": "BH-TINT-SPRAY",
-      "description": "Match your lace to your skin tone with Bold Hold Lace Tint! This easy-to-use spray helps your lace blend seamlessly for an undetectable install. Available in multiple shades.",
-      "short_description": "Lace tinting spray, undetectable blend",
-      "base_price_cents": 1299,
-      "currency": "USD",
-      "tags": [
-        "lace-tint",
-        "bold-hold",
-        "wig-install",
-        "customization"
-      ],
-      "available_colors": [
-        {
-          "value": "light",
-          "label": "Light",
-          "hex": "#f5deb3"
-        },
-        {
-          "value": "light-medium",
-          "label": "Light Medium",
-          "hex": "#deb887"
-        },
-        {
-          "value": "medium",
-          "label": "Medium",
-          "hex": "#d2691e"
-        },
-        {
-          "value": "medium-dark",
-          "label": "Medium Dark",
-          "hex": "#8b4513"
-        },
-        {
-          "value": "dark",
-          "label": "Dark",
-          "hex": "#654321"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Coverage",
-          "value": "Full Coverage"
-        },
-        {
-          "label": "Volume",
-          "value": "4 oz"
-        }
-      ],
-      "weight_grams": 120,
-      "featured": false,
-      "new_arrival": true,
-      "bestseller": false
-    },
-    "status": "published",
-    "_category_slug": "lace-melting"
-  },
-  {
-    "content_type_api_id": "product",
-    "slug": "wig-grip-band-velvet",
-    "title": "Entry product",
-    "content_data": {
-      "name": "Velvet Wig Grip Band - Adjustable",
-      "sku": "WIG-GRIP-VEL",
-      "description": "Secure your wig without glue or tape! Our Velvet Wig Grip Band features a soft, comfortable velvet interior that grips your wig securely. Adjustable to fit all head sizes. Protects your edges and hairline.",
-      "short_description": "Glueless wig security, protects edges",
-      "base_price_cents": 999,
-      "currency": "USD",
-      "tags": [
-        "wig-grip",
-        "glueless",
-        "edge-protection",
-        "velvet"
-      ],
-      "available_colors": [
-        {
-          "value": "natural-black",
-          "label": "Natural Black",
-          "hex": "#1a1a1a",
-          "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "1b",
-          "label": "#1B Off Black",
-          "hex": "#2d2d2d",
-          "image": "https://images.unsplash.com/photo-1605980776566-0ed5fd7a6c39?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "2",
-          "label": "#2 Dark Brown",
-          "hex": "#3d2314",
-          "image": "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "4",
-          "label": "#4 Medium Brown",
-          "hex": "#5a3825",
-          "image": "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "27",
-          "label": "#27 Honey Blonde",
-          "hex": "#c99550",
-          "image": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "30",
-          "label": "#30 Auburn",
-          "hex": "#8b4513",
-          "image": "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "613",
-          "label": "#613 Platinum Blonde",
-          "hex": "#f5e6c8",
-          "image": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "1b-27",
-          "label": "Ombre 1B/27",
-          "hex": "#2d2d2d",
-          "image": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&h=600&fit=crop"
-        },
-        {
-          "value": "1b-30",
-          "label": "Ombre 1B/30",
-          "hex": "#2d2d2d",
-          "image": "https://images.unsplash.com/photo-1534180477871-5d6cc81f3920?w=600&h=600&fit=crop"
-        }
-      ],
-      "specifications": [
-        {
-          "label": "Material",
-          "value": "Velvet"
-        },
-        {
-          "label": "Adjustable",
-          "value": "Yes"
-        },
-        {
-          "label": "Fits",
-          "value": "20-24 inch circumference"
-        }
-      ],
-      "weight_grams": 30,
-      "featured": false,
-      "new_arrival": false,
       "bestseller": false,
-      "media_gallery": [
-        {
-          "url": "/api/v1/media/proxy/8c013e70-51f2-44ab-a18b-aff50f81ca17_vietnamese-straight-2.jpg",
-          "alt": "8c013e70-51f2-44ab-a18b-aff50f81ca17_vietnamese-straight-2.jpg"
-        }
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "436707fc-4617-449b-ab19-b3a11612c0d2",
+        "7c407398-2160-485c-8bcb-932962aa47b8"
       ]
-    },
-    "status": "published",
-    "_category_slug": "wig-accessories"
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "african-pride-olive-miracle-conditioner",
+    "title": "Product: African Pride Olive Miracle Anti-Breakage Conditioner",
+    "content_data": {
+      "name": "African Pride Olive Miracle Anti-Breakage Conditioner",
+      "sku": "AFP-OMC-12",
+      "slug": "african-pride-olive-miracle-conditioner",
+      "description": "<p>Deep conditioning formula with olive oil to help prevent breakage and restore moisture to dry, damaged hair.</p><ul><li>Olive Oil Enriched</li><li>Anti-Breakage</li><li>Deep Moisturizing</li><li>For All Hair Types</li></ul>",
+      "short_description": "Deep conditioning formula with olive oil to help prevent breakage and restore moisture to dry, damaged hair.",
+      "price_cents": 599,
+      "compare_at_price_cents": 899,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "african-pride",
+      "tags": [
+        "conditioner",
+        "olive-oil",
+        "anti-breakage",
+        "moisturizing"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "African Pride Olive Miracle Anti-Breakage Conditioner",
+      "seo_description": "Deep conditioning formula with olive oil to help prevent breakage and restore moisture to dry, damaged hair.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "edde95af-3839-43c9-8f48-0c1a738b8679"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "babyliss-titanium-flat-iron",
+    "title": "Product: BaBylissPRO Nano Titanium Ultra-Thin Straightening Iron 1\"",
+    "content_data": {
+      "name": "BaBylissPRO Nano Titanium Ultra-Thin Straightening Iron 1\"",
+      "sku": "BBP-TFI-1",
+      "slug": "babyliss-titanium-flat-iron",
+      "description": "<p>Professional titanium flat iron with ultra-smooth plates for fast, frizz-free results. Heats up to 450\u00b0F.</p><ul><li>Nano Titanium Plates</li><li>450\u00b0F Max Heat</li><li>50 Heat Settings</li><li>Instant Heat Recovery</li></ul>",
+      "short_description": "Professional titanium flat iron with ultra-smooth plates for fast, frizz-free results. Heats up to 450\u00b0F.",
+      "price_cents": 8999,
+      "compare_at_price_cents": 12999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "babylisspro",
+      "tags": [
+        "flat-iron",
+        "titanium",
+        "professional",
+        "straightener",
+        "best-seller"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "BaBylissPRO Nano Titanium Ultra-Thin Straightening Iron 1\"",
+      "seo_description": "Professional titanium flat iron with ultra-smooth plates for fast, frizz-free results. Heats up to 450\u00b0F.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "aae3fb42-2bc3-4f76-87a4-97389e098ad5"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "hot-tools-gold-curling-iron",
+    "title": "Product: Hot Tools 24K Gold Curling Iron 1\"",
+    "content_data": {
+      "name": "Hot Tools 24K Gold Curling Iron 1\"",
+      "sku": "HT-GCI-1",
+      "slug": "hot-tools-gold-curling-iron",
+      "description": "<p>Iconic 24K gold-plated curling iron trusted by professionals. Creates long-lasting curls with high shine.</p><ul><li>24K Gold Surface</li><li>Pulse Technology</li><li>10 Heat Settings</li><li>8ft Swivel Cord</li></ul>",
+      "short_description": "Iconic 24K gold-plated curling iron trusted by professionals. Creates long-lasting curls with high shine.",
+      "price_cents": 4999,
+      "compare_at_price_cents": 6998,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "hot-tools",
+      "tags": [
+        "curling-iron",
+        "gold",
+        "professional",
+        "salon-quality",
+        "best-seller"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Hot Tools 24K Gold Curling Iron 1\"",
+      "seo_description": "Iconic 24K gold-plated curling iron trusted by professionals. Creates long-lasting curls with high shine.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "566fa45d-b53f-4e91-882a-592bc6a55ce4"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "babyliss-rapido-dryer",
+    "title": "Product: BaBylissPRO Rapido Ionic Hair Dryer 2000W",
+    "content_data": {
+      "name": "BaBylissPRO Rapido Ionic Hair Dryer 2000W",
+      "sku": "BBP-RPD-2000",
+      "slug": "babyliss-rapido-dryer",
+      "description": "<p>Ultra-lightweight professional dryer with nano titanium and ionic technology. Ferrari-designed engine for powerful airflow.</p><ul><li>2000 Watts</li><li>Ionic Technology</li><li>Nano Titanium</li><li>6 Speed/Heat Settings</li></ul>",
+      "short_description": "Ultra-lightweight professional dryer with nano titanium and ionic technology. Ferrari-designed engine for powerful airflow.",
+      "price_cents": 12999,
+      "compare_at_price_cents": 17999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "babylisspro",
+      "tags": [
+        "blow-dryer",
+        "ionic",
+        "professional",
+        "lightweight",
+        "best-seller"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "BaBylissPRO Rapido Ionic Hair Dryer 2000W",
+      "seo_description": "Ultra-lightweight professional dryer with nano titanium and ionic technology. Ferrari-designed engine for powerful airflow.",
+      "published": true,
+      "featured": true,
+      "bestseller": true,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "andis-master-clipper",
+    "title": "Product: Andis Master Adjustable Blade Clipper",
+    "content_data": {
+      "name": "Andis Master Adjustable Blade Clipper",
+      "sku": "AND-MST-01557",
+      "slug": "andis-master-clipper",
+      "description": "<p>The industry standard barber clipper. Powerful magnetic motor with adjustable blade for all hair types.</p><ul><li>14,000 SPM Motor</li><li>Adjustable Blade</li><li>All Metal Housing</li><li>Made in USA</li></ul>",
+      "short_description": "The industry standard barber clipper. Powerful magnetic motor with adjustable blade for all hair types.",
+      "price_cents": 9999,
+      "compare_at_price_cents": 13999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "andis",
+      "tags": [
+        "clipper",
+        "corded",
+        "barber",
+        "professional",
+        "heavy-duty"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Andis Master Adjustable Blade Clipper",
+      "seo_description": "The industry standard barber clipper. Powerful magnetic motor with adjustable blade for all hair types.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "58ba987c-0bf8-4b3c-aa41-ec764a3468ac",
+        "052403e5-9919-4995-9fd5-6fef19d0214c"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "chi-original-flat-iron",
+    "title": "Product: CHI Original 1\" Ceramic Flat Iron",
+    "content_data": {
+      "name": "CHI Original 1\" Ceramic Flat Iron",
+      "sku": "CHI-SFI-1",
+      "slug": "chi-original-flat-iron",
+      "description": "<p>The original CHI that started the ceramic revolution. Smooth ceramic plates for silky, shiny hair.</p><ul><li>Ceramic Plates</li><li>392\u00b0F Optimal Heat</li><li>Flash Quick Heating</li><li>11ft Swivel Cord</li></ul>",
+      "short_description": "The original CHI that started the ceramic revolution. Smooth ceramic plates for silky, shiny hair.",
+      "price_cents": 9999,
+      "compare_at_price_cents": 13999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "chi",
+      "tags": [
+        "flat-iron",
+        "ceramic",
+        "professional",
+        "original",
+        "classic"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "CHI Original 1\" Ceramic Flat Iron",
+      "seo_description": "The original CHI that started the ceramic revolution. Smooth ceramic plates for silky, shiny hair.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "9d6b7eb9-f104-4591-b7eb-603b8da147f9"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "gold-n-hot-pressing-comb",
+    "title": "Product: Gold N Hot Professional Pressing Comb",
+    "content_data": {
+      "name": "Gold N Hot Professional Pressing Comb",
+      "sku": "GNH-PRS-450",
+      "slug": "gold-n-hot-pressing-comb",
+      "description": "<p>Professional electric pressing comb for silky straight results. Perfect for silk press styles on natural hair.</p><ul><li>Gold Titanium Surface</li><li>450\u00b0F Max Heat</li><li>Variable Settings</li><li>Cool Tip</li></ul>",
+      "short_description": "Professional electric pressing comb for silky straight results. Perfect for silk press styles on natural hair.",
+      "price_cents": 3999,
+      "compare_at_price_cents": 5999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "gold-n-hot",
+      "tags": [
+        "pressing-comb",
+        "straightener",
+        "professional",
+        "silk-press"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Gold N Hot Professional Pressing Comb",
+      "seo_description": "Professional electric pressing comb for silky straight results. Perfect for silk press styles on natural hair.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "a7aca6d5-d914-4639-a05d-19fcc90dac4e",
+        "ff7ba825-a7d0-498b-b841-c22667bd6f55"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "red-by-kiss-blow-dryer",
+    "title": "Product: Red by Kiss 1875 Ceramic Ionic Blow Dryer",
+    "content_data": {
+      "name": "Red by Kiss 1875 Ceramic Ionic Blow Dryer",
+      "sku": "RBK-BDR-1875",
+      "slug": "red-by-kiss-blow-dryer",
+      "description": "<p>Affordable ceramic ionic dryer with tourmaline technology. Great for home use with professional results.</p><ul><li>1875 Watts</li><li>Ceramic Ionic</li><li>2 Speeds</li><li>Concentrator Included</li></ul>",
+      "short_description": "Affordable ceramic ionic dryer with tourmaline technology. Great for home use with professional results.",
+      "price_cents": 2499,
+      "compare_at_price_cents": 3999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "red-by-kiss",
+      "tags": [
+        "blow-dryer",
+        "ceramic",
+        "ionic",
+        "affordable",
+        "beginner"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "Red by Kiss 1875 Ceramic Ionic Blow Dryer",
+      "seo_description": "Affordable ceramic ionic dryer with tourmaline technology. Great for home use with professional results.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": [
+        "8175a48e-338b-4150-aea1-56b650f5d60c",
+        "e7d36835-4b66-4fb4-aceb-9dda6fad54b7"
+      ]
+    }
+  },
+  {
+    "content_type_api_id": "product",
+    "slug": "t3-curling-wand",
+    "title": "Product: T3 SinglePass Curl 1.25\" Ceramic Curling Wand",
+    "content_data": {
+      "name": "T3 SinglePass Curl 1.25\" Ceramic Curling Wand",
+      "sku": "T3-CRW-1",
+      "slug": "t3-curling-wand",
+      "description": "<p>Premium ceramic curling wand with SinglePass technology. Creates long-lasting, frizz-free curls in one pass.</p><ul><li>Custom Blend Ceramic</li><li>5 Heat Settings</li><li>Auto World Voltage</li><li>Digital Display</li></ul>",
+      "short_description": "Premium ceramic curling wand with SinglePass technology. Creates long-lasting, frizz-free curls in one pass.",
+      "price_cents": 15999,
+      "compare_at_price_cents": 19999,
+      "currency": "USD",
+      "category_slug": "hair-care",
+      "brand_slug": "t3",
+      "tags": [
+        "curling-wand",
+        "ceramic",
+        "premium",
+        "salon-quality"
+      ],
+      "variants": [],
+      "specifications": {},
+      "seo_title": "T3 SinglePass Curl 1.25\" Ceramic Curling Wand",
+      "seo_description": "Premium ceramic curling wand with SinglePass technology. Creates long-lasting, frizz-free curls in one pass.",
+      "published": true,
+      "featured": false,
+      "bestseller": false,
+      "new_arrival": false,
+      "on_sale": true,
+      "media_ids": []
+    }
   }
 ]

@@ -1,0 +1,3746 @@
+{
+  "metadata": {
+    "source": "shopify-products + catalog-factory-products CSVs",
+    "total_products": 32,
+    "products_with_images": 21,
+    "total_images": 75
+  },
+  "products": [
+    {
+      "handle": "straight-jet-black-bundle",
+      "title": "Brazilian Straight Hair Bundle - Jet Black #1",
+      "description": "<p>Premium 100% virgin Brazilian straight hair bundles. Silky smooth texture, no tangling, no shedding. Can be colored, bleached, and heat styled.</p><ul><li>100% Human Virgin Hair</li><li>Double Weft</li><li>Natural Black Color</li><li>Can be dyed and bleached</li><li>Lasts 12+ months with proper care</li></ul>",
+      "vendor": "K-Hair Vietnam",
+      "category": "Hair Extensions",
+      "type": "Bundle",
+      "tags": [
+        "straight",
+        "brazilian",
+        "virgin",
+        "jet-black",
+        "bundle",
+        "best-seller"
+      ],
+      "seo_title": "Brazilian Straight Hair Bundle | Premium Virgin Hair",
+      "seo_description": "Shop premium Brazilian straight hair bundles. 100% virgin human hair that lasts 12+ months.",
+      "variants": [
+        {
+          "sku": "STR-JB-12",
+          "price": 89.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 50,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-14",
+          "price": 99.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 50,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-16",
+          "price": 109.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 50,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-18",
+          "price": 119.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 50,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-20",
+          "price": 129.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 50,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-22",
+          "price": 139.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 50,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-24",
+          "price": 149.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 50,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-26",
+          "price": 169.99,
+          "compare_at_price": 209.99,
+          "inventory_qty": 50,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-28",
+          "price": 189.99,
+          "compare_at_price": 229.99,
+          "inventory_qty": 50,
+          "weight": 260.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "28\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "STR-JB-30",
+          "price": 209.99,
+          "compare_at_price": 259.99,
+          "inventory_qty": 50,
+          "weight": 280.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "30\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/STR-JB-12/str-jb-12-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/e1378620-3ef1-4f65-84d0-b1c5ea79dcf1_str-jb-12-flatlay-01.png",
+          "cms_id": "41795575-17b1-4407-9c96-0fc83df9187d",
+          "position": 1,
+          "alt_text": "Brazilian Straight Hair Bundle - Jet Black #1 - Main Image"
+        },
+        {
+          "local_path": "images/generated/STR-JB-12/str-jb-12-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/93195918-277e-4abe-8b59-5dceff8bdf93_str-jb-12-closeup-02.png",
+          "cms_id": "825a0a12-8f6d-4e8f-9af8-8faf4b3f8061",
+          "position": 2,
+          "alt_text": "Brazilian Straight Hair Bundle - Jet Black #1 - Image 2"
+        },
+        {
+          "local_path": "images/generated/STR-JB-12/str-jb-12-styled-03.png",
+          "cms_url": "/api/v1/media/proxy/079a5d43-6d43-450f-b751-6f59468170a3_str-jb-12-styled-03.png",
+          "cms_id": "9394f31a-8db1-4cbe-a81e-abb5839c5d1f",
+          "position": 3,
+          "alt_text": "Brazilian Straight Hair Bundle - Jet Black #1 - Image 3"
+        },
+        {
+          "local_path": "images/generated/STR-JB-12/str-jb-12-bundle-04.png",
+          "cms_url": "/api/v1/media/proxy/aa82e7e2-3168-49a3-af0e-036d655622b9_str-jb-12-bundle-04.png",
+          "cms_id": "8f2db59c-6ead-4460-9687-de249ef44ad9",
+          "position": 4,
+          "alt_text": "Brazilian Straight Hair Bundle - Jet Black #1 - Image 4"
+        }
+      ],
+      "sku": "STR-JB-12"
+    },
+    {
+      "handle": "body-wave-natural-bundle",
+      "title": "Body Wave Hair Bundle - Natural Black #1B",
+      "description": "<p>Luxurious body wave texture with beautiful bounce and movement. 100% virgin human hair that blends seamlessly with natural hair.</p><ul><li>100% Human Virgin Hair</li><li>Soft S-wave pattern</li><li>Minimal shedding</li><li>Can be straightened and curled</li><li>Lasts 12+ months with proper care</li></ul>",
+      "vendor": "5S Hair Vietnam",
+      "category": "Hair Extensions",
+      "type": "Bundle",
+      "tags": [
+        "body-wave",
+        "virgin",
+        "natural-black",
+        "bundle",
+        "best-seller"
+      ],
+      "seo_title": "Body Wave Hair Bundle | Premium Virgin Hair",
+      "seo_description": "Shop body wave hair bundles. Beautiful bounce and movement that lasts.",
+      "variants": [
+        {
+          "sku": "BW-NB-12",
+          "price": 94.99,
+          "compare_at_price": 134.99,
+          "inventory_qty": 50,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-14",
+          "price": 104.99,
+          "compare_at_price": 144.99,
+          "inventory_qty": 50,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-16",
+          "price": 114.99,
+          "compare_at_price": 154.99,
+          "inventory_qty": 50,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-18",
+          "price": 124.99,
+          "compare_at_price": 164.99,
+          "inventory_qty": 50,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-20",
+          "price": 134.99,
+          "compare_at_price": 174.99,
+          "inventory_qty": 50,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-22",
+          "price": 144.99,
+          "compare_at_price": 184.99,
+          "inventory_qty": 50,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-24",
+          "price": 154.99,
+          "compare_at_price": 194.99,
+          "inventory_qty": 50,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-26",
+          "price": 174.99,
+          "compare_at_price": 214.99,
+          "inventory_qty": 50,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-28",
+          "price": 194.99,
+          "compare_at_price": 234.99,
+          "inventory_qty": 50,
+          "weight": 260.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "28\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BW-NB-30",
+          "price": 214.99,
+          "compare_at_price": 264.99,
+          "inventory_qty": 50,
+          "weight": 280.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "30\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/BW-NB-12/bw-nb-12-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/c4baa318-a922-46ad-93c6-df2394e6213c_bw-nb-12-flatlay-01.png",
+          "cms_id": "beefc99a-db40-4a24-93bb-1d8cbda9a375",
+          "position": 1,
+          "alt_text": "Body Wave Hair Bundle - Natural Black #1B - Main Image"
+        },
+        {
+          "local_path": "images/generated/BW-NB-12/bw-nb-12-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/f5b9bab9-9c1f-4671-9d1f-0fc900ae800c_bw-nb-12-closeup-02.png",
+          "cms_id": "50b34d2d-ad31-4cff-8fe8-bc239d0ef176",
+          "position": 2,
+          "alt_text": "Body Wave Hair Bundle - Natural Black #1B - Image 2"
+        },
+        {
+          "local_path": "images/generated/BW-NB-12/bw-nb-12-draped-03.png",
+          "cms_url": "/api/v1/media/proxy/0877c3e6-cda2-4736-86b9-a824ea928402_bw-nb-12-draped-03.png",
+          "cms_id": "f817fdf9-5605-458a-bb6a-85941d863ad3",
+          "position": 3,
+          "alt_text": "Body Wave Hair Bundle - Natural Black #1B - Image 3"
+        },
+        {
+          "local_path": "images/generated/BW-NB-12/bw-nb-12-bundle-04.png",
+          "cms_url": "/api/v1/media/proxy/cd202255-2438-4729-8bff-61a30ebf169f_bw-nb-12-bundle-04.png",
+          "cms_id": "5621c57f-4d84-4ff9-b4a0-16c519faa530",
+          "position": 4,
+          "alt_text": "Body Wave Hair Bundle - Natural Black #1B - Image 4"
+        }
+      ],
+      "sku": "BW-NB-12"
+    },
+    {
+      "handle": "deep-wave-bundle",
+      "title": "Deep Wave Curly Hair Bundle",
+      "description": "<p>Gorgeous deep wave curls that hold pattern beautifully. Perfect for a glamorous, voluminous look. 100% virgin human hair.</p><ul><li>100% Human Virgin Hair</li><li>Tight curl pattern</li><li>Holds curl when wet</li><li>Minimal tangling</li><li>Lasts 12+ months with proper care</li></ul>",
+      "vendor": "Tinashe Hair",
+      "category": "Hair Extensions",
+      "type": "Bundle",
+      "tags": [
+        "deep-wave",
+        "curly",
+        "virgin",
+        "bundle",
+        "best-seller"
+      ],
+      "seo_title": "Deep Wave Hair Bundle | Premium Curly Hair",
+      "seo_description": "Shop deep wave curly hair bundles. Gorgeous curls that last.",
+      "variants": [
+        {
+          "sku": "DW-12",
+          "price": 99.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 50,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-14",
+          "price": 109.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 50,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-16",
+          "price": 119.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 50,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-18",
+          "price": 129.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 50,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-20",
+          "price": 139.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 50,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-22",
+          "price": 149.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 50,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-24",
+          "price": 159.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 50,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "DW-26",
+          "price": 179.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 50,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/DW-12/dw-12-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/d8c2dd6b-c323-4fad-9e9d-9ce8670b4369_dw-12-flatlay-01.png",
+          "cms_id": "f1a38f51-405a-45b2-94b3-48563c2cac6b",
+          "position": 1,
+          "alt_text": "Deep Wave Curly Hair Bundle - Main Image"
+        },
+        {
+          "local_path": "images/generated/DW-12/dw-12-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/9528e528-c2eb-485f-a920-494e49d1deed_dw-12-closeup-02.png",
+          "cms_id": "66611222-9ef9-499d-a5e4-12268a7ae3ec",
+          "position": 2,
+          "alt_text": "Deep Wave Curly Hair Bundle - Image 2"
+        },
+        {
+          "local_path": "images/generated/DW-12/dw-12-flowing-03.png",
+          "cms_url": "/api/v1/media/proxy/a52c474d-5a33-474b-8b4d-20706011508d_dw-12-flowing-03.png",
+          "cms_id": "e2af05a9-7c66-441c-810f-59670c43fcaf",
+          "position": 3,
+          "alt_text": "Deep Wave Curly Hair Bundle - Image 3"
+        },
+        {
+          "local_path": "images/generated/DW-12/dw-12-bundle-04.png",
+          "cms_url": "/api/v1/media/proxy/aaa6676a-1dcd-4cf5-9d60-8cbab7d34ffe_dw-12-bundle-04.png",
+          "cms_id": "214be1bc-3fdc-4dea-a05c-3444d14871da",
+          "position": 4,
+          "alt_text": "Deep Wave Curly Hair Bundle - Image 4"
+        }
+      ],
+      "sku": "DW-12"
+    },
+    {
+      "handle": "hd-lace-closure-4x4",
+      "title": "HD Lace Closure 4x4 - Straight",
+      "description": "<p>Invisible HD lace closure that melts into any skin tone. Pre-plucked hairline with baby hairs for the most natural look.</p><ul><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Baby hairs included</li><li>Free/Middle/Three part</li><li>Swiss lace quality</li></ul>",
+      "vendor": "West Kiss Hair",
+      "category": "Hair Extensions",
+      "type": "Closure",
+      "tags": [
+        "closure",
+        "4x4",
+        "hd-lace",
+        "straight",
+        "best-seller"
+      ],
+      "seo_title": "HD Lace Closure 4x4 | Invisible Lace",
+      "seo_description": "Premium HD lace closure. Melts into skin for undetectable install.",
+      "variants": [
+        {
+          "sku": "CL-4x4-STR-10-FP",
+          "price": 79.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 30,
+          "weight": 50.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "10\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "CL-4x4-STR-12-FP",
+          "price": 89.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 30,
+          "weight": 55.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "CL-4x4-STR-14-FP",
+          "price": 99.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 30,
+          "weight": 60.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "CL-4x4-STR-16-FP",
+          "price": 109.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 30,
+          "weight": 65.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/closures/closure-4x4-straight-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "HD Lace Closure 4x4 Straight 10 inch"
+        },
+        {
+          "local_path": "images/generated/CL-4x4-STR-12-FP/cl-4x4-str-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/248ad559-7a0c-4cce-998f-cfde3d0b19f3_cl-4x4-str-flatlay-01.png",
+          "cms_id": "8630df76-2a55-45fb-99a6-912d7e9b114f",
+          "position": 1,
+          "alt_text": "HD Lace Closure 4x4 - Straight - Main Image"
+        },
+        {
+          "local_path": "images/generated/CL-4x4-STR-12-FP/cl-4x4-str-lace-02.png",
+          "cms_url": "/api/v1/media/proxy/5342f0fa-acb7-4286-9c63-cbadd10b836d_cl-4x4-str-lace-02.png",
+          "cms_id": "a228fdcf-bb0c-4766-96b4-72bca25575f6",
+          "position": 2,
+          "alt_text": "HD Lace Closure 4x4 - Straight - Image 2"
+        },
+        {
+          "local_path": "images/generated/CL-4x4-STR-12-FP/cl-4x4-str-parting-03.png",
+          "cms_url": "/api/v1/media/proxy/b0bc8c4d-8a30-445a-a84e-65b47bc55235_cl-4x4-str-parting-03.png",
+          "cms_id": "d906f0f3-9eb1-4a4f-9efe-593db514cdb8",
+          "position": 3,
+          "alt_text": "HD Lace Closure 4x4 - Straight - Image 3"
+        },
+        {
+          "local_path": "images/generated/CL-4x4-STR-12-FP/cl-4x4-str-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/e4e89ed0-47c4-4e2b-8792-6667fe89f5b8_cl-4x4-str-styled-04.png",
+          "cms_id": "0c95ca30-e0f1-4c22-9a39-46d6e9dfbeb3",
+          "position": 4,
+          "alt_text": "HD Lace Closure 4x4 - Straight - Image 4"
+        }
+      ],
+      "sku": "CL-4x4-STR-10-FP"
+    },
+    {
+      "handle": "hd-lace-frontal-13x4",
+      "title": "HD Lace Frontal 13x4 - Body Wave",
+      "description": "<p>Ear to ear HD lace frontal for maximum styling versatility. Pre-plucked with natural hairline and baby hairs.</p><ul><li>13x4 inch coverage</li><li>HD Invisible Lace</li><li>Ear to ear coverage</li><li>Pre-plucked natural hairline</li><li>Can be parted anywhere</li></ul>",
+      "vendor": "West Kiss Hair",
+      "category": "Hair Extensions",
+      "type": "Frontal",
+      "tags": [
+        "frontal",
+        "13x4",
+        "hd-lace",
+        "body-wave",
+        "best-seller"
+      ],
+      "seo_title": "HD Lace Frontal 13x4 | Ear to Ear Coverage",
+      "seo_description": "Premium HD lace frontal. Ear to ear coverage for versatile styling.",
+      "variants": [
+        {
+          "sku": "FR-13x4-BW-12",
+          "price": 129.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 25,
+          "weight": 70.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "FR-13x4-BW-14",
+          "price": 139.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 25,
+          "weight": 80.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "FR-13x4-BW-16",
+          "price": 149.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 25,
+          "weight": 90.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "FR-13x4-BW-18",
+          "price": 159.99,
+          "compare_at_price": 209.99,
+          "inventory_qty": 25,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "FR-13x4-BW-20",
+          "price": 169.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 25,
+          "weight": 110.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/FR-13x4-BW-12/fr-13x4-bw-lace-02.png",
+          "cms_url": "/api/v1/media/proxy/82f8eb26-bca7-4166-997e-f5396abc892a_fr-13x4-bw-lace-02.png",
+          "cms_id": "751a5811-fce9-4163-ba61-70b932950e45",
+          "position": 1,
+          "alt_text": "HD Lace Frontal 13x4 - Body Wave - Main Image"
+        },
+        {
+          "local_path": "images/generated/FR-13x4-BW-12/fr-13x4-bw-full-03.png",
+          "cms_url": "/api/v1/media/proxy/a68a9451-3f5d-4a46-a02a-43588372c27f_fr-13x4-bw-full-03.png",
+          "cms_id": "87c69b01-6685-4f01-b956-26cf56e8fddb",
+          "position": 2,
+          "alt_text": "HD Lace Frontal 13x4 - Body Wave - Image 2"
+        }
+      ],
+      "sku": "FR-13x4-BW-12"
+    },
+    {
+      "handle": "kinky-curly-bundle",
+      "title": "Kinky Curly Hair Bundle - 4C Texture",
+      "description": "<p>Beautiful 4C kinky curly texture that blends perfectly with natural African American hair. Full, voluminous, and gorgeous.</p><ul><li>100% Human Virgin Hair</li><li>4C Texture match</li><li>Full and voluminous</li><li>Blends with natural hair</li><li>Minimal shedding</li></ul>",
+      "vendor": "Mielle Organics",
+      "category": "Hair Extensions",
+      "type": "Bundle",
+      "tags": [
+        "kinky-curly",
+        "4c",
+        "natural",
+        "afro",
+        "bundle",
+        "textured"
+      ],
+      "seo_title": "Kinky Curly Hair Bundle | Natural 4C Texture",
+      "seo_description": "Premium kinky curly hair for natural texture matching.",
+      "variants": [
+        {
+          "sku": "KC-4C-10",
+          "price": 109.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 30,
+          "weight": 90.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "10\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KC-4C-12",
+          "price": 119.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 30,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KC-4C-14",
+          "price": 129.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 30,
+          "weight": 110.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KC-4C-16",
+          "price": 139.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 30,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KC-4C-18",
+          "price": 149.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 30,
+          "weight": 130.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KC-4C-20",
+          "price": 159.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 30,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/KC-4C-12/kc-4c-12-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/7c4f9463-2bf9-4bc9-a29a-ff7d1d20930e_kc-4c-12-flatlay-01.png",
+          "cms_id": "a8aadf4d-ac67-4a5c-ae22-894324b5c28e",
+          "position": 1,
+          "alt_text": "Kinky Curly Hair Bundle - 4C Texture - Main Image"
+        },
+        {
+          "local_path": "images/generated/KC-4C-12/kc-4c-12-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/37a1227d-d1b9-4b27-9bce-05f5f4036629_kc-4c-12-closeup-02.png",
+          "cms_id": "df134cbd-fdf2-49f8-af45-218342f28c02",
+          "position": 2,
+          "alt_text": "Kinky Curly Hair Bundle - 4C Texture - Image 2"
+        },
+        {
+          "local_path": "images/generated/KC-4C-12/kc-4c-12-volume-03.png",
+          "cms_url": "/api/v1/media/proxy/6394bf6b-a8ea-4947-89d0-32a39048ee45_kc-4c-12-volume-03.png",
+          "cms_id": "01ae2091-b2e3-4c9f-bb9a-43aa6a1a686c",
+          "position": 3,
+          "alt_text": "Kinky Curly Hair Bundle - 4C Texture - Image 3"
+        },
+        {
+          "local_path": "images/generated/KC-4C-12/kc-4c-12-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/385d05f5-e861-414f-ab28-bea6eaabc471_kc-4c-12-styled-04.png",
+          "cms_id": "2ea05d6f-bdcf-4642-b02b-fbb24a046d9f",
+          "position": 4,
+          "alt_text": "Kinky Curly Hair Bundle - 4C Texture - Image 4"
+        }
+      ],
+      "sku": "KC-4C-10"
+    },
+    {
+      "handle": "honey-blonde-straight-bundle",
+      "title": "Honey Blonde Straight Bundle #27",
+      "description": "<p>Stunning pre-colored honey blonde straight hair. No bleaching needed - ready to install for an instant glam look.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #27 Blonde</li><li>Silky straight texture</li><li>Can be heat styled</li><li>Color-safe</li></ul>",
+      "vendor": "Beauty Forever Hair",
+      "category": "Hair Extensions",
+      "type": "Bundle",
+      "tags": [
+        "blonde",
+        "honey-blonde",
+        "27",
+        "straight",
+        "colored",
+        "bundle"
+      ],
+      "seo_title": "Honey Blonde Hair Bundle #27 | Pre-Colored",
+      "seo_description": "Pre-colored honey blonde straight hair. Ready to install.",
+      "variants": [
+        {
+          "sku": "HB-STR-12",
+          "price": 119.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 25,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "HB-STR-14",
+          "price": 129.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 25,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "HB-STR-16",
+          "price": 139.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 25,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "HB-STR-18",
+          "price": 149.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 25,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "HB-STR-20",
+          "price": 159.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 25,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "HB-STR-22",
+          "price": 169.99,
+          "compare_at_price": 209.99,
+          "inventory_qty": 25,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "HB-STR-24",
+          "price": 179.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 25,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/straight/straight-blonde-short-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "Honey Blonde Straight Hair Bundle 12 inch"
+        },
+        {
+          "local_path": "images/generated/HB-STR-18/hb-str-18-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/c96d7d7e-6119-4969-bde5-45d5026e2236_hb-str-18-flatlay-01.png",
+          "cms_id": "70147d61-3560-4569-973e-f5709cb2556b",
+          "position": 1,
+          "alt_text": "Honey Blonde Straight Bundle #27 - Main Image"
+        },
+        {
+          "local_path": "images/generated/HB-STR-18/hb-str-18-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/d699b944-8c93-4d7e-a8c2-3c95aa8dc7cf_hb-str-18-closeup-02.png",
+          "cms_id": "a914a89e-f1de-4f13-9eb9-e13ec91eed75",
+          "position": 2,
+          "alt_text": "Honey Blonde Straight Bundle #27 - Image 2"
+        },
+        {
+          "local_path": "images/generated/HB-STR-18/hb-str-18-flowing-03.png",
+          "cms_url": "/api/v1/media/proxy/13079ffc-0734-413b-b5ff-6f94ea0ae498_hb-str-18-flowing-03.png",
+          "cms_id": "ed3abe0f-2023-492d-a3bc-b2c19ad66c6e",
+          "position": 3,
+          "alt_text": "Honey Blonde Straight Bundle #27 - Image 3"
+        },
+        {
+          "local_path": "images/generated/HB-STR-18/hb-str-18-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/caf01583-4aa1-437d-a618-34ed6d55f173_hb-str-18-styled-04.png",
+          "cms_id": "3a16f199-d652-4c53-94b0-270db5468fb9",
+          "position": 4,
+          "alt_text": "Honey Blonde Straight Bundle #27 - Image 4"
+        }
+      ],
+      "sku": "HB-STR-12"
+    },
+    {
+      "handle": "burgundy-body-wave-bundle",
+      "title": "Burgundy Body Wave Bundle #99J",
+      "description": "<p>Rich burgundy wine colored body wave hair. Bold, beautiful, and ready to turn heads.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #99J Burgundy</li><li>Soft body wave texture</li><li>Vibrant color</li><li>Fade resistant</li></ul>",
+      "vendor": "Beauty Forever Hair",
+      "category": "Hair Extensions",
+      "type": "Bundle",
+      "tags": [
+        "burgundy",
+        "wine",
+        "99j",
+        "body-wave",
+        "colored",
+        "bundle"
+      ],
+      "seo_title": "Burgundy Body Wave Bundle #99J | Wine Color",
+      "seo_description": "Bold burgundy body wave hair for a stunning look.",
+      "variants": [
+        {
+          "sku": "BUR-BW-12",
+          "price": 119.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 25,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BUR-BW-14",
+          "price": 129.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 25,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BUR-BW-16",
+          "price": 139.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 25,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BUR-BW-18",
+          "price": 149.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 25,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BUR-BW-20",
+          "price": 159.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 25,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BUR-BW-22",
+          "price": 169.99,
+          "compare_at_price": 209.99,
+          "inventory_qty": 25,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/body-wave/bodywave-burgundy-short-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "Burgundy Body Wave Hair Bundle 12 inch"
+        },
+        {
+          "local_path": "images/generated/BUR-BW-18/bur-bw-18-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/a520f581-8f3d-44c0-92c8-94f29c0ddfe0_bur-bw-18-flatlay-01.png",
+          "cms_id": "0b422f4c-8dfd-4253-8b13-a76962ff308f",
+          "position": 1,
+          "alt_text": "Burgundy Body Wave Bundle #99J - Main Image"
+        },
+        {
+          "local_path": "images/generated/BUR-BW-18/bur-bw-18-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/329aaf34-286f-4a0e-9cec-4c54fe142c1b_bur-bw-18-closeup-02.png",
+          "cms_id": "a78815bf-52d7-425e-a1af-9011271906a9",
+          "position": 2,
+          "alt_text": "Burgundy Body Wave Bundle #99J - Image 2"
+        },
+        {
+          "local_path": "images/generated/BUR-BW-18/bur-bw-18-draped-03.png",
+          "cms_url": "/api/v1/media/proxy/7fdd201b-d7ef-48c7-bd17-b4cffc1d14d8_bur-bw-18-draped-03.png",
+          "cms_id": "f5817b19-e392-4a0a-b292-13bec588bd91",
+          "position": 3,
+          "alt_text": "Burgundy Body Wave Bundle #99J - Image 3"
+        },
+        {
+          "local_path": "images/generated/BUR-BW-18/bur-bw-18-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/5ef08007-15f1-4e1c-b941-5c69421ef0b9_bur-bw-18-styled-04.png",
+          "cms_id": "4657cf36-10c7-48fc-aff4-495d51612ca9",
+          "position": 4,
+          "alt_text": "Burgundy Body Wave Bundle #99J - Image 4"
+        }
+      ],
+      "sku": "BUR-BW-12"
+    },
+    {
+      "handle": "lace-front-wig-straight",
+      "title": "HD Lace Front Wig - Straight",
+      "description": "<p>Ready to wear HD lace front wig. Pre-plucked, pre-styled, and perfect for beginners and pros alike.</p><ul><li>HD Invisible Lace Front</li><li>Pre-plucked hairline</li><li>Adjustable straps</li><li>150% Density</li><li>Glueless option available</li></ul>",
+      "vendor": "UNice Hair",
+      "category": "Hair Extensions",
+      "type": "Wig",
+      "tags": [
+        "wig",
+        "lace-front",
+        "straight",
+        "hd-lace",
+        "best-seller"
+      ],
+      "seo_title": "HD Lace Front Wig | Ready to Wear",
+      "seo_description": "Premium HD lace front wig. Pre-plucked and ready to install.",
+      "variants": [
+        {
+          "sku": "WIG-LF-STR-14-150",
+          "price": 189.99,
+          "compare_at_price": 249.99,
+          "inventory_qty": 20,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        },
+        {
+          "sku": "WIG-LF-STR-16-150",
+          "price": 209.99,
+          "compare_at_price": 269.99,
+          "inventory_qty": 20,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        },
+        {
+          "sku": "WIG-LF-STR-18-150",
+          "price": 229.99,
+          "compare_at_price": 289.99,
+          "inventory_qty": 20,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        },
+        {
+          "sku": "WIG-LF-STR-20-150",
+          "price": 249.99,
+          "compare_at_price": 309.99,
+          "inventory_qty": 20,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        },
+        {
+          "sku": "WIG-LF-STR-22-150",
+          "price": 269.99,
+          "compare_at_price": 329.99,
+          "inventory_qty": 20,
+          "weight": 260.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        },
+        {
+          "sku": "WIG-LF-STR-24-150",
+          "price": 289.99,
+          "compare_at_price": 349.99,
+          "inventory_qty": 20,
+          "weight": 280.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        },
+        {
+          "sku": "WIG-LF-STR-26-150",
+          "price": 309.99,
+          "compare_at_price": 379.99,
+          "inventory_qty": 20,
+          "weight": 300.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": "Density",
+          "option2_value": "150%"
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/lace-fronts/lacefront-straight-medium-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "HD Lace Front Wig Straight 14 inch"
+        },
+        {
+          "local_path": "images/generated/WIG-LF-STR-18-150/wig-lf-str-front-01.png",
+          "cms_url": "/api/v1/media/proxy/01ffe9a0-2f3a-4446-9d07-a0b49de66868_wig-lf-str-front-01.png",
+          "cms_id": "86116e52-639a-4ec7-8ad4-afa3a2a5632c",
+          "position": 1,
+          "alt_text": "HD Lace Front Wig - Straight - Main Image"
+        },
+        {
+          "local_path": "images/generated/WIG-LF-STR-18-150/wig-lf-str-side-02.png",
+          "cms_url": "/api/v1/media/proxy/c9a8ce59-f560-44c0-a082-86ce26282cab_wig-lf-str-side-02.png",
+          "cms_id": "049a1534-647b-4923-b663-7a5a739c4c79",
+          "position": 2,
+          "alt_text": "HD Lace Front Wig - Straight - Image 2"
+        },
+        {
+          "local_path": "images/generated/WIG-LF-STR-18-150/wig-lf-str-lace-03.png",
+          "cms_url": "/api/v1/media/proxy/e32da1b5-f712-4eac-a08f-aa92a4f9fd84_wig-lf-str-lace-03.png",
+          "cms_id": "0db6c3c4-832b-40cb-b9de-a41e8d2a715a",
+          "position": 3,
+          "alt_text": "HD Lace Front Wig - Straight - Image 3"
+        }
+      ],
+      "sku": "WIG-LF-STR-14-150"
+    },
+    {
+      "handle": "sleek-ponytail-extension",
+      "title": "Sleek Ponytail Extension - Straight",
+      "description": "<p>Instant glam with our wrap-around ponytail extension. Easy to install, no glue or heat needed.</p><ul><li>Wrap-around style</li><li>Comb and drawstring attachment</li><li>Natural looking</li><li>Heat friendly</li><li>Reusable</li></ul>",
+      "vendor": "Nadula Hair",
+      "category": "Hair Extensions",
+      "type": "Ponytail",
+      "tags": [
+        "ponytail",
+        "straight",
+        "sleek",
+        "easy-install"
+      ],
+      "seo_title": "Ponytail Extension | Instant Glam",
+      "seo_description": "Easy wrap-around ponytail for instant length and style.",
+      "variants": [
+        {
+          "sku": "PONY-STR-18",
+          "price": 49.99,
+          "compare_at_price": 79.99,
+          "inventory_qty": 40,
+          "weight": 80.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "PONY-STR-22",
+          "price": 59.99,
+          "compare_at_price": 89.99,
+          "inventory_qty": 40,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "PONY-STR-26",
+          "price": 69.99,
+          "compare_at_price": 99.99,
+          "inventory_qty": 40,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "PONY-STR-30",
+          "price": 79.99,
+          "compare_at_price": 109.99,
+          "inventory_qty": 40,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "30\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/ponytails/ponytail-sleek-medium-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "Sleek Ponytail Extension 18 inch"
+        },
+        {
+          "local_path": "images/generated/PONY-STR-22/pony-str-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/ed6ffe11-b39a-4a19-8803-9d34d31eafc9_pony-str-flatlay-01.png",
+          "cms_id": "3cc3a324-25a2-455e-8562-f616ded517fe",
+          "position": 1,
+          "alt_text": "Sleek Ponytail Extension - Straight - Main Image"
+        },
+        {
+          "local_path": "images/generated/PONY-STR-22/pony-str-styled-02.png",
+          "cms_url": "/api/v1/media/proxy/f5416b24-042f-4c01-bd1a-8009a077d351_pony-str-styled-02.png",
+          "cms_id": "5d4209d0-2b6b-49c6-b7b8-804f3660ea4a",
+          "position": 2,
+          "alt_text": "Sleek Ponytail Extension - Straight - Image 2"
+        },
+        {
+          "local_path": "images/generated/PONY-STR-22/pony-str-length-04.png",
+          "cms_url": "/api/v1/media/proxy/a1cd8fa6-a4e9-4896-b63a-f144a2a97762_pony-str-length-04.png",
+          "cms_id": "83276769-8061-4412-9e1d-6a7e4ff38016",
+          "position": 3,
+          "alt_text": "Sleek Ponytail Extension - Straight - Image 3"
+        }
+      ],
+      "sku": "PONY-STR-18"
+    },
+    {
+      "handle": "curly-ponytail-extension",
+      "title": "Curly Ponytail Extension",
+      "description": "<p>Voluminous curly ponytail for a fun, flirty look. Easy clip-in and wrap style.</p><ul><li>Wrap-around style</li><li>Bouncy curls</li><li>Comb and drawstring</li><li>Lightweight</li><li>Reusable</li></ul>",
+      "vendor": "Nadula Hair",
+      "category": "Hair Extensions",
+      "type": "Ponytail",
+      "tags": [
+        "ponytail",
+        "curly",
+        "bouncy",
+        "easy-install"
+      ],
+      "seo_title": "Curly Ponytail Extension | Bouncy Curls",
+      "seo_description": "Fun and flirty curly ponytail. Easy to install.",
+      "variants": [
+        {
+          "sku": "PONY-CRL-14",
+          "price": 54.99,
+          "compare_at_price": 84.99,
+          "inventory_qty": 40,
+          "weight": 90.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "PONY-CRL-18",
+          "price": 64.99,
+          "compare_at_price": 94.99,
+          "inventory_qty": 40,
+          "weight": 110.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "PONY-CRL-22",
+          "price": 74.99,
+          "compare_at_price": 104.99,
+          "inventory_qty": 40,
+          "weight": 130.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/ponytails/ponytail-curly-medium-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "Curly Ponytail Extension 14 inch"
+        }
+      ],
+      "sku": "PONY-CRL-14"
+    },
+    {
+      "handle": "bundle-deal-3pcs-straight",
+      "title": "3 Bundle Deal - Straight Hair",
+      "description": "<p>Save big with our 3 bundle deal! Perfect for a full sew-in installation. Includes 3 bundles of matching straight hair.</p><ul><li>3 Bundles included</li><li>100% Virgin Hair</li><li>Same batch - perfect match</li><li>Great value</li></ul>",
+      "vendor": "Isee Hair",
+      "category": "Hair Extensions",
+      "type": "Bundle Deal",
+      "tags": [
+        "bundle-deal",
+        "3-bundles",
+        "straight",
+        "value",
+        "best-seller"
+      ],
+      "seo_title": "3 Bundle Deal Straight Hair | Save Big",
+      "seo_description": "3 bundle deal for a full sew-in. Great value.",
+      "variants": [
+        {
+          "sku": "BD3-STR-12-14-16",
+          "price": 239.99,
+          "compare_at_price": 329.99,
+          "inventory_qty": 30,
+          "weight": 300.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "12\" 14\" 16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD3-STR-14-16-18",
+          "price": 269.99,
+          "compare_at_price": 359.99,
+          "inventory_qty": 30,
+          "weight": 360.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "14\" 16\" 18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD3-STR-16-18-20",
+          "price": 299.99,
+          "compare_at_price": 399.99,
+          "inventory_qty": 30,
+          "weight": 420.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "16\" 18\" 20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD3-STR-18-20-22",
+          "price": 329.99,
+          "compare_at_price": 429.99,
+          "inventory_qty": 30,
+          "weight": 480.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "18\" 20\" 22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD3-STR-20-22-24",
+          "price": 359.99,
+          "compare_at_price": 459.99,
+          "inventory_qty": 30,
+          "weight": 540.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "20\" 22\" 24\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/bundles/bundle-deal-straight-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "3 Bundle Deal Straight 12 14 16 inch"
+        },
+        {
+          "local_path": "images/generated/BD3-STR-16-18-20/bd3-str-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/4dc73939-8688-431c-a897-4128e724ee23_bd3-str-flatlay-01.png",
+          "cms_id": "a1fdcf53-d220-467a-ac4d-7389fb36eacc",
+          "position": 1,
+          "alt_text": "3 Bundle Deal - Straight Hair - Main Image"
+        },
+        {
+          "local_path": "images/generated/BD3-STR-16-18-20/bd3-str-stacked-02.png",
+          "cms_url": "/api/v1/media/proxy/62e146b6-dc4f-4727-90dd-a6dd3d107a6a_bd3-str-stacked-02.png",
+          "cms_id": "6969f86b-c876-4a2d-8e30-43b7d9896a85",
+          "position": 2,
+          "alt_text": "3 Bundle Deal - Straight Hair - Image 2"
+        },
+        {
+          "local_path": "images/generated/BD3-STR-16-18-20/bd3-str-display-03.png",
+          "cms_url": "/api/v1/media/proxy/7c26f0b2-a62d-4e66-a806-6bbf61a2a0b2_bd3-str-display-03.png",
+          "cms_id": "4e77a317-11c7-4e70-96da-9d997afa5111",
+          "position": 3,
+          "alt_text": "3 Bundle Deal - Straight Hair - Image 3"
+        },
+        {
+          "local_path": "images/generated/BD3-STR-16-18-20/bd3-str-package-04.png",
+          "cms_url": "/api/v1/media/proxy/15c7d2e5-7298-499d-9224-4da299cc716e_bd3-str-package-04.png",
+          "cms_id": "c53c79e5-44f5-4a6b-ac16-680eb34d698f",
+          "position": 4,
+          "alt_text": "3 Bundle Deal - Straight Hair - Image 4"
+        }
+      ],
+      "sku": "BD3-STR-12-14-16"
+    },
+    {
+      "handle": "bundle-deal-4pcs-closure",
+      "title": "4 Bundle + Closure Deal - Body Wave",
+      "description": "<p>Complete install package! 4 bundles plus matching closure for a full, natural-looking sew-in.</p><ul><li>4 Bundles + 4x4 Closure</li><li>100% Virgin Hair</li><li>Perfect match guaranteed</li><li>Everything you need</li></ul>",
+      "vendor": "Isee Hair",
+      "category": "Hair Extensions",
+      "type": "Bundle Deal",
+      "tags": [
+        "bundle-deal",
+        "4-bundles",
+        "closure",
+        "body-wave",
+        "complete",
+        "best-seller"
+      ],
+      "seo_title": "4 Bundle + Closure Deal | Complete Install",
+      "seo_description": "Complete sew-in package. 4 bundles plus closure.",
+      "variants": [
+        {
+          "sku": "BD4C-BW-12-18",
+          "price": 379.99,
+          "compare_at_price": 499.99,
+          "inventory_qty": 20,
+          "weight": 450.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "12\" 14\" 16\" 18\" + 10\" Closure",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD4C-BW-14-20",
+          "price": 429.99,
+          "compare_at_price": 549.99,
+          "inventory_qty": 20,
+          "weight": 530.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "14\" 16\" 18\" 20\" + 12\" Closure",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD4C-BW-16-22",
+          "price": 479.99,
+          "compare_at_price": 599.99,
+          "inventory_qty": 20,
+          "weight": 610.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "16\" 18\" 20\" 22\" + 14\" Closure",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BD4C-BW-18-24",
+          "price": 529.99,
+          "compare_at_price": 659.99,
+          "inventory_qty": 20,
+          "weight": 690.0,
+          "weight_unit": "g",
+          "option1_name": "Lengths",
+          "option1_value": "18\" 20\" 22\" 24\" + 16\" Closure",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/bundles/bundle-deal-closure-bodywave-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": "4 Bundle + Closure Deal Body Wave"
+        },
+        {
+          "local_path": "images/generated/BD4C-BW-16-22/bd4c-bw-complete-01.png",
+          "cms_url": "/api/v1/media/proxy/81122fcb-1b40-46d9-af7e-d5aaeb58bcb6_bd4c-bw-complete-01.png",
+          "cms_id": "2f2b4b6f-2466-4823-bc5a-4dc8deff1810",
+          "position": 1,
+          "alt_text": "4 Bundle + Closure Deal - Body Wave - Main Image"
+        },
+        {
+          "local_path": "images/generated/BD4C-BW-16-22/bd4c-bw-arranged-02.png",
+          "cms_url": "/api/v1/media/proxy/5225efc6-3121-479d-86c4-df097d886e3e_bd4c-bw-arranged-02.png",
+          "cms_id": "f1fccfe8-aaa9-4d5f-a5d1-95a40cf26c75",
+          "position": 2,
+          "alt_text": "4 Bundle + Closure Deal - Body Wave - Image 2"
+        },
+        {
+          "local_path": "images/generated/BD4C-BW-16-22/bd4c-bw-closeup-03.png",
+          "cms_url": "/api/v1/media/proxy/2110d798-a2d2-442b-a1dc-18dc5aae951d_bd4c-bw-closeup-03.png",
+          "cms_id": "29ee61a1-96c2-4b27-b7df-77aafabf3ae5",
+          "position": 3,
+          "alt_text": "4 Bundle + Closure Deal - Body Wave - Image 3"
+        },
+        {
+          "local_path": "images/generated/BD4C-BW-16-22/bd4c-bw-package-04.png",
+          "cms_url": "/api/v1/media/proxy/93ee3ca9-67f6-4b5c-90fd-fcd234d6dbe4_bd4c-bw-package-04.png",
+          "cms_id": "b9898454-a016-4f0f-8cd7-2e9c8a58377b",
+          "position": 4,
+          "alt_text": "4 Bundle + Closure Deal - Body Wave - Image 4"
+        }
+      ],
+      "sku": "BD4C-BW-12-18"
+    },
+    {
+      "handle": "rebecca-straight-bundle",
+      "title": "Virgin Straight Hair Bundle",
+      "description": "<p>Premium 100% virgin straight hair bundles direct from Xuchang factory. Silky smooth, no tangling, no shedding. Double weft machine made - ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Double Drawn Available</li><li>Can be colored/bleached</li><li>12+ months lifespan</li></ul>",
+      "vendor": "Rebecca Hair Factory",
+      "category": "Hair Extensions > Bundles > Straight",
+      "type": "Bundle",
+      "tags": [
+        "straight",
+        "virgin",
+        "factory-direct",
+        "machine-weft",
+        "ready-to-sell"
+      ],
+      "seo_title": "Virgin Straight Hair Bundle | Factory Direct",
+      "seo_description": "Premium virgin straight hair bundles direct from factory. Best wholesale prices.",
+      "variants": [
+        {
+          "sku": "RBH-STR-12",
+          "price": 49.99,
+          "compare_at_price": 89.99,
+          "inventory_qty": 100,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-14",
+          "price": 54.99,
+          "compare_at_price": 99.99,
+          "inventory_qty": 100,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-16",
+          "price": 59.99,
+          "compare_at_price": 109.99,
+          "inventory_qty": 100,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-18",
+          "price": 64.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 100,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-20",
+          "price": 69.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 100,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-22",
+          "price": 79.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 100,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-24",
+          "price": 89.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 100,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-26",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 100,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-28",
+          "price": 109.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 100,
+          "weight": 260.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "28\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-STR-30",
+          "price": 119.99,
+          "compare_at_price": 209.99,
+          "inventory_qty": 100,
+          "weight": 280.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "30\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/RBH-STR/straight-natural-black-01.png",
+          "cms_url": "/api/v1/media/proxy/6761616e-f756-40fb-97cf-bdd3621a4808_straight-natural-black-01.png",
+          "cms_id": "28f03347-a5f8-47ca-93e2-d41ef36c604a",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/RBH-STR/straight-natural-black-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/0bb9cbbc-6787-4d18-908d-526ce2c6e2a1_straight-natural-black-closeup-02.png",
+          "cms_id": "88e23e3c-8da5-4336-a210-d82572dc5606",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/RBH-STR/straight-natural-black-flowing-03.png",
+          "cms_url": "/api/v1/media/proxy/47334f24-bb71-4665-a0d9-caec22e0d087_straight-natural-black-flowing-03.png",
+          "cms_id": "635ea16e-98d5-4a32-968d-5caa04872e85",
+          "position": 3,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/RBH-STR/straight-natural-black-pack-04.png",
+          "cms_url": "/api/v1/media/proxy/6f7dc158-c1e3-45e1-a0e3-1afe278983aa_straight-natural-black-pack-04.png",
+          "cms_id": "2b15707f-5659-4aa2-b2b3-6273f23a8d4f",
+          "position": 4,
+          "alt_text": ""
+        }
+      ],
+      "sku": "RBH-STR-12"
+    },
+    {
+      "handle": "rebecca-bodywave-bundle",
+      "title": "Body Wave Hair Bundle",
+      "description": "<p>Luxurious body wave texture direct from factory. Beautiful bounce and movement. Machine weft - ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Soft S-wave pattern</li><li>Minimal shedding</li><li>12+ months lifespan</li></ul>",
+      "vendor": "Rebecca Hair Factory",
+      "category": "Hair Extensions > Bundles > Body Wave",
+      "type": "Bundle",
+      "tags": [
+        "body-wave",
+        "virgin",
+        "factory-direct",
+        "machine-weft",
+        "ready-to-sell"
+      ],
+      "seo_title": "Body Wave Hair Bundle | Factory Direct",
+      "seo_description": "Premium body wave bundles direct from factory.",
+      "variants": [
+        {
+          "sku": "RBH-BW-12",
+          "price": 49.99,
+          "compare_at_price": 94.99,
+          "inventory_qty": 100,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-14",
+          "price": 54.99,
+          "compare_at_price": 104.99,
+          "inventory_qty": 100,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-16",
+          "price": 59.99,
+          "compare_at_price": 114.99,
+          "inventory_qty": 100,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-18",
+          "price": 64.99,
+          "compare_at_price": 124.99,
+          "inventory_qty": 100,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-20",
+          "price": 69.99,
+          "compare_at_price": 134.99,
+          "inventory_qty": 100,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-22",
+          "price": 79.99,
+          "compare_at_price": 144.99,
+          "inventory_qty": 100,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-24",
+          "price": 89.99,
+          "compare_at_price": 154.99,
+          "inventory_qty": 100,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-26",
+          "price": 99.99,
+          "compare_at_price": 174.99,
+          "inventory_qty": 100,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-28",
+          "price": 109.99,
+          "compare_at_price": 194.99,
+          "inventory_qty": 100,
+          "weight": 260.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "28\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-BW-30",
+          "price": 119.99,
+          "compare_at_price": 214.99,
+          "inventory_qty": 100,
+          "weight": 280.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "30\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/body-wave/bodywave-natural-short-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "RBH-BW-12"
+    },
+    {
+      "handle": "rebecca-deepwave-bundle",
+      "title": "Deep Wave Curly Bundle",
+      "description": "<p>Gorgeous deep wave curls from factory. Holds pattern beautifully. Machine weft - ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Tight curl pattern</li><li>Holds curl when wet</li><li>12+ months lifespan</li></ul>",
+      "vendor": "Rebecca Hair Factory",
+      "category": "Hair Extensions > Bundles > Deep Wave",
+      "type": "Bundle",
+      "tags": [
+        "deep-wave",
+        "curly",
+        "virgin",
+        "factory-direct",
+        "machine-weft",
+        "ready-to-sell"
+      ],
+      "seo_title": "Deep Wave Curly Bundle | Factory Direct",
+      "seo_description": "Premium deep wave curly bundles direct from factory.",
+      "variants": [
+        {
+          "sku": "RBH-DW-12",
+          "price": 54.99,
+          "compare_at_price": 99.99,
+          "inventory_qty": 100,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-14",
+          "price": 59.99,
+          "compare_at_price": 109.99,
+          "inventory_qty": 100,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-16",
+          "price": 64.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 100,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-18",
+          "price": 69.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 100,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-20",
+          "price": 79.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 100,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-22",
+          "price": 89.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 100,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-24",
+          "price": 99.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 100,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DW-26",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 100,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/deep-wave/deepwave-black-short-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "RBH-DW-12"
+    },
+    {
+      "handle": "longqi-straight-bundle",
+      "title": "Premium Virgin Straight Bundle",
+      "description": "<p>High quality virgin straight bundles from Longqi factory. Double weft machine made for durability.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Double Weft</li><li>Natural shine</li><li>12+ months lifespan</li></ul>",
+      "vendor": "Longqi Hair Factory",
+      "category": "Hair Extensions > Bundles > Straight",
+      "type": "Bundle",
+      "tags": [
+        "straight",
+        "virgin",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "seo_title": "Premium Virgin Straight Bundle | Longqi Factory",
+      "seo_description": "Premium quality straight bundles from Longqi factory.",
+      "variants": [
+        {
+          "sku": "LQH-STR-12",
+          "price": 54.99,
+          "compare_at_price": 94.99,
+          "inventory_qty": 80,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-14",
+          "price": 59.99,
+          "compare_at_price": 104.99,
+          "inventory_qty": 80,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-16",
+          "price": 64.99,
+          "compare_at_price": 114.99,
+          "inventory_qty": 80,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-18",
+          "price": 69.99,
+          "compare_at_price": 124.99,
+          "inventory_qty": 80,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-20",
+          "price": 79.99,
+          "compare_at_price": 134.99,
+          "inventory_qty": 80,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-22",
+          "price": 89.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 80,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-24",
+          "price": 99.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 80,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-STR-26",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 80,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/straight/straight-natural-short-02.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "LQH-STR-12"
+    },
+    {
+      "handle": "longqi-bodywave-bundle",
+      "title": "Premium Body Wave Bundle",
+      "description": "<p>Quality body wave from Longqi factory. Beautiful movement and bounce.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Double Weft</li><li>Soft wave pattern</li><li>12+ months lifespan</li></ul>",
+      "vendor": "Longqi Hair Factory",
+      "category": "Hair Extensions > Bundles > Body Wave",
+      "type": "Bundle",
+      "tags": [
+        "body-wave",
+        "virgin",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "seo_title": "Premium Body Wave Bundle | Longqi Factory",
+      "seo_description": "Premium quality body wave from Longqi factory.",
+      "variants": [
+        {
+          "sku": "LQH-BW-12",
+          "price": 54.99,
+          "compare_at_price": 94.99,
+          "inventory_qty": 80,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-BW-14",
+          "price": 59.99,
+          "compare_at_price": 104.99,
+          "inventory_qty": 80,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-BW-16",
+          "price": 64.99,
+          "compare_at_price": 114.99,
+          "inventory_qty": 80,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-BW-18",
+          "price": 69.99,
+          "compare_at_price": 124.99,
+          "inventory_qty": 80,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-BW-20",
+          "price": 79.99,
+          "compare_at_price": 134.99,
+          "inventory_qty": 80,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-BW-22",
+          "price": 89.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 80,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-BW-24",
+          "price": 99.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 80,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/LQH-BW/bodywave-premium-black-01.png",
+          "cms_url": "/api/v1/media/proxy/1d16d24a-c849-4b10-ad23-406eaae63230_bodywave-premium-black-01.png",
+          "cms_id": "17355758-bb8f-4ef7-9df1-f47b7b1d9348",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/LQH-BW/bodywave-premium-black-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/2dce5851-8ece-4e59-b530-0ae3fe44c60f_bodywave-premium-black-closeup-02.png",
+          "cms_id": "1ffca7a5-73bd-4db8-be4b-9239002dfe98",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/LQH-BW/bodywave-premium-black-styled-03.png",
+          "cms_url": "/api/v1/media/proxy/82af22e5-37b6-4d41-abe8-99743afcd7d5_bodywave-premium-black-styled-03.png",
+          "cms_id": "b0770b88-ebf1-4f97-a78f-b89a7de1a607",
+          "position": 3,
+          "alt_text": ""
+        }
+      ],
+      "sku": "LQH-BW-12"
+    },
+    {
+      "handle": "kbl-premium-straight",
+      "title": "KBL Premium Straight Bundle",
+      "description": "<p>Premium quality virgin straight from KBL Guangzhou. Higher grade factory for premium product lines.</p><ul><li>100% Human Virgin Hair</li><li>Machine Weft (Ready to Sell)</li><li>Premium Grade</li><li>Cuticle Aligned</li><li>18+ months lifespan</li></ul>",
+      "vendor": "KBL Hair Factory",
+      "category": "Hair Extensions > Bundles > Straight",
+      "type": "Bundle",
+      "tags": [
+        "straight",
+        "virgin",
+        "factory-direct",
+        "premium",
+        "kbl",
+        "ready-to-sell"
+      ],
+      "seo_title": "KBL Premium Straight Bundle | Guangzhou Factory",
+      "seo_description": "Premium grade straight bundles from KBL factory.",
+      "variants": [
+        {
+          "sku": "KBL-STR-12",
+          "price": 64.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 60,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-14",
+          "price": 69.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 60,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-16",
+          "price": 79.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 60,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-18",
+          "price": 89.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 60,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-20",
+          "price": 99.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 60,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-22",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 60,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-24",
+          "price": 119.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 60,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-STR-26",
+          "price": 129.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 60,
+          "weight": 240.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "26\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/straight/straight-premium-short-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "KBL-STR-12"
+    },
+    {
+      "handle": "yl-hd-closure-4x4",
+      "title": "HD Lace Closure 4x4 - Straight",
+      "description": "<p>Premium HD lace closure from YL Hair - the HD lace specialists. Pre-plucked with baby hairs. Ready to sell.</p><ul><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Baby hairs included</li><li>Free/Middle/Three part</li><li>Swiss HD lace</li></ul>",
+      "vendor": "YL Hair Factory",
+      "category": "Hair Extensions > Closures > 4x4",
+      "type": "Closure",
+      "tags": [
+        "closure",
+        "4x4",
+        "hd-lace",
+        "straight",
+        "factory-direct",
+        "pre-plucked",
+        "ready-to-sell"
+      ],
+      "seo_title": "HD Lace Closure 4x4 | YL Factory",
+      "seo_description": "Premium HD lace closure from the lace specialists.",
+      "variants": [
+        {
+          "sku": "YL-CL4x4-STR-10",
+          "price": 44.99,
+          "compare_at_price": 89.99,
+          "inventory_qty": 50,
+          "weight": 50.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "10\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "YL-CL4x4-STR-12",
+          "price": 49.99,
+          "compare_at_price": 99.99,
+          "inventory_qty": 50,
+          "weight": 55.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "YL-CL4x4-STR-14",
+          "price": 54.99,
+          "compare_at_price": 109.99,
+          "inventory_qty": 50,
+          "weight": 60.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "YL-CL4x4-STR-16",
+          "price": 59.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 50,
+          "weight": 65.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        },
+        {
+          "sku": "YL-CL4x4-STR-18",
+          "price": 64.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 50,
+          "weight": 70.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": "Part",
+          "option2_value": "Free Part"
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/closures/closure-4x4-straight-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "YL-CL4x4-STR-10"
+    },
+    {
+      "handle": "yl-hd-frontal-13x4",
+      "title": "HD Lace Frontal 13x4 - Body Wave",
+      "description": "<p>Ear to ear HD lace frontal from YL Hair. Pre-plucked with natural hairline. Ready to sell.</p><ul><li>13x4 inch coverage</li><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Baby hairs included</li><li>Can be parted anywhere</li></ul>",
+      "vendor": "YL Hair Factory",
+      "category": "Hair Extensions > Frontals > 13x4",
+      "type": "Frontal",
+      "tags": [
+        "frontal",
+        "13x4",
+        "hd-lace",
+        "body-wave",
+        "factory-direct",
+        "pre-plucked",
+        "ready-to-sell"
+      ],
+      "seo_title": "HD Lace Frontal 13x4 | YL Factory",
+      "seo_description": "Premium HD lace frontal from the lace specialists.",
+      "variants": [
+        {
+          "sku": "YL-FR13x4-BW-12",
+          "price": 69.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 40,
+          "weight": 70.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x4-BW-14",
+          "price": 79.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 40,
+          "weight": 80.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x4-BW-16",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 40,
+          "weight": 90.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x4-BW-18",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 40,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x4-BW-20",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 40,
+          "weight": 110.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/closures/frontal-13x4-bodywave-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "YL-FR13x4-BW-12"
+    },
+    {
+      "handle": "yl-hd-frontal-13x6",
+      "title": "HD Lace Frontal 13x6 - Straight",
+      "description": "<p>Deep part HD lace frontal 13x6 from YL Hair. Extra parting space. Pre-plucked. Ready to sell.</p><ul><li>13x6 inch coverage</li><li>Deep parting space</li><li>HD Invisible Lace</li><li>Pre-plucked hairline</li><li>Versatile styling</li></ul>",
+      "vendor": "YL Hair Factory",
+      "category": "Hair Extensions > Frontals > 13x6",
+      "type": "Frontal",
+      "tags": [
+        "frontal",
+        "13x6",
+        "hd-lace",
+        "straight",
+        "factory-direct",
+        "deep-part",
+        "ready-to-sell"
+      ],
+      "seo_title": "HD Lace Frontal 13x6 | YL Factory",
+      "seo_description": "Deep part HD lace frontal from YL Hair.",
+      "variants": [
+        {
+          "sku": "YL-FR13x6-STR-12",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 30,
+          "weight": 80.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x6-STR-14",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 30,
+          "weight": 90.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x6-STR-16",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 30,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x6-STR-18",
+          "price": 119.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 30,
+          "weight": 110.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "YL-FR13x6-STR-20",
+          "price": 129.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 30,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/YL-FR13x6-STR/frontal-13x6-straight-01.png",
+          "cms_url": "/api/v1/media/proxy/e9b90218-b3b0-448e-bb7f-57b557ba56bc_frontal-13x6-straight-01.png",
+          "cms_id": "151a5c1d-43e0-474d-a457-9ae929445794",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/YL-FR13x6-STR/frontal-13x6-straight-parting-02.png",
+          "cms_url": "/api/v1/media/proxy/04fa0c1f-5740-4d68-a668-181159717997_frontal-13x6-straight-parting-02.png",
+          "cms_id": "1d737408-4924-4e22-8e42-ddf49eebdaf4",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/YL-FR13x6-STR/frontal-13x6-straight-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/85cbd80c-bcea-471a-a238-7ea3af297b50_frontal-13x6-straight-styled-04.png",
+          "cms_id": "ecf5e20d-4e16-4213-8c72-1fd11def45e2",
+          "position": 3,
+          "alt_text": ""
+        }
+      ],
+      "sku": "YL-FR13x6-STR-12"
+    },
+    {
+      "handle": "beaudiva-blonde-bundle",
+      "title": "Honey Blonde Straight Bundle #27",
+      "description": "<p>Pre-colored honey blonde bundles from Beaudiva - colored hair specialists. No bleaching needed. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #27</li><li>Machine Weft (Ready to Sell)</li><li>Color-safe</li><li>Can be heat styled</li></ul>",
+      "vendor": "Beaudiva Hair Factory",
+      "category": "Hair Extensions > Bundles > Colored",
+      "type": "Bundle",
+      "tags": [
+        "blonde",
+        "honey-blonde",
+        "27",
+        "straight",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "seo_title": "Honey Blonde Bundle #27 | Beaudiva Factory",
+      "seo_description": "Pre-colored honey blonde from the color specialists.",
+      "variants": [
+        {
+          "sku": "BDV-BLN-12",
+          "price": 59.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 50,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BLN-14",
+          "price": 64.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 50,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BLN-16",
+          "price": 69.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 50,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BLN-18",
+          "price": 79.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 50,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BLN-20",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 50,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BLN-22",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 50,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/straight/straight-blonde-short-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "BDV-BLN-12"
+    },
+    {
+      "handle": "beaudiva-burgundy-bundle",
+      "title": "Burgundy Body Wave Bundle #99J",
+      "description": "<p>Pre-colored burgundy body wave from Beaudiva. Rich wine red color. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Pre-colored #99J</li><li>Machine Weft (Ready to Sell)</li><li>Rich burgundy color</li><li>Can be heat styled</li></ul>",
+      "vendor": "Beaudiva Hair Factory",
+      "category": "Hair Extensions > Bundles > Colored",
+      "type": "Bundle",
+      "tags": [
+        "burgundy",
+        "99j",
+        "body-wave",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "seo_title": "Burgundy Body Wave #99J | Beaudiva Factory",
+      "seo_description": "Pre-colored burgundy from the color specialists.",
+      "variants": [
+        {
+          "sku": "BDV-BRG-12",
+          "price": 59.99,
+          "compare_at_price": 119.99,
+          "inventory_qty": 50,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BRG-14",
+          "price": 64.99,
+          "compare_at_price": 129.99,
+          "inventory_qty": 50,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BRG-16",
+          "price": 69.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 50,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BRG-18",
+          "price": 79.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 50,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-BRG-20",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 50,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/body-wave/bodywave-burgundy-01.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "BDV-BRG-12"
+    },
+    {
+      "handle": "beaudiva-ombre-bundle",
+      "title": "Ombre Straight Bundle 1B/27",
+      "description": "<p>Beautiful ombre bundles from Beaudiva - dark roots to honey blonde tips. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>1B to #27 Ombre</li><li>Machine Weft (Ready to Sell)</li><li>Seamless color transition</li><li>Can be heat styled</li></ul>",
+      "vendor": "Beaudiva Hair Factory",
+      "category": "Hair Extensions > Bundles > Colored",
+      "type": "Bundle",
+      "tags": [
+        "ombre",
+        "1b-27",
+        "straight",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "seo_title": "Ombre Bundle 1B/27 | Beaudiva Factory",
+      "seo_description": "Beautiful ombre from the color specialists.",
+      "variants": [
+        {
+          "sku": "BDV-OMB-12",
+          "price": 64.99,
+          "compare_at_price": 124.99,
+          "inventory_qty": 40,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-OMB-14",
+          "price": 69.99,
+          "compare_at_price": 134.99,
+          "inventory_qty": 40,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-OMB-16",
+          "price": 79.99,
+          "compare_at_price": 144.99,
+          "inventory_qty": 40,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-OMB-18",
+          "price": 89.99,
+          "compare_at_price": 154.99,
+          "inventory_qty": 40,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-OMB-20",
+          "price": 99.99,
+          "compare_at_price": 164.99,
+          "inventory_qty": 40,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/BDV-OMB/ombre-1b27-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/3e1c7ebc-2677-4f9d-8c1a-e6ab070ff661_ombre-1b27-flatlay-01.png",
+          "cms_id": "f4f536ef-5f3f-405b-8cf2-99badcb166b3",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/BDV-OMB/ombre-1b27-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/03a934b0-70f7-4bb9-91ef-23f1fd67d60b_ombre-1b27-closeup-02.png",
+          "cms_id": "08fb59bf-96bc-47e2-835c-ead90b885377",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/BDV-OMB/ombre-1b27-flowing-03.png",
+          "cms_url": "/api/v1/media/proxy/6d1e77da-5f1d-4415-917c-934240aa29ee_ombre-1b27-flowing-03.png",
+          "cms_id": "46c9fde1-2ed6-4e87-980a-c71635cbaee9",
+          "position": 3,
+          "alt_text": ""
+        }
+      ],
+      "sku": "BDV-OMB-12"
+    },
+    {
+      "handle": "beaudiva-613-bundle",
+      "title": "Platinum Blonde Bundle #613",
+      "description": "<p>Premium platinum blonde bundles from Beaudiva. Ready for any custom color or wear as-is. Ready to sell.</p><ul><li>100% Human Virgin Hair</li><li>Pre-bleached #613</li><li>Machine Weft (Ready to Sell)</li><li>Can be custom colored</li><li>Silky texture</li></ul>",
+      "vendor": "Beaudiva Hair Factory",
+      "category": "Hair Extensions > Bundles > Colored",
+      "type": "Bundle",
+      "tags": [
+        "platinum",
+        "blonde",
+        "613",
+        "straight",
+        "colored",
+        "factory-direct",
+        "ready-to-sell"
+      ],
+      "seo_title": "Platinum Blonde Bundle #613 | Beaudiva Factory",
+      "seo_description": "Premium platinum blonde from the color specialists.",
+      "variants": [
+        {
+          "sku": "BDV-613-12",
+          "price": 69.99,
+          "compare_at_price": 139.99,
+          "inventory_qty": 40,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-613-14",
+          "price": 79.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 40,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-613-16",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 40,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-613-18",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 40,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "BDV-613-20",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 40,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/BDV-613/platinum-613-flatlay-01.png",
+          "cms_url": "/api/v1/media/proxy/152ae403-3dff-4517-aeaf-e9d68124a8ca_platinum-613-flatlay-01.png",
+          "cms_id": "aae21b3d-3fd4-4022-9285-431450ac0e52",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/BDV-613/platinum-613-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/19d303d4-f63e-4345-97eb-28fcc5faebda_platinum-613-closeup-02.png",
+          "cms_id": "ac805ebb-474f-4e63-ba66-14f08ca6c9d4",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/BDV-613/platinum-613-flowing-03.png",
+          "cms_url": "/api/v1/media/proxy/a386b5f0-dc08-424a-8de7-a8759071b0b9_platinum-613-flowing-03.png",
+          "cms_id": "88c67847-67d1-4a20-ba94-1139ea710a40",
+          "position": 3,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/BDV-613/platinum-613-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/5f7e165f-8e1b-4465-bf33-855054cef46b_platinum-613-styled-04.png",
+          "cms_id": "b165f93b-2a21-47ba-96a4-7f9de52b2a71",
+          "position": 4,
+          "alt_text": ""
+        }
+      ],
+      "sku": "BDV-613-12"
+    },
+    {
+      "handle": "vietnam-raw-straight",
+      "title": "Vietnamese Raw Hair Bundle - Straight",
+      "description": "<p>Authentic raw Vietnamese hair from village collectors. Unprocessed, cuticle aligned. Premium quality. Ready to sell.</p><ul><li>100% Raw Vietnamese Hair</li><li>Unprocessed/Virgin</li><li>Cuticle Aligned</li><li>Double Drawn</li><li>24+ months lifespan</li></ul>",
+      "vendor": "Apohair Factory",
+      "category": "Hair Extensions > Bundles > Raw Hair",
+      "type": "Bundle",
+      "tags": [
+        "raw",
+        "vietnamese",
+        "straight",
+        "virgin",
+        "cuticle-aligned",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "seo_title": "Vietnamese Raw Hair | Apohair Factory",
+      "seo_description": "Authentic raw Vietnamese hair from village collectors.",
+      "variants": [
+        {
+          "sku": "APO-RAW-STR-12",
+          "price": 79.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 40,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "APO-RAW-STR-14",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 40,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "APO-RAW-STR-16",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 40,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "APO-RAW-STR-18",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 40,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "APO-RAW-STR-20",
+          "price": 119.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 40,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "APO-RAW-STR-22",
+          "price": 129.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 40,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "APO-RAW-STR-24",
+          "price": 139.99,
+          "compare_at_price": 239.99,
+          "inventory_qty": 40,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/APO-RAW-STR/raw-vietnamese-str-01.png",
+          "cms_url": "/api/v1/media/proxy/98117956-f574-4c4c-94c5-7e024b61384d_raw-vietnamese-str-01.png",
+          "cms_id": "82ae4b1e-c59d-4b7f-998c-0d9389cf39c8",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/APO-RAW-STR/raw-vietnamese-str-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/56df3bbb-ea91-4bf0-8ce5-b7841eaaf621_raw-vietnamese-str-closeup-02.png",
+          "cms_id": "d9b372ce-39e9-4825-a6ce-ebebbbf4a02d",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/APO-RAW-STR/raw-vietnamese-str-quality-03.png",
+          "cms_url": "/api/v1/media/proxy/58df0381-abf5-42f6-a818-1bb7556383c5_raw-vietnamese-str-quality-03.png",
+          "cms_id": "3e73c17c-cd0d-48ca-9644-5d5a8735dc22",
+          "position": 3,
+          "alt_text": ""
+        }
+      ],
+      "sku": "APO-RAW-STR-12"
+    },
+    {
+      "handle": "vietnam-raw-wavy",
+      "title": "Vietnamese Raw Hair Bundle - Wavy",
+      "description": "<p>Natural wavy raw Vietnamese hair. Unprocessed with natural wave pattern. Premium quality. Ready to sell.</p><ul><li>100% Raw Vietnamese Hair</li><li>Natural Wave Pattern</li><li>Cuticle Aligned</li><li>Double Drawn</li><li>24+ months lifespan</li></ul>",
+      "vendor": "Luxshine Hair Factory",
+      "category": "Hair Extensions > Bundles > Raw Hair",
+      "type": "Bundle",
+      "tags": [
+        "raw",
+        "vietnamese",
+        "wavy",
+        "virgin",
+        "cuticle-aligned",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "seo_title": "Vietnamese Raw Wavy Hair | Luxshine Factory",
+      "seo_description": "Natural wavy raw Vietnamese hair.",
+      "variants": [
+        {
+          "sku": "LUX-RAW-WAV-12",
+          "price": 79.99,
+          "compare_at_price": 149.99,
+          "inventory_qty": 40,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LUX-RAW-WAV-14",
+          "price": 89.99,
+          "compare_at_price": 159.99,
+          "inventory_qty": 40,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LUX-RAW-WAV-16",
+          "price": 99.99,
+          "compare_at_price": 169.99,
+          "inventory_qty": 40,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LUX-RAW-WAV-18",
+          "price": 109.99,
+          "compare_at_price": 179.99,
+          "inventory_qty": 40,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LUX-RAW-WAV-20",
+          "price": 119.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 40,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LUX-RAW-WAV-22",
+          "price": 129.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 40,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LUX-RAW-WAV-24",
+          "price": 139.99,
+          "compare_at_price": 239.99,
+          "inventory_qty": 40,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/LUX-RAW-WAV/raw-vietnamese-wavy-01.png",
+          "cms_url": "/api/v1/media/proxy/27209819-69a2-4467-b4bd-bbafc5853300_raw-vietnamese-wavy-01.png",
+          "cms_id": "ec3b464b-98c7-4615-9526-f8165f75b6dc",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/LUX-RAW-WAV/raw-vietnamese-wavy-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/4e867717-a30b-46ec-81d4-bab71c35c461_raw-vietnamese-wavy-closeup-02.png",
+          "cms_id": "3cb66ae8-d3a1-4ce6-a6e1-fc06d810b026",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/LUX-RAW-WAV/raw-vietnamese-wavy-styled-03.png",
+          "cms_url": "/api/v1/media/proxy/6e0a9ede-0dfd-4889-9597-2e26bd475914_raw-vietnamese-wavy-styled-03.png",
+          "cms_id": "24a1fbf6-bb93-4be7-b66a-8f41bc033bc1",
+          "position": 3,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/LUX-RAW-WAV/raw-vietnamese-wavy-detail-04.png",
+          "cms_url": "/api/v1/media/proxy/e4cb6863-dabc-4a0a-b859-2491917bdb19_raw-vietnamese-wavy-detail-04.png",
+          "cms_id": "5cc0310b-632a-43d7-9354-57f7ae4c5720",
+          "position": 4,
+          "alt_text": ""
+        }
+      ],
+      "sku": "LUX-RAW-WAV-12"
+    },
+    {
+      "handle": "india-temple-hair",
+      "title": "Indian Temple Hair Bundle - Straight",
+      "description": "<p>Authentic South Indian temple hair. Highest quality raw hair available. Single donor, cuticle intact. Ready to sell.</p><ul><li>100% Temple Hair</li><li>Single Donor</li><li>Cuticle Intact</li><li>Remy Quality</li><li>36+ months lifespan</li></ul>",
+      "vendor": "Chennai Temple Hair",
+      "category": "Hair Extensions > Bundles > Temple Hair",
+      "type": "Bundle",
+      "tags": [
+        "temple",
+        "indian",
+        "straight",
+        "virgin",
+        "single-donor",
+        "factory-direct",
+        "luxury",
+        "ready-to-sell"
+      ],
+      "seo_title": "Indian Temple Hair | Chennai Factory",
+      "seo_description": "Authentic South Indian temple hair - highest quality.",
+      "variants": [
+        {
+          "sku": "CTH-TEMP-STR-12",
+          "price": 99.99,
+          "compare_at_price": 189.99,
+          "inventory_qty": 25,
+          "weight": 100.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "12\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "CTH-TEMP-STR-14",
+          "price": 109.99,
+          "compare_at_price": 199.99,
+          "inventory_qty": 25,
+          "weight": 120.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "14\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "CTH-TEMP-STR-16",
+          "price": 119.99,
+          "compare_at_price": 219.99,
+          "inventory_qty": 25,
+          "weight": 140.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "16\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "CTH-TEMP-STR-18",
+          "price": 139.99,
+          "compare_at_price": 249.99,
+          "inventory_qty": 25,
+          "weight": 160.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "18\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "CTH-TEMP-STR-20",
+          "price": 159.99,
+          "compare_at_price": 279.99,
+          "inventory_qty": 25,
+          "weight": 180.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "20\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "CTH-TEMP-STR-22",
+          "price": 179.99,
+          "compare_at_price": 309.99,
+          "inventory_qty": 25,
+          "weight": 200.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "22\"",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "CTH-TEMP-STR-24",
+          "price": 199.99,
+          "compare_at_price": 349.99,
+          "inventory_qty": 25,
+          "weight": 220.0,
+          "weight_unit": "g",
+          "option1_name": "Length",
+          "option1_value": "24\"",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/CTH-TEMP-STR/temple-indian-str-01.png",
+          "cms_url": "/api/v1/media/proxy/ecabd269-5ae3-4ef2-99f4-15b75daa6023_temple-indian-str-01.png",
+          "cms_id": "5bd7fc7c-0e11-4fa7-bc5a-2ef86127f0a9",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/CTH-TEMP-STR/temple-indian-str-closeup-02.png",
+          "cms_url": "/api/v1/media/proxy/4e8d09d1-2fea-4e89-b7d3-549600b5d0be_temple-indian-str-closeup-02.png",
+          "cms_id": "207efc11-38e2-434f-8a41-f6c863660bb5",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/CTH-TEMP-STR/temple-indian-str-quality-03.png",
+          "cms_url": "/api/v1/media/proxy/23e4e457-f6d9-4f5c-9026-ef6c7ec318cb_temple-indian-str-quality-03.png",
+          "cms_id": "98c2e453-f9a2-4490-b515-c69acf0876df",
+          "position": 3,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/CTH-TEMP-STR/temple-indian-str-styled-04.png",
+          "cms_url": "/api/v1/media/proxy/45d023b9-8dbb-460d-9aed-3745d0da56ea_temple-indian-str-styled-04.png",
+          "cms_id": "3d4ddb95-f3b4-4eaf-a0ba-6b51c77dc97c",
+          "position": 4,
+          "alt_text": ""
+        }
+      ],
+      "sku": "CTH-TEMP-STR-12"
+    },
+    {
+      "handle": "factory-bundle-deal-3pc",
+      "title": "3 Bundle Deal - Straight (12\" 14\" 16\")",
+      "description": "<p>Bundle deal direct from factory. 3 bundles of straight hair at discounted price. Machine weft - ready to sell.</p><ul><li>3 Bundles Included</li><li>12\" + 14\" + 16\"</li><li>Machine Weft</li><li>Same Texture Guaranteed</li><li>Best Value</li></ul>",
+      "vendor": "Rebecca Hair Factory",
+      "category": "Hair Extensions > Bundle Deals",
+      "type": "Bundle Deal",
+      "tags": [
+        "bundle-deal",
+        "straight",
+        "3-bundle",
+        "factory-direct",
+        "value",
+        "ready-to-sell"
+      ],
+      "seo_title": "3 Bundle Deal Straight | Factory Direct",
+      "seo_description": "Best value 3 bundle deal direct from factory.",
+      "variants": [
+        {
+          "sku": "RBH-DEAL-STR-3PC",
+          "price": 129.99,
+          "compare_at_price": 249.99,
+          "inventory_qty": 30,
+          "weight": 300.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Straight",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DEAL-BW-3PC",
+          "price": 129.99,
+          "compare_at_price": 249.99,
+          "inventory_qty": 30,
+          "weight": 300.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Body Wave",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "RBH-DEAL-DW-3PC",
+          "price": 139.99,
+          "compare_at_price": 269.99,
+          "inventory_qty": 30,
+          "weight": 300.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Deep Wave",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/bundles/bundle-deal-straight-3pc.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "RBH-DEAL-STR-3PC"
+    },
+    {
+      "handle": "factory-bundle-deal-4pc",
+      "title": "4 Bundle Deal with Closure (14\" 16\" 18\" + 12\" Closure)",
+      "description": "<p>Complete look bundle deal. 3 bundles + closure direct from factory. Everything needed for a sew-in. Ready to sell.</p><ul><li>3 Bundles + 4x4 Closure</li><li>14\" + 16\" + 18\" + 12\" Closure</li><li>Machine Weft</li><li>HD Lace Closure</li><li>Complete Look</li></ul>",
+      "vendor": "Longqi Hair Factory",
+      "category": "Hair Extensions > Bundle Deals",
+      "type": "Bundle Deal",
+      "tags": [
+        "bundle-deal",
+        "closure-deal",
+        "4-piece",
+        "factory-direct",
+        "complete-look",
+        "ready-to-sell"
+      ],
+      "seo_title": "4 Bundle Deal with Closure | Factory Direct",
+      "seo_description": "Complete look with 3 bundles + closure.",
+      "variants": [
+        {
+          "sku": "LQH-DEAL-STR-4PC",
+          "price": 199.99,
+          "compare_at_price": 379.99,
+          "inventory_qty": 25,
+          "weight": 400.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Straight",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-DEAL-BW-4PC",
+          "price": 199.99,
+          "compare_at_price": 379.99,
+          "inventory_qty": 25,
+          "weight": 400.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Body Wave",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "LQH-DEAL-DW-4PC",
+          "price": 209.99,
+          "compare_at_price": 399.99,
+          "inventory_qty": 25,
+          "weight": 400.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Deep Wave",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/bundles/bundle-deal-closure-4pc.jpg",
+          "cms_url": null,
+          "cms_id": null,
+          "position": 1,
+          "alt_text": ""
+        }
+      ],
+      "sku": "LQH-DEAL-STR-4PC"
+    },
+    {
+      "handle": "factory-frontal-deal",
+      "title": "4 Bundle Deal with Frontal (16\" 18\" 20\" + 14\" Frontal)",
+      "description": "<p>Premium bundle deal with 13x4 frontal. Full head coverage for glamorous look. Ready to sell.</p><ul><li>3 Bundles + 13x4 Frontal</li><li>16\" + 18\" + 20\" + 14\" Frontal</li><li>Machine Weft</li><li>HD Lace Frontal</li><li>Maximum Versatility</li></ul>",
+      "vendor": "KBL Hair Factory",
+      "category": "Hair Extensions > Bundle Deals",
+      "type": "Bundle Deal",
+      "tags": [
+        "bundle-deal",
+        "frontal-deal",
+        "4-piece",
+        "factory-direct",
+        "premium",
+        "ready-to-sell"
+      ],
+      "seo_title": "4 Bundle Deal with Frontal | Factory Direct",
+      "seo_description": "Premium deal with 3 bundles + 13x4 frontal.",
+      "variants": [
+        {
+          "sku": "KBL-DEAL-STR-FR",
+          "price": 269.99,
+          "compare_at_price": 479.99,
+          "inventory_qty": 20,
+          "weight": 500.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Straight",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-DEAL-BW-FR",
+          "price": 269.99,
+          "compare_at_price": 479.99,
+          "inventory_qty": 20,
+          "weight": 500.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Body Wave",
+          "option2_name": null,
+          "option2_value": null
+        },
+        {
+          "sku": "KBL-DEAL-DW-FR",
+          "price": 279.99,
+          "compare_at_price": 499.99,
+          "inventory_qty": 20,
+          "weight": 500.0,
+          "weight_unit": "g",
+          "option1_name": "Texture",
+          "option1_value": "Deep Wave",
+          "option2_name": null,
+          "option2_value": null
+        }
+      ],
+      "images": [
+        {
+          "local_path": "images/generated/KBL-DEAL-STR-FR/deal-4bundle-frontal-01.png",
+          "cms_url": "/api/v1/media/proxy/5a341c1a-d62d-48b9-9b9a-6c173bca2790_deal-4bundle-frontal-01.png",
+          "cms_id": "6e167f95-ed23-460f-a8ed-a9cbd9808981",
+          "position": 1,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/KBL-DEAL-STR-FR/deal-4bundle-frontal-arranged-02.png",
+          "cms_url": "/api/v1/media/proxy/4330b82f-a9f7-4efa-ae4a-3fd8c738b81f_deal-4bundle-frontal-arranged-02.png",
+          "cms_id": "5d533a41-1a3a-49c5-b6b2-e4814dbe1b82",
+          "position": 2,
+          "alt_text": ""
+        },
+        {
+          "local_path": "images/generated/KBL-DEAL-STR-FR/deal-4bundle-frontal-styled-03.png",
+          "cms_url": "/api/v1/media/proxy/c4825011-f8b7-4343-bd1c-04cff0acbf58_deal-4bundle-frontal-styled-03.png",
+          "cms_id": "33c854bc-c68e-4d67-ba61-1fc1e78edc60",
+          "position": 3,
+          "alt_text": ""
+        }
+      ],
+      "sku": "KBL-DEAL-STR-FR"
+    }
+  ]
+}

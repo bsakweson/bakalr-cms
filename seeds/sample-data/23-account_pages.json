@@ -1,0 +1,554 @@
+[
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_dashboard",
+    "title": "My Account",
+    "content_data": {
+      "page_key": "account_dashboard",
+      "title": "My Account",
+      "description": "Manage your account, orders, and preferences",
+      "tabs": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "addresses": "Addresses",
+        "wishlist": "Wishlist",
+        "settings": "Settings"
+      },
+      "stats": {
+        "total_orders": "Total Orders",
+        "saved_addresses": "Saved Addresses",
+        "wishlist_items": "Wishlist Items"
+      },
+      "buttons": {
+        "view_all": "View All",
+        "view_order": "View Order",
+        "track_order": "Track Order",
+        "manage": "Manage",
+        "edit": "Edit",
+        "logout": "Log Out"
+      },
+      "table_headers": {
+        "order_number": "Order #",
+        "date": "Date",
+        "status": "Status",
+        "total": "Total",
+        "actions": "Actions"
+      },
+      "messages": {
+        "welcome": "Welcome back",
+        "no_orders": "No orders yet",
+        "no_orders_description": "When you place an order, it will appear here.",
+        "start_shopping": "Start Shopping"
+      },
+      "status_labels": {
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "pending": "Pending"
+      },
+      "empty_states": {
+        "orders_title": "No orders yet",
+        "orders_description": "When you place an order, it will appear here.",
+        "wishlist_title": "Your wishlist is empty",
+        "wishlist_description": "Save items you love by clicking the heart icon.",
+        "addresses_title": "No saved addresses",
+        "addresses_description": "Add an address for faster checkout."
+      },
+      "modal_titles": {
+        "logout_confirm": "Sign out?",
+        "delete_address": "Delete Address?",
+        "cancel_order": "Cancel Order?"
+      },
+      "tooltips": {
+        "orders_info": "View and track your order history",
+        "addresses_info": "Manage your delivery addresses",
+        "wishlist_info": "Items you have saved for later"
+      },
+      "search": {
+        "placeholder": "Search orders...",
+        "no_results": "No orders found"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "of": "of",
+        "items": "items",
+        "per_page": "per page"
+      },
+      "sections": {
+        "recent_orders": "Recent Orders",
+        "quick_actions": "Quick Actions",
+        "account_settings": "Account Settings",
+        "need_help": "Need Help?"
+      },
+      "quick_actions": {
+        "settings_title": "Account Settings",
+        "settings_description": "Update your profile, password, and preferences",
+        "help_title": "Need Help?",
+        "help_description": "Contact our support team or browse FAQs"
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_layout",
+    "title": "My Account",
+    "content_data": {
+      "page_key": "account_layout",
+      "title": "My Account",
+      "description": "Account navigation and layout",
+      "tabs": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "addresses": "Addresses",
+        "wishlist": "Wishlist",
+        "profile": "Profile",
+        "security": "Security"
+      },
+      "messages": {
+        "welcome": "Welcome back, {name}",
+        "continue_shopping": "← Continue Shopping",
+        "need_help": "Need Help?",
+        "help_description": "We are at your disposal",
+        "contact_support": "Contact Support →"
+      },
+      "sections": {
+        "dashboard_desc": "Overview of your account",
+        "orders_desc": "View your order history",
+        "addresses_desc": "Manage shipping addresses",
+        "wishlist_desc": "Your saved items",
+        "profile_desc": "Edit your profile",
+        "security_desc": "Password & 2FA settings"
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_orders",
+    "title": "Order History",
+    "content_data": {
+      "page_key": "account_orders",
+      "title": "Order History",
+      "description": "View and track your orders",
+      "buttons": {
+        "search": "Search orders...",
+        "all_orders": "All Orders",
+        "buy_again": "Buy Again",
+        "track_package": "Track Package",
+        "view_invoice": "View Invoice",
+        "cancel_order": "Cancel Order"
+      },
+      "table_headers": {
+        "order": "Order",
+        "date": "Date",
+        "status": "Status",
+        "total": "Total",
+        "items": "Items"
+      },
+      "status_labels": {
+        "pending": "Pending",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled"
+      },
+      "empty_states": {
+        "no_orders": "No orders found",
+        "no_search_results": "No orders found matching your search"
+      },
+      "messages": {
+        "items_count": "{count} item(s)",
+        "tracking_number": "Tracking Number",
+        "shipping_address": "Shipping Address",
+        "order_summary": "Order Summary",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "tax": "Tax",
+        "total": "Total"
+      },
+      "sections": {
+        "order_details": "Order Details",
+        "items": "Items",
+        "shipping": "Shipping Information"
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_order_detail",
+    "title": "Order Details",
+    "content_data": {
+      "page_key": "account_order_detail",
+      "title": "Order Details",
+      "description": "View order details and tracking information",
+      "buttons": {
+        "back_to_orders": "← Back to Orders",
+        "track_package": "Track Package",
+        "download_invoice": "Download Invoice",
+        "buy_again": "Buy Again",
+        "cancel_order": "Cancel Order",
+        "request_return": "Request Return",
+        "contact_support": "Contact Support"
+      },
+      "sections": {
+        "order_summary": "Order Summary",
+        "items_ordered": "Items Ordered",
+        "shipping_info": "Shipping Information",
+        "payment_info": "Payment Information",
+        "order_timeline": "Order Timeline"
+      },
+      "labels": {
+        "order_number": "Order Number",
+        "order_date": "Order Date",
+        "order_status": "Order Status",
+        "tracking_number": "Tracking Number",
+        "estimated_delivery": "Estimated Delivery",
+        "shipping_method": "Shipping Method",
+        "shipping_address": "Shipping Address",
+        "billing_address": "Billing Address",
+        "payment_method": "Payment Method",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "tax": "Tax",
+        "discount": "Discount",
+        "total": "Total",
+        "quantity": "Qty",
+        "price": "Price",
+        "item_total": "Item Total"
+      },
+      "status_labels": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "out_for_delivery": "Out for Delivery",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "returned": "Returned",
+        "refunded": "Refunded"
+      },
+      "timeline": {
+        "order_placed": "Order Placed",
+        "order_confirmed": "Order Confirmed",
+        "order_processing": "Processing",
+        "order_shipped": "Shipped",
+        "out_for_delivery": "Out for Delivery",
+        "order_delivered": "Delivered"
+      },
+      "messages": {
+        "cancel_confirm": "Are you sure you want to cancel this order?",
+        "return_confirm": "Would you like to request a return for this order?",
+        "order_cancelled": "Order cancelled successfully",
+        "return_requested": "Return request submitted"
+      },
+      "empty_states": {
+        "order_not_found": "Order not found",
+        "order_not_found_desc": "The order you're looking for doesn't exist or has been removed."
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_addresses",
+    "title": "Saved Addresses",
+    "content_data": {
+      "page_key": "account_addresses",
+      "title": "Saved Addresses",
+      "description": "Manage your shipping addresses",
+      "buttons": {
+        "add": "Add Address",
+        "add_new": "Add New Address",
+        "edit": "Edit",
+        "delete": "Delete",
+        "set_default": "Set as Default",
+        "save": "Save Address",
+        "update": "Update Address",
+        "cancel": "Cancel"
+      },
+      "form_labels": {
+        "label": "Address Label",
+        "type": "Address Type",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "street": "Street Address",
+        "apartment": "Apartment, Suite, etc.",
+        "city": "City",
+        "state": "State/Province",
+        "zip": "ZIP/Postal Code",
+        "country": "Country",
+        "phone": "Phone Number",
+        "set_default": "Set as default shipping address"
+      },
+      "form_placeholders": {
+        "label": "e.g., Home, Office",
+        "first_name": "Enter first name",
+        "last_name": "Enter last name",
+        "street": "Enter street address",
+        "apartment": "Apt, Suite, Unit (optional)",
+        "city": "Enter city",
+        "zip": "Enter postal code",
+        "phone": "Enter phone number"
+      },
+      "status_labels": {
+        "default": "Default",
+        "home": "Home",
+        "work": "Work",
+        "other": "Other"
+      },
+      "empty_states": {
+        "no_addresses": "You haven't saved any addresses yet.",
+        "add_first": "Add Your First Address"
+      },
+      "messages": {
+        "confirm_delete": "Are you sure you want to delete this address?",
+        "saved": "Address saved successfully!",
+        "deleted": "Address deleted successfully!",
+        "updated": "Address updated successfully!",
+        "error": "Failed to save address. Please try again."
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_wishlist",
+    "title": "My Wishlist",
+    "content_data": {
+      "page_key": "account_wishlist",
+      "title": "My Wishlist",
+      "description": "Your saved items",
+      "buttons": {
+        "add_all_to_cart": "Add All to Cart",
+        "add_to_cart": "Add to Cart",
+        "remove": "Remove",
+        "explore_products": "Explore Products",
+        "browse_all": "Browse All Products →"
+      },
+      "messages": {
+        "items_count": "{count} item(s) saved",
+        "added_on": "Added on {date}",
+        "save_amount": "Save {amount}"
+      },
+      "empty_states": {
+        "empty": "Your wishlist is empty",
+        "empty_desc": "Save items you love by clicking the heart icon on products."
+      },
+      "status_labels": {
+        "in_stock": "In Stock",
+        "out_of_stock": "Out of Stock",
+        "low_stock": "Low Stock"
+      },
+      "sections": {
+        "recommendations": "You Might Also Like",
+        "recommendations_desc": "Based on items in your wishlist, check out these recommendations."
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_profile",
+    "title": "Edit Profile",
+    "content_data": {
+      "page_key": "account_profile",
+      "title": "Edit Profile",
+      "description": "Update your personal information and preferences",
+      "buttons": {
+        "save": "Save Changes",
+        "saving": "Saving...",
+        "change_photo": "Change Photo",
+        "delete_account": "Delete Account"
+      },
+      "form_labels": {
+        "full_name": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "date_of_birth": "Date of Birth",
+        "gender": "Gender"
+      },
+      "form_placeholders": {
+        "full_name": "Enter your full name",
+        "email": "Enter your email",
+        "phone": "Enter phone number"
+      },
+      "sections": {
+        "profile_picture": "Profile Picture",
+        "personal_info": "Personal Information",
+        "email_preferences": "Email Preferences"
+      },
+      "messages": {
+        "photo_hint": "JPG, PNG or GIF. Max size 2MB.",
+        "email_hint": "Email cannot be changed. Contact support for help.",
+        "success": "Profile updated successfully!",
+        "error": "Failed to update profile. Please try again."
+      },
+      "status_labels": {
+        "prefer_not_to_say": "Prefer not to say",
+        "female": "Female",
+        "male": "Male",
+        "non_binary": "Non-binary",
+        "other": "Other"
+      },
+      "tooltips": {
+        "order_updates": "Get notified about order status, shipping, and delivery updates.",
+        "newsletter": "Receive our weekly newsletter with beauty tips and new arrivals.",
+        "marketing": "Receive promotional offers, discounts, and exclusive deals."
+      },
+      "quick_actions": {
+        "order_updates": "Order Updates",
+        "newsletter": "Newsletter",
+        "marketing": "Marketing Emails"
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_security",
+    "title": "Security Settings",
+    "content_data": {
+      "page_key": "account_security",
+      "title": "Security Settings",
+      "description": "Manage your password and account security",
+      "buttons": {
+        "change_password": "Change Password",
+        "update_password": "Update Password",
+        "updating": "Updating...",
+        "enable_2fa": "Enable 2FA",
+        "disable_2fa": "Disable 2FA",
+        "sign_out": "Sign out",
+        "sign_out_all": "Sign out all other devices",
+        "delete_account": "Delete Account"
+      },
+      "form_labels": {
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm New Password"
+      },
+      "form_placeholders": {
+        "current_password": "Enter current password",
+        "new_password": "Enter new password",
+        "confirm_password": "Confirm new password"
+      },
+      "sections": {
+        "password": "Password",
+        "two_factor": "Two-Factor Authentication",
+        "active_sessions": "Active Sessions",
+        "danger_zone": "Danger Zone"
+      },
+      "messages": {
+        "password_last_changed": "Last changed {days} days ago",
+        "password_hint": "At least 8 characters",
+        "password_mismatch": "New passwords do not match.",
+        "password_too_short": "Password must be at least 8 characters.",
+        "password_success": "Password changed successfully!",
+        "password_error": "Failed to change password. Please try again.",
+        "2fa_enabled": "Your account is protected with 2FA",
+        "2fa_disabled": "Add an extra layer of security",
+        "2fa_recommended": "Recommended: Enable 2FA",
+        "2fa_recommended_desc": "Two-factor authentication adds an extra layer of security to your account by requiring a code from your phone in addition to your password.",
+        "sessions_desc": "Manage devices signed into your account",
+        "danger_desc": "Permanently delete your account and all associated data. This action cannot be undone.",
+        "confirm_sign_out": "Are you sure you want to sign out this device?",
+        "confirm_sign_out_all": "Sign out from all other devices?"
+      },
+      "status_labels": {
+        "current_device": "Current",
+        "active_now": "Active now"
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_payment_methods",
+    "title": "Payment Methods",
+    "content_data": {
+      "page_key": "account_payment_methods",
+      "title": "Payment Methods",
+      "description": "Manage your saved payment methods",
+      "buttons": {
+        "add": "Add Payment Method",
+        "add_card": "Add Card",
+        "edit": "Edit",
+        "delete": "Delete",
+        "set_default": "Set as Default",
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "form_labels": {
+        "card_number": "Card Number",
+        "card_holder": "Cardholder Name",
+        "expiry": "Expiry Date",
+        "cvv": "CVV",
+        "set_default": "Set as default payment method"
+      },
+      "form_placeholders": {
+        "card_number": "1234 5678 9012 3456",
+        "card_holder": "Name on card",
+        "expiry": "MM/YY",
+        "cvv": "123"
+      },
+      "status_labels": {
+        "default": "Default",
+        "expires_soon": "Expires Soon",
+        "expired": "Expired"
+      },
+      "empty_states": {
+        "no_cards": "No payment methods saved",
+        "no_cards_desc": "Add a payment method for faster checkout."
+      },
+      "messages": {
+        "confirm_delete": "Are you sure you want to delete this payment method?",
+        "saved": "Payment method added successfully!",
+        "deleted": "Payment method removed!",
+        "updated": "Payment method updated!",
+        "error": "Failed to save payment method. Please try again.",
+        "card_ending": "Ending in {last4}",
+        "expires": "Expires {date}"
+      },
+      "sections": {
+        "saved_cards": "Saved Cards",
+        "other_methods": "Other Payment Methods"
+      },
+      "card_types": {
+        "visa": "Visa",
+        "mastercard": "Mastercard",
+        "amex": "American Express",
+        "discover": "Discover",
+        "paypal": "PayPal"
+      }
+    }
+  },
+  {
+    "content_type_api_id": "account_page",
+    "slug": "account_recently_viewed",
+    "title": "Recently Viewed",
+    "content_data": {
+      "page_key": "account_recently_viewed",
+      "title": "Recently Viewed",
+      "description": "Products you've recently looked at",
+      "buttons": {
+        "add_to_cart": "Add to Cart",
+        "add_to_wishlist": "Add to Wishlist",
+        "view_product": "View Product",
+        "clear_history": "Clear History",
+        "browse_products": "Browse Products"
+      },
+      "messages": {
+        "items_count": "{count} item(s) viewed",
+        "viewed_on": "Viewed {date}",
+        "cleared": "History cleared"
+      },
+      "empty_states": {
+        "empty": "No recently viewed items",
+        "empty_desc": "Products you view will appear here for easy access."
+      },
+      "status_labels": {
+        "in_stock": "In Stock",
+        "out_of_stock": "Out of Stock",
+        "on_sale": "On Sale"
+      },
+      "sections": {
+        "recent": "Recently Viewed",
+        "recommendations": "Recommended for You"
+      }
+    }
+  }
+]

@@ -1,0 +1,187 @@
+{
+  "api_id": "shopping_page",
+  "name": "Shopping Page",
+  "description": "Product detail, category, brand, collection, search, and comparison page templates",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique identifier: product-detail, category, brand, collection, search, compare, quick-view"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page description/default subheading"
+    },
+    {
+      "name": "breadcrumb_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Breadcrumb navigation labels"
+    },
+    {
+      "name": "labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page-specific labels - IS translated"
+    },
+    {
+      "name": "buttons",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Button labels - IS translated"
+    },
+    {
+      "name": "filters",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Filter/sort labels for listing pages"
+    },
+    {
+      "name": "empty_state",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Empty state content {title, description, button_text, button_url}"
+    },
+    {
+      "name": "product_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Product card/detail labels (price, sku, add to cart, etc.)"
+    },
+    {
+      "name": "review_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Review section labels"
+    },
+    {
+      "name": "variant_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Product variant selection labels (size, color, length)"
+    },
+    {
+      "name": "sections",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page section titles (related products, you may also like, etc.)"
+    },
+    {
+      "name": "comparison_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Product comparison feature labels"
+    },
+    {
+      "name": "search_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Search-specific labels and placeholders"
+    },
+    {
+      "name": "pagination_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Pagination labels (next, previous, showing x of y)"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Success/error/info messages"
+    },
+    {
+      "name": "meta_title",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta title template"
+    },
+    {
+      "name": "meta_description",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta description template"
+    }
+  ]
+}

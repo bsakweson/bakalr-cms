@@ -1,7 +1,7 @@
 {
   "api_id": "page",
   "name": "Page",
-  "description": "Every page on the site is driven by this content type with page builder sections",
+  "description": "Every page on the site is driven by this content type with page builder sections and embedded labels",
   "fields_schema": [
     {
       "name": "page_key",
@@ -32,6 +32,16 @@
       "default": null,
       "validation": null,
       "help_text": "Page builder sections - text content IS translated"
+    },
+    {
+      "name": "labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page-specific UI labels - IS translated. Each page contains all its own labels."
     },
     {
       "name": "og_image_id",

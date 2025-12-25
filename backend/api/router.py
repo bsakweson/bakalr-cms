@@ -22,6 +22,7 @@ from backend.api import (
     organization,
     password_reset,
     preview,
+    reference_data,
     relationship,
     roles,
     schedule,
@@ -70,6 +71,7 @@ api_router.include_router(content_template.router)
 api_router.include_router(notifications.router)
 api_router.include_router(search.router)
 api_router.include_router(metrics.router)
+api_router.include_router(reference_data.router)
 
 
 @api_router.get("/")

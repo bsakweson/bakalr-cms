@@ -2,10 +2,10 @@
 Content relationship model for linking content entries.
 """
 
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import Column, ForeignKey, String, Text, UniqueConstraint
 
 from backend.db.base import Base
-from backend.models.base import IDMixin, TimestampMixin
+from backend.models.base import GUID, IDMixin, TimestampMixin
 
 
 class ContentRelationship(Base, IDMixin, TimestampMixin):
@@ -20,14 +20,14 @@ class ContentRelationship(Base, IDMixin, TimestampMixin):
 
     __tablename__ = "content_relationships"
 
-    # Source content entry
+    # Source content entry (GUID to match content_entries.id)
     source_entry_id = Column(
-        Integer, ForeignKey("content_entries.id", ondelete="CASCADE"), nullable=False, index=True
+        GUID(), ForeignKey("content_entries.id", ondelete="CASCADE"), nullable=False, index=True
     )
 
-    # Target content entry
+    # Target content entry (GUID to match content_entries.id)
     target_entry_id = Column(
-        Integer, ForeignKey("content_entries.id", ondelete="CASCADE"), nullable=False, index=True
+        GUID(), ForeignKey("content_entries.id", ondelete="CASCADE"), nullable=False, index=True
     )
 
     # Relationship type/name (e.g., "author", "related_posts", "tags")

@@ -84,12 +84,12 @@ async def list_roles(
     """
     List all roles in the current organization
 
-    Requires: view_roles permission
+    Requires: role.view permission
     """
     # Check permission
     if not PermissionChecker.has_permission(
-        current_user, "view_roles", db
-    ) and not PermissionChecker.has_permission(current_user, "manage_roles", db):
+        current_user, "role.view", db
+    ) and not PermissionChecker.has_permission(current_user, "role.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="You don't have permission to view roles"
         )
@@ -128,10 +128,10 @@ async def list_permissions(
     """
     List all available permissions (for building permission matrix)
 
-    Requires: manage_roles permission
+    Requires: role.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
+    if not PermissionChecker.has_permission(current_user, "role.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to view permissions",
@@ -163,12 +163,12 @@ async def get_role(
     """
     Get a specific role with its permissions
 
-    Requires: view_roles permission
+    Requires: role.view permission
     """
     # Check permission
     if not PermissionChecker.has_permission(
-        current_user, "view_roles", db
-    ) and not PermissionChecker.has_permission(current_user, "manage_roles", db):
+        current_user, "role.view", db
+    ) and not PermissionChecker.has_permission(current_user, "role.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="You don't have permission to view roles"
         )
@@ -209,10 +209,10 @@ async def create_role(
     """
     Create a new role in the organization
 
-    Requires: manage_roles permission
+    Requires: role.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
+    if not PermissionChecker.has_permission(current_user, "role.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to create roles",
@@ -279,10 +279,10 @@ async def update_role(
     """
     Update a role's details and permissions
 
-    Requires: manage_roles permission
+    Requires: role.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
+    if not PermissionChecker.has_permission(current_user, "role.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to update roles",
@@ -363,10 +363,10 @@ async def delete_role(
     """
     Delete a role from the organization
 
-    Requires: manage_roles permission
+    Requires: role.manage permission
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "manage_roles", db):
+    if not PermissionChecker.has_permission(current_user, "role.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to delete roles",

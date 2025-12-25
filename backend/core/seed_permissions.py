@@ -29,10 +29,10 @@ def seed_default_permissions(db: Session) -> None:
         ("content.publish", "Publish content entries", "content"),
         ("content.unpublish", "Unpublish content entries", "content"),
         # Content type permissions
-        ("content_type.read", "Read content types", "content_type"),
-        ("content_type.create", "Create content types", "content_type"),
-        ("content_type.update", "Update content types", "content_type"),
-        ("content_type.delete", "Delete content types", "content_type"),
+        ("content.type.read", "Read content types", "content_type"),
+        ("content.type.create", "Create content types", "content_type"),
+        ("content.type.update", "Update content types", "content_type"),
+        ("content.type.delete", "Delete content types", "content_type"),
         # Media permissions
         ("media.read", "Read media files", "media"),
         ("media.upload", "Upload media files", "media"),
@@ -93,9 +93,90 @@ def seed_default_permissions(db: Session) -> None:
         ("notification.read", "Read notifications", "notification"),
         ("notification.create", "Create notifications", "notification"),
         ("notification.delete", "Delete notifications", "notification"),
+        ("notification.view", "View all notifications (admin)", "notification"),
         # System permissions (typically for super admins only)
         ("system.admin", "Full system administration", "system"),
         ("system.settings", "Manage system settings", "system"),
+        # ==================== ADMIN/MANAGEMENT PERMISSIONS ====================
+        # Combined management permissions used across API endpoints
+        ("content.manage", "Full content management (templates, search reindex)", "content"),
+        ("role.manage", "Full role and permission management", "role"),
+        ("role.view", "View roles", "role"),
+        ("theme.manage", "Full theme management", "theme"),
+        ("user.manage.full", "Full user management including invites", "user"),
+        ("admin.metrics", "View admin metrics and performance data", "admin"),
+        ("audit.logs", "View audit logs", "audit"),
+        ("organization.settings.manage", "Manage organization settings", "organization"),
+        ("organization.settings.view", "View organization settings", "organization"),
+        # ==================== EMPLOYEE PERMISSIONS ====================
+        # Employee management for POS/Sales Portal
+        ("employees.read", "Read employee profiles and schedules", "employees"),
+        ("employees.create", "Create new employees", "employees"),
+        ("employees.update", "Update employee profiles", "employees"),
+        ("employees.delete", "Delete employees", "employees"),
+        ("employees.manage", "Full employee management (status, settings)", "employees"),
+        ("employees.stats", "View employee statistics and reports", "employees"),
+        ("employees.schedule", "Manage employee schedules and shifts", "employees"),
+        ("employees.self.read", "Read own employee profile", "employees"),
+        ("employees.self.update", "Update own profile and PIN", "employees"),
+        # ==================== POS/SALES PERMISSIONS ====================
+        # Point of Sale terminal access and operations
+        ("pos.access", "Access POS terminal", "pos"),
+        ("pos.sell", "Process sales transactions", "pos"),
+        ("pos.discount", "Apply discounts up to employee threshold", "pos"),
+        ("pos.discount.manager", "Apply manager-level discounts", "pos"),
+        ("pos.refund", "Process refunds", "pos"),
+        ("pos.void", "Void transactions", "pos"),
+        ("pos.cash.drawer", "Open cash drawer", "pos"),
+        ("pos.end.shift", "End shift and reconcile", "pos"),
+        ("pos.reports", "View POS reports", "pos"),
+        ("pos.manage", "Full POS management", "pos"),
+        # ==================== INVENTORY PERMISSIONS ====================
+        # Inventory and stock management
+        ("inventory.read", "View inventory items and stock levels", "inventory"),
+        ("inventory.create", "Create new inventory items", "inventory"),
+        ("inventory.update", "Update inventory items and stock levels", "inventory"),
+        ("inventory.delete", "Delete inventory items", "inventory"),
+        ("inventory.manage", "Full inventory management (adjustments, transfers)", "inventory"),
+        ("inventory.reports", "View inventory reports and analytics", "inventory"),
+        ("inventory.stock.adjust", "Adjust stock levels manually", "inventory"),
+        ("inventory.stock.transfer", "Transfer stock between locations", "inventory"),
+        # ==================== PRODUCT/CATALOG PERMISSIONS ====================
+        # Product catalog management
+        ("products.read", "View products and catalog", "products"),
+        ("products.create", "Create new products", "products"),
+        ("products.update", "Update product details", "products"),
+        ("products.delete", "Delete products", "products"),
+        ("products.manage", "Full product management (pricing, variants)", "products"),
+        ("products.pricing", "Manage product pricing", "products"),
+        # ==================== CATEGORY PERMISSIONS ====================
+        # Category management
+        ("categories.read", "View categories", "categories"),
+        ("categories.create", "Create categories", "categories"),
+        ("categories.update", "Update categories", "categories"),
+        ("categories.delete", "Delete categories", "categories"),
+        ("categories.manage", "Full category management", "categories"),
+        # ==================== ORDER PERMISSIONS ====================
+        # Order management
+        ("orders.read", "View orders", "orders"),
+        ("orders.create", "Create orders", "orders"),
+        ("orders.update", "Update orders", "orders"),
+        ("orders.cancel", "Cancel orders", "orders"),
+        ("orders.manage", "Full order management", "orders"),
+        ("orders.refund", "Process order refunds", "orders"),
+        # ==================== CUSTOMER PERMISSIONS ====================
+        # Customer management
+        ("customers.read", "View customer profiles", "customers"),
+        ("customers.create", "Create customer profiles", "customers"),
+        ("customers.update", "Update customer profiles", "customers"),
+        ("customers.delete", "Delete customer profiles", "customers"),
+        ("customers.manage", "Full customer management", "customers"),
+        # ==================== REFERENCE DATA PERMISSIONS ====================
+        # Reference data management (departments, roles, statuses, etc.)
+        ("reference_data.read", "Read reference data (departments, roles, statuses)", "reference_data"),
+        ("reference_data.create", "Create reference data entries", "reference_data"),
+        ("reference_data.update", "Update reference data entries", "reference_data"),
+        ("reference_data.delete", "Delete reference data entries (non-system only)", "reference_data"),
     ]
 
     created_count = 0
@@ -139,10 +220,10 @@ DEFAULT_ROLE_CONFIGS = {
             "content.delete",
             "content.publish",
             "content.unpublish",
-            "content_type.read",
-            "content_type.create",
-            "content_type.update",
-            "content_type.delete",
+            "content.type.read",
+            "content.type.create",
+            "content.type.update",
+            "content.type.delete",
             # Media management (full control)
             "media.read",
             "media.upload",
@@ -201,6 +282,42 @@ DEFAULT_ROLE_CONFIGS = {
             "notification.read",
             "notification.create",
             "notification.delete",
+            "notification.view",
+            "notification.create",
+            # Admin/Management consolidated permissions
+            "content.manage",
+            "role.manage",
+            "role.view",
+            "theme.manage",
+            "user.manage.full",
+            "admin.metrics",
+            "audit.logs",
+            "organization.settings.manage",
+            "organization.settings.view",
+            # Employee management (full control)
+            "employees.read",
+            "employees.create",
+            "employees.update",
+            "employees.delete",
+            "employees.manage",
+            "employees.stats",
+            "employees.schedule",
+            # POS management (full control)
+            "pos.access",
+            "pos.sell",
+            "pos.discount",
+            "pos.discount.manager",
+            "pos.refund",
+            "pos.void",
+            "pos.cash.drawer",
+            "pos.end.shift",
+            "pos.reports",
+            "pos.manage",
+            # Reference data management (full control)
+            "reference_data.read",
+            "reference_data.create",
+            "reference_data.update",
+            "reference_data.delete",
         ],
     },
     "admin": {
@@ -214,10 +331,10 @@ DEFAULT_ROLE_CONFIGS = {
             "content.delete",
             "content.publish",
             "content.unpublish",
-            "content_type.read",
-            "content_type.create",
-            "content_type.update",
-            "content_type.delete",
+            "content.type.read",
+            "content.type.create",
+            "content.type.update",
+            "content.type.delete",
             # Media management (full control)
             "media.read",
             "media.upload",
@@ -260,11 +377,11 @@ DEFAULT_ROLE_CONFIGS = {
             # Analytics access
             "analytics.read",
             # API key management
-            "api_key.read",
-            "api_key.create",
-            "api_key.delete",
+            "api.key.read",
+            "api.key.create",
+            "api.key.delete",
             # Audit logs
-            "audit_log.read",
+            "audit.log.read",
             # Theme management
             "theme.read",
             "theme.create",
@@ -279,6 +396,42 @@ DEFAULT_ROLE_CONFIGS = {
             "notification.read",
             "notification.create",
             "notification.delete",
+            "notification.view",
+            "notification.create",
+            # Admin/Management consolidated permissions
+            "content.manage",
+            "role.manage",
+            "role.view",
+            "theme.manage",
+            "user.manage.full",
+            "admin.metrics",
+            "audit.logs",
+            "organization.settings.manage",
+            "organization.settings.view",
+            # Employee management (full control for admin)
+            "employees.read",
+            "employees.create",
+            "employees.update",
+            "employees.delete",
+            "employees.manage",
+            "employees.stats",
+            "employees.schedule",
+            # POS management (full control for admin)
+            "pos.access",
+            "pos.sell",
+            "pos.discount",
+            "pos.discount.manager",
+            "pos.refund",
+            "pos.void",
+            "pos.cash.drawer",
+            "pos.end.shift",
+            "pos.reports",
+            "pos.manage",
+            # Reference data management (full control for admin)
+            "reference_data.read",
+            "reference_data.create",
+            "reference_data.update",
+            "reference_data.delete",
         ],
     },
     "editor": {
@@ -292,7 +445,7 @@ DEFAULT_ROLE_CONFIGS = {
             "content.delete",
             "content.publish",
             "content.unpublish",
-            "content_type.read",
+            "content.type.read",
             # Media management (full control)
             "media.read",
             "media.upload",
@@ -325,7 +478,7 @@ DEFAULT_ROLE_CONFIGS = {
             "content.update",
             "content.publish",
             "content.unpublish",
-            "content_type.read",
+            "content.type.read",
             # Media management
             "media.read",
             "media.upload",
@@ -351,6 +504,29 @@ DEFAULT_ROLE_CONFIGS = {
             "template.read",
             # Notifications
             "notification.read",
+            # Manager-level admin permissions
+            "role.view",
+            "audit.logs",
+            "organization.settings.view",
+            # Employee management (manager level)
+            "employees.read",
+            "employees.create",
+            "employees.update",
+            "employees.manage",
+            "employees.stats",
+            "employees.schedule",
+            # POS management (manager level)
+            "pos.access",
+            "pos.sell",
+            "pos.discount",
+            "pos.discount.manager",
+            "pos.refund",
+            "pos.void",
+            "pos.cash.drawer",
+            "pos.end.shift",
+            "pos.reports",
+            # Reference data (read only for manager)
+            "reference_data.read",
         ],
     },
     "inventory_manager": {
@@ -362,7 +538,7 @@ DEFAULT_ROLE_CONFIGS = {
             "content.create",
             "content.update",
             "content.publish",
-            "content_type.read",
+            "content.type.read",
             # Media management
             "media.read",
             "media.upload",
@@ -384,7 +560,7 @@ DEFAULT_ROLE_CONFIGS = {
         "permissions": [
             # Content read only
             "content.read",
-            "content_type.read",
+            "content.type.read",
             # Media read only
             "media.read",
             # Translation read only
@@ -396,6 +572,15 @@ DEFAULT_ROLE_CONFIGS = {
             "template.read",
             # Notifications
             "notification.read",
+            # Employee self-access
+            "employees.self.read",
+            "employees.self.update",
+            # POS access (sales associate level)
+            "pos.access",
+            "pos.sell",
+            "pos.discount",
+            "pos.cash.drawer",
+            "pos.end.shift",
         ],
     },
     "employee": {
@@ -404,7 +589,7 @@ DEFAULT_ROLE_CONFIGS = {
         "permissions": [
             # Read-only access to content
             "content.read",
-            "content_type.read",
+            "content.type.read",
             # Read-only access to media
             "media.read",
             # Read-only access to translations
@@ -412,6 +597,12 @@ DEFAULT_ROLE_CONFIGS = {
             "locale.read",
             # Notifications
             "notification.read",
+            # Employee self-access only
+            "employees.self.read",
+            "employees.self.update",
+            # Basic POS access
+            "pos.access",
+            "pos.sell",
         ],
     },
     "viewer": {
@@ -420,7 +611,7 @@ DEFAULT_ROLE_CONFIGS = {
         "permissions": [
             # Read-only access to content
             "content.read",
-            "content_type.read",
+            "content.type.read",
             # Read-only access to media
             "media.read",
             # Read-only access to translations
@@ -719,6 +910,98 @@ BOUTIQUE_SCOPES = [
         "description": "Track shipments",
         "category": "shipping",
     },
+    # Employee Scopes
+    {
+        "name": "employees.read",
+        "label": "Read Employees",
+        "description": "View employee profiles and information",
+        "category": "employees",
+    },
+    {
+        "name": "employees.create",
+        "label": "Create Employees",
+        "description": "Create new employees",
+        "category": "employees",
+    },
+    {
+        "name": "employees.update",
+        "label": "Update Employees",
+        "description": "Update employee information",
+        "category": "employees",
+    },
+    {
+        "name": "employees.delete",
+        "label": "Delete Employees",
+        "description": "Delete employees",
+        "category": "employees",
+    },
+    {
+        "name": "employees.stats",
+        "label": "Employee Statistics",
+        "description": "View employee statistics and reports",
+        "category": "employees",
+    },
+    {
+        "name": "employees.schedule",
+        "label": "Employee Schedules",
+        "description": "View and manage employee schedules",
+        "category": "employees",
+    },
+    {
+        "name": "employees.self.read",
+        "label": "Read Own Profile",
+        "description": "View own employee profile",
+        "category": "employees",
+    },
+    {
+        "name": "employees.self.update",
+        "label": "Update Own Profile",
+        "description": "Update own profile and PIN",
+        "category": "employees",
+    },
+    # POS Scopes
+    {
+        "name": "pos.access",
+        "label": "POS Access",
+        "description": "Access point of sale terminal",
+        "category": "pos",
+    },
+    {
+        "name": "pos.sell",
+        "label": "POS Sell",
+        "description": "Process sales transactions",
+        "category": "pos",
+    },
+    {
+        "name": "pos.discount",
+        "label": "POS Discount",
+        "description": "Apply standard discounts",
+        "category": "pos",
+    },
+    {
+        "name": "pos.discount.manager",
+        "label": "POS Manager Discount",
+        "description": "Apply manager-level discounts",
+        "category": "pos",
+    },
+    {
+        "name": "pos.refund",
+        "label": "POS Refund",
+        "description": "Process refunds",
+        "category": "pos",
+    },
+    {
+        "name": "pos.void",
+        "label": "POS Void",
+        "description": "Void transactions",
+        "category": "pos",
+    },
+    {
+        "name": "pos.reports",
+        "label": "POS Reports",
+        "description": "View POS reports",
+        "category": "pos",
+    },
 ]
 
 
@@ -736,7 +1019,7 @@ def seed_organization_boutique_scopes(db: Session, organization_id: int) -> dict
     Returns:
         Dictionary with 'scopes_created' and 'mappings_created' counts
     """
-    from backend.models.api_key import ApiScope
+    from backend.models.api_scope import ApiScope
 
     result = {"scopes_created": 0, "mappings_created": 0}
     scope_map = {}
@@ -1036,6 +1319,23 @@ ROLE_API_SCOPES_CONFIG = {
         "shipping.create",
         "shipping.update",
         "shipping.track",
+        # Employee management (full access)
+        "employees.read",
+        "employees.create",
+        "employees.update",
+        "employees.delete",
+        "employees.stats",
+        "employees.schedule",
+        "employees.self.read",
+        "employees.self.update",
+        # POS management (full access)
+        "pos.access",
+        "pos.sell",
+        "pos.discount",
+        "pos.discount.manager",
+        "pos.refund",
+        "pos.void",
+        "pos.reports",
     ],
     "admin": [
         # Full access (same as owner for boutique operations)
@@ -1074,6 +1374,23 @@ ROLE_API_SCOPES_CONFIG = {
         "shipping.create",
         "shipping.update",
         "shipping.track",
+        # Employee management (full access for admin)
+        "employees.read",
+        "employees.create",
+        "employees.update",
+        "employees.delete",
+        "employees.stats",
+        "employees.schedule",
+        "employees.self.read",
+        "employees.self.update",
+        # POS management (full access for admin)
+        "pos.access",
+        "pos.sell",
+        "pos.discount",
+        "pos.discount.manager",
+        "pos.refund",
+        "pos.void",
+        "pos.reports",
     ],
     "manager": [
         # Operations management - can do most things except admin
@@ -1106,6 +1423,22 @@ ROLE_API_SCOPES_CONFIG = {
         "shipping.create",
         "shipping.update",
         "shipping.track",
+        # Employee management (manager level)
+        "employees.read",
+        "employees.create",
+        "employees.update",
+        "employees.stats",
+        "employees.schedule",
+        "employees.self.read",
+        "employees.self.update",
+        # POS management (manager level)
+        "pos.access",
+        "pos.sell",
+        "pos.discount",
+        "pos.discount.manager",
+        "pos.refund",
+        "pos.void",
+        "pos.reports",
     ],
     "inventory_manager": [
         # Inventory and product management
@@ -1140,6 +1473,13 @@ ROLE_API_SCOPES_CONFIG = {
         "payments.create",
         "shipping.read",
         "shipping.track",
+        # Employee self-access
+        "employees.self.read",
+        "employees.self.update",
+        # POS access (sales level)
+        "pos.access",
+        "pos.sell",
+        "pos.discount",
     ],
     "employee": [
         # Basic read access
@@ -1149,6 +1489,12 @@ ROLE_API_SCOPES_CONFIG = {
         "customers.read",
         "wishlist.read",
         "addresses.read",
+        # Employee self-access only
+        "employees.self.read",
+        "employees.self.update",
+        # Basic POS access
+        "pos.access",
+        "pos.sell",
     ],
     "viewer": [
         # Read-only access

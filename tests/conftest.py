@@ -26,6 +26,7 @@ os.environ["RATE_LIMIT_ENABLED"] = "false"  # Disable rate limiting for tests
 os.environ["MAIL_SUPPRESS_SEND"] = "1"  # Disable email sending in tests
 os.environ["STORAGE_BACKEND"] = "local"  # Use local storage for tests to avoid AWS config issues
 os.environ["UPLOAD_DIR"] = "test_uploads"  # Use separate directory for test uploads
+os.environ["SKIP_EMAIL_VERIFICATION"] = "true"  # Skip email verification for tests
 
 from backend.core.dependencies import get_db
 from backend.db.base import Base

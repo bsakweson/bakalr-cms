@@ -33,10 +33,10 @@ def create_theme(
     """
     Create a new custom theme for the organization.
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -191,12 +191,12 @@ def update_theme(
     """
     Update a theme.
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     System themes cannot be updated.
     """
     # Check permission
     # Fixed: Use static method
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -252,12 +252,12 @@ def delete_theme(
     """
     Delete a theme.
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     System themes and active themes cannot be deleted.
     """
     # Check permission
     # Fixed: Use static method
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -308,12 +308,12 @@ def set_active_theme(
     """
     Set a theme as the active theme for the organization.
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     Only one theme can be active at a time.
     """
     # Check permission
     # Fixed: Use static method
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -359,11 +359,11 @@ def activate_theme(
     """
     Activate a theme for the organization (alternative endpoint for UI).
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     Only one theme can be active at a time.
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -409,10 +409,10 @@ def deactivate_theme(
     """
     Deactivate a theme for the organization.
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -545,11 +545,11 @@ def initialize_default_themes(
     Creates Dark Chocolate, Light, and Dark themes if they don't exist.
     Sets Dark Chocolate as the active theme.
 
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     """
     # Check permission
     # Fixed: Use static method
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",
@@ -613,11 +613,11 @@ def clone_theme(
     Clone an existing theme (system or custom) to create a new custom theme.
 
     Useful for customizing system themes.
-    Requires 'themes.manage' permission.
+    Requires 'theme.manage' permission.
     """
     # Check permission
     # Fixed: Use static method
-    if not PermissionChecker.has_permission(current_user, "themes.manage", db):
+    if not PermissionChecker.has_permission(current_user, "theme.manage", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to manage themes",

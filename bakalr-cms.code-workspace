@@ -1,0 +1,384 @@
+{
+  "folders": [
+    {
+      "name": "🎂 Bakalr CMS",
+      "path": "."
+    },
+    {
+      "name": "🐍 Backend (FastAPI)",
+      "path": "backend"
+    },
+    {
+      "name": "⚛️ Frontend (Next.js)",
+      "path": "frontend"
+    },
+    {
+      "path": "../../devops/k8s"
+    }
+  ],
+  "settings": {
+    // Python Backend Settings
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+      }
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": ["tests"],
+
+    // TypeScript/JavaScript Frontend Settings
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+
+    // JSON and Markdown
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+      "editor.wordWrap": "on"
+    },
+
+    // General Editor Settings
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+
+    // File Exclusions
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/.pytest_cache": true,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/.mypy_cache": true,
+      "**/.ruff_cache": true
+    },
+
+    // Search Exclusions
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/__pycache__": true,
+      "**/coverage": true,
+      "**/.git": true
+    },
+
+    // Terminal Settings
+    "terminal.integrated.cwd": "${workspaceFolder}",
+
+    // Emmet for React
+    "emmet.includeLanguages": {
+      "typescriptreact": "html",
+      "javascriptreact": "html"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      // Python Extensions
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.black-formatter",
+      "charliermarsh.ruff",
+      "ms-python.debugpy",
+
+      // JavaScript/TypeScript Extensions
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+
+      // General Development
+      "ms-azuretools.vscode-docker",
+      "eamodio.gitlens",
+      "formulahendry.auto-rename-tag",
+      "christian-kohler.path-intellisense",
+      "mikestead.dotenv",
+
+      // Database
+      "mtxr.sqltools",
+      "mtxr.sqltools-driver-pg",
+
+      // API Development
+      "humao.rest-client",
+      "42Crunch.vscode-openapi",
+
+      // Productivity
+      "usernamehw.errorlens",
+      "gruntfuggly.todo-tree",
+      "streetsidesoftware.code-spell-checker"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Backend: FastAPI",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": ["backend.main:app", "--reload", "--port", "8000"],
+        "cwd": "${workspaceFolder:🎂 Bakalr CMS}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Backend: Debug Current Test",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "pytest",
+        "args": ["${file}", "-v"],
+        "cwd": "${workspaceFolder:🎂 Bakalr CMS}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Frontend: Next.js",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder:⚛️ Frontend (Next.js)}",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Frontend: Chrome Debug",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder:⚛️ Frontend (Next.js)}"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Full Stack: Backend + Frontend",
+        "configurations": ["Backend: FastAPI", "Frontend: Next.js"],
+        "stopAll": true
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Backend: Install Dependencies",
+        "type": "shell",
+        "command": "poetry install",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Run Migrations",
+        "type": "shell",
+        "command": "poetry run alembic upgrade head",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Start Server",
+        "type": "shell",
+        "command": "poetry run uvicorn backend.main:app --reload --port 8000",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Run Tests",
+        "type": "shell",
+        "command": "poetry run pytest -v",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "test",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Run Tests with Coverage",
+        "type": "shell",
+        "command": "poetry run pytest --cov=backend --cov-report=html",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "test",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Lint (Ruff)",
+        "type": "shell",
+        "command": "poetry run ruff check backend/",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Format (Black)",
+        "type": "shell",
+        "command": "poetry run black backend/",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Type Check (MyPy)",
+        "type": "shell",
+        "command": "poetry run mypy backend/",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Backend: Create Migration",
+        "type": "shell",
+        "command": "poetry run alembic revision --autogenerate -m \"${input:migrationMessage}\"",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Frontend: Install Dependencies",
+        "type": "shell",
+        "command": "npm install",
+        "options": {
+          "cwd": "${workspaceFolder:⚛️ Frontend (Next.js)}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Frontend: Start Dev Server",
+        "type": "shell",
+        "command": "npm run dev",
+        "options": {
+          "cwd": "${workspaceFolder:⚛️ Frontend (Next.js)}"
+        },
+        "group": "build",
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "Frontend: Build",
+        "type": "shell",
+        "command": "npm run build",
+        "options": {
+          "cwd": "${workspaceFolder:⚛️ Frontend (Next.js)}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Frontend: Lint",
+        "type": "shell",
+        "command": "npm run lint",
+        "options": {
+          "cwd": "${workspaceFolder:⚛️ Frontend (Next.js)}"
+        },
+        "group": "build",
+        "problemMatcher": ["$eslint-stylish"]
+      },
+      {
+        "label": "Frontend: Run Tests",
+        "type": "shell",
+        "command": "npm test",
+        "options": {
+          "cwd": "${workspaceFolder:⚛️ Frontend (Next.js)}"
+        },
+        "group": "test",
+        "problemMatcher": []
+      },
+      {
+        "label": "Docker: Start All Services",
+        "type": "shell",
+        "command": "docker-compose up -d",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Docker: Stop All Services",
+        "type": "shell",
+        "command": "docker-compose down",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Docker: View Logs",
+        "type": "shell",
+        "command": "docker-compose logs -f",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "Docker: Rebuild All",
+        "type": "shell",
+        "command": "docker-compose up -d --build",
+        "options": {
+          "cwd": "${workspaceFolder:🎂 Bakalr CMS}"
+        },
+        "group": "build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Full Stack: Start All (Backend + Frontend)",
+        "dependsOn": ["Backend: Start Server", "Frontend: Start Dev Server"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": []
+      }
+    ],
+    "inputs": [
+      {
+        "id": "migrationMessage",
+        "type": "promptString",
+        "description": "Enter migration message"
+      }
+    ]
+  }
+}

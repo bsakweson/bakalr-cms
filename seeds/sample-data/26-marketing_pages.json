@@ -1,0 +1,692 @@
+[
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "sale",
+    "title": "Sale & Clearance",
+    "content_data": {
+      "page_key": "sale",
+      "title": "Sale & Clearance",
+      "heading": "Sale & Clearance",
+      "subheading": "Limited time offers on premium hair products",
+      "description": "Shop our biggest markdowns on top-quality hair extensions, wigs, and care products.",
+      "hero_image": "/images/banners/sale-hero.jpg",
+      "hero_cta": {
+        "text": "Shop All Sale Items",
+        "url": "/products?on_sale=true",
+        "style": "primary"
+      },
+      "labels": {
+        "title": "Sale & Clearance",
+        "all_sale_items": "All Sale Items",
+        "clearance": "Clearance",
+        "limited_time": "Limited Time",
+        "while_supplies_last": "While Supplies Last",
+        "up_to_off": "Up to {{percent}}% Off",
+        "save": "Save",
+        "was": "Was",
+        "now": "Now",
+        "sale_ends": "Sale Ends",
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds",
+        "final_sale": "Final Sale",
+        "no_returns": "No Returns on Sale Items",
+        "filter_by_discount": "Filter by Discount",
+        "sort_by": "Sort By",
+        "biggest_savings": "Biggest Savings",
+        "price_low_high": "Price: Low to High",
+        "price_high_low": "Price: High to Low",
+        "newest_first": "Newest First",
+        "shop_category": "Shop {{category}} Sale",
+        "empty_state": "No sale items at the moment. Check back soon!",
+        "subscribe_alerts": "Subscribe to Sale Alerts"
+      },
+      "buttons": {
+        "shop_now": "Shop Now",
+        "view_all": "View All",
+        "add_to_cart": "Add to Cart",
+        "notify_me": "Notify Me",
+        "subscribe": "Subscribe"
+      },
+      "sections": [
+        {
+          "title": "Flash Deals",
+          "type": "countdown"
+        },
+        {
+          "title": "Biggest Discounts",
+          "type": "product_grid"
+        },
+        {
+          "title": "Clearance",
+          "type": "product_grid"
+        }
+      ],
+      "messages": {
+        "sale_ending_soon": "Hurry! This sale ends in {{time}}",
+        "low_stock": "Only {{count}} left at this price",
+        "subscribed": "You'll be notified about upcoming sales"
+      },
+      "meta_title": "Sale & Clearance | Up to 70% Off Hair Products",
+      "meta_description": "Shop our biggest sale on premium hair extensions, wigs, and care products. Limited time offers while supplies last."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "new-arrivals",
+    "title": "New Arrivals",
+    "content_data": {
+      "page_key": "new-arrivals",
+      "title": "New Arrivals",
+      "heading": "New Arrivals",
+      "subheading": "Fresh styles just dropped",
+      "description": "Discover our latest hair extensions, wigs, and styling products.",
+      "hero_image": "/images/banners/new-arrivals-hero.jpg",
+      "hero_cta": {
+        "text": "Shop New Arrivals",
+        "url": "/products?new_arrival=true",
+        "style": "primary"
+      },
+      "labels": {
+        "title": "New Arrivals",
+        "just_arrived": "Just Arrived",
+        "new": "New",
+        "this_week": "This Week",
+        "this_month": "This Month",
+        "coming_soon": "Coming Soon",
+        "pre_order": "Pre-Order",
+        "notify_launch": "Notify Me When Available",
+        "trending_now": "Trending Now",
+        "staff_picks": "Staff Picks",
+        "featured_new": "Featured New Products",
+        "shop_by_category": "Shop New by Category",
+        "view_all_new": "View All New Arrivals",
+        "added_date": "Added {{date}}",
+        "empty_state": "New products coming soon! Check back shortly.",
+        "subscribe_new": "Be First to Know"
+      },
+      "buttons": {
+        "shop_now": "Shop Now",
+        "pre_order": "Pre-Order",
+        "notify_me": "Notify Me",
+        "view_all": "View All",
+        "add_to_cart": "Add to Cart"
+      },
+      "sections": [
+        {
+          "title": "Just Dropped",
+          "type": "product_grid"
+        },
+        {
+          "title": "Coming Soon",
+          "type": "preview_grid"
+        },
+        {
+          "title": "New by Category",
+          "type": "category_tabs"
+        }
+      ],
+      "messages": {
+        "pre_order_note": "Expected to ship by {{date}}",
+        "notify_success": "We'll email you when this product is available",
+        "subscribed": "You'll be the first to know about new arrivals"
+      },
+      "meta_title": "New Arrivals | Latest Hair Extensions & Wigs",
+      "meta_description": "Discover our newest hair extensions, wigs, and styling products. Fresh styles added weekly."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "best-sellers",
+    "title": "Best Sellers",
+    "content_data": {
+      "page_key": "best-sellers",
+      "title": "Best Sellers",
+      "heading": "Customer Favorites",
+      "subheading": "Our most-loved products",
+      "description": "Shop the hair products our customers can't stop buying.",
+      "hero_image": "/images/banners/best-sellers-hero.jpg",
+      "hero_cta": {
+        "text": "Shop Best Sellers",
+        "url": "/products?bestseller=true",
+        "style": "primary"
+      },
+      "labels": {
+        "title": "Best Sellers",
+        "best_seller": "Best Seller",
+        "top_rated": "Top Rated",
+        "customer_favorite": "Customer Favorite",
+        "most_popular": "Most Popular",
+        "trending": "Trending",
+        "sold_count": "{{count}}+ Sold",
+        "reviews_count": "{{count}} Reviews",
+        "rating": "{{rating}} Stars",
+        "by_category": "Best Sellers by Category",
+        "all_best_sellers": "All Best Sellers",
+        "why_customers_love": "Why Customers Love It",
+        "top_reviews": "Top Reviews",
+        "see_all_reviews": "See All Reviews",
+        "empty_state": "Best sellers coming soon!"
+      },
+      "buttons": {
+        "shop_now": "Shop Now",
+        "add_to_cart": "Add to Cart",
+        "view_product": "View Product",
+        "read_reviews": "Read Reviews"
+      },
+      "sections": [
+        {
+          "title": "Top 10 Best Sellers",
+          "type": "ranked_list"
+        },
+        {
+          "title": "By Category",
+          "type": "category_tabs"
+        },
+        {
+          "title": "Customer Reviews",
+          "type": "testimonials"
+        }
+      ],
+      "meta_title": "Best Sellers | Top-Rated Hair Products",
+      "meta_description": "Shop our most popular hair extensions, wigs, and care products. Loved by thousands of customers."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "gift-cards",
+    "title": "Gift Cards",
+    "content_data": {
+      "page_key": "gift-cards",
+      "title": "Gift Cards",
+      "heading": "Gift Cards",
+      "subheading": "The perfect gift for hair lovers",
+      "description": "Give the gift of beautiful hair with our digital gift cards.",
+      "hero_image": "/images/banners/gift-cards-hero.jpg",
+      "labels": {
+        "title": "Gift Cards",
+        "choose_amount": "Choose Amount",
+        "custom_amount": "Custom Amount",
+        "min_amount": "Minimum ${{min}}",
+        "max_amount": "Maximum ${{max}}",
+        "recipient_info": "Recipient Information",
+        "recipient_name": "Recipient Name",
+        "recipient_email": "Recipient Email",
+        "sender_name": "Your Name",
+        "personal_message": "Personal Message",
+        "message_placeholder": "Add a personal touch...",
+        "delivery_date": "Delivery Date",
+        "send_now": "Send Immediately",
+        "schedule_delivery": "Schedule Delivery",
+        "preview_card": "Preview Card",
+        "how_it_works": "How It Works",
+        "never_expires": "Never Expires",
+        "instant_delivery": "Instant Email Delivery",
+        "redeemable_online": "Redeemable Online",
+        "check_balance": "Check Balance",
+        "terms": "Gift Card Terms"
+      },
+      "buttons": {
+        "buy_now": "Buy Gift Card",
+        "add_to_cart": "Add to Cart",
+        "preview": "Preview",
+        "send_gift": "Send Gift",
+        "check_balance": "Check Balance"
+      },
+      "form_labels": {
+        "amount": "Amount",
+        "recipient_name": "Recipient's Name",
+        "recipient_email": "Recipient's Email",
+        "sender_name": "Your Name",
+        "message": "Personal Message",
+        "delivery_date": "When to Send"
+      },
+      "form_placeholders": {
+        "recipient_name": "Enter recipient's name",
+        "recipient_email": "recipient@email.com",
+        "sender_name": "Enter your name",
+        "message": "Write a personal message (optional)",
+        "custom_amount": "Enter amount"
+      },
+      "features": [
+        {
+          "icon": "gift",
+          "title": "Perfect Gift",
+          "description": "Let them choose what they love"
+        },
+        {
+          "icon": "mail",
+          "title": "Instant Delivery",
+          "description": "Delivered by email immediately"
+        },
+        {
+          "icon": "infinity",
+          "title": "Never Expires",
+          "description": "Use anytime, no rush"
+        },
+        {
+          "icon": "shield",
+          "title": "Secure",
+          "description": "Protected against loss"
+        }
+      ],
+      "faq": [
+        {
+          "question": "How are gift cards delivered?",
+          "answer": "Gift cards are delivered instantly via email to the recipient."
+        },
+        {
+          "question": "Do gift cards expire?",
+          "answer": "No, our gift cards never expire."
+        },
+        {
+          "question": "Can I check my balance?",
+          "answer": "Yes, use the balance checker on this page or at checkout."
+        },
+        {
+          "question": "Can I use multiple gift cards?",
+          "answer": "Yes, you can combine multiple gift cards on a single order."
+        }
+      ],
+      "messages": {
+        "purchase_success": "Gift card purchased! It will be delivered to {{email}}",
+        "invalid_email": "Please enter a valid email address",
+        "invalid_amount": "Please enter an amount between ${{min}} and ${{max}}",
+        "scheduled": "Gift card will be sent on {{date}}"
+      },
+      "meta_title": "Gift Cards | Give the Gift of Beautiful Hair",
+      "meta_description": "Buy digital gift cards for hair lovers. Instant email delivery, never expires. Perfect for any occasion."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "gift-card-balance",
+    "title": "Check Gift Card Balance",
+    "content_data": {
+      "page_key": "gift-card-balance",
+      "title": "Check Gift Card Balance",
+      "heading": "Check Your Balance",
+      "subheading": "Enter your gift card details below",
+      "description": "",
+      "labels": {
+        "title": "Gift Card Balance",
+        "card_number": "Gift Card Number",
+        "pin": "PIN",
+        "check_balance": "Check Balance",
+        "your_balance": "Your Balance",
+        "remaining_balance": "Remaining Balance",
+        "original_value": "Original Value",
+        "amount_used": "Amount Used",
+        "card_status": "Card Status",
+        "active": "Active",
+        "redeemed": "Fully Redeemed",
+        "expired": "Expired",
+        "transaction_history": "Transaction History",
+        "date": "Date",
+        "description": "Description",
+        "amount": "Amount",
+        "add_to_account": "Add to Account",
+        "need_help": "Need Help?",
+        "buy_new": "Buy a New Gift Card"
+      },
+      "buttons": {
+        "check_balance": "Check Balance",
+        "add_to_account": "Add to My Account",
+        "buy_gift_card": "Buy Gift Card",
+        "contact_support": "Contact Support"
+      },
+      "form_labels": {
+        "card_number": "Gift Card Number",
+        "pin": "PIN (if applicable)"
+      },
+      "form_placeholders": {
+        "card_number": "Enter 16-digit card number",
+        "pin": "Enter PIN"
+      },
+      "messages": {
+        "card_not_found": "Gift card not found. Please check the number and try again.",
+        "invalid_number": "Please enter a valid gift card number",
+        "balance_success": "Your gift card balance is ${{balance}}",
+        "card_empty": "This gift card has been fully redeemed",
+        "added_to_account": "Gift card added to your account"
+      },
+      "meta_title": "Check Gift Card Balance",
+      "meta_description": "Check your gift card balance instantly. Enter your card number to see remaining funds."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "refer-a-friend",
+    "title": "Refer a Friend",
+    "content_data": {
+      "page_key": "refer-a-friend",
+      "title": "Refer a Friend",
+      "heading": "Give $15, Get $15",
+      "subheading": "Share the love and earn rewards",
+      "description": "Refer your friends and you both get $15 off your next purchase!",
+      "hero_image": "/images/banners/referral-hero.jpg",
+      "labels": {
+        "title": "Refer a Friend",
+        "your_referral_code": "Your Referral Code",
+        "your_referral_link": "Your Referral Link",
+        "copy_link": "Copy Link",
+        "copied": "Copied!",
+        "share_via": "Share Via",
+        "email": "Email",
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "whatsapp": "WhatsApp",
+        "sms": "Text Message",
+        "how_it_works": "How It Works",
+        "step_1": "Share your unique link",
+        "step_2": "Friend makes a purchase",
+        "step_3": "You both get $15 credit",
+        "your_referrals": "Your Referrals",
+        "pending": "Pending",
+        "completed": "Completed",
+        "total_earned": "Total Earned",
+        "available_credit": "Available Credit",
+        "terms": "Referral Terms",
+        "no_referrals": "No referrals yet. Share your link to start earning!",
+        "invite_more": "Invite More Friends"
+      },
+      "buttons": {
+        "copy_link": "Copy Link",
+        "share": "Share",
+        "send_invite": "Send Invite",
+        "view_terms": "View Terms",
+        "redeem_credit": "Redeem Credit"
+      },
+      "form_labels": {
+        "friend_email": "Friend's Email",
+        "friend_name": "Friend's Name (Optional)",
+        "your_message": "Personal Message"
+      },
+      "form_placeholders": {
+        "friend_email": "friend@email.com",
+        "friend_name": "Your friend's name",
+        "your_message": "Hey! Check out this amazing hair store..."
+      },
+      "features": [
+        {
+          "icon": "gift",
+          "title": "Give $15",
+          "description": "Your friend gets $15 off their first order"
+        },
+        {
+          "icon": "dollar",
+          "title": "Get $15",
+          "description": "You get $15 credit when they buy"
+        },
+        {
+          "icon": "repeat",
+          "title": "Unlimited",
+          "description": "No limit on how many friends you can refer"
+        }
+      ],
+      "terms": "Referral credit is valid for 90 days. Friend must be a new customer and place an order of $50 or more. Credit cannot be combined with other offers. We reserve the right to modify or cancel the program at any time.",
+      "messages": {
+        "invite_sent": "Invitation sent to {{email}}!",
+        "link_copied": "Referral link copied to clipboard",
+        "referral_completed": "Congrats! {{name}} made a purchase. $15 credit added to your account!",
+        "invalid_email": "Please enter a valid email address"
+      },
+      "meta_title": "Refer a Friend | Give $15, Get $15",
+      "meta_description": "Refer friends to our store and earn rewards. Give them $15 off and get $15 credit when they purchase."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "rewards",
+    "title": "Rewards Program",
+    "content_data": {
+      "page_key": "rewards",
+      "title": "Rewards Program",
+      "heading": "VIP Rewards",
+      "subheading": "Earn points on every purchase",
+      "description": "Join our loyalty program and earn points for exclusive discounts, free products, and VIP perks.",
+      "hero_image": "/images/banners/rewards-hero.jpg",
+      "labels": {
+        "title": "Rewards Program",
+        "join_now": "Join Now",
+        "already_member": "Already a Member?",
+        "sign_in": "Sign In",
+        "your_points": "Your Points",
+        "points_balance": "Points Balance",
+        "lifetime_points": "Lifetime Points",
+        "current_tier": "Current Tier",
+        "next_tier": "Next Tier",
+        "points_to_next": "{{points}} points to next tier",
+        "how_to_earn": "How to Earn Points",
+        "ways_to_earn": "Ways to Earn",
+        "purchase": "Make a Purchase",
+        "points_per_dollar": "Earn {{points}} point per $1",
+        "review": "Write a Review",
+        "birthday": "Birthday Bonus",
+        "social_share": "Share on Social",
+        "referral": "Refer a Friend",
+        "how_to_redeem": "How to Redeem",
+        "redeem_options": "Redeem Options",
+        "discount_off": "${{amount}} Off",
+        "free_shipping": "Free Shipping",
+        "free_product": "Free Product",
+        "points_required": "{{points}} Points",
+        "redeem_now": "Redeem Now",
+        "tier_benefits": "Tier Benefits",
+        "your_rewards": "Your Rewards",
+        "available_rewards": "Available Rewards",
+        "used_rewards": "Used Rewards",
+        "expired_rewards": "Expired Rewards",
+        "reward_history": "Reward History",
+        "terms": "Program Terms",
+        "faq": "Frequently Asked Questions"
+      },
+      "buttons": {
+        "join_now": "Join Now",
+        "sign_in": "Sign In",
+        "redeem": "Redeem",
+        "view_rewards": "View Rewards",
+        "earn_more": "Earn More Points",
+        "view_terms": "View Terms"
+      },
+      "tiers": [
+        {
+          "name": "Bronze",
+          "points": 0,
+          "icon": "bronze-badge",
+          "benefits": [
+            "1 point per $1 spent",
+            "Birthday bonus (100 points)",
+            "Early access to sales"
+          ]
+        },
+        {
+          "name": "Silver",
+          "points": 500,
+          "icon": "silver-badge",
+          "benefits": [
+            "1.5 points per $1 spent",
+            "Birthday bonus (150 points)",
+            "Free standard shipping",
+            "Exclusive member pricing"
+          ]
+        },
+        {
+          "name": "Gold",
+          "points": 1000,
+          "icon": "gold-badge",
+          "benefits": [
+            "2 points per $1 spent",
+            "Birthday bonus (200 points)",
+            "Free express shipping",
+            "Priority customer support",
+            "Exclusive Gold events"
+          ]
+        },
+        {
+          "name": "Platinum",
+          "points": 2500,
+          "icon": "platinum-badge",
+          "benefits": [
+            "3 points per $1 spent",
+            "Birthday bonus (300 points)",
+            "Free overnight shipping",
+            "Dedicated stylist consultations",
+            "First access to new products",
+            "Annual VIP gift"
+          ]
+        }
+      ],
+      "features": [
+        {
+          "icon": "star",
+          "title": "Earn Points",
+          "description": "Earn points on every purchase and action"
+        },
+        {
+          "icon": "gift",
+          "title": "Get Rewards",
+          "description": "Redeem points for discounts and free products"
+        },
+        {
+          "icon": "crown",
+          "title": "VIP Benefits",
+          "description": "Unlock exclusive perks as you level up"
+        }
+      ],
+      "faq": [
+        {
+          "question": "How do I earn points?",
+          "answer": "Earn points by making purchases, writing reviews, referring friends, and more. You earn 1 point per $1 spent as a Bronze member, with higher tiers earning more."
+        },
+        {
+          "question": "Do points expire?",
+          "answer": "Points expire after 12 months of account inactivity. Stay active to keep your points!"
+        },
+        {
+          "question": "How do I redeem points?",
+          "answer": "Redeem points at checkout for discounts, free shipping, or free products. Go to the Rewards page to see available options."
+        },
+        {
+          "question": "How do I move up tiers?",
+          "answer": "Your tier is based on lifetime points earned. Once you reach the point threshold, you automatically move up."
+        }
+      ],
+      "terms": "Points are earned on subtotal before tax and shipping. Points cannot be earned on gift cards or sale items. Points have no cash value. Program terms subject to change.",
+      "messages": {
+        "joined": "Welcome to VIP Rewards! You've earned 50 bonus points.",
+        "points_earned": "You earned {{points}} points!",
+        "reward_redeemed": "Reward redeemed! {{reward}} applied to your cart.",
+        "tier_upgrade": "Congratulations! You've reached {{tier}} status!",
+        "points_expiring": "{{points}} points expiring on {{date}}"
+      },
+      "meta_title": "VIP Rewards Program | Earn Points & Exclusive Perks",
+      "meta_description": "Join our rewards program to earn points on every purchase. Redeem for discounts, free products, and VIP benefits."
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "marketing_page",
+    "slug": "chat",
+    "title": "Live Chat",
+    "content_data": {
+      "page_key": "chat",
+      "title": "Live Chat Support",
+      "heading": "Chat With Us",
+      "subheading": "We're here to help",
+      "description": "Connect with our customer support team instantly via live chat.",
+      "labels": {
+        "title": "Live Chat",
+        "start_chat": "Start Chat",
+        "chat_with_us": "Chat With Us",
+        "online": "Online",
+        "offline": "Offline",
+        "away": "Away",
+        "typical_response": "Typical response time",
+        "under_minute": "Under 1 minute",
+        "few_minutes": "A few minutes",
+        "hours": "{{hours}} hours",
+        "enter_message": "Type your message...",
+        "send": "Send",
+        "end_chat": "End Chat",
+        "transcript": "Email Transcript",
+        "rate_chat": "Rate This Chat",
+        "feedback": "Feedback",
+        "helpful": "Was this helpful?",
+        "yes": "Yes",
+        "no": "No",
+        "chat_hours": "Chat Hours",
+        "monday_friday": "Monday - Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        "closed": "Closed",
+        "leave_message": "Leave a Message",
+        "we_will_respond": "We'll respond within 24 hours",
+        "your_name": "Your Name",
+        "your_email": "Your Email",
+        "your_message": "Your Message",
+        "common_questions": "Common Questions",
+        "before_you_chat": "Before You Chat",
+        "faq_might_help": "Our FAQ might have your answer"
+      },
+      "buttons": {
+        "start_chat": "Start Chat",
+        "send": "Send",
+        "end_chat": "End Chat",
+        "send_transcript": "Send Transcript",
+        "submit_message": "Submit Message",
+        "view_faq": "View FAQ",
+        "attach_file": "Attach File",
+        "emoji": "Add Emoji"
+      },
+      "form_labels": {
+        "name": "Name",
+        "email": "Email",
+        "order_number": "Order Number (if applicable)",
+        "topic": "What can we help with?",
+        "message": "Message"
+      },
+      "form_placeholders": {
+        "name": "Enter your name",
+        "email": "your@email.com",
+        "order_number": "e.g., ORD-12345",
+        "message": "How can we help you today?"
+      },
+      "sections": [
+        {
+          "title": "Chat Widget",
+          "type": "chat_interface"
+        },
+        {
+          "title": "Offline Form",
+          "type": "contact_form"
+        },
+        {
+          "title": "Quick Answers",
+          "type": "faq_quick"
+        }
+      ],
+      "messages": {
+        "connecting": "Connecting you with an agent...",
+        "connected": "Connected with {{agent}}",
+        "agent_typing": "{{agent}} is typing...",
+        "chat_ended": "Chat ended. Thank you for contacting us!",
+        "transcript_sent": "Chat transcript sent to {{email}}",
+        "message_received": "We received your message and will respond within 24 hours.",
+        "outside_hours": "We're currently offline. Leave a message and we'll get back to you.",
+        "queue_position": "You are #{{position}} in queue",
+        "thank_you": "Thank you for your feedback!"
+      },
+      "meta_title": "Live Chat Support | Get Help Now",
+      "meta_description": "Connect with our customer support team instantly via live chat. We're here to help with orders, products, and more."
+    },
+    "status": "published"
+  }
+]

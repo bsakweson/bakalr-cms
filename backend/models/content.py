@@ -90,6 +90,7 @@ class ContentEntry(Base, IDMixin, TimestampMixin):
 
     # Relationships
     content_type = relationship("ContentType", back_populates="entries")
+    author = relationship("User", foreign_keys=[author_id], backref="authored_entries")
     translations = relationship(
         "Translation", back_populates="content_entry", cascade="all, delete-orphan"
     )

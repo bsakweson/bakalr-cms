@@ -98,7 +98,15 @@
         "paypal",
         "apple-pay",
         "google-pay"
-      ]
+      ],
+      "labels": {
+        "we_accept": "We accept:",
+        "follow_us": "Follow Us",
+        "newsletter_title": "Stay Connected",
+        "newsletter_placeholder": "Enter your email",
+        "newsletter_button": "Subscribe",
+        "all_rights_reserved": "All rights reserved."
+      }
     },
     "status": "published"
   }

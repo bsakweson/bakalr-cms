@@ -296,16 +296,15 @@ async def handle_social_callback(
             # Create user with random password (they'll use social login)
             import secrets
 
-            random_password = secrets.token_urlsafe(32)
-            from passlib.context import CryptContext
+            from backend.core.security import get_password_hash
 
-            pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+            random_password = secrets.token_urlsafe(32)
 
             user = User(
                 email=user_info.email,
                 first_name=user_info.first_name,
                 last_name=user_info.last_name,
-                hashed_password=pwd_context.hash(random_password),
+                hashed_password=get_password_hash(random_password),
                 organization_id=org.id,
                 is_active=True,
                 is_email_verified=user_info.email_verified,

@@ -78,8 +78,8 @@ class MediaListResponse(BaseModel):
     items: List[MediaResponse]
     total: int
     page: int
-    page_size: int
-    total_pages: int
+    size: int
+    pages: int
 
 
 class MediaFilterParams(BaseModel):

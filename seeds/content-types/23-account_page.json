@@ -1,0 +1,188 @@
+{
+  "api_id": "account_page",
+  "name": "Account Page",
+  "description": "Customer account pages - My Account, Orders, Addresses, Wishlist, Profile, Security",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique identifier for the account page"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title - IS translated"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page description - IS translated"
+    },
+    {
+      "name": "tabs",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Navigation tabs - IS translated"
+    },
+    {
+      "name": "buttons",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Button labels - IS translated"
+    },
+    {
+      "name": "table_headers",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Table column headers - IS translated"
+    },
+    {
+      "name": "form_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field labels - IS translated"
+    },
+    {
+      "name": "form_placeholders",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field placeholders - IS translated"
+    },
+    {
+      "name": "status_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Status badge labels - IS translated"
+    },
+    {
+      "name": "empty_states",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Empty state messages - IS translated"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "General messages and text - IS translated"
+    },
+    {
+      "name": "sections",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Section headings and descriptions - IS translated"
+    },
+    {
+      "name": "stats",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Statistics labels - IS translated"
+    },
+    {
+      "name": "quick_actions",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Quick action labels - IS translated"
+    },
+    {
+      "name": "modal_titles",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Modal dialog titles - IS translated"
+    },
+    {
+      "name": "tooltips",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Tooltip text - IS translated"
+    },
+    {
+      "name": "search",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Search-related labels - IS translated"
+    },
+    {
+      "name": "pagination",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Pagination labels - IS translated"
+    }
+  ],
+  "is_published": true
+}

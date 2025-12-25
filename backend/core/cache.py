@@ -8,6 +8,7 @@ from functools import wraps
 from typing import Any, Callable, Optional
 
 import redis.asyncio as redis
+import redis as sync_redis
 
 from backend.core.config import settings
 
@@ -17,6 +18,7 @@ class RedisCache:
 
     _instance: Optional["RedisCache"] = None
     _redis_client: Optional[redis.Redis] = None
+    _sync_redis_client: Optional[sync_redis.Redis] = None
 
     def __new__(cls):
         if cls._instance is None:
@@ -33,11 +35,28 @@ class RedisCache:
                 max_connections=settings.REDIS_MAX_CONNECTIONS,
             )
 
+    def _get_sync_client(self) -> Optional[sync_redis.Redis]:
+        """Get or create synchronous Redis client"""
+        if self._sync_redis_client is None:
+            try:
+                self._sync_redis_client = sync_redis.from_url(
+                    settings.REDIS_URL,
+                    encoding="utf-8",
+                    decode_responses=True,
+                )
+            except Exception as e:
+                print(f"Sync Redis connection error: {e}")
+                return None
+        return self._sync_redis_client
+
     async def disconnect(self):
         """Close Redis connection"""
         if self._redis_client:
             await self._redis_client.aclose()
             self._redis_client = None
+        if self._sync_redis_client:
+            self._sync_redis_client.close()
+            self._sync_redis_client = None
 
     @property
     def client(self) -> redis.Redis:
@@ -45,6 +64,52 @@ class RedisCache:
         if self._redis_client is None:
             raise RuntimeError("Redis not connected. Call connect() first.")
         return self._redis_client
+
+    # ==================== Synchronous Methods ====================
+
+    def get_sync(self, key: str) -> Optional[str]:
+        """Get value from cache (synchronous version)"""
+        try:
+            client = self._get_sync_client()
+            if client:
+                return client.get(key)
+            return None
+        except Exception as e:
+            print(f"Sync cache get error: {e}")
+            return None
+
+    def set_sync(self, key: str, value: Any, ttl: Optional[int] = None) -> bool:
+        """Set value in cache (synchronous version)"""
+        try:
+            client = self._get_sync_client()
+            if not client:
+                return False
+
+            if isinstance(value, (dict, list)):
+                value = json.dumps(value)
+            elif not isinstance(value, str):
+                value = str(value)
+
+            if ttl:
+                client.setex(key, ttl, value)
+            else:
+                client.set(key, value)
+            return True
+        except Exception as e:
+            print(f"Sync cache set error: {e}")
+            return False
+
+    def get_json_sync(self, key: str) -> Optional[Any]:
+        """Get and deserialize JSON value from cache (synchronous version)"""
+        value = self.get_sync(key)
+        if value:
+            try:
+                return json.loads(value)
+            except json.JSONDecodeError:
+                return value
+        return None
+
+    # ==================== Async Methods ====================
 
     async def get(self, key: str) -> Optional[str]:
         """Get value from cache"""
@@ -261,3 +326,7 @@ class CacheKeys:
     def format(pattern: str, **kwargs) -> str:
         """Format cache key pattern with values"""
         return pattern.format(**kwargs)
+
+
+# Alias for backwards compatibility
+cache_response = cached

@@ -269,7 +269,7 @@ async def get_media_stats(
 
     # Total size in MB
     total_size_bytes = (
-        db.query(func.sum(Media.size)).filter(Media.organization_id == org_id).scalar() or 0
+        db.query(func.sum(Media.file_size)).filter(Media.organization_id == org_id).scalar() or 0
     )
     total_size_mb = round(total_size_bytes / (1024 * 1024), 2)
 
@@ -297,7 +297,7 @@ async def get_media_stats(
             "id": media.id,
             "filename": media.filename,
             "mime_type": media.mime_type,
-            "size": media.size,
+            "size": media.file_size,
             "created_at": media.created_at.isoformat() if media.created_at else None,
         }
         for media in recent_uploads

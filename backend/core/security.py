@@ -2,6 +2,8 @@
 Security utilities for password hashing and JWT tokens
 """
 
+import base64
+import hashlib
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional
@@ -17,6 +19,9 @@ from backend.core.jwt_keys import jwt_key_manager
 # JWT Algorithm - RS256 for asymmetric signing
 JWT_ALGORITHM = "RS256"
 
+# bcrypt has a 72-byte limit on password input
+BCRYPT_MAX_LENGTH = 72
+
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a password against a hash"""
@@ -28,6 +33,71 @@ def get_password_hash(password: str) -> str:
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(password.encode("utf-8"), salt)
     return hashed.decode("utf-8")
+
+
+def _prepare_secret_for_bcrypt(secret: str) -> bytes:
+    """
+    Prepare a secret for bcrypt hashing, handling long secrets safely.
+
+    bcrypt has a 72-byte input limit. Secrets longer than this are pre-hashed
+    with SHA-256 and base64-encoded to ensure consistent behavior and full
+    entropy usage regardless of input length.
+
+    Args:
+        secret: The plain text secret
+
+    Returns:
+        Bytes suitable for bcrypt hashing (guaranteed <= 72 bytes)
+    """
+    secret_bytes = secret.encode("utf-8")
+
+    if len(secret_bytes) > BCRYPT_MAX_LENGTH:
+        # Pre-hash with SHA-256 and base64 encode
+        # SHA-256 produces 32 bytes, base64 encoded = 44 bytes (well under 72)
+        sha256_hash = hashlib.sha256(secret_bytes).digest()
+        return base64.b64encode(sha256_hash)
+
+    return secret_bytes
+
+
+def hash_secret(secret: str) -> str:
+    """
+    Hash a secret (password, API key, client secret, etc.) for secure storage.
+
+    This function handles secrets of any length safely by pre-hashing long
+    secrets with SHA-256 before bcrypt.
+
+    Args:
+        secret: The plain text secret
+
+    Returns:
+        Hashed secret string
+    """
+    prepared = _prepare_secret_for_bcrypt(secret)
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(prepared, salt)
+    return hashed.decode("utf-8")
+
+
+def verify_secret(plain_secret: str, hashed_secret: str) -> bool:
+    """
+    Verify a secret against its hash.
+
+    This function handles secrets of any length safely by pre-hashing long
+    secrets with SHA-256 before bcrypt verification.
+
+    Args:
+        plain_secret: The plain text secret to verify
+        hashed_secret: The stored hash to verify against
+
+    Returns:
+        True if the secret matches, False otherwise
+    """
+    try:
+        prepared = _prepare_secret_for_bcrypt(plain_secret)
+        return bcrypt.checkpw(prepared, hashed_secret.encode("utf-8"))
+    except (ValueError, TypeError):
+        return False
 
 
 def generate_api_key() -> str:
@@ -82,6 +152,7 @@ class TokenPayload(BaseModel):
     roles: list[str] = []
     exp: Optional[int] = None
     type: str = "access"  # access or refresh
+    session_id: Optional[str] = None  # Session ID for logout functionality
 
 
 def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
@@ -206,6 +277,7 @@ def verify_token(token: str, token_type: str = "access") -> Optional[TokenPayloa
             roles=payload.get("roles", []),
             exp=payload.get("exp"),
             type=payload.get("type"),
+            session_id=payload.get("session_id"),
         )
 
         return token_data

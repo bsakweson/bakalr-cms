@@ -164,16 +164,6 @@
       "help_text": "Maintenance message - IS translated"
     },
     {
-      "name": "common_labels",
-      "type": "json",
-      "required": false,
-      "unique": false,
-      "localized": true,
-      "default": null,
-      "validation": null,
-      "help_text": "Common UI labels used across pages (products, categories, cart, pagination, filters, etc.) - IS translated"
-    },
-    {
       "name": "payment_methods",
       "type": "json",
       "required": false,

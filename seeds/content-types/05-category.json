@@ -11,7 +11,7 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Category name - IS translated"
+      "help_text": "Category display name"
     },
     {
       "name": "description",
@@ -21,7 +21,7 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Full description with formatting - IS translated"
+      "help_text": "Category description"
     },
     {
       "name": "short_description",
@@ -31,27 +31,27 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Brief description - IS translated"
+      "help_text": "Brief category summary (max 200 chars)"
     },
     {
-      "name": "image_id",
-      "type": "media",
+      "name": "parent_slug",
+      "type": "text",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Category thumbnail"
+      "help_text": "Parent category slug for hierarchy"
     },
     {
-      "name": "banner_image_id",
-      "type": "media",
+      "name": "image_url",
+      "type": "text",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Category page banner"
+      "help_text": "Category image URL"
     },
     {
       "name": "icon",
@@ -61,17 +61,7 @@
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Icon name - NOT translated"
-    },
-    {
-      "name": "parent_id",
-      "type": "reference",
-      "required": false,
-      "unique": false,
-      "localized": false,
-      "default": null,
-      "validation": null,
-      "help_text": "Parent category ID"
+      "help_text": "Icon name for UI display"
     },
     {
       "name": "display_order",
@@ -81,7 +71,7 @@
       "localized": false,
       "default": 0,
       "validation": null,
-      "help_text": "Sort order"
+      "help_text": "Sort order within parent"
     },
     {
       "name": "featured",
@@ -91,7 +81,27 @@
       "localized": false,
       "default": false,
       "validation": null,
-      "help_text": "Show in featured"
+      "help_text": "Featured category on storefront"
+    },
+    {
+      "name": "seo_title",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta title (max 70 chars)"
+    },
+    {
+      "name": "seo_description",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta description (max 160 chars)"
     }
   ],
   "is_published": true

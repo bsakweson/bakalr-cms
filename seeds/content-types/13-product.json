@@ -1,7 +1,7 @@
 {
   "api_id": "product",
   "name": "Product",
-  "description": "Product catalog entries with variants, media, and specifications",
+  "description": "Product catalog entries with variants and specifications",
   "fields_schema": [
     {
       "name": "name",
@@ -11,7 +11,7 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Product name - IS translated"
+      "help_text": "Product display name"
     },
     {
       "name": "sku",
@@ -21,7 +21,17 @@
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "SKU - NOT translated"
+      "help_text": "Unique product identifier"
+    },
+    {
+      "name": "slug",
+      "type": "text",
+      "required": false,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "URL-friendly identifier"
     },
     {
       "name": "description",
@@ -31,7 +41,7 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Full description with formatting - IS translated"
+      "help_text": "Product description (HTML allowed)"
     },
     {
       "name": "short_description",
@@ -41,17 +51,17 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Brief description - IS translated"
+      "help_text": "Brief product summary (max 500 chars)"
     },
     {
-      "name": "base_price_cents",
+      "name": "price_cents",
       "type": "number",
       "required": true,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Base price in cents"
+      "help_text": "Base price in cents (USD)"
     },
     {
       "name": "compare_at_price_cents",
@@ -61,7 +71,17 @@
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Original price in cents"
+      "help_text": "Original/compare price in cents"
+    },
+    {
+      "name": "cost_cents",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Cost of goods in cents (for inventory)"
     },
     {
       "name": "currency",
@@ -71,27 +91,57 @@
       "localized": false,
       "default": "USD",
       "validation": null,
-      "help_text": "Currency code - NOT translated"
+      "help_text": "Currency code (USD, CAD, EUR, GBP)"
     },
     {
-      "name": "category_id",
-      "type": "reference",
+      "name": "category_slug",
+      "type": "text",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Primary category"
+      "help_text": "Primary category slug reference"
     },
     {
-      "name": "brand_id",
-      "type": "reference",
+      "name": "category_slugs",
+      "type": "json",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Brand"
+      "help_text": "All category slug references (array)"
+    },
+    {
+      "name": "brand_slug",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand slug reference"
+    },
+    {
+      "name": "vendor",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Original vendor name from source"
+    },
+    {
+      "name": "product_type",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Product type classification"
     },
     {
       "name": "tags",
@@ -101,37 +151,37 @@
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Tags array - NOT translated (used for filtering)"
+      "help_text": "Product tags for filtering/search (array)"
     },
     {
-      "name": "media_gallery",
+      "name": "media_ids",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": [],
+      "validation": null,
+      "help_text": "Product media IDs (array of UUIDs). First item is primary image, rest are gallery images."
+    },
+    {
+      "name": "variants",
       "type": "json",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Media items array - NOT translated"
+      "help_text": "Product variants array [{sku, price_cents, options, inventory_quantity}]"
     },
     {
-      "name": "available_colors",
+      "name": "variant_options",
       "type": "json",
       "required": false,
       "unique": false,
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Color options - names ARE translated"
-    },
-    {
-      "name": "available_sizes",
-      "type": "json",
-      "required": false,
-      "unique": false,
-      "localized": true,
-      "default": null,
-      "validation": null,
-      "help_text": "Size options - names ARE translated"
+      "help_text": "Variant option definitions [{name, values}]"
     },
     {
       "name": "specifications",
@@ -141,27 +191,7 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Specs key-value - values ARE translated"
-    },
-    {
-      "name": "ingredients",
-      "type": "richtext",
-      "required": false,
-      "unique": false,
-      "localized": true,
-      "default": null,
-      "validation": null,
-      "help_text": "Ingredients list with formatting - IS translated"
-    },
-    {
-      "name": "how_to_use",
-      "type": "richtext",
-      "required": false,
-      "unique": false,
-      "localized": true,
-      "default": null,
-      "validation": null,
-      "help_text": "Usage instructions with formatting - IS translated"
+      "help_text": "Product specifications object"
     },
     {
       "name": "weight_grams",
@@ -171,17 +201,47 @@
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Weight in grams"
+      "help_text": "Product weight in grams"
     },
     {
-      "name": "dimensions",
-      "type": "json",
+      "name": "inventory_quantity",
+      "type": "number",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Dimensions object - NOT translated"
+      "help_text": "Stock quantity (for inventory service)"
+    },
+    {
+      "name": "seo_title",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta title (max 70 chars)"
+    },
+    {
+      "name": "seo_description",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO meta description (max 160 chars)"
+    },
+    {
+      "name": "published",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": true,
+      "validation": null,
+      "help_text": "Product visibility"
     },
     {
       "name": "featured",
@@ -194,16 +254,6 @@
       "help_text": "Featured product"
     },
     {
-      "name": "new_arrival",
-      "type": "boolean",
-      "required": false,
-      "unique": false,
-      "localized": false,
-      "default": false,
-      "validation": null,
-      "help_text": "New arrival"
-    },
-    {
       "name": "bestseller",
       "type": "boolean",
       "required": false,
@@ -211,7 +261,47 @@
       "localized": false,
       "default": false,
       "validation": null,
-      "help_text": "Bestseller"
+      "help_text": "Bestseller flag"
+    },
+    {
+      "name": "new_arrival",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "New arrival flag"
+    },
+    {
+      "name": "on_sale",
+      "type": "boolean",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": false,
+      "validation": null,
+      "help_text": "On sale flag"
+    },
+    {
+      "name": "source_platform",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Original source (shopify, woocommerce, manual)"
+    },
+    {
+      "name": "external_id",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "ID from source platform"
     }
   ],
   "is_published": true

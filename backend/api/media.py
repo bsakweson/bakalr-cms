@@ -188,7 +188,7 @@ async def list_media(
     media_type: Optional[MediaType] = None,
     search: Optional[str] = None,
     page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
+    size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user_flexible),
 ):
@@ -199,7 +199,7 @@ async def list_media(
         media_type: Filter by media type
         search: Search in filename and description
         page: Page number
-        page_size: Items per page
+        size: Items per page
 
     Returns:
         Paginated list of media files
@@ -226,8 +226,8 @@ async def list_media(
     total = db.execute(total_query).scalar_one()
 
     # Apply pagination
-    offset = (page - 1) * page_size
-    query = query.order_by(Media.created_at.desc()).offset(offset).limit(page_size)
+    offset = (page - 1) * size
+    query = query.order_by(Media.created_at.desc()).offset(offset).limit(size)
 
     # Execute query
     media_items = db.execute(query).scalars().all()
@@ -243,10 +243,10 @@ async def list_media(
                 item_dict["tags"] = []
         items.append(MediaResponse(**item_dict))
 
-    total_pages = (total + page_size - 1) // page_size
+    pages = (total + size - 1) // size
 
     return MediaListResponse(
-        items=items, total=total, page=page, page_size=page_size, total_pages=total_pages
+        items=items, total=total, page=page, size=size, pages=pages
     )
 
 
@@ -256,7 +256,7 @@ async def search_media(
     request: Request,
     q: str = Query(..., min_length=1, description="Search query"),
     page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
+    size: int = Query(20, ge=1, le=100),
     media_type: Optional[MediaType] = None,
     current_user: User = Depends(get_current_user_flexible),
     db: Session = Depends(get_db),
@@ -285,8 +285,8 @@ async def search_media(
     total = db.execute(count_query).scalar() or 0
 
     # Paginate
-    offset = (page - 1) * page_size
-    query = query.offset(offset).limit(page_size).order_by(Media.created_at.desc())
+    offset = (page - 1) * size
+    query = query.offset(offset).limit(size).order_by(Media.created_at.desc())
 
     # Execute
     media_items = db.execute(query).scalars().all()
@@ -302,10 +302,10 @@ async def search_media(
                 item_dict["tags"] = []
         items.append(MediaResponse(**item_dict))
 
-    total_pages = (total + page_size - 1) // page_size
+    pages = (total + size - 1) // size
 
     return MediaListResponse(
-        items=items, total=total, page=page, page_size=page_size, total_pages=total_pages
+        items=items, total=total, page=page, size=size, pages=pages
     )
 
 

@@ -108,41 +108,6 @@
   },
   {
     "content_type_api_id": "admin_page",
-    "slug": "account_wishlist",
-    "title": "My Wishlist",
-    "content_data": {
-      "page_key": "account_wishlist",
-      "title": "My Wishlist",
-      "description": "Your saved items",
-      "buttons": {
-        "add_all_to_cart": "Add All to Cart",
-        "add_to_cart": "Add to Cart",
-        "remove": "Remove",
-        "explore_products": "Explore Products",
-        "browse_all": "Browse All Products →"
-      },
-      "messages": {
-        "items_count": "{count} item(s) saved",
-        "added_on": "Added on {date}",
-        "save_amount": "Save {amount}"
-      },
-      "empty_states": {
-        "empty": "Your wishlist is empty",
-        "empty_desc": "Save items you love by clicking the heart icon on products."
-      },
-      "status_labels": {
-        "in_stock": "In Stock",
-        "out_of_stock": "Out of Stock",
-        "low_stock": "Low Stock"
-      },
-      "sections": {
-        "recommendations": "You Might Also Like",
-        "recommendations_desc": "Based on items in your wishlist, check out these recommendations."
-      }
-    }
-  },
-  {
-    "content_type_api_id": "admin_page",
     "slug": "admin_employees",
     "title": "Employee Management",
     "content_data": {
@@ -1204,57 +1169,6 @@
   },
   {
     "content_type_api_id": "admin_page",
-    "slug": "account_orders",
-    "title": "Order History",
-    "content_data": {
-      "page_key": "account_orders",
-      "title": "Order History",
-      "description": "View and track your orders",
-      "buttons": {
-        "search": "Search orders...",
-        "all_orders": "All Orders",
-        "buy_again": "Buy Again",
-        "track_package": "Track Package",
-        "view_invoice": "View Invoice",
-        "cancel_order": "Cancel Order"
-      },
-      "table_headers": {
-        "order": "Order",
-        "date": "Date",
-        "status": "Status",
-        "total": "Total",
-        "items": "Items"
-      },
-      "status_labels": {
-        "pending": "Pending",
-        "processing": "Processing",
-        "shipped": "Shipped",
-        "delivered": "Delivered",
-        "cancelled": "Cancelled"
-      },
-      "empty_states": {
-        "no_orders": "No orders found",
-        "no_search_results": "No orders found matching your search"
-      },
-      "messages": {
-        "items_count": "{count} item(s)",
-        "tracking_number": "Tracking Number",
-        "shipping_address": "Shipping Address",
-        "order_summary": "Order Summary",
-        "subtotal": "Subtotal",
-        "shipping": "Shipping",
-        "tax": "Tax",
-        "total": "Total"
-      },
-      "sections": {
-        "order_details": "Order Details",
-        "items": "Items",
-        "shipping": "Shipping Information"
-      }
-    }
-  },
-  {
-    "content_type_api_id": "admin_page",
     "slug": "admin_dashboard",
     "title": "Admin Dashboard",
     "content_data": {
@@ -1455,39 +1369,6 @@
   },
   {
     "content_type_api_id": "admin_page",
-    "slug": "account_layout",
-    "title": "My Account",
-    "content_data": {
-      "page_key": "account_layout",
-      "title": "My Account",
-      "description": "Account navigation and layout",
-      "tabs": {
-        "dashboard": "Dashboard",
-        "orders": "Orders",
-        "addresses": "Addresses",
-        "wishlist": "Wishlist",
-        "profile": "Profile",
-        "security": "Security"
-      },
-      "messages": {
-        "welcome": "Welcome back, {name}",
-        "continue_shopping": "← Continue Shopping",
-        "need_help": "Need Help?",
-        "help_description": "We are at your disposal",
-        "contact_support": "Contact Support →"
-      },
-      "sections": {
-        "dashboard_desc": "Overview of your account",
-        "orders_desc": "View your order history",
-        "addresses_desc": "Manage shipping addresses",
-        "wishlist_desc": "Your saved items",
-        "profile_desc": "Edit your profile",
-        "security_desc": "Password & 2FA settings"
-      }
-    }
-  },
-  {
-    "content_type_api_id": "admin_page",
     "slug": "admin_analytics",
     "title": "Analytics & Reports",
     "content_data": {
@@ -1587,265 +1468,113 @@
   },
   {
     "content_type_api_id": "admin_page",
-    "slug": "account_profile",
-    "title": "Edit Profile",
+    "slug": "admin_reference_data",
+    "title": "Reference Data",
     "content_data": {
-      "page_key": "account_profile",
-      "title": "Edit Profile",
-      "description": "Update your personal information and preferences",
-      "buttons": {
-        "save": "Save Changes",
-        "saving": "Saving...",
-        "change_photo": "Change Photo",
-        "delete_account": "Delete Account"
+      "page_key": "admin_reference_data",
+      "title": "Custom Reference Data",
+      "description": "Define custom departments, roles, and statuses for your organization",
+      "loading": {
+        "title": "Loading Reference Data",
+        "message": "Please wait while we load your custom reference data"
       },
-      "form_labels": {
-        "full_name": "Full Name",
-        "email": "Email Address",
-        "phone": "Phone Number",
-        "date_of_birth": "Date of Birth",
-        "gender": "Gender"
-      },
-      "form_placeholders": {
-        "full_name": "Enter your full name",
-        "email": "Enter your email",
-        "phone": "Enter phone number"
-      },
-      "sections": {
-        "profile_picture": "Profile Picture",
-        "personal_info": "Personal Information",
-        "email_preferences": "Email Preferences"
-      },
-      "messages": {
-        "photo_hint": "JPG, PNG or GIF. Max size 2MB.",
-        "email_hint": "Email cannot be changed. Contact support for help.",
-        "success": "Profile updated successfully!",
-        "error": "Failed to update profile. Please try again."
-      },
-      "status_labels": {
-        "prefer_not_to_say": "Prefer not to say",
-        "female": "Female",
-        "male": "Male",
-        "non_binary": "Non-binary",
-        "other": "Other"
-      },
-      "tooltips": {
-        "order_updates": "Get notified about order status, shipping, and delivery updates.",
-        "newsletter": "Receive our weekly newsletter with beauty tips and new arrivals.",
-        "marketing": "Receive promotional offers, discounts, and exclusive deals."
-      },
-      "quick_actions": {
-        "order_updates": "Order Updates",
-        "newsletter": "Newsletter",
-        "marketing": "Marketing Emails"
-      }
-    }
-  },
-  {
-    "content_type_api_id": "admin_page",
-    "slug": "account_security",
-    "title": "Security Settings",
-    "content_data": {
-      "page_key": "account_security",
-      "title": "Security Settings",
-      "description": "Manage your password and account security",
-      "buttons": {
-        "change_password": "Change Password",
-        "update_password": "Update Password",
-        "updating": "Updating...",
-        "enable_2fa": "Enable 2FA",
-        "disable_2fa": "Disable 2FA",
-        "sign_out": "Sign out",
-        "sign_out_all": "Sign out all other devices",
-        "delete_account": "Delete Account"
-      },
-      "form_labels": {
-        "current_password": "Current Password",
-        "new_password": "New Password",
-        "confirm_password": "Confirm New Password"
-      },
-      "form_placeholders": {
-        "current_password": "Enter current password",
-        "new_password": "Enter new password",
-        "confirm_password": "Confirm new password"
-      },
-      "sections": {
-        "password": "Password",
-        "two_factor": "Two-Factor Authentication",
-        "active_sessions": "Active Sessions",
-        "danger_zone": "Danger Zone"
-      },
-      "messages": {
-        "password_last_changed": "Last changed {days} days ago",
-        "password_hint": "At least 8 characters",
-        "password_mismatch": "New passwords do not match.",
-        "password_too_short": "Password must be at least 8 characters.",
-        "password_success": "Password changed successfully!",
-        "password_error": "Failed to change password. Please try again.",
-        "2fa_enabled": "Your account is protected with 2FA",
-        "2fa_disabled": "Add an extra layer of security",
-        "2fa_recommended": "Recommended: Enable 2FA",
-        "2fa_recommended_desc": "Two-factor authentication adds an extra layer of security to your account by requiring a code from your phone in addition to your password.",
-        "sessions_desc": "Manage devices signed into your account",
-        "danger_desc": "Permanently delete your account and all associated data. This action cannot be undone.",
-        "confirm_sign_out": "Are you sure you want to sign out this device?",
-        "confirm_sign_out_all": "Sign out from all other devices?"
-      },
-      "status_labels": {
-        "current_device": "Current",
-        "active_now": "Active now"
-      }
-    }
-  },
-  {
-    "content_type_api_id": "admin_page",
-    "slug": "account_dashboard",
-    "title": "My Account",
-    "content_data": {
-      "page_key": "account_dashboard",
-      "title": "My Account",
-      "description": "Manage your account, orders, and preferences",
       "tabs": {
-        "dashboard": "Dashboard",
-        "orders": "Orders",
-        "addresses": "Addresses",
-        "wishlist": "Wishlist",
-        "settings": "Settings"
-      },
-      "stats": {
-        "total_orders": "Total Orders",
-        "saved_addresses": "Saved Addresses",
-        "wishlist_items": "Wishlist Items"
+        "department": "Departments",
+        "role": "Roles",
+        "status": "Statuses",
+        "departments": "Departments",
+        "roles": "Roles",
+        "statuses": "Statuses"
       },
       "buttons": {
-        "view_all": "View All",
-        "view_order": "View Order",
-        "track_order": "Track Order",
-        "manage": "Manage",
+        "refresh": "Refresh",
+        "add_custom": "Add Custom {type}",
+        "add_first": "Add First Custom {type}",
+        "create": "Create",
+        "update": "Update",
+        "cancel": "Cancel",
         "edit": "Edit",
-        "logout": "Log Out"
+        "delete": "Delete"
       },
-      "table_headers": {
-        "order_number": "Order #",
-        "date": "Date",
+      "labels": {
+        "department": "Department",
+        "departments": "Departments",
+        "role": "Role",
+        "roles": "Roles",
         "status": "Status",
-        "total": "Total",
-        "actions": "Actions"
-      },
-      "messages": {
-        "welcome": "Welcome back",
-        "no_orders": "No orders yet",
-        "no_orders_description": "When you place an order, it will appear here.",
-        "start_shopping": "Start Shopping"
-      },
-      "status_labels": {
-        "processing": "Processing",
-        "shipped": "Shipped",
-        "delivered": "Delivered",
-        "cancelled": "Cancelled",
-        "pending": "Pending"
-      },
-      "empty_states": {
-        "orders_title": "No orders yet",
-        "orders_description": "When you place an order, it will appear here.",
-        "wishlist_title": "Your wishlist is empty",
-        "wishlist_description": "Save items you love by clicking the heart icon.",
-        "addresses_title": "No saved addresses",
-        "addresses_description": "Add an address for faster checkout."
-      },
-      "modal_titles": {
-        "logout_confirm": "Sign out?",
-        "delete_address": "Delete Address?",
-        "cancel_order": "Cancel Order?"
-      },
-      "tooltips": {
-        "orders_info": "View and track your order history",
-        "addresses_info": "Manage your delivery addresses",
-        "wishlist_info": "Items you have saved for later"
-      },
-      "search": {
-        "placeholder": "Search orders...",
-        "no_results": "No orders found"
-      },
-      "pagination": {
-        "showing": "Showing",
-        "of": "of",
-        "items": "items",
-        "per_page": "per page"
-      },
-      "sections": {
-        "recent_orders": "Recent Orders",
-        "quick_actions": "Quick Actions",
-        "account_settings": "Account Settings",
-        "need_help": "Need Help?"
-      },
-      "quick_actions": {
-        "settings_title": "Account Settings",
-        "settings_description": "Update your profile, password, and preferences",
-        "help_title": "Need Help?",
-        "help_description": "Contact our support team or browse FAQs"
-      }
-    }
-  },
-  {
-    "content_type_api_id": "admin_page",
-    "slug": "account_addresses",
-    "title": "Saved Addresses",
-    "content_data": {
-      "page_key": "account_addresses",
-      "title": "Saved Addresses",
-      "description": "Manage your shipping addresses",
-      "buttons": {
-        "add": "Add Address",
-        "add_new": "Add New Address",
-        "edit": "Edit",
-        "delete": "Delete",
-        "set_default": "Set as Default",
-        "save": "Save Address",
-        "update": "Update Address",
-        "cancel": "Cancel"
+        "statuses": "Statuses",
+        "type": "Type",
+        "code": "Code",
+        "label": "Label",
+        "description": "Description",
+        "icon": "Icon",
+        "color": "Color",
+        "sort_order": "Sort Order",
+        "order": "Order",
+        "active": "Active",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "metadata": "Metadata (JSON)",
+        "system": "System",
+        "inactive": "Inactive"
       },
       "form_labels": {
-        "label": "Address Label",
-        "type": "Address Type",
-        "first_name": "First Name",
-        "last_name": "Last Name",
-        "street": "Street Address",
-        "apartment": "Apartment, Suite, etc.",
-        "city": "City",
-        "state": "State/Province",
-        "zip": "ZIP/Postal Code",
-        "country": "Country",
-        "phone": "Phone Number",
-        "set_default": "Set as default shipping address"
+        "type": "Type",
+        "code": "Code",
+        "label": "Label",
+        "description": "Description",
+        "icon": "Icon",
+        "color": "Color",
+        "sort_order": "Sort Order",
+        "active": "Active",
+        "metadata": "Metadata (JSON)"
       },
       "form_placeholders": {
-        "label": "e.g., Home, Office",
-        "first_name": "Enter first name",
-        "last_name": "Enter last name",
-        "street": "Enter street address",
-        "apartment": "Apt, Suite, Unit (optional)",
-        "city": "Enter city",
-        "zip": "Enter postal code",
-        "phone": "Enter phone number"
+        "code": "e.g., CUSTOM_ROLE",
+        "label": "e.g., Custom Role",
+        "description": "Brief description of this entry",
+        "icon": "e.g., user-plus",
+        "color": "#6B7280",
+        "metadata": "{\"managerLevel\": false, \"permissions\": []}"
       },
-      "status_labels": {
-        "default": "Default",
-        "home": "Home",
-        "work": "Work",
-        "other": "Other"
-      },
-      "empty_states": {
-        "no_addresses": "You haven't saved any addresses yet.",
-        "add_first": "Add Your First Address"
+      "form_help": {
+        "code": "Uppercase identifier used in the system (cannot be changed after creation)",
+        "metadata": "Optional JSON object for role-specific settings like permissions"
       },
       "messages": {
-        "confirm_delete": "Are you sure you want to delete this address?",
-        "saved": "Address saved successfully!",
-        "deleted": "Address deleted successfully!",
-        "updated": "Address updated successfully!",
-        "error": "Failed to save address. Please try again."
+        "loading": "Loading reference data...",
+        "create_title": "Create Custom {type}",
+        "edit_title": "Edit Custom {type}",
+        "dialog_description": "Add a custom {type} specific to your organization",
+        "content_type_missing": "The \"organization_reference_data\" content type has not been created yet. Please run the CMS seed script or create it manually.",
+        "delete_title": "Delete Reference Data",
+        "delete_confirm": "Are you sure you want to delete \"{label}\"? This action cannot be undone.",
+        "delete_confirm_title": "Delete {label}?",
+        "delete_confirm_description": "This will permanently delete this {type}. This action cannot be undone.",
+        "delete_system_warning": "This is a system {type} and cannot be deleted.",
+        "create_success": "{type} created successfully",
+        "update_success": "{type} updated successfully",
+        "delete_success": "{type} deleted successfully",
+        "error_loading": "Failed to load reference data. The content type may not exist yet.",
+        "error_creating": "Failed to create {type}",
+        "error_updating": "Failed to update {type}",
+        "error_deleting": "Failed to delete {type}"
+      },
+      "empty_states": {
+        "no_custom": "No custom {type}",
+        "no_custom_title": "No custom {type}",
+        "add_custom_hint": "Add custom {type} specific to your organization",
+        "no_custom_description": "Add custom {type} specific to your organization",
+        "add_first": "Add First Custom {type}"
+      },
+      "select_options": {
+        "department": "Department",
+        "role": "Role",
+        "status": "Status",
+        "enabled": "Enabled",
+        "disabled": "Disabled"
       }
-    }
+    },
+    "status": "published"
   }
 ]

@@ -112,7 +112,7 @@ def test_unauthorized_access(client):
     """Test accessing protected endpoint without auth fails"""
     response = client.get("/api/v1/auth/me")
 
-    assert response.status_code == 403
+    assert response.status_code == 401
 
 
 def test_logout(authenticated_client):
@@ -222,7 +222,7 @@ def test_delete_account_unauthenticated(client):
         },
     )
 
-    assert response.status_code == 403
+    assert response.status_code == 401
 
 
 def test_delete_organization_owner_deletes_org(client, db_session):
@@ -563,7 +563,7 @@ def test_update_profile_unauthenticated(client):
         json={"first_name": "Hacker"},
     )
 
-    assert response.status_code == 403
+    assert response.status_code == 401
 
 
 # ==================== Password Change Tests ====================
@@ -773,7 +773,7 @@ def test_upload_avatar_unauthenticated(client):
         files={"file": ("test.png", img_bytes, "image/png")},
     )
 
-    assert response.status_code == 403
+    assert response.status_code == 401
 
 
 def test_delete_avatar_success(authenticated_client):
@@ -823,4 +823,4 @@ def test_delete_avatar_no_avatar(authenticated_client):
 def test_delete_avatar_unauthenticated(client):
     """Test avatar deletion fails without authentication"""
     response = client.delete("/api/v1/auth/avatar")
-    assert response.status_code == 403
+    assert response.status_code == 401

@@ -2,7 +2,7 @@
   {
     "content_type_api_id": "page",
     "slug": "home",
-    "title": "Entry page",
+    "title": "Home Page",
     "content_data": {
       "page_key": "home",
       "template": "home",
@@ -49,14 +49,45 @@
           "heading": "Join Our Newsletter",
           "subheading": "Get 10% off your first order!"
         }
-      ]
+      ],
+      "labels": {
+        "categories": {
+          "title": "Shop by Category",
+          "view_all": "View All Categories",
+          "explore_all": "Explore Categories"
+        },
+        "products": {
+          "featured": "Featured Products",
+          "featured_subtitle": "Hand-picked favorites from our collection",
+          "bestsellers": "Bestsellers",
+          "new_arrivals": "New Arrivals",
+          "on_sale": "On Sale",
+          "view_all": "View All",
+          "explore_all": "Explore All Products",
+          "add_to_cart": "Add to Cart",
+          "quick_view": "Quick View"
+        },
+        "brands": {
+          "title": "Top Brands",
+          "view_all": "View All Brands",
+          "explore_all": "Explore Brands"
+        },
+        "newsletter": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Get 10% off your first order!",
+          "placeholder": "Enter your email",
+          "button": "Subscribe",
+          "success": "Thank you for subscribing!",
+          "error": "Please enter a valid email"
+        }
+      }
     },
     "status": "published"
   },
   {
     "content_type_api_id": "page",
     "slug": "shop",
-    "title": "Entry page",
+    "title": "Shop All Products",
     "content_data": {
       "page_key": "shop",
       "template": "listing",
@@ -72,7 +103,178 @@
           "show_sort": true,
           "per_page": 12
         }
-      ]
+      ],
+      "labels": {
+        "title": "Shop All Products",
+        "subtitle": "Browse our collection",
+        "filters": {
+          "title": "Filters",
+          "clear_all": "Clear All",
+          "apply": "Apply Filters",
+          "show_filters": "Show Filters",
+          "hide_filters": "Hide Filters",
+          "price_range": "Price Range",
+          "category": "Category",
+          "brand": "Brand",
+          "color": "Color",
+          "size": "Size",
+          "availability": "Availability",
+          "in_stock": "In Stock",
+          "out_of_stock": "Out of Stock",
+          "on_sale": "On Sale",
+          "new_arrivals": "New Arrivals"
+        },
+        "sort": {
+          "sort_by": "Sort by",
+          "featured": "Featured",
+          "newest": "Newest",
+          "bestselling": "Bestselling",
+          "price_low_high": "Price: Low to High",
+          "price_high_low": "Price: High to Low",
+          "name_a_z": "Name: A to Z",
+          "name_z_a": "Name: Z to A",
+          "rating": "Highest Rated"
+        },
+        "products": {
+          "no_products": "No products found",
+          "no_products_message": "Try adjusting your filters or search terms.",
+          "loading": "Loading products...",
+          "view_all": "View All",
+          "add_to_cart": "Add to Cart",
+          "quick_view": "Quick View",
+          "add_to_wishlist": "Add to Wishlist",
+          "out_of_stock": "Out of Stock",
+          "sale": "Sale",
+          "new": "New",
+          "bestseller": "Bestseller"
+        },
+        "search": {
+          "placeholder": "Search products...",
+          "no_results": "No results found",
+          "results_for": "Results for",
+          "suggestions": "Suggestions"
+        }
+      }
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "product-detail",
+    "title": "Product Detail Template",
+    "content_data": {
+      "page_key": "product-detail",
+      "template": "product-detail",
+      "sections": [
+        {
+          "type": "product_gallery"
+        },
+        {
+          "type": "product_info"
+        },
+        {
+          "type": "product_tabs"
+        },
+        {
+          "type": "reviews_section"
+        },
+        {
+          "type": "related_products",
+          "heading": "Related Products",
+          "count": 4
+        }
+      ],
+      "labels": {
+        "product": {
+          "add_to_cart": "Add to Cart",
+          "buy_now": "Buy Now",
+          "out_of_stock": "Out of Stock",
+          "notify_me": "Notify Me When Available",
+          "in_stock": "In Stock",
+          "low_stock": "Only {count} left!",
+          "sku": "SKU:",
+          "category": "Category:",
+          "brand": "Brand:",
+          "tags": "Tags:",
+          "share": "Share",
+          "compare": "Compare",
+          "add_to_wishlist": "Add to Wishlist",
+          "added_to_wishlist": "Added to Wishlist",
+          "remove_from_wishlist": "Remove from Wishlist",
+          "sale": "Sale",
+          "new": "New",
+          "bestseller": "Bestseller",
+          "discount_off": "OFF",
+          "save": "Save",
+          "free_shipping": "Free Shipping",
+          "select_options": "Select Options"
+        },
+        "options": {
+          "select": "Select",
+          "selected": "Selected:",
+          "length": "Length",
+          "color": "Color",
+          "size": "Size",
+          "quantity": "Quantity",
+          "inches": "inches",
+          "cm": "cm"
+        },
+        "gallery": {
+          "no_image": "No Image Available",
+          "zoom": "Click to zoom",
+          "view_full": "View full size",
+          "previous": "Previous image",
+          "next": "Next image"
+        },
+        "tabs": {
+          "description": "Description",
+          "specifications": "Specifications",
+          "reviews": "Reviews",
+          "shipping": "Shipping & Returns",
+          "questions": "Questions"
+        },
+        "specifications": {
+          "title": "Specifications",
+          "material": "Material",
+          "weight": "Weight",
+          "dimensions": "Dimensions",
+          "origin": "Country of Origin"
+        },
+        "reviews": {
+          "title": "Customer Reviews",
+          "rating_breakdown": "Rating Breakdown",
+          "write_review": "Write a Review",
+          "verified_purchase": "Verified Purchase",
+          "helpful": "Helpful",
+          "not_helpful": "Not Helpful",
+          "report": "Report",
+          "sort_by": "Sort by",
+          "most_recent": "Most Recent",
+          "highest_rated": "Highest Rated",
+          "lowest_rated": "Lowest Rated",
+          "most_helpful": "Most Helpful",
+          "out_of": "out of",
+          "based_on": "based on",
+          "customer_reviews": "customer reviews",
+          "star": "star",
+          "stars": "stars",
+          "no_reviews": "No reviews yet. Be the first to review this product!",
+          "load_more": "Load More Reviews",
+          "showing": "Showing",
+          "of": "of",
+          "reviews_label": "reviews",
+          "review_submitted": "Thank you! Your review has been submitted.",
+          "rating_required": "Please select a rating",
+          "review_required": "Please write your review"
+        },
+        "related": {
+          "title": "Related Products",
+          "you_may_also_like": "You May Also Like",
+          "customers_also_bought": "Customers Also Bought",
+          "recently_viewed": "Recently Viewed",
+          "view_product": "View Product"
+        }
+      }
     },
     "status": "published"
   },
@@ -282,7 +484,7 @@
   {
     "content_type_api_id": "page",
     "slug": "cart",
-    "title": "Entry page",
+    "title": "Shopping Cart",
     "content_data": {
       "page_key": "cart",
       "template": "cart",
@@ -299,20 +501,634 @@
           "count": 4,
           "filter": "featured"
         }
-      ]
+      ],
+      "labels": {
+        "title": "Shopping Cart",
+        "empty_cart": "Your cart is empty",
+        "empty_cart_message": "Looks like you haven't added any items yet.",
+        "start_shopping": "Start Shopping",
+        "continue_shopping": "Continue Shopping",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "shipping_calculated": "Calculated at checkout",
+        "tax": "Tax",
+        "total": "Total",
+        "checkout": "Proceed to Checkout",
+        "secure_checkout": "Secure Checkout",
+        "item": "Item",
+        "items": "Items",
+        "quantity": "Quantity",
+        "price": "Price",
+        "remove": "Remove",
+        "update": "Update",
+        "add_more": "Add More",
+        "move_to_wishlist": "Move to Wishlist",
+        "save_for_later": "Save for Later",
+        "apply_coupon": "Apply Coupon",
+        "coupon_placeholder": "Enter coupon code",
+        "coupon_applied": "Coupon applied!",
+        "coupon_invalid": "Invalid coupon code",
+        "free_shipping_message": "Free shipping on orders over {threshold}!",
+        "you_save": "You save",
+        "order_summary": "Order Summary"
+      }
     },
     "status": "published"
   },
   {
     "content_type_api_id": "page",
     "slug": "checkout",
-    "title": "Entry page",
+    "title": "Checkout",
     "content_data": {
       "page_key": "checkout",
       "template": "checkout",
       "sections": [
         {
           "type": "checkout_form"
+        }
+      ],
+      "labels": {
+        "title": "Checkout",
+        "express_checkout": "Express Checkout",
+        "or_continue_below": "Or continue below",
+        "contact_info": "Contact Information",
+        "email": "Email",
+        "email_placeholder": "your@email.com",
+        "phone": "Phone",
+        "phone_placeholder": "(555) 123-4567",
+        "shipping_address": "Shipping Address",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "company": "Company (optional)",
+        "address": "Address",
+        "address_line_2": "Apartment, suite, etc. (optional)",
+        "city": "City",
+        "state": "State/Province",
+        "zip_code": "ZIP/Postal Code",
+        "country": "Country",
+        "save_address": "Save this address for next time",
+        "billing_address": "Billing Address",
+        "same_as_shipping": "Same as shipping address",
+        "shipping_method": "Shipping Method",
+        "standard_shipping": "Standard Shipping",
+        "express_shipping": "Express Shipping",
+        "overnight_shipping": "Overnight Shipping",
+        "free": "Free",
+        "business_days": "business days",
+        "payment_method": "Payment Method",
+        "card_number": "Card Number",
+        "expiry_date": "Expiry Date",
+        "cvv": "CVV",
+        "name_on_card": "Name on Card",
+        "order_summary": "Order Summary",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "tax": "Tax",
+        "discount": "Discount",
+        "total": "Total",
+        "place_order": "Place Order",
+        "processing": "Processing...",
+        "secure_payment": "Your payment is secure and encrypted",
+        "order_notes": "Order Notes (optional)",
+        "order_notes_placeholder": "Special instructions for your order",
+        "terms_agreement": "I agree to the Terms of Service and Privacy Policy",
+        "marketing_consent": "Send me news and exclusive offers",
+        "gift_options": "Gift Options",
+        "is_gift": "This is a gift",
+        "gift_message": "Gift Message",
+        "gift_message_placeholder": "Enter your gift message"
+      }
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "shipping",
+    "title": "Shipping Information",
+    "content_data": {
+      "page_key": "shipping",
+      "template": "info",
+      "meta_title": "Shipping Information | Free Shipping Over $50",
+      "meta_description": "Learn about our shipping options, delivery times, and free shipping thresholds.",
+      "heading": "Shipping Information",
+      "subheading": "Fast, reliable delivery for all your hair care needs",
+      "content": "<h2>Free Shipping</h2><p>Enjoy FREE standard shipping on all orders over $50! No promo code needed.</p><h2>Shipping Options</h2><p>We offer multiple shipping options to meet your needs...</p>",
+      "labels": {
+        "title": "Shipping Information",
+        "free_shipping_threshold": "Free Shipping on Orders Over",
+        "shipping_methods": "Shipping Methods",
+        "standard_shipping": "Standard Shipping",
+        "express_shipping": "Express Shipping",
+        "overnight_shipping": "Overnight Shipping",
+        "delivery_time": "Delivery Time",
+        "business_days": "business days",
+        "shipping_cost": "Shipping Cost",
+        "free": "FREE",
+        "processing_time": "Processing Time",
+        "processing_note": "Orders placed before 2pm EST ship same day",
+        "track_order": "Track Your Order",
+        "international_shipping": "International Shipping",
+        "po_boxes": "P.O. Box Delivery",
+        "shipping_restrictions": "Shipping Restrictions",
+        "questions": "Questions about shipping?"
+      },
+      "sections": [
+        {
+          "title": "Domestic Shipping Rates",
+          "type": "table"
+        },
+        {
+          "title": "International Shipping",
+          "type": "content"
+        },
+        {
+          "title": "Delivery FAQs",
+          "type": "faq"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "returns",
+    "title": "Returns & Refunds",
+    "content_data": {
+      "page_key": "returns",
+      "template": "info",
+      "meta_title": "Returns & Refunds | 30-Day Return Policy",
+      "meta_description": "Easy returns within 30 days. Learn about our hassle-free return process and refund policy.",
+      "heading": "Returns & Refunds",
+      "subheading": "Hassle-free returns within 30 days",
+      "content": "<h2>Return Policy</h2><p>We want you to love your purchase! If you're not completely satisfied, return any unused items within 30 days for a full refund.</p>",
+      "labels": {
+        "title": "Returns & Refunds",
+        "return_policy": "Return Policy",
+        "return_window": "Return Window",
+        "days": "days",
+        "return_conditions": "Return Conditions",
+        "how_to_return": "How to Return",
+        "start_return": "Start a Return",
+        "return_steps": "Return Steps",
+        "step_1": "Log into your account",
+        "step_2": "Find your order",
+        "step_3": "Select items to return",
+        "step_4": "Print shipping label",
+        "step_5": "Ship your return",
+        "refund_timeline": "Refund Timeline",
+        "refund_method": "Refund Method",
+        "original_payment": "Original Payment Method",
+        "store_credit": "Store Credit",
+        "exchange": "Exchange",
+        "non_returnable": "Non-Returnable Items",
+        "damaged_items": "Damaged Items",
+        "wrong_item": "Wrong Item Received",
+        "questions": "Questions about returns?"
+      },
+      "sections": [
+        {
+          "title": "Return Process",
+          "type": "steps"
+        },
+        {
+          "title": "Refund Information",
+          "type": "content"
+        },
+        {
+          "title": "Return FAQs",
+          "type": "faq"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "size-guide",
+    "title": "Size Guide",
+    "content_data": {
+      "page_key": "size-guide",
+      "template": "guide",
+      "meta_title": "Hair Extension Size Guide | Length & Weight Chart",
+      "meta_description": "Find your perfect hair extension length and weight with our comprehensive size guide.",
+      "heading": "Hair Extension Size Guide",
+      "subheading": "Find your perfect length and style",
+      "content": "<h2>Choosing the Right Length</h2><p>Hair extension length is measured from the top of the weft to the bottom of the hair. Consider your natural hair length and desired style.</p>",
+      "labels": {
+        "title": "Size Guide",
+        "length_guide": "Length Guide",
+        "weight_guide": "Weight Guide",
+        "bundle_guide": "Bundle Guide",
+        "inches": "inches",
+        "grams": "grams",
+        "recommended_bundles": "Recommended Bundles",
+        "length": "Length",
+        "bundles_needed": "Bundles Needed",
+        "full_head": "Full Head",
+        "half_head": "Half Head",
+        "short_style": "Short Style (10-14\")",
+        "medium_style": "Medium Style (16-20\")",
+        "long_style": "Long Style (22-26\")",
+        "extra_long_style": "Extra Long (28-32\")",
+        "texture_considerations": "Texture Considerations",
+        "straight_hair": "Straight Hair",
+        "wavy_hair": "Wavy Hair",
+        "curly_hair": "Curly Hair",
+        "tips": "Helpful Tips",
+        "how_to_measure": "How to Measure",
+        "need_help": "Need help choosing?"
+      },
+      "sections": [
+        {
+          "title": "Length Chart",
+          "type": "visual_guide"
+        },
+        {
+          "title": "Bundle Recommendations",
+          "type": "table"
+        },
+        {
+          "title": "Measuring Tips",
+          "type": "content"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "hair-care",
+    "title": "Hair Care Guide",
+    "content_data": {
+      "page_key": "hair-care",
+      "template": "guide",
+      "meta_title": "Hair Extension Care Guide | Maintenance Tips",
+      "meta_description": "Learn how to care for your hair extensions to keep them looking beautiful and lasting longer.",
+      "heading": "Hair Extension Care Guide",
+      "subheading": "Keep your extensions looking beautiful",
+      "content": "<h2>Daily Care</h2><p>Proper care is essential to maintain the quality and longevity of your hair extensions.</p>",
+      "labels": {
+        "title": "Hair Care Guide",
+        "daily_care": "Daily Care",
+        "washing": "Washing",
+        "conditioning": "Conditioning",
+        "drying": "Drying",
+        "styling": "Styling",
+        "storage": "Storage",
+        "dos": "Do's",
+        "donts": "Don'ts",
+        "products_to_use": "Products to Use",
+        "products_to_avoid": "Products to Avoid",
+        "heat_styling": "Heat Styling Tips",
+        "sleeping": "Sleeping with Extensions",
+        "swimming": "Swimming & Exercise",
+        "maintenance_schedule": "Maintenance Schedule",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "lifespan": "Extension Lifespan",
+        "troubleshooting": "Troubleshooting",
+        "tangling": "Preventing Tangles",
+        "shedding": "Minimizing Shedding",
+        "dryness": "Combating Dryness"
+      },
+      "sections": [
+        {
+          "title": "Washing Instructions",
+          "type": "steps"
+        },
+        {
+          "title": "Styling Tips",
+          "type": "content"
+        },
+        {
+          "title": "Care FAQs",
+          "type": "faq"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "color-guide",
+    "title": "Color Matching Guide",
+    "content_data": {
+      "page_key": "color-guide",
+      "template": "guide",
+      "meta_title": "Hair Color Matching Guide | Find Your Perfect Match",
+      "meta_description": "Find your perfect hair extension color match with our comprehensive color guide.",
+      "heading": "Hair Color Matching Guide",
+      "subheading": "Find your perfect shade",
+      "content": "<h2>Matching Your Hair Color</h2><p>Getting the right color match is essential for a natural, seamless blend with your own hair.</p>",
+      "labels": {
+        "title": "Color Guide",
+        "color_chart": "Color Chart",
+        "natural_colors": "Natural Colors",
+        "blonde_shades": "Blonde Shades",
+        "brown_shades": "Brown Shades",
+        "black_shades": "Black Shades",
+        "red_shades": "Red Shades",
+        "ombre": "Ombré & Balayage",
+        "highlights": "Highlights",
+        "color_tips": "Color Matching Tips",
+        "lighting_matters": "Lighting Matters",
+        "match_ends": "Match Your Ends",
+        "blend_colors": "Blending Multiple Colors",
+        "custom_coloring": "Custom Coloring",
+        "can_i_dye": "Can I Dye Extensions?",
+        "color_samples": "Color Samples",
+        "request_sample": "Request a Color Sample",
+        "not_sure": "Not Sure? We Can Help!"
+      },
+      "sections": [
+        {
+          "title": "Color Chart",
+          "type": "visual_guide"
+        },
+        {
+          "title": "Color Matching Tips",
+          "type": "content"
+        },
+        {
+          "title": "Custom Coloring",
+          "type": "content"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "help",
+    "title": "Help Center",
+    "content_data": {
+      "page_key": "help",
+      "template": "help-center",
+      "meta_title": "Help Center | Customer Support",
+      "meta_description": "Find answers to common questions or contact our customer support team.",
+      "heading": "Help Center",
+      "subheading": "How can we help you today?",
+      "content": "",
+      "labels": {
+        "title": "Help Center",
+        "search_placeholder": "Search for help...",
+        "popular_topics": "Popular Topics",
+        "browse_topics": "Browse Topics",
+        "orders": "Orders & Shipping",
+        "returns": "Returns & Refunds",
+        "products": "Products & Sizing",
+        "account": "Account & Login",
+        "payments": "Payments & Billing",
+        "contact_us": "Contact Us",
+        "live_chat": "Live Chat",
+        "email_us": "Email Us",
+        "call_us": "Call Us",
+        "hours": "Hours of Operation",
+        "response_time": "Response Time",
+        "still_need_help": "Still Need Help?",
+        "submit_request": "Submit a Request",
+        "track_request": "Track Your Request"
+      },
+      "sections": [
+        {
+          "title": "Quick Links",
+          "type": "links"
+        },
+        {
+          "title": "Popular FAQs",
+          "type": "faq"
+        },
+        {
+          "title": "Contact Options",
+          "type": "contact"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "wholesale",
+    "title": "Wholesale",
+    "content_data": {
+      "page_key": "wholesale",
+      "template": "info",
+      "meta_title": "Wholesale | B2B Hair Products",
+      "meta_description": "Partner with us for wholesale hair products. Competitive pricing for salons and retailers.",
+      "heading": "Wholesale Program",
+      "subheading": "Partner with us for your business",
+      "content": "<h2>Become a Wholesale Partner</h2><p>We offer competitive wholesale pricing for salons, beauty supply stores, and online retailers.</p>",
+      "labels": {
+        "title": "Wholesale",
+        "become_partner": "Become a Partner",
+        "wholesale_benefits": "Wholesale Benefits",
+        "competitive_pricing": "Competitive Pricing",
+        "bulk_discounts": "Bulk Discounts",
+        "dedicated_support": "Dedicated Support",
+        "fast_shipping": "Fast Shipping",
+        "requirements": "Requirements",
+        "minimum_order": "Minimum Order",
+        "business_license": "Business License Required",
+        "apply_now": "Apply Now",
+        "application_form": "Application Form",
+        "business_name": "Business Name",
+        "business_type": "Business Type",
+        "tax_id": "Tax ID / EIN",
+        "annual_volume": "Estimated Annual Volume",
+        "already_partner": "Already a Partner?",
+        "partner_login": "Partner Login",
+        "contact_sales": "Contact Sales Team"
+      },
+      "sections": [
+        {
+          "title": "Benefits",
+          "type": "benefits"
+        },
+        {
+          "title": "How to Apply",
+          "type": "steps"
+        },
+        {
+          "title": "Application Form",
+          "type": "form"
+        }
+      ]
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "cookies",
+    "title": "Cookie Policy",
+    "content_data": {
+      "page_key": "cookies",
+      "template": "legal",
+      "meta_title": "Cookie Policy",
+      "meta_description": "Learn about how we use cookies and similar technologies on our website.",
+      "heading": "Cookie Policy",
+      "subheading": "Last updated: December 2024",
+      "content": "<h2>What Are Cookies</h2><p>Cookies are small text files that are placed on your device when you visit our website...</p>",
+      "labels": {
+        "title": "Cookie Policy",
+        "what_are_cookies": "What Are Cookies",
+        "how_we_use": "How We Use Cookies",
+        "types_of_cookies": "Types of Cookies",
+        "essential": "Essential Cookies",
+        "performance": "Performance Cookies",
+        "functionality": "Functionality Cookies",
+        "targeting": "Targeting Cookies",
+        "manage_cookies": "Managing Cookies",
+        "browser_settings": "Browser Settings",
+        "opt_out": "Opt Out",
+        "cookie_preferences": "Cookie Preferences",
+        "third_party": "Third-Party Cookies",
+        "updates": "Policy Updates",
+        "contact": "Contact Us"
+      }
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "data-rights",
+    "title": "Your Privacy Rights",
+    "content_data": {
+      "page_key": "data-rights",
+      "template": "legal",
+      "meta_title": "Your Privacy Rights | CCPA & GDPR",
+      "meta_description": "Learn about your privacy rights under CCPA, GDPR, and other privacy regulations.",
+      "heading": "Your Privacy Rights",
+      "subheading": "Understanding your data protection rights",
+      "content": "<h2>Your Rights</h2><p>Depending on where you live, you may have certain rights regarding your personal information...</p>",
+      "labels": {
+        "title": "Your Privacy Rights",
+        "your_rights": "Your Rights",
+        "right_to_know": "Right to Know",
+        "right_to_delete": "Right to Delete",
+        "right_to_correct": "Right to Correct",
+        "right_to_portability": "Right to Data Portability",
+        "right_to_opt_out": "Right to Opt Out",
+        "right_to_limit": "Right to Limit Use",
+        "how_to_exercise": "How to Exercise Your Rights",
+        "submit_request": "Submit a Request",
+        "verify_identity": "Identity Verification",
+        "response_time": "Response Time",
+        "california_residents": "California Residents (CCPA)",
+        "european_residents": "European Residents (GDPR)",
+        "authorized_agent": "Authorized Agent",
+        "non_discrimination": "Non-Discrimination",
+        "contact_us": "Contact Us"
+      }
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "accessibility",
+    "title": "Accessibility Statement",
+    "content_data": {
+      "page_key": "accessibility",
+      "template": "legal",
+      "meta_title": "Accessibility Statement",
+      "meta_description": "Our commitment to making our website accessible to all users.",
+      "heading": "Accessibility Statement",
+      "subheading": "Our commitment to accessibility",
+      "content": "<h2>Our Commitment</h2><p>We are committed to ensuring digital accessibility for people with disabilities...</p>",
+      "labels": {
+        "title": "Accessibility Statement",
+        "our_commitment": "Our Commitment",
+        "standards": "Accessibility Standards",
+        "wcag": "WCAG 2.1 AA",
+        "features": "Accessibility Features",
+        "keyboard_navigation": "Keyboard Navigation",
+        "screen_readers": "Screen Reader Support",
+        "text_alternatives": "Text Alternatives",
+        "color_contrast": "Color Contrast",
+        "resizable_text": "Resizable Text",
+        "ongoing_efforts": "Ongoing Efforts",
+        "known_issues": "Known Issues",
+        "feedback": "Feedback",
+        "report_issue": "Report an Issue",
+        "contact": "Contact Us",
+        "third_party": "Third-Party Content",
+        "last_updated": "Last Updated"
+      }
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "do-not-sell",
+    "title": "Do Not Sell My Information",
+    "content_data": {
+      "page_key": "do-not-sell",
+      "template": "legal",
+      "meta_title": "Do Not Sell My Personal Information",
+      "meta_description": "Exercise your right to opt out of the sale of your personal information.",
+      "heading": "Do Not Sell My Personal Information",
+      "subheading": "California Consumer Privacy Act (CCPA)",
+      "content": "<h2>Your Right to Opt Out</h2><p>Under the California Consumer Privacy Act (CCPA), you have the right to opt out of the sale of your personal information...</p>",
+      "labels": {
+        "title": "Do Not Sell My Information",
+        "your_right": "Your Right to Opt Out",
+        "what_this_means": "What This Means",
+        "how_to_opt_out": "How to Opt Out",
+        "opt_out_form": "Opt Out Form",
+        "submit_request": "Submit Request",
+        "email": "Email Address",
+        "confirm_opt_out": "Confirm Opt Out",
+        "already_opted_out": "Already Opted Out",
+        "check_status": "Check Status",
+        "what_happens_next": "What Happens Next",
+        "processing_time": "Processing Time",
+        "questions": "Questions?"
+      }
+    },
+    "status": "published"
+  },
+  {
+    "content_type_api_id": "page",
+    "slug": "affiliates",
+    "title": "Affiliate Program",
+    "content_data": {
+      "page_key": "affiliates",
+      "template": "info",
+      "meta_title": "Affiliate Program | Earn Commission",
+      "meta_description": "Join our affiliate program and earn commission on every sale you refer.",
+      "heading": "Affiliate Program",
+      "subheading": "Earn money sharing products you love",
+      "content": "<h2>Become an Affiliate</h2><p>Love our products? Earn money by sharing them with your audience!</p>",
+      "labels": {
+        "title": "Affiliate Program",
+        "become_affiliate": "Become an Affiliate",
+        "how_it_works": "How It Works",
+        "earn_commission": "Earn Commission",
+        "commission_rate": "Commission Rate",
+        "cookie_duration": "Cookie Duration",
+        "payment_schedule": "Payment Schedule",
+        "benefits": "Benefits",
+        "exclusive_offers": "Exclusive Offers",
+        "marketing_materials": "Marketing Materials",
+        "dedicated_support": "Dedicated Support",
+        "real_time_tracking": "Real-Time Tracking",
+        "apply_now": "Apply Now",
+        "requirements": "Requirements",
+        "already_affiliate": "Already an Affiliate?",
+        "affiliate_login": "Affiliate Login",
+        "faq": "Affiliate FAQs"
+      },
+      "sections": [
+        {
+          "title": "Program Benefits",
+          "type": "benefits"
+        },
+        {
+          "title": "How to Join",
+          "type": "steps"
+        },
+        {
+          "title": "FAQs",
+          "type": "faq"
         }
       ]
     },

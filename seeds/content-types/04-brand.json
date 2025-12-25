@@ -1,7 +1,7 @@
 {
   "api_id": "brand",
   "name": "Brand",
-  "description": "Product brands with metadata for filtering",
+  "description": "Product brands/vendors for the catalog",
   "fields_schema": [
     {
       "name": "name",
@@ -11,7 +11,7 @@
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Brand name - NOT translated (proper noun)"
+      "help_text": "Brand display name"
     },
     {
       "name": "description",
@@ -21,37 +21,127 @@
       "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Brand description with formatting - IS translated"
+      "help_text": "Brand description"
     },
     {
-      "name": "logo_id",
-      "type": "media",
+      "name": "short_description",
+      "type": "text",
       "required": false,
       "unique": false,
-      "localized": false,
+      "localized": true,
       "default": null,
       "validation": null,
-      "help_text": "Brand logo"
+      "help_text": "Brief brand summary (max 200 chars)"
     },
     {
-      "name": "banner_image_id",
-      "type": "media",
-      "required": false,
-      "unique": false,
-      "localized": false,
-      "default": null,
-      "validation": null,
-      "help_text": "Brand page banner"
-    },
-    {
-      "name": "website_url",
+      "name": "logo_url",
       "type": "text",
       "required": false,
       "unique": false,
       "localized": false,
       "default": null,
       "validation": null,
-      "help_text": "Website URL - NOT translated"
+      "help_text": "Brand logo image URL"
+    },
+    {
+      "name": "website",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand website URL"
+    },
+    {
+      "name": "country",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Country of origin"
+    },
+    {
+      "name": "location",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "City/region location"
+    },
+    {
+      "name": "type",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Brand type (Manufacturer, Wholesaler, Factory)"
+    },
+    {
+      "name": "contact_email",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Contact email"
+    },
+    {
+      "name": "phone",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Phone number"
+    },
+    {
+      "name": "whatsapp",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "WhatsApp number"
+    },
+    {
+      "name": "products",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Product categories this brand offers (array)"
+    },
+    {
+      "name": "specialties",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "What the brand is known for (array)"
+    },
+    {
+      "name": "founded_year",
+      "type": "number",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Year brand was founded"
     },
     {
       "name": "featured",
@@ -61,7 +151,7 @@
       "localized": false,
       "default": false,
       "validation": null,
-      "help_text": "Show in featured"
+      "help_text": "Featured brand on storefront"
     },
     {
       "name": "display_order",
@@ -71,47 +161,7 @@
       "localized": false,
       "default": 0,
       "validation": null,
-      "help_text": "Sort order"
-    },
-    {
-      "name": "country_of_origin",
-      "type": "text",
-      "required": false,
-      "unique": false,
-      "localized": true,
-      "default": null,
-      "validation": null,
-      "help_text": "Country - IS translated"
-    },
-    {
-      "name": "is_black_owned",
-      "type": "boolean",
-      "required": false,
-      "unique": false,
-      "localized": false,
-      "default": false,
-      "validation": null,
-      "help_text": "Black-owned brand"
-    },
-    {
-      "name": "is_organic",
-      "type": "boolean",
-      "required": false,
-      "unique": false,
-      "localized": false,
-      "default": false,
-      "validation": null,
-      "help_text": "Uses organic ingredients"
-    },
-    {
-      "name": "is_cruelty_free",
-      "type": "boolean",
-      "required": false,
-      "unique": false,
-      "localized": false,
-      "default": false,
-      "validation": null,
-      "help_text": "Cruelty-free"
+      "help_text": "Sort order for display"
     }
   ],
   "is_published": true

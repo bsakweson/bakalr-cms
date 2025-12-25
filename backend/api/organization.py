@@ -80,7 +80,7 @@ async def get_organization_profile(
     """
     Get current organization profile details
     """
-    PermissionChecker.require_permission(current_user, "view_organization_settings", db)
+    PermissionChecker.require_permission(current_user, "organization.settings.view", db)
     return OrganizationProfileResponse(
         id=org.id,
         name=org.name,
@@ -108,7 +108,7 @@ async def update_organization_profile(
     """
     Update organization profile details
     """
-    PermissionChecker.require_permission(current_user, "manage_organization_settings", db)
+    PermissionChecker.require_permission(current_user, "organization.settings.manage", db)
     # Update fields
     if data.name is not None:
         org.name = data.name
@@ -150,7 +150,7 @@ async def list_locales(
     """
     Get all locales for the organization
     """
-    PermissionChecker.require_permission(current_user, "view_organization_settings", db)
+    PermissionChecker.require_permission(current_user, "organization.settings.view", db)
     locales = db.query(Locale).filter(Locale.organization_id == org.id).all()
 
     return LocaleListResponse(
@@ -180,7 +180,7 @@ async def create_locale(
     """
     Create a new locale for the organization
     """
-    PermissionChecker.require_permission(current_user, "manage_organization_settings", db)
+    PermissionChecker.require_permission(current_user, "organization.settings.manage", db)
     # Check if locale code already exists
     existing = (
         db.query(Locale).filter(Locale.organization_id == org.id, Locale.code == data.code).first()
@@ -232,7 +232,7 @@ async def update_locale(
     """
     Update a locale
     """
-    PermissionChecker.require_permission(current_user, "manage_organization_settings", db)
+    PermissionChecker.require_permission(current_user, "organization.settings.manage", db)
     locale = (
         db.query(Locale).filter(Locale.id == locale_id, Locale.organization_id == org.id).first()
     )
@@ -278,7 +278,7 @@ async def delete_locale(
     """
     Delete a locale (cannot delete default locale)
     """
-    PermissionChecker.require_permission(current_user, "manage_organization_settings", db)
+    PermissionChecker.require_permission(current_user, "organization.settings.manage", db)
     locale = (
         db.query(Locale).filter(Locale.id == locale_id, Locale.organization_id == org.id).first()
     )

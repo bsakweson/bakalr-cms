@@ -47,7 +47,8 @@ class GraphQLContext(BaseContext):
             if not token_data or not token_data.sub:
                 return None
 
-            user = self.db.query(User).filter(User.id == int(token_data.sub)).first()
+            # User.id is a UUID, so use string comparison (sub is UUID as string)
+            user = self.db.query(User).filter(User.id == token_data.sub).first()
             return user
         except Exception:
             return None
@@ -74,9 +75,9 @@ class GraphQLContext(BaseContext):
         user = self.require_auth()
 
         # Import here to avoid circular dependency
-        from backend.core.permissions import has_permission
+        from backend.core.permissions import PermissionChecker
 
-        if not has_permission(self.db, user, permission):
+        if not PermissionChecker.has_permission(user, permission, self.db):
             raise Exception(f"Permission denied: {permission}")
 
         return user

@@ -44,7 +44,7 @@ async def create_field_permission(
     Example: Allow "Editor" role to edit "title" and "body" but not "price" field.
     """
     # Verify user has permission to manage roles
-    PermissionChecker.require_permission(current_user, "roles.manage", db)
+    PermissionChecker.require_permission(current_user, "role.manage", db)
 
     # Verify role exists and belongs to user's organization
     role = (
@@ -129,7 +129,7 @@ async def create_field_permissions_bulk(
     Efficient way to grant permissions to multiple fields in a single request.
     """
     # Verify user has permission to manage roles
-    PermissionChecker.require_permission(current_user, "roles.manage", db)
+    PermissionChecker.require_permission(current_user, "role.manage", db)
 
     # Verify role exists and belongs to user's organization
     role = (
@@ -218,7 +218,7 @@ async def create_content_type_permission(
     Example: Allow "Product Manager" role to manage all "Product" content.
     """
     # Verify user has permission to manage roles
-    PermissionChecker.require_permission(current_user, "roles.manage", db)
+    PermissionChecker.require_permission(current_user, "role.manage", db)
 
     # Verify role exists
     role = (
@@ -431,7 +431,7 @@ async def revoke_field_permission(
     Revoke a field-level permission from a role.
     """
     # Verify user has permission to manage roles
-    PermissionChecker.require_permission(current_user, "roles.manage", db)
+    PermissionChecker.require_permission(current_user, "role.manage", db)
 
     # Verify role exists
     role = (

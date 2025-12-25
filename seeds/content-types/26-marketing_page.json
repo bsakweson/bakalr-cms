@@ -1,0 +1,197 @@
+{
+  "api_id": "marketing_page",
+  "name": "Marketing Page",
+  "description": "Marketing, promotional, and loyalty program pages",
+  "fields_schema": [
+    {
+      "name": "page_key",
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Unique identifier: sale, new-arrivals, best-sellers, gift-cards, rewards, chat"
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page title - IS translated"
+    },
+    {
+      "name": "heading",
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Main heading displayed on the page"
+    },
+    {
+      "name": "subheading",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Supporting text under the heading"
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page description or intro text"
+    },
+    {
+      "name": "hero_image",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Hero banner image URL"
+    },
+    {
+      "name": "hero_cta",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Hero call-to-action button {text, url, style}"
+    },
+    {
+      "name": "labels",
+      "type": "json",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Page-specific labels and text - IS translated"
+    },
+    {
+      "name": "buttons",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Button labels - IS translated"
+    },
+    {
+      "name": "form_labels",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field labels - IS translated"
+    },
+    {
+      "name": "form_placeholders",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form field placeholders - IS translated"
+    },
+    {
+      "name": "sections",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": false,
+      "default": null,
+      "validation": null,
+      "help_text": "Page sections configuration [{title, type, content}]"
+    },
+    {
+      "name": "features",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Feature/benefit list [{icon, title, description}] - IS translated"
+    },
+    {
+      "name": "tiers",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Loyalty/reward tiers [{name, points, benefits}] - IS translated"
+    },
+    {
+      "name": "faq",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Frequently asked questions [{question, answer}] - IS translated"
+    },
+    {
+      "name": "terms",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Terms and conditions text - IS translated"
+    },
+    {
+      "name": "messages",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Success/error/info messages - IS translated"
+    },
+    {
+      "name": "meta_title",
+      "type": "text",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO page title - IS translated"
+    },
+    {
+      "name": "meta_description",
+      "type": "textarea",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "SEO page description - IS translated"
+    }
+  ]
+}

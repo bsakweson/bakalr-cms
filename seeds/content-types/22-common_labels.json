@@ -1,0 +1,48 @@
+{
+  "api_id": "common_labels",
+  "name": "Common Labels",
+  "description": "Truly global UI strings used across all pages (loading, error, success, etc.). One entry per organization.",
+  "fields_schema": [
+    {
+      "name": "general",
+      "type": "json",
+      "required": true,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "General UI labels: back, home, close, save, cancel, delete, edit, loading, error, success, required"
+    },
+    {
+      "name": "pagination",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Pagination labels: previous, next, page, of, showing, results"
+    },
+    {
+      "name": "validation",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Form validation messages: required, invalid_email, min_length, max_length, etc."
+    },
+    {
+      "name": "accessibility",
+      "type": "json",
+      "required": false,
+      "unique": false,
+      "localized": true,
+      "default": null,
+      "validation": null,
+      "help_text": "Accessibility labels: skip_to_content, menu_toggle, close_menu, etc."
+    }
+  ],
+  "is_published": true
+}

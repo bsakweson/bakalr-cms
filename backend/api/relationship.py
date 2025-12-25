@@ -87,7 +87,16 @@ async def create_relationship(
     db.commit()
     db.refresh(relationship)
 
-    return relationship
+    # Convert to response schema with string UUIDs
+    return ContentRelationshipResponse(
+        id=str(relationship.id),
+        source_entry_id=str(relationship.source_entry_id),
+        target_entry_id=str(relationship.target_entry_id),
+        relationship_type=relationship.relationship_type,
+        meta_data=relationship.meta_data,
+        created_at=relationship.created_at,
+        updated_at=relationship.updated_at,
+    )
 
 
 @router.get("/entries/{entry_id}/relationships", response_model=List[ContentRelationshipResponse])

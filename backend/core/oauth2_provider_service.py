@@ -12,11 +12,11 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 
 from jose import jwt
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from backend.core.cache import RedisCache
 from backend.core.config import settings
+from backend.core.security import hash_secret, verify_secret
 from backend.models.oauth2 import (
     OAuth2AccessToken,
     OAuth2AuthorizationCode,
@@ -24,8 +24,6 @@ from backend.models.oauth2 import (
     OAuth2RefreshToken,
 )
 from backend.models.user import User
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class OAuth2ProviderService:
@@ -76,7 +74,7 @@ class OAuth2ProviderService:
 
         if client_type == "confidential":
             client_secret = OAuth2Client.generate_client_secret()
-            client_secret_hash = pwd_context.hash(client_secret)
+            client_secret_hash = hash_secret(client_secret)
 
         grant_types = grant_types or ["authorization_code", "refresh_token"]
 
@@ -125,7 +123,7 @@ class OAuth2ProviderService:
         """Validate client secret"""
         if not client.client_secret_hash:
             return False
-        return pwd_context.verify(client_secret, client.client_secret_hash)
+        return verify_secret(client_secret, client.client_secret_hash)
 
     def validate_redirect_uri(self, client: OAuth2Client, redirect_uri: str) -> bool:
         """Validate redirect URI against client's registered URIs"""

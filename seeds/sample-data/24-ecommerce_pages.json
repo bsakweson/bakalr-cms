@@ -1,0 +1,295 @@
+[
+  {
+    "content_type_api_id": "ecommerce_page",
+    "slug": "order-confirmation",
+    "title": "Order Confirmation",
+    "content_data": {
+      "page_key": "order-confirmation",
+      "title": "Order Confirmation",
+      "heading": "Thank You for Your Order!",
+      "description": "Your order has been placed successfully. You will receive a confirmation email shortly.",
+      "icon": "check-circle",
+      "icon_color": "text-green-500",
+      "primary_button": {
+        "text": "View Order Details",
+        "url": "/account/orders/{orderId}",
+        "icon": "receipt"
+      },
+      "secondary_button": {
+        "text": "Continue Shopping",
+        "url": "/shop",
+        "icon": "shopping-bag"
+      },
+      "info_sections": [
+        {
+          "title": "What's Next?",
+          "content": "We're preparing your order for shipment. You'll receive tracking information once your order ships.",
+          "icon": "package"
+        },
+        {
+          "title": "Questions?",
+          "content": "Contact our customer service team if you have any questions about your order.",
+          "icon": "help-circle"
+        }
+      ],
+      "labels": {
+        "order_number": "Order Number",
+        "order_date": "Order Date",
+        "order_total": "Order Total",
+        "payment_method": "Payment Method",
+        "shipping_address": "Shipping Address",
+        "billing_address": "Billing Address",
+        "items_ordered": "Items Ordered",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "tax": "Tax",
+        "discount": "Discount",
+        "total": "Total",
+        "quantity": "Qty",
+        "price": "Price",
+        "confirmation_email_sent": "A confirmation email has been sent to",
+        "estimated_delivery": "Estimated Delivery",
+        "print_receipt": "Print Receipt"
+      },
+      "messages": {
+        "success": "Your order has been placed successfully!",
+        "email_confirmation": "A confirmation email has been sent to {email}",
+        "processing_note": "Please allow 1-2 business days for processing"
+      },
+      "meta_title": "Order Confirmation | Thank You",
+      "meta_description": "Your order has been placed successfully. View your order details and track your shipment."
+    }
+  },
+  {
+    "content_type_api_id": "ecommerce_page",
+    "slug": "payment-failed",
+    "title": "Payment Failed",
+    "content_data": {
+      "page_key": "payment-failed",
+      "title": "Payment Failed",
+      "heading": "Payment Unsuccessful",
+      "description": "We were unable to process your payment. Please try again or use a different payment method.",
+      "icon": "x-circle",
+      "icon_color": "text-red-500",
+      "primary_button": {
+        "text": "Try Again",
+        "url": "/checkout/payment",
+        "icon": "refresh-cw"
+      },
+      "secondary_button": {
+        "text": "Contact Support",
+        "url": "/contact",
+        "icon": "headphones"
+      },
+      "info_sections": [
+        {
+          "title": "Common Reasons",
+          "content": "Insufficient funds, incorrect card details, or bank security holds can cause payment failures.",
+          "icon": "info"
+        },
+        {
+          "title": "Your Cart is Safe",
+          "content": "Don't worry - your cart items are saved. Try again when you're ready.",
+          "icon": "shopping-cart"
+        }
+      ],
+      "labels": {
+        "error_code": "Error Code",
+        "error_details": "Error Details",
+        "retry_payment": "Retry Payment",
+        "use_different_method": "Use Different Payment Method",
+        "common_issues": "Common Issues",
+        "check_card_details": "Check Card Details",
+        "contact_bank": "Contact Your Bank",
+        "try_different_card": "Try a Different Card"
+      },
+      "messages": {
+        "generic_error": "Your payment could not be processed. Please try again.",
+        "card_declined": "Your card was declined. Please try a different payment method.",
+        "insufficient_funds": "Insufficient funds. Please use a different card or payment method.",
+        "expired_card": "Your card has expired. Please use a valid card.",
+        "invalid_card": "Invalid card details. Please check and try again.",
+        "processing_error": "A processing error occurred. Please try again later.",
+        "cart_preserved": "Your cart items have been saved for you."
+      },
+      "meta_title": "Payment Failed | Try Again",
+      "meta_description": "We were unable to process your payment. Please try again or use a different payment method."
+    }
+  },
+  {
+    "content_type_api_id": "ecommerce_page",
+    "slug": "payment-processing",
+    "title": "Processing Payment",
+    "content_data": {
+      "page_key": "payment-processing",
+      "title": "Processing Payment",
+      "heading": "Processing Your Payment",
+      "description": "Please wait while we process your payment. Do not close this window.",
+      "icon": "loader",
+      "icon_color": "text-blue-500",
+      "primary_button": null,
+      "secondary_button": null,
+      "info_sections": [
+        {
+          "title": "Please Wait",
+          "content": "This usually takes less than a minute. Please don't refresh or close this page.",
+          "icon": "clock"
+        }
+      ],
+      "labels": {
+        "processing": "Processing...",
+        "verifying_payment": "Verifying payment details",
+        "contacting_bank": "Contacting your bank",
+        "finalizing_order": "Finalizing your order",
+        "do_not_close": "Please do not close this window",
+        "this_may_take": "This may take a few moments"
+      },
+      "messages": {
+        "processing": "We're processing your payment. This usually takes less than a minute.",
+        "do_not_refresh": "Please do not refresh or close this page while we process your payment.",
+        "secure_connection": "Your payment is being processed over a secure connection."
+      },
+      "meta_title": "Processing Payment",
+      "meta_description": "Your payment is being processed. Please do not close this window."
+    }
+  },
+  {
+    "content_type_api_id": "ecommerce_page",
+    "slug": "order-tracking",
+    "title": "Track Your Order",
+    "content_data": {
+      "page_key": "order-tracking",
+      "title": "Track Your Order",
+      "heading": "Track Your Order",
+      "description": "Enter your order number and email to track your shipment.",
+      "icon": "package",
+      "icon_color": "text-blue-500",
+      "primary_button": {
+        "text": "Track Order",
+        "url": null,
+        "icon": "search"
+      },
+      "secondary_button": {
+        "text": "Contact Support",
+        "url": "/contact",
+        "icon": "headphones"
+      },
+      "info_sections": [
+        {
+          "title": "Where's My Order Number?",
+          "content": "You can find your order number in your confirmation email or in your account order history.",
+          "icon": "help-circle"
+        }
+      ],
+      "form_labels": {
+        "order_number": "Order Number",
+        "email": "Email Address",
+        "submit": "Track Order"
+      },
+      "form_placeholders": {
+        "order_number": "e.g., ORD-12345",
+        "email": "you@example.com"
+      },
+      "labels": {
+        "tracking_number": "Tracking Number",
+        "carrier": "Carrier",
+        "shipped_date": "Shipped Date",
+        "expected_delivery": "Expected Delivery",
+        "current_status": "Current Status",
+        "track_with_carrier": "Track with Carrier",
+        "delivery_address": "Delivery Address",
+        "order_items": "Order Items",
+        "shipment_updates": "Shipment Updates"
+      },
+      "status_labels": {
+        "pending": "Order Pending",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "out_for_delivery": "Out for Delivery",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "returned": "Returned"
+      },
+      "timeline_labels": {
+        "order_placed": "Order Placed",
+        "order_confirmed": "Order Confirmed",
+        "preparing": "Preparing for Shipment",
+        "shipped": "Shipped",
+        "in_transit": "In Transit",
+        "out_for_delivery": "Out for Delivery",
+        "delivered": "Delivered"
+      },
+      "messages": {
+        "order_not_found": "We couldn't find an order with that information. Please check and try again.",
+        "tracking_available": "Tracking information is available for your order.",
+        "not_yet_shipped": "Your order hasn't shipped yet. We'll send you an email with tracking info once it does.",
+        "delivered_success": "Your order has been delivered!"
+      },
+      "meta_title": "Track Your Order",
+      "meta_description": "Track your order status and shipment. Enter your order number to get real-time updates."
+    }
+  },
+  {
+    "content_type_api_id": "ecommerce_page",
+    "slug": "order-lookup",
+    "title": "Order Lookup",
+    "content_data": {
+      "page_key": "order-lookup",
+      "title": "Order Lookup",
+      "heading": "Find Your Order",
+      "description": "Don't have an account? Look up your order using your email and order number.",
+      "icon": "search",
+      "icon_color": "text-gray-600",
+      "primary_button": {
+        "text": "Find Order",
+        "url": null,
+        "icon": "search"
+      },
+      "secondary_button": {
+        "text": "Create Account",
+        "url": "/register",
+        "icon": "user-plus"
+      },
+      "info_sections": [
+        {
+          "title": "Create an Account",
+          "content": "Create an account to easily view all your orders, save addresses, and track shipments.",
+          "icon": "user"
+        },
+        {
+          "title": "Need Help?",
+          "content": "Can't find your order? Contact our customer service team for assistance.",
+          "icon": "headphones"
+        }
+      ],
+      "form_labels": {
+        "order_number": "Order Number",
+        "email": "Email Address",
+        "zip_code": "Billing ZIP Code",
+        "submit": "Find Order"
+      },
+      "form_placeholders": {
+        "order_number": "e.g., ORD-12345",
+        "email": "Email used for order",
+        "zip_code": "12345"
+      },
+      "labels": {
+        "order_details": "Order Details",
+        "view_order": "View Order",
+        "track_shipment": "Track Shipment",
+        "request_return": "Request Return",
+        "download_invoice": "Download Invoice",
+        "guest_checkout": "Placed as Guest",
+        "account_benefits": "Account Benefits"
+      },
+      "messages": {
+        "order_not_found": "We couldn't find an order matching those details. Please verify your information.",
+        "order_found": "Order found! Here are your order details.",
+        "multiple_attempts": "Too many attempts. Please try again later or contact support.",
+        "create_account_prompt": "Create an account to access your orders anytime and get exclusive perks!"
+      },
+      "meta_title": "Order Lookup | Find Your Order",
+      "meta_description": "Look up your guest order using your email and order number. Track shipments and view order details."
+    }
+  }
+]

@@ -312,7 +312,7 @@ def add_permissions_to_api_key(
     """
     Add permissions to an existing API key.
 
-    - **permissions**: List of permissions to add (e.g., ['themes.read', 'themes.manage'])
+    - **permissions**: List of permissions to add (e.g., ['theme.read', 'theme.manage'])
 
     Existing permissions are preserved, duplicates are ignored.
     """

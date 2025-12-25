@@ -1,0 +1,66 @@
+[
+  {
+    "content_type_api_id": "common_labels",
+    "slug": "global-labels",
+    "title": "Global UI Labels",
+    "content_data": {
+      "general": {
+        "back": "Back",
+        "home": "Home",
+        "view_details": "View Details",
+        "learn_more": "Learn More",
+        "read_more": "Read More",
+        "see_more": "See More",
+        "close": "Close",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "success": "Success",
+        "required": "Required",
+        "submit": "Submit",
+        "confirm": "Confirm",
+        "yes": "Yes",
+        "no": "No",
+        "or": "or",
+        "and": "and"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page",
+        "of": "of",
+        "showing": "Showing",
+        "results": "results",
+        "items_per_page": "Items per page",
+        "go_to_page": "Go to page"
+      },
+      "validation": {
+        "required_field": "This field is required",
+        "invalid_email": "Please enter a valid email address",
+        "min_length": "Must be at least {min} characters",
+        "max_length": "Must be no more than {max} characters",
+        "passwords_must_match": "Passwords must match",
+        "invalid_phone": "Please enter a valid phone number",
+        "invalid_url": "Please enter a valid URL",
+        "invalid_date": "Please enter a valid date",
+        "min_value": "Must be at least {min}",
+        "max_value": "Must be no more than {max}"
+      },
+      "accessibility": {
+        "skip_to_content": "Skip to main content",
+        "menu_toggle": "Toggle menu",
+        "close_menu": "Close menu",
+        "open_menu": "Open menu",
+        "expand": "Expand",
+        "collapse": "Collapse",
+        "loading_content": "Loading content, please wait",
+        "new_window": "Opens in new window",
+        "external_link": "External link"
+      }
+    },
+    "status": "published"
+  }
+]

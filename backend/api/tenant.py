@@ -278,7 +278,7 @@ async def invite_user_to_organization(
     """
     Invite a user to join current organization
 
-    Requires 'users.manage' permission in current organization.
+    Requires 'user.manage.full' permission in current organization.
     Creates UserOrganization association if user exists, otherwise sends invitation email.
 
     Args:
@@ -288,7 +288,7 @@ async def invite_user_to_organization(
         Invitation status
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "users.manage", db):
+    if not PermissionChecker.has_permission(current_user, "user.manage.full", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to invite users",
@@ -380,7 +380,7 @@ async def remove_user_from_organization(
     """
     Remove a user from current organization
 
-    Requires 'users.manage' permission.
+    Requires 'user.manage.full' permission.
     Cannot remove yourself or the last admin.
 
     Args:
@@ -390,7 +390,7 @@ async def remove_user_from_organization(
         Confirmation message
     """
     # Check permission
-    if not PermissionChecker.has_permission(current_user, "users.manage", db):
+    if not PermissionChecker.has_permission(current_user, "user.manage.full", db):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You don't have permission to remove users",

@@ -127,8 +127,8 @@ class EmailTemplateService:
         """
         cache_key = f"email_template:{self.organization_id}:{template_key}:{locale}"
 
-        # Try cache first
-        cached = self.cache.get(cache_key)
+        # Try cache first (using sync method)
+        cached = self.cache.get_json_sync(cache_key)
         if cached:
             return cached
 
@@ -138,8 +138,8 @@ class EmailTemplateService:
 
         data = self._get_translated_data(entry, locale)
 
-        # Cache the result
-        self.cache.set(cache_key, data, ttl=EMAIL_TEMPLATE_CACHE_TTL)
+        # Cache the result (using sync method)
+        self.cache.set_sync(cache_key, data, ttl=EMAIL_TEMPLATE_CACHE_TTL)
 
         return data
 

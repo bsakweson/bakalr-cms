@@ -1,0 +1,1321 @@
+{
+  "content_type": "organization_reference_data",
+  "entries": [
+    {
+      "title": "Sales Department",
+      "slug": "department-sales",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "SALES",
+        "label": "Sales",
+        "description": "Sales and retail operations team",
+        "icon": "shopping-cart",
+        "color": "#3B82F6",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Inventory Department",
+      "slug": "department-inventory",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "INVENTORY",
+        "label": "Inventory",
+        "description": "Stock management and warehouse operations",
+        "icon": "package",
+        "color": "#10B981",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Customer Service Department",
+      "slug": "department-customer-service",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "CUSTOMER_SERVICE",
+        "label": "Customer Service",
+        "description": "Customer support and relations",
+        "icon": "headphones",
+        "color": "#8B5CF6",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Management Department",
+      "slug": "department-management",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "MANAGEMENT",
+        "label": "Management",
+        "description": "Store and business management",
+        "icon": "briefcase",
+        "color": "#F59E0B",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Kitchen Department",
+      "slug": "department-kitchen",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "KITCHEN",
+        "label": "Kitchen",
+        "description": "Food preparation (for restaurants/cafes)",
+        "icon": "utensils",
+        "color": "#EF4444",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Front of House Department",
+      "slug": "department-front-of-house",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "FRONT_OF_HOUSE",
+        "label": "Front of House",
+        "description": "Customer-facing service staff",
+        "icon": "users",
+        "color": "#EC4899",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Delivery Department",
+      "slug": "department-delivery",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "DELIVERY",
+        "label": "Delivery",
+        "description": "Delivery and logistics team",
+        "icon": "truck",
+        "color": "#06B6D4",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 7
+      }
+    },
+    {
+      "title": "General Department",
+      "slug": "department-general",
+      "status": "published",
+      "fields": {
+        "data_type": "department",
+        "code": "GENERAL",
+        "label": "General",
+        "description": "General staff and unassigned employees",
+        "icon": "user",
+        "color": "#6B7280",
+        "metadata": {},
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 99
+      }
+    },
+    {
+      "title": "Manager Role",
+      "slug": "role-manager",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "MANAGER",
+        "label": "Manager",
+        "description": "Store manager with full POS and employee management access",
+        "icon": "crown",
+        "color": "#F59E0B",
+        "metadata": {
+          "managerLevel": true,
+          "permissions": ["pos.full", "employees.manage", "reports.view", "settings.edit"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Assistant Manager Role",
+      "slug": "role-assistant-manager",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "ASSISTANT_MANAGER",
+        "label": "Assistant Manager",
+        "description": "Assistant manager with elevated POS access",
+        "icon": "star",
+        "color": "#F59E0B",
+        "metadata": {
+          "managerLevel": true,
+          "permissions": ["pos.full", "employees.view", "reports.view"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Sales Associate Role",
+      "slug": "role-sales-associate",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "SALES_ASSOCIATE",
+        "label": "Sales Associate",
+        "description": "Standard POS access for sales",
+        "icon": "shopping-bag",
+        "color": "#3B82F6",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["pos.sales", "pos.returns"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Cashier Role",
+      "slug": "role-cashier",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "CASHIER",
+        "label": "Cashier",
+        "description": "POS checkout only",
+        "icon": "credit-card",
+        "color": "#10B981",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["pos.checkout"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Stock Handler Role",
+      "slug": "role-stock-handler",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "STOCK_HANDLER",
+        "label": "Stock Handler",
+        "description": "Inventory and stock management",
+        "icon": "package",
+        "color": "#10B981",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["inventory.manage", "receiving.process"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Customer Service Role",
+      "slug": "role-customer-service",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "CUSTOMER_SERVICE",
+        "label": "Customer Service",
+        "description": "Customer support representative",
+        "icon": "headphones",
+        "color": "#8B5CF6",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["customers.view", "orders.view", "returns.process"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Kitchen Staff Role",
+      "slug": "role-kitchen-staff",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "KITCHEN_STAFF",
+        "label": "Kitchen Staff",
+        "description": "Food preparation staff",
+        "icon": "chef-hat",
+        "color": "#EF4444",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["kitchen.orders"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 7
+      }
+    },
+    {
+      "title": "Waiter/Server Role",
+      "slug": "role-waiter",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "WAITER",
+        "label": "Waiter/Server",
+        "description": "Table service staff",
+        "icon": "coffee",
+        "color": "#EC4899",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["pos.tables", "orders.create"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 8
+      }
+    },
+    {
+      "title": "Delivery Driver Role",
+      "slug": "role-delivery-driver",
+      "status": "published",
+      "fields": {
+        "data_type": "role",
+        "code": "DELIVERY_DRIVER",
+        "label": "Delivery Driver",
+        "description": "Delivery and logistics",
+        "icon": "truck",
+        "color": "#06B6D4",
+        "metadata": {
+          "managerLevel": false,
+          "permissions": ["deliveries.manage"]
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 9
+      }
+    },
+    {
+      "title": "Active Status",
+      "slug": "status-active",
+      "status": "published",
+      "fields": {
+        "data_type": "status",
+        "code": "ACTIVE",
+        "label": "Active",
+        "description": "Employee is currently working",
+        "icon": "check-circle",
+        "color": "#10B981",
+        "metadata": {
+          "canWork": true,
+          "variant": "success"
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Inactive Status",
+      "slug": "status-inactive",
+      "status": "published",
+      "fields": {
+        "data_type": "status",
+        "code": "INACTIVE",
+        "label": "Inactive",
+        "description": "Employee account is deactivated",
+        "icon": "x-circle",
+        "color": "#6B7280",
+        "metadata": {
+          "canWork": false,
+          "variant": "secondary"
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "On Leave Status",
+      "slug": "status-on-leave",
+      "status": "published",
+      "fields": {
+        "data_type": "status",
+        "code": "ON_LEAVE",
+        "label": "On Leave",
+        "description": "Employee is on vacation or leave",
+        "icon": "calendar-off",
+        "color": "#F59E0B",
+        "metadata": {
+          "canWork": false,
+          "variant": "warning"
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Terminated Status",
+      "slug": "status-terminated",
+      "status": "published",
+      "fields": {
+        "data_type": "status",
+        "code": "TERMINATED",
+        "label": "Terminated",
+        "description": "Employment has ended",
+        "icon": "user-x",
+        "color": "#EF4444",
+        "metadata": {
+          "canWork": false,
+          "variant": "destructive"
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Pending Order Status",
+      "slug": "order-status-pending",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "PENDING",
+        "label": "Pending",
+        "description": "Order created, waiting for payment",
+        "icon": "clock",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "canEdit": true,
+          "canCancel": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Confirmed Order Status",
+      "slug": "order-status-confirmed",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "CONFIRMED",
+        "label": "Confirmed",
+        "description": "Payment confirmed, order accepted",
+        "icon": "check",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "canEdit": true,
+          "canCancel": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Processing Order Status",
+      "slug": "order-status-processing",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "PROCESSING",
+        "label": "Processing",
+        "description": "Order is being prepared",
+        "icon": "loader",
+        "color": "#3B82F6",
+        "metadata": {
+          "variant": "info",
+          "canEdit": false,
+          "canCancel": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Shipped Order Status",
+      "slug": "order-status-shipped",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "SHIPPED",
+        "label": "Shipped",
+        "description": "Order has been shipped",
+        "icon": "truck",
+        "color": "#8B5CF6",
+        "metadata": {
+          "variant": "info",
+          "canEdit": false,
+          "canCancel": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Delivered Order Status",
+      "slug": "order-status-delivered",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "DELIVERED",
+        "label": "Delivered",
+        "description": "Order has been delivered",
+        "icon": "package-check",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "canEdit": false,
+          "canCancel": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Cancelled Order Status",
+      "slug": "order-status-cancelled",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "CANCELLED",
+        "label": "Cancelled",
+        "description": "Order was cancelled",
+        "icon": "x-circle",
+        "color": "#EF4444",
+        "metadata": {
+          "variant": "destructive",
+          "canEdit": false,
+          "canCancel": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Refunded Order Status",
+      "slug": "order-status-refunded",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "REFUNDED",
+        "label": "Refunded",
+        "description": "Order was fully refunded",
+        "icon": "rotate-ccw",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "canEdit": false,
+          "canCancel": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 7
+      }
+    },
+    {
+      "title": "On Hold Order Status",
+      "slug": "order-status-on-hold",
+      "status": "published",
+      "fields": {
+        "data_type": "order_status",
+        "code": "ON_HOLD",
+        "label": "On Hold",
+        "description": "Order is on hold",
+        "icon": "pause",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "canEdit": true,
+          "canCancel": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 8
+      }
+    },
+    {
+      "title": "Pending Payment Status",
+      "slug": "payment-status-pending",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "PENDING",
+        "label": "Pending",
+        "description": "Payment is pending",
+        "icon": "clock",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "allowRetry": true,
+          "isFinal": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Authorized Payment Status",
+      "slug": "payment-status-authorized",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "AUTHORIZED",
+        "label": "Authorized",
+        "description": "Payment authorized but not captured",
+        "icon": "shield-check",
+        "color": "#3B82F6",
+        "metadata": {
+          "variant": "info",
+          "allowCapture": true,
+          "allowVoid": true,
+          "isFinal": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Paid Payment Status",
+      "slug": "payment-status-paid",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "PAID",
+        "label": "Paid",
+        "description": "Payment completed successfully",
+        "icon": "check-circle",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "allowRefund": true,
+          "isFinal": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Partially Paid Payment Status",
+      "slug": "payment-status-partially-paid",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "PARTIALLY_PAID",
+        "label": "Partially Paid",
+        "description": "Partial payment received",
+        "icon": "pie-chart",
+        "color": "#6366F1",
+        "metadata": {
+          "variant": "info",
+          "allowRetry": true,
+          "isFinal": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Failed Payment Status",
+      "slug": "payment-status-failed",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "FAILED",
+        "label": "Failed",
+        "description": "Payment failed",
+        "icon": "x-circle",
+        "color": "#EF4444",
+        "metadata": {
+          "variant": "destructive",
+          "allowRetry": true,
+          "isFinal": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Refunded Payment Status",
+      "slug": "payment-status-refunded",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "REFUNDED",
+        "label": "Refunded",
+        "description": "Payment has been refunded",
+        "icon": "rotate-ccw",
+        "color": "#8B5CF6",
+        "metadata": {
+          "variant": "secondary",
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Partially Refunded Payment Status",
+      "slug": "payment-status-partially-refunded",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "PARTIALLY_REFUNDED",
+        "label": "Partially Refunded",
+        "description": "Partial refund issued",
+        "icon": "minus-circle",
+        "color": "#A855F7",
+        "metadata": {
+          "variant": "secondary",
+          "allowRefund": true,
+          "isFinal": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 7
+      }
+    },
+    {
+      "title": "Voided Payment Status",
+      "slug": "payment-status-voided",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "VOIDED",
+        "label": "Voided",
+        "description": "Payment authorization voided",
+        "icon": "ban",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 8
+      }
+    },
+    {
+      "title": "Chargeback Payment Status",
+      "slug": "payment-status-chargeback",
+      "status": "published",
+      "fields": {
+        "data_type": "payment_status",
+        "code": "CHARGEBACK",
+        "label": "Chargeback",
+        "description": "Customer initiated chargeback",
+        "icon": "alert-triangle",
+        "color": "#DC2626",
+        "metadata": {
+          "variant": "destructive",
+          "isFinal": true,
+          "isDisputed": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 9
+      }
+    },
+    {
+      "title": "In Stock Inventory Status",
+      "slug": "inventory-status-in-stock",
+      "status": "published",
+      "fields": {
+        "data_type": "inventory_status",
+        "code": "IN_STOCK",
+        "label": "In Stock",
+        "description": "Item is available in inventory",
+        "icon": "check-circle",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "canSell": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Low Stock Inventory Status",
+      "slug": "inventory-status-low-stock",
+      "status": "published",
+      "fields": {
+        "data_type": "inventory_status",
+        "code": "LOW_STOCK",
+        "label": "Low Stock",
+        "description": "Stock level is below threshold",
+        "icon": "alert-triangle",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "canSell": true,
+          "needsReorder": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Out of Stock Inventory Status",
+      "slug": "inventory-status-out-of-stock",
+      "status": "published",
+      "fields": {
+        "data_type": "inventory_status",
+        "code": "OUT_OF_STOCK",
+        "label": "Out of Stock",
+        "description": "Item is not available",
+        "icon": "x-circle",
+        "color": "#EF4444",
+        "metadata": {
+          "variant": "destructive",
+          "canSell": false,
+          "needsReorder": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Reserved Inventory Status",
+      "slug": "inventory-status-reserved",
+      "status": "published",
+      "fields": {
+        "data_type": "inventory_status",
+        "code": "RESERVED",
+        "label": "Reserved",
+        "description": "Item is reserved for an order",
+        "icon": "lock",
+        "color": "#3B82F6",
+        "metadata": {
+          "variant": "info",
+          "canSell": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Backordered Inventory Status",
+      "slug": "inventory-status-backordered",
+      "status": "published",
+      "fields": {
+        "data_type": "inventory_status",
+        "code": "BACKORDERED",
+        "label": "Backordered",
+        "description": "Item is on backorder",
+        "icon": "clock",
+        "color": "#8B5CF6",
+        "metadata": {
+          "variant": "secondary",
+          "canSell": true,
+          "hasLeadTime": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Discontinued Inventory Status",
+      "slug": "inventory-status-discontinued",
+      "status": "published",
+      "fields": {
+        "data_type": "inventory_status",
+        "code": "DISCONTINUED",
+        "label": "Discontinued",
+        "description": "Item is no longer available",
+        "icon": "archive",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "canSell": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Pending Shipping Status",
+      "slug": "shipping-status-pending",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "PENDING",
+        "label": "Pending",
+        "description": "Awaiting shipment",
+        "icon": "clock",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "canCancel": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Processing Shipping Status",
+      "slug": "shipping-status-processing",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "PROCESSING",
+        "label": "Processing",
+        "description": "Order is being prepared for shipment",
+        "icon": "package",
+        "color": "#3B82F6",
+        "metadata": {
+          "variant": "info",
+          "canCancel": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Label Created Shipping Status",
+      "slug": "shipping-status-label-created",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "LABEL_CREATED",
+        "label": "Label Created",
+        "description": "Shipping label has been generated",
+        "icon": "file-text",
+        "color": "#6366F1",
+        "metadata": {
+          "variant": "info",
+          "hasTracking": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Picked Up Shipping Status",
+      "slug": "shipping-status-picked-up",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "PICKED_UP",
+        "label": "Picked Up",
+        "description": "Package picked up by carrier",
+        "icon": "truck",
+        "color": "#8B5CF6",
+        "metadata": {
+          "variant": "info",
+          "hasTracking": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "In Transit Shipping Status",
+      "slug": "shipping-status-in-transit",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "IN_TRANSIT",
+        "label": "In Transit",
+        "description": "Package is on its way",
+        "icon": "navigation",
+        "color": "#0EA5E9",
+        "metadata": {
+          "variant": "info",
+          "hasTracking": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Out for Delivery Shipping Status",
+      "slug": "shipping-status-out-for-delivery",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "OUT_FOR_DELIVERY",
+        "label": "Out for Delivery",
+        "description": "Package is out for delivery today",
+        "icon": "map-pin",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "hasTracking": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Delivered Shipping Status",
+      "slug": "shipping-status-delivered",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "DELIVERED",
+        "label": "Delivered",
+        "description": "Package has been delivered",
+        "icon": "check-circle",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "isFinal": true,
+          "hasTracking": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 7
+      }
+    },
+    {
+      "title": "Failed Delivery Shipping Status",
+      "slug": "shipping-status-failed-delivery",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "FAILED_DELIVERY",
+        "label": "Failed Delivery",
+        "description": "Delivery attempt failed",
+        "icon": "alert-circle",
+        "color": "#EF4444",
+        "metadata": {
+          "variant": "destructive",
+          "canReschedule": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 8
+      }
+    },
+    {
+      "title": "Returned to Sender Shipping Status",
+      "slug": "shipping-status-returned",
+      "status": "published",
+      "fields": {
+        "data_type": "shipping_status",
+        "code": "RETURNED_TO_SENDER",
+        "label": "Returned to Sender",
+        "description": "Package returned to sender",
+        "icon": "rotate-ccw",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 9
+      }
+    },
+    {
+      "title": "Active Customer Status",
+      "slug": "customer-status-active",
+      "status": "published",
+      "fields": {
+        "data_type": "customer_status",
+        "code": "ACTIVE",
+        "label": "Active",
+        "description": "Active customer account",
+        "icon": "user-check",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "canOrder": true,
+          "canLogin": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "Pending Verification Customer Status",
+      "slug": "customer-status-pending",
+      "status": "published",
+      "fields": {
+        "data_type": "customer_status",
+        "code": "PENDING_VERIFICATION",
+        "label": "Pending Verification",
+        "description": "Account awaiting email verification",
+        "icon": "mail",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "canOrder": false,
+          "canLogin": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Suspended Customer Status",
+      "slug": "customer-status-suspended",
+      "status": "published",
+      "fields": {
+        "data_type": "customer_status",
+        "code": "SUSPENDED",
+        "label": "Suspended",
+        "description": "Account temporarily suspended",
+        "icon": "pause-circle",
+        "color": "#EF4444",
+        "metadata": {
+          "variant": "destructive",
+          "canOrder": false,
+          "canLogin": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Banned Customer Status",
+      "slug": "customer-status-banned",
+      "status": "published",
+      "fields": {
+        "data_type": "customer_status",
+        "code": "BANNED",
+        "label": "Banned",
+        "description": "Account permanently banned",
+        "icon": "ban",
+        "color": "#DC2626",
+        "metadata": {
+          "variant": "destructive",
+          "canOrder": false,
+          "canLogin": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Inactive Customer Status",
+      "slug": "customer-status-inactive",
+      "status": "published",
+      "fields": {
+        "data_type": "customer_status",
+        "code": "INACTIVE",
+        "label": "Inactive",
+        "description": "Inactive account (no recent activity)",
+        "icon": "user-minus",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "canOrder": true,
+          "canLogin": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "VIP Customer Status",
+      "slug": "customer-status-vip",
+      "status": "published",
+      "fields": {
+        "data_type": "customer_status",
+        "code": "VIP",
+        "label": "VIP",
+        "description": "VIP customer with special privileges",
+        "icon": "star",
+        "color": "#D97706",
+        "metadata": {
+          "variant": "warning",
+          "canOrder": true,
+          "canLogin": true,
+          "hasPriority": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    },
+    {
+      "title": "Active Employee Status",
+      "slug": "employee-status-active",
+      "status": "published",
+      "fields": {
+        "data_type": "employee_status",
+        "code": "ACTIVE",
+        "label": "Active",
+        "description": "Currently employed and active",
+        "icon": "user-check",
+        "color": "#10B981",
+        "metadata": {
+          "variant": "success",
+          "canWork": true,
+          "canLogin": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 1
+      }
+    },
+    {
+      "title": "On Leave Employee Status",
+      "slug": "employee-status-on-leave",
+      "status": "published",
+      "fields": {
+        "data_type": "employee_status",
+        "code": "ON_LEAVE",
+        "label": "On Leave",
+        "description": "Employee is on approved leave",
+        "icon": "calendar",
+        "color": "#3B82F6",
+        "metadata": {
+          "variant": "info",
+          "canWork": false,
+          "canLogin": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 2
+      }
+    },
+    {
+      "title": "Suspended Employee Status",
+      "slug": "employee-status-suspended",
+      "status": "published",
+      "fields": {
+        "data_type": "employee_status",
+        "code": "SUSPENDED",
+        "label": "Suspended",
+        "description": "Employee is temporarily suspended",
+        "icon": "pause-circle",
+        "color": "#EF4444",
+        "metadata": {
+          "variant": "destructive",
+          "canWork": false,
+          "canLogin": false
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 3
+      }
+    },
+    {
+      "title": "Probation Employee Status",
+      "slug": "employee-status-probation",
+      "status": "published",
+      "fields": {
+        "data_type": "employee_status",
+        "code": "PROBATION",
+        "label": "Probation",
+        "description": "Employee is on probationary period",
+        "icon": "clock",
+        "color": "#F59E0B",
+        "metadata": {
+          "variant": "warning",
+          "canWork": true,
+          "canLogin": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 4
+      }
+    },
+    {
+      "title": "Terminated Employee Status",
+      "slug": "employee-status-terminated",
+      "status": "published",
+      "fields": {
+        "data_type": "employee_status",
+        "code": "TERMINATED",
+        "label": "Terminated",
+        "description": "Employment has been terminated",
+        "icon": "user-x",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "canWork": false,
+          "canLogin": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 5
+      }
+    },
+    {
+      "title": "Resigned Employee Status",
+      "slug": "employee-status-resigned",
+      "status": "published",
+      "fields": {
+        "data_type": "employee_status",
+        "code": "RESIGNED",
+        "label": "Resigned",
+        "description": "Employee has resigned",
+        "icon": "log-out",
+        "color": "#6B7280",
+        "metadata": {
+          "variant": "secondary",
+          "canWork": false,
+          "canLogin": false,
+          "isFinal": true
+        },
+        "is_system": true,
+        "is_active": true,
+        "sort_order": 6
+      }
+    }
+  ]
+}

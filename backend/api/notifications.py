@@ -186,9 +186,9 @@ async def create_notification(
 ):
     """
     Create a new notification for a user.
-    Requires 'notifications.create' permission (admin only).
+    Requires 'notification.create' permission (admin only).
     """
-    PermissionChecker.require_permission(current_user, "notifications.create", db)
+    PermissionChecker.require_permission(current_user, "notification.create", db)
 
     # Use current user if user_id not provided
     target_user_id = notification_data.user_id or current_user.id
@@ -350,9 +350,9 @@ async def list_email_logs(
 ):
     """
     Get email delivery logs (admin only).
-    Requires 'notifications.view' permission.
+    Requires 'notification.view' permission.
     """
-    PermissionChecker.require_permission(current_user, "notifications.view", db)
+    PermissionChecker.require_permission(current_user, "notification.view", db)
     offset = (page - 1) * per_page
 
     query = db.query(EmailLog).filter(EmailLog.organization_id == current_user.organization_id)
@@ -378,9 +378,9 @@ async def get_email_stats(
 ):
     """
     Get email delivery statistics (admin only).
-    Requires 'notifications.view' permission.
+    Requires 'notification.view' permission.
     """
-    PermissionChecker.require_permission(current_user, "notifications.view", db)
+    PermissionChecker.require_permission(current_user, "notification.view", db)
     from sqlalchemy import func
 
     org_id = current_user.organization_id

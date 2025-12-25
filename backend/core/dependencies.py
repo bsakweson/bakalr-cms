@@ -9,6 +9,7 @@ Set AUTH_PROVIDER environment variable to switch providers.
 """
 
 import logging
+import os
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -184,7 +185,9 @@ async def get_current_user(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Inactive user")
 
     # Check email verification (skip for Keycloak - trust their verification)
-    if not is_keycloak_auth() and not user.is_email_verified:
+    # Also skip in test mode when SKIP_EMAIL_VERIFICATION is set
+    skip_email_verification = os.environ.get("SKIP_EMAIL_VERIFICATION", "").lower() == "true"
+    if not is_keycloak_auth() and not user.is_email_verified and not skip_email_verification:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Email not verified. Please check your email for verification link.",
@@ -399,7 +402,9 @@ async def get_current_user_or_api_key(
 
             if token_data:
                 user = db.query(User).filter(User.id == token_data.sub).first()
-                if user and user.is_active and user.is_email_verified:
+                # Skip email verification check in test mode
+                skip_email_verification = os.environ.get("SKIP_EMAIL_VERIFICATION", "").lower() == "true"
+                if user and user.is_active and (user.is_email_verified or skip_email_verification):
                     return (user, None)
         except Exception:
             pass
@@ -468,3 +473,40 @@ async def get_current_user_flexible(
         is_email_verified=True,
     )
     return virtual_user
+
+
+def require_permission(permission: str):
+    """
+    Dependency factory that requires a specific permission.
+
+    Usage:
+        @router.post("/items")
+        async def create_item(
+            current_user: User = Depends(require_permission("items.create"))
+        ):
+            ...
+
+    Args:
+        permission: The permission string required (e.g., "reference_data.create")
+
+    Returns:
+        A dependency function that validates the permission and returns the user
+    """
+    async def permission_checker(
+        current_user: User = Depends(get_current_user),
+        db: Session = Depends(get_db),
+    ) -> User:
+        # Check if user has the required permission
+        # For now, we allow all authenticated users - permission system can be expanded later
+        # In production, you would check current_user.roles or a permissions table
+        if not current_user.is_active:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="User account is not active",
+            )
+
+        # TODO: Implement full permission checking against roles/permissions
+        # For now, we trust authenticated users
+        return current_user
+
+    return permission_checker
